@@ -423,11 +423,15 @@ def tab_sigma_delta(check: bool) -> None:
             write(nm, L, check)
 
     # ---- bang O DAC TA: nguong tinh bang cong thuc ----
-    PROF_TAW, span = 70.0, 0.14
+    # LOI SPAN DA SUA (2026-10-04, phat hien khi teach-back doi chieu bang vs text):
+    # span = FC - WP = 160 - 90 = 70 mm (water_balance.py depletion_fraction).
+    # Ban cu hardcode span*1000 = 140 mm (gap DOI) => bang in 7,14 mm va
+    # f_sigma 0,0506/0,0445, mau thuan text paper (3,57 mm; f_sigma <= 0,025).
+    SPAN_MM = 70.0
     S = [HDR, r"\begin{tabular}{@{}lll@{}}", r"\toprule",
          r"Đại lượng & Công thức & Giá trị \\", r"\midrule"]
     sig_star = W_SAFE / (2 * Z)
-    sig_need = (0.85 - 0.75) * 700.0 / Z      # span*1000 = 140 mm; (0.10)*140/z
+    sig_need = (0.85 - 0.75) * SPAN_MM / Z      # = 3.57 mm, khop text Muc 6.9
     S.append(r"$W$ (chiều rộng tập an toàn) & $(0{,}85-0)\times$TAW & "
              + m(W_SAFE, 1) + r"\,mm \\")
     S.append(r"$\sigma^{*}$ (ngưỡng cổng rỗng) & $W/(2z_{1-\delta/2})$ & "
@@ -437,15 +441,15 @@ def tab_sigma_delta(check: bool) -> None:
     S.append(r"$\sigma$ tĩnh (tuổi $\infty$) & $f_\sigma\cdot$TAW$/\sqrt{1-\rho^2}$ & "
              + r"$f_\sigma\times" + vn_num(TAW / math.sqrt(1 - 0.81), 2) + r"$\,mm \\")
     S.append(r"$\sigma_H$ cần cho AWD ($d^*=0{,}75$) & $(0{,}85-d^{*})\cdot$"
-             r"$\mathrm{span}/z$ & " + m((0.10 * 140.0) / Z, 2) + r"\,mm \\")
+             r"$\mathrm{span}/z$ & " + m(sig_need, 2) + r"\,mm \\")
     S.append(r"$f_\sigma$ tối đa để cổng sống & $\sigma^{*}/(\mathrm{TAW}/\sqrt{1-\rho^2})$ & "
              + m(sig_star / (TAW / math.sqrt(1 - 0.81)), 4) + r" \\")
     S.append(r"$f_\sigma$ tối đa để AWD đạt chuẩn (tuổi 0) & $\sigma_{\text{cần}}/"
              r"(\mathrm{TAW}\cdot g)$ & "
-             + m((0.10 * 140.0 / Z) / (TAW * G7), 4) + r" \\")
+             + m(sig_need / (TAW * G7), 4) + r" \\")
     S.append(r"$f_\sigma$ tối đa để AWD đạt chuẩn (tuổi $\infty$) & $\sigma_{\text{cần}}/"
              r"\sigma_{\text{tĩnh}}$ & "
-             + m((0.10 * 140.0 / Z) / (TAW / math.sqrt(1 - 0.81)), 4) + r" \\")
+             + m(sig_need / (TAW / math.sqrt(1 - 0.81)), 4) + r" \\")
     S += [r"\bottomrule", r"\end{tabular}"]
     write("tab_spec", S, check)
 
