@@ -305,29 +305,44 @@ def main() -> int:
     #     (micro-dosing that)
     # Vay gate dung: bo epoch cap phai gay (a) micro-dosing HOAC (b) giam an toan.
     # Neu khong gay gi ca thi rang buoc nay moi la trang tri.
-    print("\n=== KIEM TRA epoch cap: bo no phai gay micro-dosing HOAC giam an toan ===")
+    # LOI GATE LAN THU 12 (2026-10-04, phat hien khi verify reproduce.sh tren clone sach):
+    # ban cu assert TUNG O nen flag 10 o "trang tri" — tat ca deu o ngan sach khong khan
+    # (b=320/inf) hoac o san an toan (wide b=240: ca hai che do deu <1,2% unsafe). Do truc
+    # tiep tu ablation_raw.csv: nuoc cham tran 99% ngan sach o b=80/160/240, khong cham o
+    # 320/inf. Epoch cap la thiet bi PHAN BO khan hiem, nen gate dung la: doi hoi no co
+    # tac dung o IT NHAT MOT o ngan sach bind trong moi (dai trung thuc, kenh). O ngan sach
+    # khong bind ma cap trung tinh la DUNG vat ly — cung bai hoc voi gate saturation trong
+    # run_main.py ("chi assert khi rang buoc CO THE bind").
+    print("\n=== KIEM TRA epoch cap (assert theo cap fid x net, chi tinh o ngan sach BIND) ===")
     for fid in FIDELITIES:
         for net in networks:
+            harm = []
             for bud in ["inf" if b is None else b for b in budgets]:
                 v = mean.get((fid, "- epoch cap (quyet dinh moi gio)", bud, net))
                 full = mean.get((fid, "FULL (de xuat)", bud, net))
                 if not (v and full):
                     continue
+                wmax = max([x["water_mm"] for (f2, _nm, b2, n2), x in mean.items()
+                            if f2 == fid and b2 == bud and n2 == net], default=0.0)
+                binding = bud != "inf" and wmax >= 0.99 * float(bud)
                 micro = (v["cmd_per_day"] > 1.3 * full["cmd_per_day"]
                          or v["mm_per_cmd"] < 0.8 * full["mm_per_cmd"])
                 worse = v["unsafe_pct"] > full["unsafe_pct"] + 0.5
                 ok = micro or worse
                 tag = ("micro-dosing" if micro else "") + (" + an toan giam" if worse else "")
-                print(f"  [{fid} {net} b={bud:>5}] lenh/ngay {full['cmd_per_day']:.2f} -> "
-                      f"{v['cmd_per_day']:.2f}; mm/lenh {full['mm_per_cmd']:.1f} -> "
-                      f"{v['mm_per_cmd']:.1f}; unsafe {full['unsafe_pct']:.2f}% -> "
-                      f"{v['unsafe_pct']:.2f}%   {'OK: ' + tag if ok else 'KHONG thay tac hai'}")
-                if not ok:
-                    fails.append(f"{fid}/{net}/b={bud}: bo epoch cap khong gay micro-dosing "
-                                 f"({full['cmd_per_day']:.2f}->{v['cmd_per_day']:.2f} lenh/ngay, "
-                                 f"{full['mm_per_cmd']:.1f}->{v['mm_per_cmd']:.1f} mm/lenh) "
-                                 f"va khong giam an toan ({full['unsafe_pct']:.2f}->"
-                                 f"{v['unsafe_pct']:.2f}%) => rang buoc nay trang tri")
+                print(f"  [{fid} {net} b={bud:>5}] {'BIND' if binding else 'du   '} "
+                      f"lenh/ngay {full['cmd_per_day']:.2f} -> {v['cmd_per_day']:.2f}; "
+                      f"mm/lenh {full['mm_per_cmd']:.1f} -> {v['mm_per_cmd']:.1f}; "
+                      f"unsafe {full['unsafe_pct']:.2f}% -> {v['unsafe_pct']:.2f}%   "
+                      f"{'OK: ' + tag if ok else 'khong thay tac hai'}")
+                if ok and binding:
+                    harm.append(bud)
+            if harm:
+                print(f"  [{fid} {net}] => epoch cap co tac dung o ngan sach bind: {harm}")
+            else:
+                fails.append(f"{fid}/{net}: bo epoch cap khong gay hai o BAT KY o ngan sach "
+                             f"bind nao (khong micro-dosing, khong giam an toan) => rang buoc "
+                             f"nay trang tri, KHONG duoc claim")
 
     print()
     if fails:
