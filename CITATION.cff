@@ -1,0 +1,29 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the paper below."
+title: "TwinGate: A Digital-Twin Safety Gate for Irrigation Command Dispatch over Lossy Networks"
+type: software
+authors:
+  - family-names: "Mai"
+    given-names: "Xuan Van"
+  - family-names: "Nguyen"
+    given-names: "Tuong Tri"
+repository-code: "https://github.com/mxuanvan02/TwinGate"
+license: MIT
+version: "1.0.0"
+date-released: "2026-10-04"
+keywords:
+  - digital-twin
+  - networked-control-system
+  - chance-constraint
+  - irrigation-scheduling
+  - MRV
+  - rice
+  - mekong-delta
+abstract: >-
+  Reference implementation of a chance-constrained safety gate that uses a
+  FAO-56 water-balance digital twin to simulate irrigation commands before
+  transmission over lossy networks, with a proven fidelity threshold
+  sigma* = W/(2 z_{1-delta/2}) below which silence (WITHHELD) is optimal.
+  Includes the full 36,480-episode simulation suite on real ERA5 forcing,
+  seven invariant tests, and one-command reproduction of every number in the
+  paper.

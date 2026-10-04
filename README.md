@@ -1,0 +1,196 @@
+# TwinGate — Digital-Twin Safety Gate for Irrigation Command Dispatch over Lossy Networks
+
+Reference implementation for the paper
+
+> **A Digital-Twin Safety Gate for Irrigation Command Dispatch over Lossy
+> Networks and Its Relevance to Emission MRV**
+>
+> Mai Xuan Van, Nguyen Tuong Tri (corresponding) — Hue University, Vietnam.
+> Funded by Hue University, Grant No. DHH2025-19-07.
+> Manuscript under review at the Hue University Journal of Science (HUJOS-TT).
+
+TwinGate decides, once every 24-hour epoch, *whether* an irrigation command may
+be sent at all — and with what depth — when the command channel drops packets
+and the gateway's view of the field is a drifting digital twin. It is built for
+MRV-grade water management of low-emission rice in the Mekong Delta, where
+every credit-eligible action (alternate wetting and drying, drainage) passes
+through a control command on cheap, lossy wireless links.
+
+## The problem
+
+Carbon-credit programmes for rice (Decision 1490/QD-TTg, Verra VM0051 v1.1)
+bottleneck at MRV cost, and the highest-rank evidence under Decision
+4801/QD-BNNMT is the *record of actual irrigation and drainage actions*. In
+NCS terms, the scarce resource here is not the uplink sample (as in AoI /
+digital-twin-sync literature) but the **downlink command**. The gateway must
+answer: *is it safe to issue this command now?*
+
+## Contributions
+
+- **A chance-constrained safety gate in front of the command transmitter.**
+  A FAO-56 root-zone water-balance twin takes each candidate depth `u` as
+  input (counterfactual rollout), and the command is released only when the
+  predicted post-command state lies in the agronomic safe set with probability
+  ≥ 1 − δ.
+- **A fidelity threshold σ\* = W / (2·z₁₋δ/₂).** When the twin's predictive
+  standard deviation exceeds σ\*, the gate is empty for *every* command set and
+  silence (WITHHELD) is the optimal action. Verified by invariant I6
+  (`tests/test_ncs_invariants.py`, uncapped-budget configuration): with uplink
+  re-anchoring disabled, σ crosses σ\*, the gate generates **0.0 commands**,
+  the field is unsafe **57.82 %** of the hours, and twin RMSE reads **0.000 mm**
+  — a degenerate agreement (twin and field both receive zero water), not
+  accuracy. Exactly the predicted gate paralysis. Re-anchoring restores
+  0.00 % (mild) and 2.84 % (severe) unsafe hours.
+- **WITHHELD as a first-class action.** Unlike every AoI-based scheduler,
+  *not transmitting* is a valid, logged, MRV-useful outcome.
+- **Belief-driven resend policy T2.** After a lost ACK the gateway keeps
+  πₖ = 1 − (1 − φ)ᵏ (φ = p_dl·(1 − p_ack)), the belief that the pending command
+  already landed, and resends only while πₖ stays below a myopic
+  expected-cost threshold. T2 cuts double-irrigation water waste 23 % vs blind
+  ARQ at equal or better safety.
+- **A closed-form applicability proposition.** |P| ≤ 1 + |W − 2zσ_H| / Δ_min:
+  once the pass region is narrower than the actuator step, every command
+  selection rule collapses to the same command — measured 36/36 cells identical
+  at f_σ = 0.10 vs 18/36 significantly different at f_σ = 0.02.
+- **A tidal-salinity constraint (scenario model).** The gate hard-excludes
+  pumping whenever the source is saline (0 mm saline delivered vs up to
+  2 116 dS·mm of excess salt load for baselines at intrusion intensity
+  i = 2.0, station×network×seed aggregate), and is invariant to the disputed
+  salinity
+  tolerance thresholds. No field salinity measurements exist, so this is a
+  scenario analysis, not a compliance claim.
+
+## Headline results
+
+Main grid: 3 stations × 2 channels × 6 water budgets × 7 policies × 10 seeds ×
+3 fidelity bands = **7 560 episodes per year** (2024 dry-scarce, 2025
+water-surplus); 36 480 episodes in total across all grids.
+
+- Unsafe hours, severe channel, f_σ = 0.02: **34.79 %** (TwinGate+T2) vs
+  41.27–53.78 % (all baselines) at B = 80 mm; **0.81 %** vs 11.30–48.39 % at
+  B = 240 mm. Oracle gap = the price of imperfect information.
+- Paired Wilcoxon with Holm correction over 540 comparisons: **344
+  significant, none favouring a baseline**.
+- Credit-eligible AWD cycles (dry phase ≥ 72 h per QĐ 4801) appear **only when
+  f_σ ≤ 0.025** — a closed-form condition that more frequent sensing cannot
+  fix (σ has a floor f_σ·TAW·g even at age 0).
+
+## Repository layout
+
+```
+src/water_balance.py     FAO-56 hourly ET0 (Penman–Monteith, wind u10→u2,
+                         solar geometry) + soil-water bucket + SCS-CN runoff
+src/twin_gate.py         chance-constrained gate, σ(a) AR(1)/Kalman law, σ*
+src/command_resend.py    T2 belief filter + myopic resend threshold
+src/tide_salinity.py     tidal salinity scenario model (C2 constraint)
+src/ncs_loop.py          the 3-state NCS loop, 5 metrics, budget accounting
+tests/                   7 test scripts incl. the 6 paper invariants (I1–I7)
+experiments/             main grid, ablation, deployment sweep, multi-field,
+                         σ×δ sweep, salinity scenario, Wilcoxon stats,
+                         LaTeX table generator
+data/                    ERA5 fetch script + cached 2024/2025 hourly weather
+                         for Can Tho, Soc Trang, Ca Mau (Open-Meteo archive;
+                         provenance JSONs included)
+figures/                 all 8 paper figures, drawn from outputs/*.csv
+outputs/                 every raw CSV and summary behind every paper number
+reproduce.sh             one-command full reproduction
+```
+
+## Reproducing every number in the paper
+
+```bash
+./reproduce.sh            # full: tests + all grids + stats + figures (~2-4 min)
+./reproduce.sh --quick    # smoke run (2 seeds, main grid only)
+./reproduce.sh --tests    # invariant scripts only
+```
+
+The script creates its own `.venv`, fetches ERA5 weather only if the CSV cache
+is missing (the Open-Meteo archive needs no API key and is deterministic for a
+given station/year), runs the six test scripts, all seven experiment grids, the
+paired Wilcoxon analysis, and regenerates every figure and LaTeX table.
+Requirements: Python ≥ 3.11, numpy, scipy, matplotlib.
+
+Every test script is a standalone executable that exits non-zero on any
+violation:
+
+```bash
+python3 tests/test_ncs_invariants.py   # I1–I7, ALL INVARIANTS HOLD
+```
+
+| Invariant | Guarantee |
+|---|---|
+| I1 | water budget is hard: worst overshoot 0.000 mm over 108 episodes |
+| I2 | exactly one decision per 24-h epoch (WITHHELD consumes the epoch too) |
+| I3 | no micro-dosing: delivered depth ∈ candidate set {20, 40, 60} mm |
+| I4 | mass conservation: bucket residual exactly 0 |
+| I5 | Oracle is valid: no policy beats it by > 0.5 points |
+| I6 | σ ≥ σ\* ⇒ gate empty (0 commands, WITHHELD always) |
+| I7 | 95 % calibration band covers 0.99–1.00 empirically |
+
+## Key parameters
+
+| Symbol | Meaning | Value |
+|---|---|---|
+| W | safe-set width (depletion 0–0.85, TAW 70 mm) | 59.5 mm |
+| σ\* | fidelity threshold at δ = 0.05 | 15.18 mm |
+| H | twin rollout horizon | 6 h |
+| ρ | AR(1) correlation of twin residual | 0.9 |
+| f_σ | fidelity band (σ₀ = f_σ·TAW) | 0.02 / 0.05 / 0.10 |
+| epoch | decision period | 24 h |
+| candidates | agronomic irrigation depths | {20, 40, 60} mm |
+| p_ack loss | ACK loss probability | 0.35 |
+| channel | Gilbert–Elliott downlink | mild & severe configs |
+
+## Limitations (read before citing numbers)
+
+- Simulation study; no field deployment. 3 stations; FAO-56 Table-2 average
+  soil parameters.
+- σ is slightly conservative (I7 coverage 0.99–1.00 > 0.95) — the gate
+  withholds more than strictly optimal.
+- T2 is myopic; the full dynamic program remains open, and no closed-form
+  optimality bound for T2 is proven yet.
+- The salinity constraint is a scenario model (no field salinity data); yield
+  loss uses a linear −12 % per dS/m translation capped at 100 %.
+- Results are climate-year dependent (2024 scarce vs 2025 surplus reported
+  separately; conclusions are conditional).
+
+## Data
+
+Hourly ERA5 weather (temperature, humidity, wind, shortwave radiation,
+precipitation) for three Mekong-Delta stations, 2024 and 2025, via the public
+Open-Meteo archive API (no API key). Per-file provenance JSONs are tracked in
+`data/era5_multi/`; the weather CSVs themselves are not committed —
+`reproduce.sh` re-fetches them deterministically (the same station/year always
+returns the same ERA5 grid series). All 36 480 result rows behind every number
+in the paper are committed under `outputs/`.
+
+## Citation
+
+If you use this code, please cite the paper (see `CITATION.cff`) and mention
+the grant:
+
+```bibtex
+@unpublished{twingate2026,
+  title  = {A Digital-Twin Safety Gate for Irrigation Command Dispatch over
+            Lossy Networks and Its Relevance to Emission MRV},
+  author = {Mai, Xuan Van and Nguyen, Tuong Tri},
+  year   = {2026},
+  note   = {Under review, Hue University Journal of Science — Techniques and
+            Technology (HUJOS-TT). Code:
+            \url{https://github.com/mxuanvan02/TwinGate}}
+}
+```
+
+## Funding and declarations
+
+Funded by Hue University under Grant No. DHH2025-19-07. The authors declare no
+competing interests. The study uses public reanalysis weather data and
+simulation experiments only; no human participants, animals or field
+interventions were involved.
+
+## License
+
+MIT — see [LICENSE](LICENSE). Third-party policy documents referenced in the
+paper (Verra VM0051, QĐ 4801/QĐ-BNNMT, QĐ 1490/QĐ-TTg) are **not**
+redistributed here; they are publicly available from Verra and the Vietnamese
+government portals.
