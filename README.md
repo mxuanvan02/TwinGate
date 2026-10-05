@@ -75,6 +75,41 @@ water-surplus); 36 480 episodes in total across all grids.
   f_σ ≤ 0.025** — a closed-form condition that more frequent sensing cannot
   fix (σ has a floor f_σ·TAW·g even at age 0).
 
+## Second paper: physics-attested irrigation logs
+
+The same FAO-56 twin is used a second time, in a different role. Paper 1 uses it
+as a pre-transmission safety gate for irrigation commands. Paper 2 uses it as a
+post-hoc auditor of what a farmer *claimed*, so that an irrigation log recorded
+on a mobile phone can serve as MRV evidence with no sensor deployed.
+
+A claimed depth is an input to the water balance, so a fabricated log produces a
+trajectory the soil cannot produce. Three filters follow:
+
+| Filter | Violation it detects |
+|---|---|
+| `V1` saturation | irrigation claimed while the root zone is already at field capacity |
+| `V2` infeasible depletion | a claimed history that drives depletion outside its physical range |
+| `V4` storage excess | a claimed depth larger than the storage the soil can hold at that hour |
+
+Guarantee: an AWD-compliant log never triggers any of them, and the largest
+claimable depth that never raises an alarm is `u_max = d* · span + ε = 61 mm`
+for the reference soil. Omission fraud (deleting real commands to fake a dry
+phase) is provably invisible to replay, and is closed exactly by one flow meter
+at the cooperative pumping station, `G = M − U(L) > τ`.
+
+Measured on 240 audited logs (3 stations × 2 climate years × 10 seeds):
+**0 false alarms**, **60/60** detected for each of the three fraud classes, mean
+pump gap 29.0 mm against τ = 5 mm.
+
+```bash
+python3 experiments/fraud_detection.py           # 240 logs, exits non-zero on any gate failure
+python3 experiments/make_tables_paper2.py        # regenerates paper2/tables/*.tex from the CSV
+```
+
+Design notes: `PROPOSAL_TWIN_ATTESTED.md` (the proposal) and
+`PROPOSAL_MRV_COST.md` (the four-architecture cost comparison). Hardware prices
+there are planning estimates, not quotations.
+
 ## Repository layout
 
 ```

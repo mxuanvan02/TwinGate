@@ -13,8 +13,9 @@
 #      stations from the public Open-Meteo archive  (skipped if already cached)
 #   4. runs the six invariant test scripts + the d_max proposition test
 #   5. runs the main grid (7 560 episodes/year x 2 years), the ablation, the
-#      deployment sweep, the multi-field experiment, the sigma x delta sweep
-#      and the salinity scenario
+#      deployment sweep, the multi-field experiment, the sigma x delta sweep,
+#      the salinity scenario and the fraud-detection experiment (240 audited
+#      irrigation logs, paper 2)
 #   6. runs the paired Wilcoxon analysis and regenerates every figure + LaTeX
 #      table
 #
@@ -67,7 +68,8 @@ fi
 echo "[4/6] invariant + proposition test scripts"
 for t in tests/test_water_balance.py tests/test_twin_gate.py \
          tests/test_command_resend.py tests/test_ncs_invariants.py \
-         tests/test_tide_salinity.py tests/test_dmax_proposition.py; do
+         tests/test_tide_salinity.py tests/test_dmax_proposition.py \
+         experiments/fraud_detection.py; do
   printf '   %-40s' "$t"
   if python "$t" > "/tmp/$(basename "$t").log" 2>&1; then
     echo "PASS"
@@ -90,6 +92,8 @@ else
   python experiments/run_multi_field.py
   python experiments/sweep_sigma_delta.py
   python experiments/sweep_salinity.py
+  python experiments/fraud_detection.py
+  python experiments/make_tables_paper2.py
 fi
 
 # --- 6. stats + figures + tables -------------------------------------------

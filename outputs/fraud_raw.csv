@@ -1,0 +1,241 @@
+station,year,seed,variant,desc,n_irrig_claims,total_mm,truth_total_mm,F1_over_sat,F2_mass_imp,F4_storage,max_depl,awd_ok,awd_broken,awd_shallow,truth_awd_ok
+can_tho,2024,0,honest,"tuan thu AWD, 8 pha kho dat chuan",7,180.0,180.0,0,0,0,0.803,8,0,3,8
+can_tho,2024,0,fraud_wet_day,khai them 8 lan tuoi vao ngay mua,15,540.0,180.0,6,0,8,0.803,8,0,3,8
+can_tho,2024,0,fraud_dry_claim,"khai pha kho 96h tai h=200, xoa 1 lenh",6,160.0,180.0,0,0,0,0.916,7,0,3,8
+can_tho,2024,0,fraud_depth,khai 2 lan tuoi = FC (160mm),7,440.0,180.0,0,0,2,0.803,6,1,1,8
+can_tho,2024,1,honest,"tuan thu AWD, 6 pha kho dat chuan",6,220.0,220.0,0,0,0,0.804,6,0,0,6
+can_tho,2024,1,fraud_wet_day,khai them 8 lan tuoi vao ngay mua,14,520.0,220.0,7,0,8,0.804,6,0,0,6
+can_tho,2024,1,fraud_dry_claim,"khai pha kho 96h tai h=200, xoa 1 lenh",5,180.0,220.0,0,0,0,0.948,5,0,0,6
+can_tho,2024,1,fraud_depth,khai 2 lan tuoi = FC (160mm),6,460.0,220.0,0,0,2,0.804,5,1,0,6
+can_tho,2024,2,honest,"tuan thu AWD, 8 pha kho dat chuan",8,200.0,200.0,0,0,0,0.804,8,0,0,8
+can_tho,2024,2,fraud_wet_day,khai them 8 lan tuoi vao ngay mua,16,560.0,200.0,6,0,8,0.804,8,0,0,8
+can_tho,2024,2,fraud_dry_claim,"khai pha kho 96h tai h=200, xoa 1 lenh",7,180.0,200.0,0,0,0,0.916,7,0,0,8
+can_tho,2024,2,fraud_depth,khai 2 lan tuoi = FC (160mm),8,480.0,200.0,0,0,3,0.803,5,1,0,8
+can_tho,2024,3,honest,"tuan thu AWD, 6 pha kho dat chuan",5,200.0,200.0,0,0,0,0.804,6,0,2,6
+can_tho,2024,3,fraud_wet_day,khai them 8 lan tuoi vao ngay mua,13,540.0,200.0,5,0,8,0.804,6,0,0,6
+can_tho,2024,3,fraud_dry_claim,"khai pha kho 96h tai h=200, xoa 1 lenh",4,160.0,200.0,0,0,0,0.948,5,0,2,6
+can_tho,2024,3,fraud_depth,khai 1 lan tuoi = FC (160mm),5,320.0,200.0,0,0,1,0.804,6,0,1,6
+can_tho,2024,4,honest,"tuan thu AWD, 8 pha kho dat chuan",7,180.0,180.0,0,0,0,0.803,8,0,1,8
+can_tho,2024,4,fraud_wet_day,khai them 8 lan tuoi vao ngay mua,15,520.0,180.0,6,0,7,0.803,8,0,0,8
+can_tho,2024,4,fraud_dry_claim,"khai pha kho 96h tai h=200, xoa 1 lenh",6,160.0,180.0,0,0,0,0.916,7,0,1,8
+can_tho,2024,4,fraud_depth,khai 2 lan tuoi = FC (160mm),7,460.0,180.0,0,0,4,0.803,6,0,1,8
+can_tho,2024,5,honest,"tuan thu AWD, 7 pha kho dat chuan",7,200.0,200.0,0,0,0,0.803,7,0,1,7
+can_tho,2024,5,fraud_wet_day,khai them 8 lan tuoi vao ngay mua,15,420.0,200.0,5,0,7,0.803,7,1,0,7
+can_tho,2024,5,fraud_dry_claim,"khai pha kho 96h tai h=200, xoa 1 lenh",6,180.0,200.0,0,0,0,0.916,6,0,1,7
+can_tho,2024,5,fraud_depth,khai 2 lan tuoi = FC (160mm),7,460.0,200.0,0,0,2,0.803,5,1,1,7
+can_tho,2024,6,honest,"tuan thu AWD, 7 pha kho dat chuan",6,200.0,200.0,0,0,0,0.804,7,0,2,7
+can_tho,2024,6,fraud_wet_day,khai them 8 lan tuoi vao ngay mua,14,540.0,200.0,4,0,7,0.804,7,0,0,7
+can_tho,2024,6,fraud_dry_claim,"khai pha kho 96h tai h=200, xoa 1 lenh",5,160.0,200.0,0,0,0,0.948,6,0,2,7
+can_tho,2024,6,fraud_depth,khai 2 lan tuoi = FC (160mm),6,460.0,200.0,0,0,2,0.804,4,1,4,7
+can_tho,2024,7,honest,"tuan thu AWD, 7 pha kho dat chuan",7,200.0,200.0,0,0,0,0.803,7,0,1,7
+can_tho,2024,7,fraud_wet_day,khai them 8 lan tuoi vao ngay mua,15,480.0,200.0,6,0,7,0.803,7,1,0,7
+can_tho,2024,7,fraud_dry_claim,"khai pha kho 96h tai h=200, xoa 1 lenh",6,180.0,200.0,0,0,0,0.916,6,0,1,7
+can_tho,2024,7,fraud_depth,khai 2 lan tuoi = FC (160mm),7,460.0,200.0,0,0,3,0.803,6,0,0,7
+can_tho,2024,8,honest,"tuan thu AWD, 8 pha kho dat chuan",8,200.0,200.0,0,0,0,0.804,8,0,0,8
+can_tho,2024,8,fraud_wet_day,khai them 8 lan tuoi vao ngay mua,16,560.0,200.0,6,0,8,0.804,8,0,0,8
+can_tho,2024,8,fraud_dry_claim,"khai pha kho 96h tai h=200, xoa 1 lenh",7,180.0,200.0,0,0,0,0.916,7,0,0,8
+can_tho,2024,8,fraud_depth,khai 2 lan tuoi = FC (160mm),8,480.0,200.0,0,0,2,0.803,4,2,0,8
+can_tho,2024,9,honest,"tuan thu AWD, 8 pha kho dat chuan",7,180.0,180.0,0,0,0,0.804,8,0,2,8
+can_tho,2024,9,fraud_wet_day,khai them 8 lan tuoi vao ngay mua,15,440.0,180.0,5,0,7,0.804,8,0,0,8
+can_tho,2024,9,fraud_dry_claim,"khai pha kho 96h tai h=200, xoa 1 lenh",6,160.0,180.0,0,0,0,0.916,7,0,2,8
+can_tho,2024,9,fraud_depth,khai 2 lan tuoi = FC (160mm),7,440.0,180.0,0,0,2,0.803,5,1,3,8
+soc_trang,2024,0,honest,"tuan thu AWD, 8 pha kho dat chuan",7,180.0,180.0,0,0,0,0.802,8,0,1,8
+soc_trang,2024,0,fraud_wet_day,khai them 8 lan tuoi vao ngay mua,15,540.0,180.0,4,0,7,0.802,8,0,1,8
+soc_trang,2024,0,fraud_dry_claim,"khai pha kho 96h tai h=200, xoa 1 lenh",6,160.0,180.0,0,0,0,0.913,7,0,1,8
+soc_trang,2024,0,fraud_depth,khai 2 lan tuoi = FC (160mm),7,440.0,180.0,0,0,2,0.802,5,1,3,8
+soc_trang,2024,1,honest,"tuan thu AWD, 6 pha kho dat chuan",5,180.0,180.0,0,0,0,0.802,6,0,0,6
+soc_trang,2024,1,fraud_wet_day,khai them 8 lan tuoi vao ngay mua,13,480.0,180.0,5,0,6,0.802,6,0,0,6
+soc_trang,2024,1,fraud_dry_claim,"khai pha kho 96h tai h=200, xoa 1 lenh",4,140.0,180.0,0,0,0,0.946,5,0,0,6
+soc_trang,2024,1,fraud_depth,khai 1 lan tuoi = FC (160mm),5,300.0,180.0,0,0,1,0.801,5,1,0,6
+soc_trang,2024,2,honest,"tuan thu AWD, 8 pha kho dat chuan",7,160.0,160.0,0,0,0,0.802,8,0,0,8
+soc_trang,2024,2,fraud_wet_day,khai them 8 lan tuoi vao ngay mua,15,520.0,160.0,6,0,8,0.802,8,0,0,8
+soc_trang,2024,2,fraud_dry_claim,"khai pha kho 96h tai h=200, xoa 1 lenh",6,140.0,160.0,0,0,0,0.913,7,0,0,8
+soc_trang,2024,2,fraud_depth,khai 2 lan tuoi = FC (160mm),7,420.0,160.0,0,0,2,0.802,6,1,0,8
+soc_trang,2024,3,honest,"tuan thu AWD, 6 pha kho dat chuan",5,200.0,200.0,0,0,0,0.802,6,0,0,6
+soc_trang,2024,3,fraud_wet_day,khai them 8 lan tuoi vao ngay mua,13,540.0,200.0,5,0,7,0.802,6,0,0,6
+soc_trang,2024,3,fraud_dry_claim,"khai pha kho 96h tai h=200, xoa 1 lenh",4,160.0,200.0,0,0,0,0.946,5,0,0,6
+soc_trang,2024,3,fraud_depth,khai 1 lan tuoi = FC (160mm),5,320.0,200.0,0,0,1,0.801,6,0,5,6
+soc_trang,2024,4,honest,"tuan thu AWD, 8 pha kho dat chuan",7,180.0,180.0,0,0,0,0.804,8,0,1,8
+soc_trang,2024,4,fraud_wet_day,khai them 8 lan tuoi vao ngay mua,15,560.0,180.0,6,0,6,0.804,7,1,0,8
+soc_trang,2024,4,fraud_dry_claim,"khai pha kho 96h tai h=200, xoa 1 lenh",6,160.0,180.0,0,0,0,0.913,7,0,1,8
+soc_trang,2024,4,fraud_depth,khai 2 lan tuoi = FC (160mm),7,460.0,180.0,0,0,3,0.801,6,1,1,8
+soc_trang,2024,5,honest,"tuan thu AWD, 7 pha kho dat chuan",7,200.0,200.0,0,0,0,0.802,7,0,0,7
+soc_trang,2024,5,fraud_wet_day,khai them 8 lan tuoi vao ngay mua,15,420.0,200.0,4,0,7,0.802,7,0,0,7
+soc_trang,2024,5,fraud_dry_claim,"khai pha kho 96h tai h=200, xoa 1 lenh",6,180.0,200.0,0,0,0,0.913,6,0,0,7
+soc_trang,2024,5,fraud_depth,khai 2 lan tuoi = FC (160mm),7,460.0,200.0,0,0,2,0.802,6,0,0,7
+soc_trang,2024,6,honest,"tuan thu AWD, 6 pha kho dat chuan",6,200.0,200.0,0,0,0,0.803,6,0,5,6
+soc_trang,2024,6,fraud_wet_day,khai them 8 lan tuoi vao ngay mua,14,520.0,200.0,5,0,8,0.803,6,0,1,6
+soc_trang,2024,6,fraud_dry_claim,"khai pha kho 96h tai h=200, xoa 1 lenh",5,160.0,200.0,0,0,0,0.946,5,0,5,6
+soc_trang,2024,6,fraud_depth,khai 2 lan tuoi = FC (160mm),6,440.0,200.0,0,0,2,0.802,6,0,0,6
+soc_trang,2024,7,honest,"tuan thu AWD, 7 pha kho dat chuan",7,200.0,200.0,0,0,0,0.804,7,0,0,7
+soc_trang,2024,7,fraud_wet_day,khai them 8 lan tuoi vao ngay mua,15,480.0,200.0,6,0,8,0.804,7,0,0,7
+soc_trang,2024,7,fraud_dry_claim,"khai pha kho 96h tai h=200, xoa 1 lenh",6,180.0,200.0,0,0,0,0.913,6,0,0,7
+soc_trang,2024,7,fraud_depth,khai 2 lan tuoi = FC (160mm),7,460.0,200.0,0,0,3,0.802,6,0,0,7
+soc_trang,2024,8,honest,"tuan thu AWD, 8 pha kho dat chuan",7,160.0,160.0,0,0,0,0.802,8,0,0,8
+soc_trang,2024,8,fraud_wet_day,khai them 8 lan tuoi vao ngay mua,15,520.0,160.0,5,0,6,0.802,8,0,0,8
+soc_trang,2024,8,fraud_dry_claim,"khai pha kho 96h tai h=200, xoa 1 lenh",6,140.0,160.0,0,0,0,0.913,7,0,0,8
+soc_trang,2024,8,fraud_depth,khai 2 lan tuoi = FC (160mm),7,420.0,160.0,0,0,2,0.802,6,1,0,8
+soc_trang,2024,9,honest,"tuan thu AWD, 8 pha kho dat chuan",7,180.0,180.0,0,0,0,0.803,8,0,5,8
+soc_trang,2024,9,fraud_wet_day,khai them 8 lan tuoi vao ngay mua,15,480.0,180.0,4,0,8,0.803,7,1,0,8
+soc_trang,2024,9,fraud_dry_claim,"khai pha kho 96h tai h=200, xoa 1 lenh",6,160.0,180.0,0,0,0,0.913,7,0,7,8
+soc_trang,2024,9,fraud_depth,khai 2 lan tuoi = FC (160mm),7,440.0,180.0,0,0,2,0.802,5,1,0,8
+ca_mau,2024,0,honest,"tuan thu AWD, 7 pha kho dat chuan",6,160.0,160.0,0,0,0,0.802,7,0,0,7
+ca_mau,2024,0,fraud_wet_day,khai them 8 lan tuoi vao ngay mua,14,440.0,160.0,6,0,7,0.802,7,0,0,7
+ca_mau,2024,0,fraud_dry_claim,"khai pha kho 96h tai h=200, xoa 1 lenh",5,140.0,160.0,0,0,0,0.884,6,0,0,7
+ca_mau,2024,0,fraud_depth,khai 2 lan tuoi = FC (160mm),6,440.0,160.0,0,0,2,0.801,5,2,2,7
+ca_mau,2024,1,honest,"tuan thu AWD, 7 pha kho dat chuan",5,180.0,180.0,0,0,0,0.803,7,0,2,7
+ca_mau,2024,1,fraud_wet_day,khai them 8 lan tuoi vao ngay mua,13,500.0,180.0,6,0,8,0.803,6,0,0,7
+ca_mau,2024,1,fraud_dry_claim,"khai pha kho 96h tai h=200, xoa 1 lenh",4,140.0,180.0,0,0,0,0.92,6,0,2,7
+ca_mau,2024,1,fraud_depth,khai 1 lan tuoi = FC (160mm),5,300.0,180.0,0,0,1,0.803,5,0,1,7
+ca_mau,2024,2,honest,"tuan thu AWD, 7 pha kho dat chuan",7,160.0,160.0,0,0,0,0.803,7,0,9,7
+ca_mau,2024,2,fraud_wet_day,khai them 8 lan tuoi vao ngay mua,15,400.0,160.0,6,0,7,0.803,7,1,0,7
+ca_mau,2024,2,fraud_dry_claim,"khai pha kho 96h tai h=200, xoa 1 lenh",6,140.0,160.0,0,0,0,0.884,6,0,11,7
+ca_mau,2024,2,fraud_depth,khai 2 lan tuoi = FC (160mm),7,420.0,160.0,0,0,2,0.801,5,1,6,7
+ca_mau,2024,3,honest,"tuan thu AWD, 5 pha kho dat chuan",5,200.0,200.0,0,0,0,0.804,5,0,0,5
+ca_mau,2024,3,fraud_wet_day,khai them 8 lan tuoi vao ngay mua,13,500.0,200.0,6,0,7,0.804,5,0,0,5
+ca_mau,2024,3,fraud_dry_claim,"khai pha kho 96h tai h=200, xoa 1 lenh",4,160.0,200.0,0,0,0,0.92,4,0,0,5
+ca_mau,2024,3,fraud_depth,khai 1 lan tuoi = FC (160mm),5,320.0,200.0,0,0,1,0.803,5,0,0,5
+ca_mau,2024,4,honest,"tuan thu AWD, 7 pha kho dat chuan",6,160.0,160.0,0,0,0,0.803,7,0,0,7
+ca_mau,2024,4,fraud_wet_day,khai them 8 lan tuoi vao ngay mua,14,400.0,160.0,6,0,6,0.803,7,0,0,7
+ca_mau,2024,4,fraud_dry_claim,"khai pha kho 96h tai h=200, xoa 1 lenh",5,140.0,160.0,0,0,0,0.884,6,0,0,7
+ca_mau,2024,4,fraud_depth,khai 2 lan tuoi = FC (160mm),6,420.0,160.0,0,0,2,0.801,4,2,4,7
+ca_mau,2024,5,honest,"tuan thu AWD, 7 pha kho dat chuan",6,160.0,160.0,0,0,0,0.802,7,0,2,7
+ca_mau,2024,5,fraud_wet_day,khai them 8 lan tuoi vao ngay mua,14,500.0,160.0,6,0,7,0.802,7,0,0,7
+ca_mau,2024,5,fraud_dry_claim,"khai pha kho 96h tai h=200, xoa 1 lenh",5,140.0,160.0,0,0,0,0.884,6,0,2,7
+ca_mau,2024,5,fraud_depth,khai 2 lan tuoi = FC (160mm),6,440.0,160.0,0,0,2,0.802,5,1,0,7
+ca_mau,2024,6,honest,"tuan thu AWD, 6 pha kho dat chuan",5,160.0,160.0,0,0,0,0.803,6,0,0,6
+ca_mau,2024,6,fraud_wet_day,khai them 8 lan tuoi vao ngay mua,13,460.0,160.0,6,0,8,0.803,6,0,0,6
+ca_mau,2024,6,fraud_dry_claim,"khai pha kho 96h tai h=200, xoa 1 lenh",4,120.0,160.0,0,0,0,0.92,5,0,0,6
+ca_mau,2024,6,fraud_depth,khai 1 lan tuoi = FC (160mm),5,280.0,160.0,0,0,1,0.803,6,0,0,6
+ca_mau,2024,7,honest,"tuan thu AWD, 7 pha kho dat chuan",6,160.0,160.0,0,0,0,0.803,7,0,0,7
+ca_mau,2024,7,fraud_wet_day,khai them 8 lan tuoi vao ngay mua,14,500.0,160.0,6,0,7,0.803,7,0,0,7
+ca_mau,2024,7,fraud_dry_claim,"khai pha kho 96h tai h=200, xoa 1 lenh",5,140.0,160.0,0,0,0,0.884,6,0,0,7
+ca_mau,2024,7,fraud_depth,khai 2 lan tuoi = FC (160mm),6,400.0,160.0,0,0,2,0.801,6,0,4,7
+ca_mau,2024,8,honest,"tuan thu AWD, 10 pha kho dat chuan",7,160.0,160.0,0,0,0,0.804,10,0,0,10
+ca_mau,2024,8,fraud_wet_day,khai them 8 lan tuoi vao ngay mua,15,400.0,160.0,6,0,7,0.804,8,0,0,10
+ca_mau,2024,8,fraud_dry_claim,"khai pha kho 96h tai h=200, xoa 1 lenh",6,140.0,160.0,0,0,0,0.884,9,0,0,10
+ca_mau,2024,8,fraud_depth,khai 2 lan tuoi = FC (160mm),7,440.0,160.0,0,0,3,0.801,4,2,0,10
+ca_mau,2024,9,honest,"tuan thu AWD, 7 pha kho dat chuan",6,160.0,160.0,0,0,0,0.805,7,0,0,7
+ca_mau,2024,9,fraud_wet_day,khai them 8 lan tuoi vao ngay mua,14,400.0,160.0,6,0,6,0.805,7,0,0,7
+ca_mau,2024,9,fraud_dry_claim,"khai pha kho 96h tai h=200, xoa 1 lenh",5,140.0,160.0,0,0,0,0.884,6,0,0,7
+ca_mau,2024,9,fraud_depth,khai 2 lan tuoi = FC (160mm),6,440.0,160.0,0,0,2,0.804,5,1,0,7
+can_tho,2025,0,honest,"tuan thu AWD, 5 pha kho dat chuan",2,60.0,60.0,0,0,0,0.801,5,0,2,5
+can_tho,2025,0,fraud_wet_day,khai them 8 lan tuoi vao ngay mua,10,320.0,60.0,7,0,7,0.801,4,1,2,5
+can_tho,2025,0,fraud_dry_claim,"khai pha kho 96h tai h=250, xoa 1 lenh",1,20.0,60.0,0,0,0,0.897,3,0,1,5
+can_tho,2025,0,fraud_depth,khai 0 lan tuoi = FC (160mm),2,200.0,60.0,0,0,1,0.801,2,0,0,5
+can_tho,2025,1,honest,"tuan thu AWD, 2 pha kho dat chuan",2,80.0,80.0,0,0,0,0.801,2,0,4,2
+can_tho,2025,1,fraud_wet_day,khai them 8 lan tuoi vao ngay mua,10,400.0,80.0,7,0,8,0.801,2,1,3,2
+can_tho,2025,1,fraud_dry_claim,"khai pha kho 96h tai h=250, xoa 1 lenh",1,40.0,80.0,0,0,0,0.897,1,0,4,2
+can_tho,2025,1,fraud_depth,khai 0 lan tuoi = FC (160mm),2,200.0,80.0,0,0,1,0.801,2,0,4,2
+can_tho,2025,2,honest,"tuan thu AWD, 4 pha kho dat chuan",2,60.0,60.0,0,0,0,0.801,4,0,1,4
+can_tho,2025,2,fraud_wet_day,khai them 8 lan tuoi vao ngay mua,10,400.0,60.0,7,0,8,0.801,4,0,1,4
+can_tho,2025,2,fraud_dry_claim,"khai pha kho 96h tai h=250, xoa 1 lenh",1,40.0,60.0,0,0,0,0.866,3,0,1,4
+can_tho,2025,2,fraud_depth,khai 0 lan tuoi = FC (160mm),2,200.0,60.0,0,0,2,0.801,3,1,1,4
+can_tho,2025,3,honest,"tuan thu AWD, 5 pha kho dat chuan",2,60.0,60.0,0,0,0,0.801,5,0,2,5
+can_tho,2025,3,fraud_wet_day,khai them 8 lan tuoi vao ngay mua,10,400.0,60.0,7,0,8,0.801,5,0,2,5
+can_tho,2025,3,fraud_dry_claim,"khai pha kho 96h tai h=250, xoa 1 lenh",1,20.0,60.0,0,0,0,0.897,3,0,1,5
+can_tho,2025,3,fraud_depth,khai 0 lan tuoi = FC (160mm),2,200.0,60.0,0,0,1,0.801,2,0,0,5
+can_tho,2025,4,honest,"tuan thu AWD, 2 pha kho dat chuan",2,80.0,80.0,0,0,0,0.801,2,0,4,2
+can_tho,2025,4,fraud_wet_day,khai them 8 lan tuoi vao ngay mua,10,320.0,80.0,6,0,6,0.801,2,0,0,2
+can_tho,2025,4,fraud_dry_claim,"khai pha kho 96h tai h=250, xoa 1 lenh",1,40.0,80.0,0,0,0,0.897,1,0,4,2
+can_tho,2025,4,fraud_depth,khai 0 lan tuoi = FC (160mm),2,200.0,80.0,0,0,1,0.801,2,0,0,2
+can_tho,2025,5,honest,"tuan thu AWD, 4 pha kho dat chuan",2,60.0,60.0,0,0,0,0.801,4,0,1,4
+can_tho,2025,5,fraud_wet_day,khai them 8 lan tuoi vao ngay mua,10,400.0,60.0,7,0,7,0.801,3,0,0,4
+can_tho,2025,5,fraud_dry_claim,"khai pha kho 96h tai h=250, xoa 1 lenh",1,40.0,60.0,0,0,0,0.866,3,0,1,4
+can_tho,2025,5,fraud_depth,khai 0 lan tuoi = FC (160mm),2,200.0,60.0,0,0,2,0.801,3,1,1,4
+can_tho,2025,6,honest,"tuan thu AWD, 4 pha kho dat chuan",2,60.0,60.0,0,0,0,0.801,4,0,1,4
+can_tho,2025,6,fraud_wet_day,khai them 8 lan tuoi vao ngay mua,10,420.0,60.0,7,0,7,0.801,3,0,0,4
+can_tho,2025,6,fraud_dry_claim,"khai pha kho 96h tai h=250, xoa 1 lenh",1,40.0,60.0,0,0,0,0.866,3,0,1,4
+can_tho,2025,6,fraud_depth,khai 0 lan tuoi = FC (160mm),2,200.0,60.0,0,0,2,0.801,3,1,1,4
+can_tho,2025,7,honest,"tuan thu AWD, 2 pha kho dat chuan",2,80.0,80.0,0,0,0,0.801,2,0,4,2
+can_tho,2025,7,fraud_wet_day,khai them 8 lan tuoi vao ngay mua,10,440.0,80.0,7,0,8,0.801,2,0,4,2
+can_tho,2025,7,fraud_dry_claim,"khai pha kho 96h tai h=250, xoa 1 lenh",1,40.0,80.0,0,0,0,0.897,1,0,4,2
+can_tho,2025,7,fraud_depth,khai 0 lan tuoi = FC (160mm),2,200.0,80.0,0,0,1,0.801,2,0,4,2
+can_tho,2025,8,honest,"tuan thu AWD, 5 pha kho dat chuan",2,60.0,60.0,0,0,0,0.801,5,0,2,5
+can_tho,2025,8,fraud_wet_day,khai them 8 lan tuoi vao ngay mua,10,400.0,60.0,6,0,7,0.801,3,0,0,5
+can_tho,2025,8,fraud_dry_claim,"khai pha kho 96h tai h=250, xoa 1 lenh",1,20.0,60.0,0,0,0,0.897,3,0,1,5
+can_tho,2025,8,fraud_depth,khai 0 lan tuoi = FC (160mm),2,180.0,60.0,0,0,1,0.801,5,0,2,5
+can_tho,2025,9,honest,"tuan thu AWD, 6 pha kho dat chuan",3,60.0,60.0,0,0,0,0.802,6,0,2,6
+can_tho,2025,9,fraud_wet_day,khai them 8 lan tuoi vao ngay mua,11,380.0,60.0,7,0,8,0.802,4,0,0,6
+can_tho,2025,9,fraud_dry_claim,"khai pha kho 96h tai h=250, xoa 1 lenh",2,40.0,60.0,0,0,0,0.866,5,0,2,6
+can_tho,2025,9,fraud_depth,khai 1 lan tuoi = FC (160mm),3,200.0,60.0,0,0,1,0.802,3,0,0,6
+soc_trang,2025,0,honest,"tuan thu AWD, 5 pha kho dat chuan",4,120.0,120.0,0,0,0,0.804,5,0,3,5
+soc_trang,2025,0,fraud_wet_day,khai them 8 lan tuoi vao ngay mua,12,460.0,120.0,7,0,7,0.803,4,1,3,5
+soc_trang,2025,0,fraud_dry_claim,"khai pha kho 96h tai h=200, xoa 1 lenh",3,80.0,120.0,0,0,0,0.897,4,0,1,5
+soc_trang,2025,0,fraud_depth,khai 1 lan tuoi = FC (160mm),4,240.0,120.0,0,0,1,0.802,5,0,2,5
+soc_trang,2025,1,honest,"tuan thu AWD, 4 pha kho dat chuan",3,100.0,100.0,0,0,0,0.803,4,0,2,4
+soc_trang,2025,1,fraud_wet_day,khai them 8 lan tuoi vao ngay mua,11,360.0,100.0,6,0,7,0.803,5,0,3,4
+soc_trang,2025,1,fraud_dry_claim,"khai pha kho 96h tai h=200, xoa 1 lenh",2,60.0,100.0,0,0,0,0.897,3,0,1,4
+soc_trang,2025,1,fraud_depth,khai 1 lan tuoi = FC (160mm),3,240.0,100.0,0,0,1,0.803,3,0,5,4
+soc_trang,2025,2,honest,"tuan thu AWD, 4 pha kho dat chuan",3,100.0,100.0,0,0,0,0.802,4,0,2,4
+soc_trang,2025,2,fraud_wet_day,khai them 8 lan tuoi vao ngay mua,11,520.0,100.0,7,0,8,0.802,4,0,2,4
+soc_trang,2025,2,fraud_dry_claim,"khai pha kho 96h tai h=200, xoa 1 lenh",2,80.0,100.0,0,0,0,0.885,3,0,0,4
+soc_trang,2025,2,fraud_depth,khai 1 lan tuoi = FC (160mm),3,240.0,100.0,0,0,1,0.802,3,1,0,4
+soc_trang,2025,3,honest,"tuan thu AWD, 4 pha kho dat chuan",3,100.0,100.0,0,0,0,0.803,4,0,2,4
+soc_trang,2025,3,fraud_wet_day,khai them 8 lan tuoi vao ngay mua,11,540.0,100.0,5,0,8,0.803,4,3,3,4
+soc_trang,2025,3,fraud_dry_claim,"khai pha kho 96h tai h=200, xoa 1 lenh",2,60.0,100.0,0,0,0,0.897,3,0,0,4
+soc_trang,2025,3,fraud_depth,khai 1 lan tuoi = FC (160mm),3,220.0,100.0,0,0,1,0.802,4,0,1,4
+soc_trang,2025,4,honest,"tuan thu AWD, 4 pha kho dat chuan",3,100.0,100.0,0,0,0,0.803,4,0,2,4
+soc_trang,2025,4,fraud_wet_day,khai them 8 lan tuoi vao ngay mua,11,440.0,100.0,5,0,8,0.803,4,0,2,4
+soc_trang,2025,4,fraud_dry_claim,"khai pha kho 96h tai h=200, xoa 1 lenh",2,60.0,100.0,0,0,0,0.897,3,0,1,4
+soc_trang,2025,4,fraud_depth,khai 1 lan tuoi = FC (160mm),3,220.0,100.0,0,0,1,0.802,4,0,1,4
+soc_trang,2025,5,honest,"tuan thu AWD, 5 pha kho dat chuan",4,100.0,100.0,0,0,0,0.805,5,0,3,5
+soc_trang,2025,5,fraud_wet_day,khai them 8 lan tuoi vao ngay mua,12,380.0,100.0,6,0,6,0.802,5,1,6,5
+soc_trang,2025,5,fraud_dry_claim,"khai pha kho 96h tai h=200, xoa 1 lenh",3,80.0,100.0,0,0,0,0.885,4,0,1,5
+soc_trang,2025,5,fraud_depth,khai 1 lan tuoi = FC (160mm),4,240.0,100.0,0,0,1,0.802,4,1,4,5
+soc_trang,2025,6,honest,"tuan thu AWD, 4 pha kho dat chuan",3,100.0,100.0,0,0,0,0.802,4,0,2,4
+soc_trang,2025,6,fraud_wet_day,khai them 8 lan tuoi vao ngay mua,11,400.0,100.0,7,0,8,0.802,4,0,2,4
+soc_trang,2025,6,fraud_dry_claim,"khai pha kho 96h tai h=200, xoa 1 lenh",2,80.0,100.0,0,0,0,0.885,3,0,0,4
+soc_trang,2025,6,fraud_depth,khai 1 lan tuoi = FC (160mm),3,220.0,100.0,0,0,1,0.802,4,0,0,4
+soc_trang,2025,7,honest,"tuan thu AWD, 4 pha kho dat chuan",3,120.0,120.0,0,0,0,0.803,4,0,6,4
+soc_trang,2025,7,fraud_wet_day,khai them 8 lan tuoi vao ngay mua,11,480.0,120.0,7,0,8,0.803,4,0,6,4
+soc_trang,2025,7,fraud_dry_claim,"khai pha kho 96h tai h=200, xoa 1 lenh",2,80.0,120.0,0,0,0,0.897,3,0,5,4
+soc_trang,2025,7,fraud_depth,khai 1 lan tuoi = FC (160mm),3,240.0,120.0,0,0,1,0.803,4,0,5,4
+soc_trang,2025,8,honest,"tuan thu AWD, 5 pha kho dat chuan",4,100.0,100.0,0,0,0,0.804,5,0,3,5
+soc_trang,2025,8,fraud_wet_day,khai them 8 lan tuoi vao ngay mua,12,420.0,100.0,6,0,7,0.803,5,1,3,5
+soc_trang,2025,8,fraud_dry_claim,"khai pha kho 96h tai h=200, xoa 1 lenh",3,60.0,100.0,0,0,0,0.897,4,0,1,5
+soc_trang,2025,8,fraud_depth,khai 1 lan tuoi = FC (160mm),4,220.0,100.0,0,0,1,0.802,5,0,2,5
+soc_trang,2025,9,honest,"tuan thu AWD, 5 pha kho dat chuan",4,100.0,100.0,0,0,0,0.803,5,0,0,5
+soc_trang,2025,9,fraud_wet_day,khai them 8 lan tuoi vao ngay mua,12,460.0,100.0,6,0,7,0.802,5,1,2,5
+soc_trang,2025,9,fraud_dry_claim,"khai pha kho 96h tai h=200, xoa 1 lenh",3,80.0,100.0,0,0,0,0.885,4,0,0,5
+soc_trang,2025,9,fraud_depth,khai 1 lan tuoi = FC (160mm),4,240.0,100.0,0,0,1,0.802,4,1,2,5
+ca_mau,2025,0,honest,"tuan thu AWD, 3 pha kho dat chuan",1,40.0,40.0,0,0,0,0.801,3,0,2,3
+ca_mau,2025,0,fraud_wet_day,khai them 8 lan tuoi vao ngay mua,9,300.0,40.0,7,0,7,0.801,2,0,1,3
+ca_mau,2025,0,fraud_dry_claim,"khai pha kho 96h tai h=250, xoa 1 lenh",0,0,40.0,0,0,0,0.856,3,0,2,3
+ca_mau,2025,0,fraud_depth,khai 0 lan tuoi = FC (160mm),1,160.0,40.0,0,0,1,0.801,3,0,2,3
+ca_mau,2025,1,honest,"tuan thu AWD, 3 pha kho dat chuan",1,40.0,40.0,0,0,0,0.801,3,0,2,3
+ca_mau,2025,1,fraud_wet_day,khai them 8 lan tuoi vao ngay mua,9,340.0,40.0,6,0,7,0.801,2,0,1,3
+ca_mau,2025,1,fraud_dry_claim,"khai pha kho 96h tai h=250, xoa 1 lenh",0,0,40.0,0,0,0,0.856,3,0,2,3
+ca_mau,2025,1,fraud_depth,khai 0 lan tuoi = FC (160mm),1,160.0,40.0,0,0,1,0.801,3,0,2,3
+ca_mau,2025,2,honest,"tuan thu AWD, 4 pha kho dat chuan",1,20.0,20.0,0,0,0,0.801,4,0,2,4
+ca_mau,2025,2,fraud_wet_day,khai them 8 lan tuoi vao ngay mua,9,440.0,20.0,5,0,7,0.801,3,0,1,4
+ca_mau,2025,2,fraud_dry_claim,"khai pha kho 96h tai h=250, xoa 1 lenh",0,0,20.0,0,0,0,0.856,3,0,2,4
+ca_mau,2025,2,fraud_depth,khai 0 lan tuoi = FC (160mm),1,160.0,20.0,0,0,1,0.801,3,0,2,4
+ca_mau,2025,3,honest,"tuan thu AWD, 3 pha kho dat chuan",1,40.0,40.0,0,0,0,0.801,3,0,2,3
+ca_mau,2025,3,fraud_wet_day,khai them 8 lan tuoi vao ngay mua,9,480.0,40.0,6,0,8,0.801,3,0,2,3
+ca_mau,2025,3,fraud_dry_claim,"khai pha kho 96h tai h=250, xoa 1 lenh",0,0,40.0,0,0,0,0.856,3,0,2,3
+ca_mau,2025,3,fraud_depth,khai 0 lan tuoi = FC (160mm),1,160.0,40.0,0,0,1,0.801,3,0,2,3
+ca_mau,2025,4,honest,"tuan thu AWD, 3 pha kho dat chuan",1,40.0,40.0,0,0,0,0.801,3,0,2,3
+ca_mau,2025,4,fraud_wet_day,khai them 8 lan tuoi vao ngay mua,9,280.0,40.0,6,0,7,0.801,3,0,2,3
+ca_mau,2025,4,fraud_dry_claim,"khai pha kho 96h tai h=250, xoa 1 lenh",0,0,40.0,0,0,0,0.856,3,0,2,3
+ca_mau,2025,4,fraud_depth,khai 0 lan tuoi = FC (160mm),1,160.0,40.0,0,0,1,0.801,3,0,2,3
+ca_mau,2025,5,honest,"tuan thu AWD, 4 pha kho dat chuan",1,20.0,20.0,0,0,0,0.801,4,0,2,4
+ca_mau,2025,5,fraud_wet_day,khai them 8 lan tuoi vao ngay mua,9,300.0,20.0,5,0,6,0.801,3,0,1,4
+ca_mau,2025,5,fraud_dry_claim,"khai pha kho 96h tai h=250, xoa 1 lenh",0,0,20.0,0,0,0,0.856,3,0,2,4
+ca_mau,2025,5,fraud_depth,khai 0 lan tuoi = FC (160mm),1,160.0,20.0,0,0,1,0.801,3,0,2,4
+ca_mau,2025,6,honest,"tuan thu AWD, 4 pha kho dat chuan",1,20.0,20.0,0,0,0,0.801,4,0,2,4
+ca_mau,2025,6,fraud_wet_day,khai them 8 lan tuoi vao ngay mua,9,400.0,20.0,5,0,7,0.801,3,0,1,4
+ca_mau,2025,6,fraud_dry_claim,"khai pha kho 96h tai h=250, xoa 1 lenh",0,0,20.0,0,0,0,0.856,3,0,2,4
+ca_mau,2025,6,fraud_depth,khai 0 lan tuoi = FC (160mm),1,160.0,20.0,0,0,1,0.801,3,0,2,4
+ca_mau,2025,7,honest,"tuan thu AWD, 3 pha kho dat chuan",1,40.0,40.0,0,0,0,0.801,3,0,2,3
+ca_mau,2025,7,fraud_wet_day,khai them 8 lan tuoi vao ngay mua,9,360.0,40.0,5,0,7,0.801,2,1,1,3
+ca_mau,2025,7,fraud_dry_claim,"khai pha kho 96h tai h=250, xoa 1 lenh",0,0,40.0,0,0,0,0.856,3,0,2,3
+ca_mau,2025,7,fraud_depth,khai 0 lan tuoi = FC (160mm),1,160.0,40.0,0,0,1,0.801,3,0,2,3
+ca_mau,2025,8,honest,"tuan thu AWD, 3 pha kho dat chuan",1,40.0,40.0,0,0,0,0.801,3,0,2,3
+ca_mau,2025,8,fraud_wet_day,khai them 8 lan tuoi vao ngay mua,9,380.0,40.0,6,0,8,0.801,3,0,2,3
+ca_mau,2025,8,fraud_dry_claim,"khai pha kho 96h tai h=250, xoa 1 lenh",0,0,40.0,0,0,0,0.856,3,0,2,3
+ca_mau,2025,8,fraud_depth,khai 0 lan tuoi = FC (160mm),1,160.0,40.0,0,0,1,0.801,3,0,2,3
+ca_mau,2025,9,honest,"tuan thu AWD, 4 pha kho dat chuan",1,20.0,20.0,0,0,0,0.801,4,0,2,4
+ca_mau,2025,9,fraud_wet_day,khai them 8 lan tuoi vao ngay mua,9,400.0,20.0,5,0,7,0.801,2,1,1,4
+ca_mau,2025,9,fraud_dry_claim,"khai pha kho 96h tai h=250, xoa 1 lenh",0,0,20.0,0,0,0,0.856,3,0,2,4
+ca_mau,2025,9,fraud_depth,khai 0 lan tuoi = FC (160mm),1,160.0,20.0,0,0,1,0.801,3,0,2,4
