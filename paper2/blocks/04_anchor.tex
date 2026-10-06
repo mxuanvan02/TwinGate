@@ -1,0 +1,75 @@
+\section{Device-Anchored Attestation}
+\label{sec:anchor}
+
+\subsection{The gateway record}
+
+Proposition~\ref{prop:blind} shows that volume and depth are insufficient, and
+Proposition~\ref{prop:coincide} shows that order is exactly what the adversary
+manipulates. The defence must therefore observe timestamps --- and the only party
+that can vouch for a timestamp is the device that acted on it.
+
+Let the gateway hold a signed command record
+\begin{equation}
+\mathcal{G}=\{(t_j,u_j,\sigma_j)\},
+\label{eq:gateway}
+\end{equation}
+where $\sigma_j$ is a signature over $(t_j,u_j)$ produced by the controller at
+actuation time. The anchor test compares the claimed log against it:
+\begin{equation}
+A(L,\mathcal{G})=
+\begin{cases}
+\text{forge}, & \{t_i\}\neq\{t_j\}\ \vee\ \exists t:\ |u(t)-u_{\mathcal{G}}(t)|>\epsilon,\\
+\text{match}, & \text{otherwise},
+\end{cases}
+\label{eq:anchor}
+\end{equation}
+with $\epsilon=10^{-6}$\,mm, i.e.\ exact agreement up to floating-point noise.
+Time-shifting, consolidation, addition, omission and depth inflation all alter
+either the hour set or a depth at a common hour, so all are caught.
+
+\begin{proposition}[Completeness of the anchor]
+\label{prop:complete}
+If a claimed log $L$ differs from the gateway record $\mathcal{G}$ in the
+multiset of hours or in any depth at a shared hour, then $A(L,\mathcal{G})$
+returns \text{forge}. If $L$ and $\mathcal{G}$ agree on both, then $L$ is a
+faithful transcript and no forgery of the three quantities in \eqref{eq:three}
+has occurred.
+\end{proposition}
+
+\begin{proof}
+The first clause is the definition of \eqref{eq:anchor}. For the second, total
+volume, individual depths and timestamps are all functions of the hour set and
+the per-hour depths, so agreement on those two fixes all three.
+\end{proof}
+
+\subsection{Why this does not re-introduce false accusation}
+
+Proposition~\ref{prop:complete} is strong enough to look dangerous: any
+discrepancy is treated as forgery, including the forgetting and rounding that
+Sec.~\ref{sec:guarantee} showed to be ubiquitous. The resolution is that the
+anchor does not compare a log against a \emph{model}; it compares a transcript
+against the \emph{source}. An honest farmer who forgets an entry is not accused
+of fraud, because the system of record is the gateway, not the farmer's memory:
+the claim is simply completed from $\mathcal{G}$. In operational terms the anchor
+turns the log from \emph{evidence the farmer must get right} into \emph{a view of
+a record the device already holds}. False accusation then requires the gateway to
+disagree with itself, which is a device-integrity question rather than a
+behavioural one, and is why the guarantee in Table~\ref{tab:falseacc} holds at
+$0/60$ while the behavioural tiers hold at $26.7\%$ and $5.0\%$.
+
+\subsection{Cost and the scope of the claim}
+
+The anchor requires the gateway of the companion work~\cite{twingate2026}, which
+actuates the pump and already writes a signed, time-stamped command record as
+part of its safety function. The marginal cost of attestation is therefore the
+storage and transmission of a record that exists regardless, which is why tier~0
+of Table~\ref{tab:cost} remains near zero.
+
+The scope must nonetheless be stated precisely, because it is narrower than the
+premise we started from. A log written by hand on a handset, with no device in
+the loop, is \emph{not} admissible evidence on its own: Sec.~\ref{sec:results}
+measures a rational adversary inflating credits by $69\%$ while escaping every
+physics-based and volume-based test. The honest formulation of the result is that
+near-zero-cost MRV is achievable, but only where a controller stands between the
+farmer and the pump. Where irrigation is manual --- a sluice gate opened by hand
+--- the anchor is unavailable and this layer does not apply.

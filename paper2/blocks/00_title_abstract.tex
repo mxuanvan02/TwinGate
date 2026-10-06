@@ -1,0 +1,32 @@
+\title{Device-Anchored Irrigation Logs: An Adversarial Evaluation of
+Near-Zero-Cost MRV for Low-Emission Rice}
+
+\begin{abstract}
+Measurement, reporting and verification (MRV) is the bottleneck keeping emission
+reductions in low-emission rice from becoming tradable credits, and monitoring is
+about three quarters of that cost. Because every credit-eligible water-management
+action is already an \emph{actuation command}, a farmer-written irrigation log
+looks like free evidence of the highest rank under Decision 4801/QD-BNNMT. We
+built such a layer, proved it cannot accuse a compliant farmer, and then attacked
+it. The attack is the contribution. Replaying a log through the FAO-56 water
+balance under public ERA5 forcing exposes claimed depths no soil can hold, but
+an adversary who keeps the total volume and every individual depth intact and
+merely \emph{shifts commands in time} inflates creditable dry phases by
+$69\%$ and escapes both the physics layer and the pump meter in $91\%$ of cases.
+We measure this over $281$ audited logs at three Mekong Delta stations across two
+climate years, with the field deliberately violating every modelling assumption:
+soil texture across the FAO-56 Table 2 range, staged crop coefficient,
+irrigation efficiency $0.60$--$0.85$, field rainfall differing from the grid
+cell, bund seepage, and farmers who forget, round and record late. Under those
+conditions the published point-model detector falsely accused $26.7\%$ of honest
+farmers. Matching the log against the gateway's signed, time-stamped command
+record instead catches $116/116$ genuinely forged logs and accuses none. The
+result is a negative one with a constructive repair: physics-based attestation is
+worth having but cannot stand alone, and the timestamp must come from a device
+rather than from the farmer.
+\end{abstract}
+
+\begin{IEEEkeywords}
+carbon credit, digital MRV, adversarial robustness, digital twin, rice irrigation,
+alternate wetting and drying, IoT gateway, Mekong Delta
+\end{IEEEkeywords}

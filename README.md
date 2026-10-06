@@ -143,7 +143,7 @@ phases**, escaping both tiers in 91–100 % of cases.
 
 **The only defence that reaches 100 % / 0 % is the device-anchored log** — matching
 the claimed log against the gateway's signed, time-stamped command record:
-**78/78** genuinely forged logs caught, **0/60** honest farmers accused. Paper 1's
+**116/116** genuinely forged logs caught, **0/60** honest farmers accused (re-verified by counting the CSV; **37/37** under the full 150-replay Θ). Paper 1's
 TwinGate gateway already writes that record, so the marginal cost stays near zero
 *if the two are deployed together*. **Tier 0 as a standalone phone app is not
 trustworthy on its own** — the cost model in the paper must say so.
@@ -168,6 +168,48 @@ python3 tests/test_log_filters.py                       # 46 tests, one per hole
 python3 experiments/reality_gap_probe.py 3              # 7 reality-gap axes
 python3 experiments/robust_audit_eval.py --quick        # v1 vs v2, 9 fraud variants
 python3 experiments/analyze_robust_eval.py outputs/robust_audit_eval.csv
+```
+
+## Paper 2 changed axis: device-anchored, not physics-attested
+
+The robustness work above did not merely add caveats — it reversed the paper's
+conclusion. The first version claimed that soil-water physics could attest a
+farmer-written log at near-zero cost. Two propositions show why it cannot:
+
+- **Aggregate defences are exactly blind.** If two logs share the same multiset of
+  depths, then `G = M − U(L)` and the infiltration-bound violation count are both
+  invariant. The pump meter and `V5` cannot distinguish them at all.
+- **Profit and undetectability share a gradient.** Delaying a claim both extends
+  the creditable dry phase *and* increases the deficit available to it, so the
+  move that earns more credit is also the move that looks more legitimate.
+
+Measured consequence: a volume-preserving, depth-bounded **time shift** inflates
+creditable dry phases by **+69%** (reduced Θ) to **+78%** (full Θ) while escaping
+both physical tiers in 91–100% of cases.
+
+What actually holds is the **device anchor** — matching the claimed log against
+the gateway's signed, time-stamped command record:
+
+| Defence | Caught genuinely forged | False accusation on honest logs |
+|---|---|---|
+| v1 point model (as published) | naive only | **26.7%** |
+| v2 physics, ∀ over Θ | naive only | 5.0% |
+| **Device anchor** | **116/116 = 100%** | **0/60** |
+
+So the honest claim is narrower and more useful: near-zero-cost MRV is
+achievable **only where a controller stands between the farmer and the pump**.
+Hand-operated sluices have no command record, so this layer does not apply there.
+
+Two published numbers were corrected: the admissible depth is a range
+**[49.0, 86.0] mm**, not a single 61 mm (it is a *per-event* bound, and
+`u_max = max(d*, w0)·span + ε`); and the wilting-point filter **cannot activate**
+on dry-season delta rice — over 150 configurations the unclipped depletion peaks
+at **0.9987**, so it is a safety device, not detection evidence. Do not describe
+the layer as having "three physical filters".
+
+```bash
+python3 experiments/diag_f2.py                 # V2 reachability, 150 configs
+python3 experiments/make_tables_anchored.py    # paper2 tables + gate (exits non-zero on failure)
 ```
 
 ## Repository layout

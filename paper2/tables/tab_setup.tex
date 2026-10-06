@@ -1,19 +1,23 @@
-% Sinh TU DONG tu outputs/fraud_raw.csv boi experiments/make_tables_paper2.py
+% Sinh TU DONG tu outputs/eval_theta_*.csv boi experiments/make_tables_anchored.py
 % KHONG sua tay: moi con so deu truy nguon duoc ve CSV.
 
-\begin{tabular}{@{}p{2.6cm}p{5.9cm}@{}}
+\begin{tabular}{@{}p{2.85cm}p{5.60cm}@{}}
 \toprule
 Component & Value \\
 \midrule
 Weather & Hourly ERA5 via the Open-Meteo archive, no missing values \\
-Stations & 3: Can Tho, Soc Trang, Ca Mau \\
+Stations & 3: ca mau, can tho, soc trang \\
 Climate years & 2024, 2025 (2024 water-scarce, 2025 water-surplus) \\
-Window & 1 March to 29 May (2\,160 h), the dry season of the Mekong Delta \\
-Soil & Silty clay loam, FAO-56 Table 2: TAW $=70$, FC $=160$, WP $=90$\,mm \\
-True irrigation schedule & AWD-compliant, irrigating at $d\ge 0.80$ with depths $\{20,40\}$\,mm \\
-Log variants & 4 (one honest, three fraudulent) \\
-Random seeds & 10 per cell \\
-Logs audited in total & 	extbf{240} \\
-Filters & $V_1,V_2,V_4$ physical (tier 0); pump-meter gap $G$ (tier 1) \\
+Window & 1 March to 29 May (2\,160 h), the delta dry season \\
+Soil textures sampled & 5 across the FAO-56 Table 2 range \\
+Reality-gap axes & 7: soil, $K_c$ stage, $\eta$, field rain, seepage, recording behaviour, $w_0$ \\
+Irrigation efficiency $\eta$ & 0.60--0.85 (water reaching roots / water pumped) \\
+$K_c$ regimes & fixed 1.05 (as published) and staged 1.05/1.20/0.90 \\
+Recording noise & forget 5\%, round to 5\,mm, one-day delay 35\%, depth error 15\% within $\pm$35\% \\
+Fraud variants & 7 (three naive, four adversarial) \\
+Uncertainty set $|\Theta|$ & 30 = 5 soils $\times$ 2 $K_c$ regimes $\times$ 3 efficiencies \\
+Initial states $|w_0|$ & 5, spanning depletion 0 to 0.90 \\
+Replays per log & 24 (reduced $\Theta$) and 150 (full $\Theta$) \\
+Logs audited & 281 \\
 \bottomrule
 \end{tabular}

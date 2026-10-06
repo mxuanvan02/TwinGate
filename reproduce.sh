@@ -99,6 +99,10 @@ else
   python experiments/reality_gap_probe.py 3
   python experiments/robust_audit_eval.py --quick
   python experiments/analyze_robust_eval.py outputs/robust_audit_eval.csv
+  # chan doan V2 co the kich hoat tren lua mua kho khong (150 cau hinh)
+  python experiments/diag_f2.py
+  # bang cua bai 2 theo truc device-anchored (gate: anchor 116/116, bat oan 0)
+  python experiments/make_tables_anchored.py
   python experiments/make_tables_paper2.py
 fi
 

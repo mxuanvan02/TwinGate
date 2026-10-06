@@ -112,8 +112,9 @@ dịch giờ +78,3% tín chỉ, anchor bắt 3/3.
    điều kiện này.
 
 2. **Phòng tuyến duy nhất đạt 100%/0% là device-anchored command log**: bắt
-   **100%** mọi nhật ký thật sự bị làm giả (28/28 quick, 78/78 full), bắt oan
-   **0/60**. Đây mới là đóng góp trung thực của bài — không phải "ba bộ lọc vật
+   **100%** mọi nhật ký thật sự bị làm giả — đếm lại từ CSV: **28/28** (quick),
+   **116/116** (Θ rút gọn 10 seeds), **37/37** (Θ đầy đủ 3 seeds); bắt oan **0/60**
+   và **0/18**. Đây mới là đóng góp trung thực của bài — không phải "ba bộ lọc vật
    lý bắt 100%".
 
 3. **Không được nói "ba bộ lọc"**: V2 đã sửa cho fire được nhưng **không kích

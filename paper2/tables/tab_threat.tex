@@ -1,0 +1,17 @@
+% Sinh TU DONG tu outputs/eval_theta_*.csv boi experiments/make_tables_anchored.py
+% KHONG sua tay: moi con so deu truy nguon duoc ve CSV.
+
+\begin{tabular}{@{}p{2.85cm}p{0.95cm}p{1.05cm}p{0.95cm}p{2.20cm}@{}}
+\toprule
+Fraud variant & Total mm & Each depth & Timing & What it forges \\
+\midrule
+Honest farmer (field conditions) & true & true & true & Reference: seven reality-gap axes active \\
+Added irrigation events & FALSE & true & true & Inflates the record of management activity \\
+Infeasible claimed depth & FALSE & FALSE & true & One third of entries set to the whole storage span \\
+Omission of real commands & FALSE & true & true & Deletes a 96 h window to manufacture a dry phase \\
+Claim consolidation, 24 h & true & varies & FALSE & Same water, fewer and larger events \\
+Claim consolidation, 96 h & true & varies & FALSE & Same water, events snapped to a coarse grid \\
+Time shifting (rational) & true & true & FALSE & Hill-climbs each hour to maximise creditable dry phases \\
+Rational adversary & true & true & FALSE & Chooses the consolidation window that maximises dry phases \\
+\bottomrule
+\end{tabular}
