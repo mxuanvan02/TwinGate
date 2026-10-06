@@ -1,0 +1,18 @@
+% Sinh TU DONG tu outputs/fraud_raw.csv boi experiments/make_tables_paper2.py
+% KHONG sua tay: moi con so deu truy nguon duoc ve CSV.
+
+\begin{tabular}{@{}p{3.9cm}p{2.2cm}p{1.85cm}@{}}
+\toprule
+Result & Measured value & Source \\
+\midrule
+False alarms on honest logs & $0/60$ & Table~\ref{tab:detect} \\
+Added irrigation events detected & 60/60 $=100\%$ & Table~\ref{tab:detect} \\
+Infeasible depths detected & 60/60 $=100\%$ & Table~\ref{tab:detect} \\
+Omission detected at tier 1 & 60/60 $=100\%$, $\bar G=29.0$\,mm & Table~\ref{tab:detect} \\
+Largest depth that never raises an alarm & $u\le 61$\,mm & Prop.~\ref{prop:umax}, Table~\ref{tab:prop1} \\
+Cost of tier 0 & $\sim\$0$--$1$/ha per season & Table~\ref{tab:cost} \\
+Cost of the full stack (tiers 0+1+2) & $\sim\$6$--$11$/ha per season & Table~\ref{tab:cost} \\
+Share of credit revenue & $5$--$15\%$ at $\$15$--$25$/t and $4$--$6$ credits/ha & Sec.~\ref{sec:cost} \\
+Threshold drift from subsidence over a 5-year crediting period & $5.5$--$12.5$\,cm, that is $37$--$83\%$ of the 15\,cm AWD threshold & Prop.~\ref{prop:subsid} \\
+\bottomrule
+\end{tabular}

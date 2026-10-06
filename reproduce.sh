@@ -14,8 +14,9 @@
 #   4. runs the six invariant test scripts + the d_max proposition test
 #   5. runs the main grid (7 560 episodes/year x 2 years), the ablation, the
 #      deployment sweep, the multi-field experiment, the sigma x delta sweep,
-#      the salinity scenario and the fraud-detection experiment (240 audited
-#      irrigation logs, paper 2)
+#      the salinity scenario, the fraud-detection experiment (240 audited
+#      irrigation logs, paper 2) and the robust-audit evaluation (v2 filters
+#      under seven reality-gap axes plus nine fraud variants)
 #   6. runs the paired Wilcoxon analysis and regenerates every figure + LaTeX
 #      table
 #
@@ -69,6 +70,7 @@ echo "[4/6] invariant + proposition test scripts"
 for t in tests/test_water_balance.py tests/test_twin_gate.py \
          tests/test_command_resend.py tests/test_ncs_invariants.py \
          tests/test_tide_salinity.py tests/test_dmax_proposition.py \
+         tests/test_log_filters.py \
          experiments/fraud_detection.py; do
   printf '   %-40s' "$t"
   if python "$t" > "/tmp/$(basename "$t").log" 2>&1; then
@@ -93,6 +95,10 @@ else
   python experiments/sweep_sigma_delta.py
   python experiments/sweep_salinity.py
   python experiments/fraud_detection.py
+  # v2: bo loc ben vung. reality_gap_probe dung ERA5 that nen phai co data truoc.
+  python experiments/reality_gap_probe.py 3
+  python experiments/robust_audit_eval.py --quick
+  python experiments/analyze_robust_eval.py outputs/robust_audit_eval.csv
   python experiments/make_tables_paper2.py
 fi
 

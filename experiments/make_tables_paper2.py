@@ -58,7 +58,14 @@ def write(name: str, lines: list[str]) -> None:
     p = DEST / f"{name}.tex"
     hdr = ("% Sinh TU DONG tu outputs/fraud_raw.csv boi experiments/make_tables_paper2.py\n"
            "% KHONG sua tay: moi con so deu truy nguon duoc ve CSV.\n\n")
-    p.write_text(hdr + "\n".join(lines) + "\n", encoding="utf-8")
+    BS_ = chr(92)
+    NL_ = chr(10)
+    BAD4 = BS_ * 4 + chr(34)
+    body_txt = NL_.join(lines)
+    for k, ln in enumerate(body_txt.split(NL_), 1):
+        assert not ln.rstrip().endswith(BAD4), (
+            name + ".tex dong " + str(k) + " ket thuc 4 backslash = dong TRONG")
+    p.write_text(hdr + body_txt + NL_, encoding="utf-8")
     print(f"  wrote {p.name} ({len(lines)} dong)")
 
 
@@ -79,7 +86,7 @@ def tab_detect(rows) -> None:
 
     VN_ST = {"can_tho": "Can Tho", "soc_trang": "Soc Trang", "ca_mau": "Ca Mau"}
 
-    L = [HDR + "{@{}llccccc@{}}", TOP,
+    L = [HDR + "{@{}p{1.5cm}p{0.75cm}p{0.35cm}p{1.25cm}p{1.25cm}p{1.2cm}p{1.2cm}@{}}", TOP,
          r"Station & Year & $n$ & False alarm & Added events & False depth & Omission \\",
          MID]
     tot = defaultdict(int)
@@ -119,7 +126,7 @@ def tab_intensity(rows) -> None:
           "fraud_wet_day": r"Fraud 1, added irrigation events",
           "fraud_depth": r"Fraud 2, infeasible depth",
           "fraud_dry_claim": r"Fraud 3, omission to claim a dry phase"}
-    L = [HDR + "{@{}lcccccc@{}}", TOP,
+    L = [HDR + "{@{}p{2.2cm}p{0.7cm}p{1.05cm}p{0.8cm}p{0.8cm}p{1.0cm}p{0.95cm}@{}}", TOP,
          r"Log type & $|L|$ & $\sum u$ (mm) & $|V_1|$ & $|V_4|$ & $\bar d_{\max}$ & $G$ (mm) \\",
          MID]
     for v in order:
@@ -195,7 +202,9 @@ def tab_cost() -> None:
         ("0+1+2", "One water-level node shared by the whole cooperative", 6.0, 11.0,
          "Re-anchors the twin and satisfies the I7 calibration invariant"),
     ]
-    L = [HDR + "{@{}lp{4.4cm}cp{4.2cm}@{}}", TOP,
+    # ngan sach chieu rong: 1 cot IEEE = 252pt = 8.85cm, tru tabcolsep 3pt x 2 x (ncols-1)
+    # = 0.64cm cho 4 cot -> con 8.21cm. Cu 0.75+2.7+1.3+3.6 = 8.35cm nen tran 7.3-8.2pt.
+    L = [HDR + "{@{}p{0.7cm}p{2.6cm}p{1.2cm}p{3.6cm}@{}}", TOP,
          r"Tier & Hardware & \$/ha/season & Additional evidence purchased \\", MID]
     for t, dev, lo, hi, gain in tiers:
         cost = f"${lo:.0f}$--${hi:.0f}$" if lo != hi else f"${hi:.0f}$"
@@ -220,18 +229,18 @@ def tab_setup(rows) -> None:
     stations = sorted({r["station"] for r in rows})
     years = sorted({r["year"] for r in rows})
     seeds = sorted({r["seed"] for r in rows})
-    L = [HDR + "{@{}ll@{}}", TOP,
+    L = [HDR + "{@{}p{2.6cm}p{5.9cm}@{}}", TOP,
          r"Component & Value \\", MID,
          r"Weather & Hourly ERA5 via the Open-Meteo archive, no missing values \\",
          f"Stations & {len(stations)}: Can Tho, Soc Trang, Ca Mau \\\\",
          f"Climate years & {', '.join(years)} (2024 water-scarce, 2025 water-surplus) \\\\",
-         r"Window & 1 March to 29 May (2\,160 h), the dry season of the Mekong Delta \\\\",
-         r"Soil & Silty clay loam, FAO-56 Table 2: TAW $=70$, FC $=160$, WP $=90$\,mm \\\\",
-         r"True irrigation schedule & AWD-compliant, irrigating at $d\ge 0.80$ with depths $\{20,40\}$\,mm \\\\",
+         r"Window & 1 March to 29 May (2\,160 h), the dry season of the Mekong Delta \\",
+         r"Soil & Silty clay loam, FAO-56 Table 2: TAW $=70$, FC $=160$, WP $=90$\,mm \\",
+         r"True irrigation schedule & AWD-compliant, irrigating at $d\ge 0.80$ with depths $\{20,40\}$\,mm \\",
          f"Log variants & {len(variants)} (one honest, three fraudulent) \\\\",
          f"Random seeds & {len(seeds)} per cell \\\\",
          f"Logs audited in total & \textbf{{{n}}} \\\\",
-         r"Filters & $V_1,V_2,V_4$ physical (tier 0); pump-meter gap $G$ (tier 1) \\\\",
+         r"Filters & $V_1,V_2,V_4$ physical (tier 0); pump-meter gap $G$ (tier 1) \\",
          BOT, END]
     write("tab_setup", L)
 
@@ -247,7 +256,7 @@ def tab_headline(rows, tot) -> None:
     om = tot["omi"]
     gap = statistics.mean(f(x["truth_total_mm"]) - f(x["total_mm"])
                           for x in by["fraud_dry_claim"])
-    L = [HDR + "{@{}lll@{}}", TOP,
+    L = [HDR + "{@{}p{3.9cm}p{2.2cm}p{1.85cm}@{}}", TOP,
          r"Result & Measured value & Source \\", MID,
          r"False alarms on honest logs & $0/" + str(n) + r"$ & Table~\ref{tab:detect} \\",
          r"Added irrigation events detected & " + f"{tot['wet']}/{n}" + r" $=100\%$ & Table~\ref{tab:detect} \\",
@@ -267,29 +276,29 @@ def tab_headline(rows, tot) -> None:
 # BANG 7: doi chieu phap ly
 # ======================================================================
 def tab_legal() -> None:
-    L = [HDR + "{@{}p{4.9cm}p{6.4cm}l@{}}", TOP,
+    L = [HDR + "{@{}p{4.5cm}p{10.1cm}p{2.3cm}@{}}", TOP,
          r"Requirement & How the system meets it & Level \\", MID,
          r"Decision 4801: the highest-ranked evidence is the record of actual irrigation and drainage actions &"
          r"A signed, time-stamped command log at hourly resolution &"
-         r"Direct \\\\",
+         r"Direct \\",
          r"Decision 4801: drainage counts only if the field is not re-irrigated for at least three days &"
          r"A counter of dry phases of at least 72 h with $d\ge d_{\mathrm{dry}}$, evaluated on the replayed trajectory &"
-         r"Direct \\\\",
+         r"Direct \\",
          r"Decision 4801, Appendix A12: uncertainty reported at a 95\% interval with $z=1.96$ &"
          r"The same statistical machinery as the I7 calibration invariant of~\cite{twingate2026} &"
-         r"Direct \\\\",
+         r"Direct \\",
          r"VM0051 \S 9.3: the principle of conservativeness when choosing parameters &"
          r"Thresholds are biased toward raising an alarm ($\varepsilon=5$\,mm), so a compliant farmer may be queried but a fraudster is not passed &"
-         r"Aligned \\\\",
+         r"Aligned \\",
          r"VM0051 \S 5.2: a digital record of cultivation practices is acceptable &"
          r"The mobile log is exactly this type of record &"
-         r"Direct \\\\",
+         r"Direct \\",
          r"VM0051 Appendix 4: digital MRV and remote sensing are recommended &"
          r"Sentinel-1 is used as a per-plot cross-check that lowers the frequency of field verification; it does not replace the log &"
-         r"Supporting \\\\",
+         r"Supporting \\",
          r"Not claimed &"
          r"The system does not quantify CH$_4$ or N$_2$O (that requires the emission factors of IAE), does not replace third-party verification, and treats the salinity constraint as a scenario model only &"
-         r"Limitation \\\\",
+         r"Limitation \\",
          BOT, END]
     write("tab_legal", L)
 
@@ -298,16 +307,17 @@ def tab_legal() -> None:
 # BANG 8: so sanh chi phi 4 kien truc
 # ======================================================================
 def tab_baseline() -> None:
-    L = [HDR + "{@{}lccccl@{}}", TOP,
+    # 6 cot: tabcolsep an 5 x 0.212 = 1.06cm -> con 7.79cm. Cu 8.10cm nen tran 8.5pt.
+    L = [HDR + "{@{}p{2.2cm}p{0.8cm}p{0.65cm}p{0.65cm}p{0.9cm}p{2.4cm}@{}}", TOP,
          r"Architecture & Hardware & Labor & Audit & Total \$/ha & Note \\", MID,
          r"Manual observation tube plus photographs & $0.5$ & $8.0$ & $4$ & $12.5$ &"
-         r"current practice under Decision 4801 \\\\",
+         r"current practice under Decision 4801 \\",
          r"Water-level sensor per plot & $11.3$ & $1.5$ & $4$ & $18.8$ &"
-         r"accurate, hard to scale to smallholders \\\\",
+         r"accurate, hard to scale to smallholders \\",
          r"Remote sensing plus field verification & $0$ & $2.0$ & $6$ & $8.0$ &"
-         r"revisit 2 to 4 days \\\\",
+         r"revisit 2 to 4 days \\",
          r"\textbf{Physics-attested log (this work)} & $3.6$ & $0.3$ & $3$ &"
-         r"$\mathbf{8.4}$ & tier 0 alone is $\$0$--$1$ \\\\",
+         r"$\mathbf{8.4}$ & tier 0 alone is $\$0$--$1$ \\",
          BOT, END]
     write("tab_baseline", L)
 

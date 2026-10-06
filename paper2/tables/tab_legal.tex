@@ -1,0 +1,16 @@
+% Sinh TU DONG tu outputs/fraud_raw.csv boi experiments/make_tables_paper2.py
+% KHONG sua tay: moi con so deu truy nguon duoc ve CSV.
+
+\begin{tabular}{@{}p{4.5cm}p{10.1cm}p{2.3cm}@{}}
+\toprule
+Requirement & How the system meets it & Level \\
+\midrule
+Decision 4801: the highest-ranked evidence is the record of actual irrigation and drainage actions &A signed, time-stamped command log at hourly resolution &Direct \\
+Decision 4801: drainage counts only if the field is not re-irrigated for at least three days &A counter of dry phases of at least 72 h with $d\ge d_{\mathrm{dry}}$, evaluated on the replayed trajectory &Direct \\
+Decision 4801, Appendix A12: uncertainty reported at a 95\% interval with $z=1.96$ &The same statistical machinery as the I7 calibration invariant of~\cite{twingate2026} &Direct \\
+VM0051 \S 9.3: the principle of conservativeness when choosing parameters &Thresholds are biased toward raising an alarm ($\varepsilon=5$\,mm), so a compliant farmer may be queried but a fraudster is not passed &Aligned \\
+VM0051 \S 5.2: a digital record of cultivation practices is acceptable &The mobile log is exactly this type of record &Direct \\
+VM0051 Appendix 4: digital MRV and remote sensing are recommended &Sentinel-1 is used as a per-plot cross-check that lowers the frequency of field verification; it does not replace the log &Supporting \\
+Not claimed &The system does not quantify CH$_4$ or N$_2$O (that requires the emission factors of IAE), does not replace third-party verification, and treats the salinity constraint as a scenario model only &Limitation \\
+\bottomrule
+\end{tabular}

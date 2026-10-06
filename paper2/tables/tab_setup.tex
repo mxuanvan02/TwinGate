@@ -1,0 +1,19 @@
+% Sinh TU DONG tu outputs/fraud_raw.csv boi experiments/make_tables_paper2.py
+% KHONG sua tay: moi con so deu truy nguon duoc ve CSV.
+
+\begin{tabular}{@{}p{2.6cm}p{5.9cm}@{}}
+\toprule
+Component & Value \\
+\midrule
+Weather & Hourly ERA5 via the Open-Meteo archive, no missing values \\
+Stations & 3: Can Tho, Soc Trang, Ca Mau \\
+Climate years & 2024, 2025 (2024 water-scarce, 2025 water-surplus) \\
+Window & 1 March to 29 May (2\,160 h), the dry season of the Mekong Delta \\
+Soil & Silty clay loam, FAO-56 Table 2: TAW $=70$, FC $=160$, WP $=90$\,mm \\
+True irrigation schedule & AWD-compliant, irrigating at $d\ge 0.80$ with depths $\{20,40\}$\,mm \\
+Log variants & 4 (one honest, three fraudulent) \\
+Random seeds & 10 per cell \\
+Logs audited in total & 	extbf{240} \\
+Filters & $V_1,V_2,V_4$ physical (tier 0); pump-meter gap $G$ (tier 1) \\
+\bottomrule
+\end{tabular}
