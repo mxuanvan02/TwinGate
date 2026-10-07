@@ -86,10 +86,45 @@
 % khac. Vung chu that = 15.01 cm theo bai da xuat ban.
 \setlength{\columnsep}{0.75cm}
 
-% ---- gian dong 1.15, 6 pt truoc / 3 pt sau, khong gian giua doan = 0 ----
-\linespread{1.15}
-\setlength{\parskip}{0pt}
-\setlength{\parindent}{0.45cm}
+% ---- gian dong + indent doan: DO TU 2 BAI HUJOS-TT DA XUAT BAN ----
+% experiments/measure_indent.py (loc dung bang tieu chi "doan truoc ket thuc som
+% hon le phai 0.5cm", khong dem moi dong thut le vi nham voi dong trong bang):
+%   indent dau doan = 1.00 cm  (bai #1: 31/72 dong; bai #2: 30/58 dong — trung vi
+%                               cua ca hai dung bang 1.00)
+%   khoang cach doan = pitch tai cho bat dau doan tru them +3.01pt (bai #1)
+%                                            va +6.00pt (bai #2) so voi pitch thuong
+% Quy dinh van ban: "6 points before and 3 points after paragraph spacing".
+% template docx docDefaults: w:spacing before="120" after="60" line="276"
+% (= 6pt / 3pt / 1.15). Hai nguon nay khop nhau -> chon parskip 3pt.
+%
+% Ban cu de parindent 0.45cm va parskip 0pt: KHONG khop nguon nao.
+%
+% "1.15" CUA WORD KHAC \linespread{1.15} CUA LATEX — da giai bang phep do, khong
+% con la xung dot phai doan. Word nhan 1.15 voi (ascent+descent+lineGap) cua FONT;
+% LaTeX \linespread nhan voi baselineskip cua CLASS.
+%
+% experiments/probe_linespread.py: 7 PDF RIENG, moi PDF mot gia tri (probe dau tien
+% dat ca 4 gia tri trong cung mot file va tach doan bang khoang cach doc -> ham tach
+% gop ca 4 doan lipsum thanh 1, trung vi ra 15.54pt la TRON cua 4 gia tri, vo nghia;
+% \typeout khong xuat hien trong PDF nen khong dung lam moc duoc).
+%   baselineskip tu nhien cua TeX Gyre Pagella 10pt = 11.954pt
+%   (7 gia tri cho cung mot he so: 11.95-11.96pt, sai so 0.01pt)
+%   1.15 -> 13.75pt   1.25 -> 14.94pt   1.29 -> 15.42pt   1.30 -> 15.54pt
+% 2 bai HUJOS-TT da xuat ban do duoc pitch 15.48pt (n=225 va n=161 khoang cach).
+% => \linespread{1.29} cho 15.42pt, lech target -0.06pt. Chon 1.29.
+% Dung 1.15 (13.75pt) se chat hon bai cua chinh toa soan 1.13 lan.
+\linespread{1.29}
+\setlength{\parskip}{3pt plus 0.5pt}
+\setlength{\parindent}{1.0cm}
+
+% \raggedbottom la BAT BUOC o day. \documentclass[10pt,twoside] mac dinh bat
+% \flushbottom, tuc LaTeX keo gian KEO DOC de moi trang cao bang nhau. Hau qua do
+% duoc (experiments/verify_layout.py): parskip that cua ban em do ra +7.97pt thay vi
+% 3pt da dat, va khoang cach tai ranh doan phan tan 16.9/21.7/23.9pt trong khi 2 bai
+% da dang gom chat 18.1/21.5pt. \raggedbottom de trang ket thuc tu nhien, khong keo.
+% parskip GIU 3pt: 2 bai da dang do duoc +2.64pt tai ranh doan (ca hai bai giong
+% het nhau), khop "3 points after paragraph spacing" cua quy dinh van ban.
+\raggedbottom
 
 % ---- toan hoc ----
 % KHONG dung \numberwithin{equation}{section}: quy dinh HUJOS-TT yeu cau cong thuc
@@ -108,21 +143,35 @@
 
 % ---- bang: booktabs + caption tren bang ----
 \usepackage{booktabs}
+% Caption canh GIUA: do tu 2 bai da xuat ban (experiments/measure_venue_style.py),
+% 17/17 caption 'Table n.'/'Fig. n.' co mid = 9.50cm dung tam vung chu
+% (2.00..17.00cm), ke ca caption dai 2 dong (x=[2.79,16.21] va x=[2.74,16.09]).
+% Ban cu dung justification=raggedright + singlelinecheck=false = canh TRAI,
+% khong khop bai nao. font=small (9pt) giu nguyen: do duoc 9.14pt o bai da dang.
+% labelfont=bf giu nguyen: quy dinh noi "Figure numbers and table numbers are
+% printed in bold". labelsep=period giu nguyen: bai dang that la "Fig. 1." / "Table 1."
 \usepackage[font=small,labelfont=bf,labelsep=period,
-            skip=4pt,justification=raggedright,singlelinecheck=false]{caption}
+            skip=4pt,justification=centering]{caption}
 \captionsetup[table]{position=top}
 \captionsetup[figure]{position=bottom}
 
 % ---- heading theo so do tu template ----
 \usepackage{titlesec}
+% Bai da dang: so muc "1" nam o x=[2.00,2.33]cm, CHU "Introduction" bat dau o
+% x=3.00cm (PyMuPDF tach thanh 2 span cung dong y=19.3). Tuc khoang cach tu CUOI
+% nhan den dau chu = 0.79cm (do lai lan 2: het nhan 2.21 -> chu 3.00, ca 2 bai
+% deu ra gap 0.79cm). Ban cu dung 0.5em (~0.21cm o 12pt) -> chu nam o
+% ~2.25cm; ban sua 0.67cm cho 2.88cm, van lech 0.12cm -> chot 0.79cm.
+% Subsection GIU 0.5em: bai #2 do duoc "2.1 Object Detection from UAV Imagery"
+% bat dau o x0=2.00cm, khong thut them.
 \titleformat{\section}{\normalfont\bfseries\fontsize{12}{14}\selectfont}
-  {\thesection.}{0.5em}{}
+  {\thesection}{0.79cm}{}
 \titlespacing*{\section}{0pt}{18pt}{12pt}
 \titleformat{\subsection}{\normalfont\bfseries\fontsize{10}{12}\selectfont}
-  {\thesubsection.}{0.5em}{}
+  {\thesubsection}{0.5em}{}
 \titlespacing*{\subsection}{0pt}{18pt}{8pt}
 \titleformat{\subsubsection}[runin]{\normalfont\itshape}
-  {\thesubsubsection.}{0.5em}{}[.]
+  {\thesubsubsection}{0.5em}{}[.]
 \titlespacing*{\subsubsection}{0pt}{12pt}{0.5em}
 % 18 pt space after text in each section (template yeu cau)
 \titleformat{name=\section,numberless}{\normalfont\bfseries\fontsize{12}{14}\selectfont}
@@ -209,14 +258,33 @@
 \newlength{\HUJOScol}
 \setlength{\HUJOScol}{15.0cm}
 
-% Front matter: title 14pt bold, authors 10pt bold, affiliations 9pt regular,
-% abstract + keywords 9pt (dung so do tu template)
+% ---------------- FRONT MATTER: moi con so DO TU 2 BAI HUJOS-TT DA XUAT BAN --------
+% experiments/measure_fonts.py (PyMuPDF, doc theo SPAN nen biet dung font cua tung
+% manh chu, khong gop dong):
+%   title        PalatinoLinotype-Bold 14.04pt, canh giua       -> em: 14pt bold center  (khop)
+%   authors      canh GIUA: mid = 9.59 va 9.53 cm (tam vung chu 9.5)
+%   affiliations canh GIUA: mid = 9.54 cm (ca 4 dong cua bai #1)
+%   abstract     9.00pt, x = [3.00, 16.08] cm -> THUT VAO 1.00 cm ca hai ben,
+%                trong khi than bai x = [2.00, 17.08] cm (khong thut)
+%   keywords     cung nam trong khoi thut 1.00 cm (x bat dau 3.00)
+%   caption      9.00pt, chi NHAN in dam: span 'Fig. 1.' = PalatinoLinotype-Bold,
+%                span con lai = PalatinoLinotype-Roman (10/10 caption bai #1,
+%                8/8 bai #2) -> labelfont=bf + font=small cua em da khop san
+% Ban cu de \raggedright cho authors/affil va khong thut le abstract: lech ca hai
+% bai da dang o dung nhung cho nay.
 \newcommand{\hujostitle}[1]{%
   {\centering\normalfont\bfseries\fontsize{14}{17}\selectfont #1\par}}
 \newcommand{\hujosauthors}[1]{%
-  {\raggedright\normalfont\bfseries\fontsize{10}{12}\selectfont #1\par}}
+  {\centering\normalfont\bfseries\fontsize{10}{12}\selectfont #1\par}}
 \newcommand{\hujosaffil}[1]{%
-  {\raggedright\normalfont\fontsize{9}{11}\selectfont #1\par}}
+  {\centering\normalfont\fontsize{9}{11}\selectfont #1\par}}
+% \leftskip/\rightskip = 1cm de abstract + keywords thut vao dung nhu bai da dang.
+% Keywords nam BEN TRONG hujosabstract trong main_hujos.tex nen cung duoc thut.
+% CO CHU ABSTRACT = 9pt, KHONG PHAI 11pt.
+% LOI EM VUA GAY RA TRONG CHINH LAN SUA NAY: go \fontsize{11}{13} thay vi {9}{11}
+% -> abstract se to hon than bai (10pt), nguoc hoan toan voi so do da do
+% (measure_fonts.py: abstract 9.00pt o ca 2 bai; body 9.96pt). Da sua lai 9/11.
 \newenvironment{hujosabstract}
-  {\par\vspace{10pt}\normalfont\fontsize{9}{11}\selectfont\noindent\ignorespaces}
+  {\par\vspace{10pt}\normalfont\fontsize{9}{11}\selectfont
+   \leftskip=1cm\rightskip=1cm\parindent=0pt\noindent\ignorespaces}
   {\par}

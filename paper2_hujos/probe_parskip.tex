@@ -1,0 +1,38 @@
+% PROBE: dung DUNG preamble that cua bai de kiem tra \parskip co ra +3pt khong.
+%
+% FILE NAY TUNG BI XOA MAT: trong lenh rebuild em da go
+%   rm -f main_hujos.aux ... probe_parskip.*
+% va pattern probe_parskip.* an luon probe_parskip.tex. Hau qua: lenh sync repo
+% "cp probe_parskip.tex" that bai, ma script dung "set -e" nen TOAN BO buoc sync
+% bi huy va khong commit gi ca. Bai hoc: khi don file phu cua LaTeX, liet ke ro
+%   *.aux *.bbl *.blg *.log *.out
+% thay vi dung "<ten>.*" de tranh an mat file nguon cung ten.
+%
+% KHONG khai \documentclass o day: preamble.tex DA chua
+% \documentclass[10pt,twoside]{article} (dong 42). Ban dau probe nay khai them mot
+% \documentclass nua -> xelatex nonstopmode:
+%   ! LaTeX Error: Two \documentclass or \documentstyle commands.  (l.45)
+% Phep do van ra dung so (page size 19x27cm, pitch 15.42pt chung to preamble da nap
+% that), nhung mot probe con loi fatal thi khong duoc dung lam bang chung.
+%
+% Vi sao khong do \parskip tu PDF cua bai: ca hai cong cu (pdftotext -bbox va
+% PyMuPDF) deu phai loai dong ngan de tranh nham voi dong trong bang, ma DONG CUOI
+% DOAN luon ngan -> dung cho can do bi loai. PyMuPDF chi lay duoc n=0..3 mau (bao
+% +17.40pt la rac); pdftotext lay duoc 42 mau nhung dinh parskip roi ngoai top-4
+% peak -> bao "parskip = 0" (false negative, khien em nghi preamble sai trong khi
+% no dung).
+%
+% Probe nay chi co lipsum: moi doan dai >=3 dong, khong co bang hay cong thuc xen
+% vao, nen chi ton tai DUY NHAT mot loai ranh gioi la het doan.
+%   \parskip that = gap tai ranh doan - pitch dong thuong
+% Ket qua do duoc: pitch 15.42pt, gap ranh doan 18.41pt (peak n=5) -> +2.99pt,
+% khop 3pt dat trong preamble va khop +2.64pt cua 2 bai HUJOS-TT da xuat ban.
+%
+% Chay:
+%   cd paper2_hujos && xelatex probe_parskip.tex
+%   python3 experiments/qa_hujos_layout.py     # gate layout day du
+\input{preamble}
+\usepackage{lipsum}
+\begin{document}
+\lipsum[1-6]
+\end{document}
