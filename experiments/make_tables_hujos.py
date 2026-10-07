@@ -1,19 +1,24 @@
 #!/usr/bin/env python3
-"""Sinh cac bang LaTeX cho ban HUJOS-TT (kho 19x27 cm, 2 cot).
+"""Sinh cac bang LaTeX cho ban HUJOS-TT (kho 19x27 cm, MOT cot).
 
 Khong chep lai 400 dong cua make_tables_anchored.py. Thay vao do, import module do
 va CHI doi ba hang so ve hinh hoc, roi goi main(). Ly do: moi con so trong bang deu
 phai sinh tu cung mot CSV, va hai ban phai cho ra CUNG mot so lieu -- chi khac
 chieu rong cot. Chep file se tao ra hai ban roi rac va chac chan lech nhau.
 
-Kho that cua HUJOS-TT (do tu geometry cua preamble, khong doan):
-  giay A4 20.5 x 29.7 cm theo TEMPLATE that, le 1.5 tren/duoi va 2 trai/phai
-  -> vung text 16.5 x 26.7 cm
-  2 cot, columnsep 0.75 cm (425 twips tu template chinh thuc)
-  -> moi cot      = (16.5 - 0.75) / 2 = 7.875 cm
-  -> table* (2 cot) = 16.5 cm
-So voi ban IEEE: 8.85 cm -> 7.125 cm (giam 19.5%), nen moi spec p{...} cua ban
-IEEE deu tran va phai co lai theo ti le.
+Kho that cua HUJOS-TT, XAC MINH BANG 2 BAI DA XUAT BAN (art. 7830, 7862):
+  giay 19.00 x 27.00 cm, le 2 cm deu -> vung chu 15.01 x 23.0 cm
+  MOT cot (chu bat dau o dai giua trang 20.1% / 20.5% = day chu;
+          ban 2 cot chi co 4.9% vi ranh cot trong)
+  -> ngan sach bang = 15.00 cm cho MOI bang (khong con phan biet bang rong)
+
+LOI DA SUA: truoc day lay 7.875 cm/cot tu template A4 2 cot cua HUJOS KHOA HOC
+TU NHIEN (/tmp/hujos_tpl.docx, header ghi "Natural Science Vol. 129"). Do la tap
+chi khac. Con so 425 twips thi dung that (nam trong the con <w:col w:space="425">)
+nhung khong lien quan den HUJOS-TT.
+
+Vi vung chu rong hon ban IEEE (8.85 cm -> 15.00 cm), fit() se khong can thu
+nho spec nao; no van chay de gate chong tran neu spec sau nay phinh ra.
 
 Chay:
     python3 experiments/make_tables_hujos.py
@@ -29,8 +34,10 @@ sys.path.insert(0, str(ROOT / "experiments"))
 
 import make_tables_anchored as base  # noqa: E402
 
-COL_1_HUJOS = 7.875
-COL_2_HUJOS = 16.5
+# Mot cot: ca bang thuong lan "bang rong" deu lay het vung chu 15.00 cm.
+# Do tu bai da xuat ban: xMin 2.00cm -> xMax 17.01cm = 15.01cm.
+COL_1_HUJOS = 15.0
+COL_2_HUJOS = 15.0
 DEST_HUJOS = ROOT / "paper2_hujos" / "tables"
 
 def usable_budget(spec, wide):

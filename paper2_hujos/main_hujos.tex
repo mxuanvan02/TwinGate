@@ -20,9 +20,9 @@
 \begin{document}
 
 % ---------------------------------------------------------------- front matter
-% Front matter trai het ca hai cot (template NS dung 2 cot cho toan bai, title
-% va abstract nam trong vung trai cot).
-\twocolumn[%
+% Front matter: MOT cot nhu 2 bai HUJOS-TT da xuat ban. Khong con \twocolumn
+% (template 2 cot la cua HUJOS Khoa hoc Tu nhien, tap chi khac).
+\begingroup
   \hujostitle{Device-Anchored Irrigation Logs: An Adversarial Evaluation of
   Near-Zero-Cost MRV for Low-Emission Rice}
 
@@ -69,7 +69,7 @@
 
   \vspace{10pt}
   \end{hujosabstract}
-]
+\endgroup
 
 % ---------------------------------------------------------------- than bai
 \input{blocks/01_intro}
@@ -113,7 +113,7 @@ configurations with an empty log, i.e.\ the driest forcing available.}
 \input{blocks/08_subsidence}
 \input{blocks/09_cost}
 
-\begin{table*}[!t]
+\begin{table}[!t]
 \centering
 \caption{MRV cost per hectare per season for the four
 architectures. Monitoring dominates MRV cost, so the architecture that avoids
@@ -121,7 +121,7 @@ dedicated sensing wins on labour rather than hardware.}
 \label{tab:baseline}
 \footnotesize
 \input{tables/tab_baseline}
-\end{table*}
+\end{table}
 
 
 \input{blocks/05_design_results}
@@ -168,7 +168,7 @@ actually been altered.}
 
 \input{blocks/06_discussion_conclusion}
 
-% Bang rong: trai ca hai cot
+% (Bang rong khong can nua: mot cot nen table* = table)
 
 % ---------------------------------------------------------------- khai bao
 \section*{Data, Code and Declarations}

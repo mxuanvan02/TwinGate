@@ -17,7 +17,9 @@
 %       - cuoi bai: ho ten, hoc ham, hoc vi, co quan, dia chi, dien thoai,
 %         email, nguoi huong dan (neu co), chu ky tac gia, chi ro
 %         corresponding author
-%   * Template chinh thuc (HUJOS-NS, file DOCX tai tu Drive cua tap chi)
+%   * Template DOCX /tmp/hujos_tpl.docx — LUU Y: day la template cua HUJOS
+%     KHOA HOC TU NHIEN (Natural Science), KHONG phai cua HUJOS-TT. No ghi
+%     pgSz 20.5x29.7cm va HAI cot. Da tung bi dung nham lam chuan hinh hoc.
 %     do tu word/document.xml va word/styles.xml:
 %       - pgSz 11624 x 16840 twips = 20.5 x 29.7 cm, le tren/duoi 1.5 cm,
 %         trai/phai 2 cm, HAI cot, columnsep 425 twips = 0.75 cm
@@ -28,10 +30,11 @@
 %       - body spacing line 276 = 1.15, before 120 = 6 pt, after 60 = 3 pt
 %       - font nhung trong template: PalatinoLinotype-{regular,bold,italic,
 %         boldItalic}.ttf va Cardo
-%     => Template NS khac quy dinh van ban cua TT/ARD ve kho giay va le.
-%        Ta theo QUY DINH VAN BAN cua TT (19x27, le 2 deu) vi do la phan
-%        bat buoc doi voi bai nop TT; giu HAI cot va columnsep 0.75 cm cua
-%        template vi quy dinh van ban khong noi ve so cot.
+%     => Template NS khac HUJOS-TT ve kho giay, le VA SO COT. Bai nay nop
+%        HUJOS-TT nen theo: 19x27 cm, le 2 cm deu, MOT cot — da xac nhan
+%        bang 2 bai HUJOS-TT da xuat ban (xem comment o phan geometry).
+%        KHONG duoc giu 2 cot: quy dinh van ban khong noi ve so cot, va
+%        bai da xuat ban cua chinh tap chi nay deu 1 cot.
 %   * Kiem tra font: Palatino Linotype that (trich tu template) co 16/16
 %     glyph tieng Viet theo cmap. `fc-list :lang=vi` bao KHONG ho tro tieng
 %     Viet la SAI -- fontconfig doan theo bang lang chu khong doc cmap.
@@ -42,20 +45,33 @@
 \documentclass[10pt,twoside]{article}
 
 % ---- hinh hoc ----
-% MAU THUAN GIUA HAI NGUON CUA TAP CHI, da doi chieu ca hai:
-%   (a) Quy dinh van ban o hujos-tt/about/submissions: "standard-sized paper
-%       (19 cm x 27 cm) ... margins on all sides of 2 cm"  -> vung text 15 x 23 cm
-%   (b) TEMPLATE DOCX chinh thuc (tai tu Drive tren trang authorguidelines), do tu
-%       word/document.xml: <w:pgSz w:w="11624" w:h="16840"> = 20.5 x 29.7 cm (A4),
-%       <w:pgMar w:top="851" w:bottom="851" w:left="1134" w:right="1134"> =
-%       1.5 cm tren/duoi va 2 cm trai/phai, HAI cot, columnsep 425 twips = 0.75 cm
-%       -> vung text 16.5 x 26.7 cm
-% Chon (b) vi template la artifact ma toa soan thuc su dung de xep chu, va noi
-% dung template ghi ro "format your manuscripts exactly the same as this document".
-% Vung text (b) lon hon (a) 27.7% — do la cach hop phap nhat de dat tran 12 trang
-% ma KHONG phai cat noi dung (cat noi dung la quyet dinh cua tac gia).
-\usepackage[paperwidth=20.5cm,paperheight=29.7cm,
-            top=1.5cm,bottom=1.5cm,left=2cm,right=2cm,
+% DA XAC MINH BANG BAI DA XUAT BAN THAT, khong con dua vao template nao.
+%
+% LOI DA MAC (ghi lai de khong tai pham): ban dau lay hinh hoc tu
+% /tmp/hujos_tpl.docx = A4 20.5x29.7cm, le 1.5cm tren/duoi, HAI cot, columnsep
+% 425 twips. File do CO that va cac con so do DUNG (425 twips nam trong the con
+% <w:col w:space="425" w:w="4465.5">, khong phai trong <w:cols/>). Nhung HEADER
+% BEN TRONG cua no ghi "Hue University Journal of Science: Natural Science
+% Vol. 129, No. 1B" — do la template cua HUJOS KHOA HOC TU NHIEN, mot tap chi
+% KHAC trong cung he thong. Bai nay nop HUJOS-TT (Ky thuat & Cong nghe).
+% Hau qua: dung layout cua tap chi khac, vung chu 16.74cm thay vi 15.01cm,
+% rong hon 11.5% -> so trang do duoc (13) khong co gia tri.
+%
+% BANG CHUNG QUYET DINH = 2 bai HUJOS-TT da xuat ban, tai tu
+% citation_pdf_url cua chinh trang bai (article 7830, 7862):
+%   pdfinfo     : 538.7 x 765.5 pt = 19.00 x 27.00 cm  (ca hai bai)
+%   vung chu    : xMin 2.00cm -> xMax 17.01cm, rong 15.01 cm
+%   le          : trai 2.00, phai 1.99 cm  -> le 2cm deu, dung nhu quy dinh van ban
+%   SO COT      : chu bat dau trong dai giua trang = 20.1% va 20.5% (day chu)
+%                 -> MOT COT. (Ban hai cot chi co 4.9%, vi ranh cot trong.)
+%   font        : PalatinoLinotype-Roman/Bold/Italic + Cambria + Arial-BoldMT
+% Kiem cheo: Author Guidelines cua HUJOS-TT noi "19 cm x 27 cm ... margins on
+% all sides of 2 cm ... Palatino Linotype ... font size 10", va NHAC DEN
+% "column" 0 LAN. Ba nguon (quy dinh van ban + 2 bai da xuat ban + template docx
+% ref_hujos*.docx 19x27 le 2 1 cot) nay THONG NHAT. Chi co hujos_tpl.docx lech,
+% va no thuoc tap chi khac.
+\usepackage[paperwidth=19cm,paperheight=27cm,
+            top=2cm,bottom=2cm,left=2cm,right=2cm,
             headsep=0.4cm,footskip=0.6cm]{geometry}
 
 % ---- font: Palatino (TeX Gyre Pagella) + math khop ----
@@ -64,7 +80,10 @@
 \usepackage{unicode-math}
 \setmathfont{TeX Gyre Pagella Math}
 
-% ---- hai cot, columnsep 0.75 cm (425 twips theo template) ----
+% ---- MOT COT (xac nhan bang 2 bai HUJOS-TT da xuat ban) ----
+% \columnsep khong con tac dung khi document khong \twocolumn; giu gia tri nay
+% chi de neu ai do build lai 2 cot thi khong vo tinh dung khoang cach cua tap chi
+% khac. Vung chu that = 15.01 cm theo bai da xuat ban.
 \setlength{\columnsep}{0.75cm}
 
 % ---- gian dong 1.15, 6 pt truoc / 3 pt sau, khong gian giua doan = 0 ----
@@ -184,12 +203,11 @@
 % 34.89pt va 26.16pt trong 01_intro.tex. Day la cach sua khong doi noi dung.
 \setlength{\emergencystretch}{2em}
 
-% Kho cot that voi geometry nay: text 15 cm, 2 cot, columnsep 0.75 cm
-%   -> moi cot = (16.5 - 0.75)/2 = 7.875 cm
-%   -> table* (2 cot) = 16.5 cm
-% Day la con so ma experiments/make_tables_hujos.py dung de gate chieu rong.
+% Kho cot that: MOT cot, vung chu 19 - 2 - 2 = 15.00 cm
+% (bai da xuat ban do duoc 15.01 cm — khop). \columnwidth = \textwidth o day.
+% Day la con so ma experiments/make_tables_hujos.py dung de gate chieu rong bang.
 \newlength{\HUJOScol}
-\setlength{\HUJOScol}{7.875cm}
+\setlength{\HUJOScol}{15.0cm}
 
 % Front matter: title 14pt bold, authors 10pt bold, affiliations 9pt regular,
 % abstract + keywords 9pt (dung so do tu template)
