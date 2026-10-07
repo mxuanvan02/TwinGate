@@ -1,0 +1,192 @@
+% !TeX program = xelatex
+% =====================================================================
+% BAN HUJOS-TT cua bai bao (ban IEEE nam o ../paper2/)
+% =====================================================================
+% Cung mot noi dung va CUNG mot so lieu: moi con so trong bang deu sinh tu
+% outputs/eval_theta_reduced_10seeds.csv bang experiments/make_tables_hujos.py,
+% script nay import make_tables_anchored.py va chi doi kho giay. Hai ban khong
+% the lech so lieu vi dung mot generator.
+%
+% Cau truc theo muc 3 va muc 5 quy dinh HUJOS-TT. Quy dinh viet: abstract tieng
+% Viet o DAU bai, ban tieng Anh o CUOI bai -- vi no mac dinh bai viet bang tieng
+% Viet. Bai nay viet bang tieng Anh (dung nhu bai HUJOS-TT da xuat ban that,
+% ma 7999, DOI 10.26459/hueunijtt.v135i2B.7999, citation_language = en), nen
+% ta anh xa doi xung: ban tieng Anh o dau, ban tieng Viet o cuoi. Ca hai ngon
+% ngu deu co mat theo dung yeu cau "in Vietnamese and English".
+% =====================================================================
+
+\input{preamble}
+
+\begin{document}
+
+% ---------------------------------------------------------------- front matter
+% Front matter trai het ca hai cot (template NS dung 2 cot cho toan bai, title
+% va abstract nam trong vung trai cot).
+\twocolumn[%
+  \hujostitle{Device-Anchored Irrigation Logs: An Adversarial Evaluation of
+  Near-Zero-Cost MRV for Low-Emission Rice}
+
+  \vspace{8pt}
+  \hujosauthors{Xuan Van Mai$^{1}$, Tuong Tri Nguyen$^{2,3,*}$}
+
+  \vspace{4pt}
+  \hujosaffil{$^{1}$ Thuan Hoa High School, University of Education, Hue University, Hue, Viet Nam\\
+  $^{2}$ Institute of Open Education and Information Technology, Hue University, Hue, Viet Nam\\
+  $^{3}$ University of Education, Hue University, 34 Le Loi St., Hue, Viet Nam}
+
+  \vspace{4pt}
+  \hujosaffil{$^{*}$ Corresponding author: Tuong Tri Nguyen. E-mail: ntuongtri@hueuni.edu.vn}
+
+  \vspace{6pt}
+  \begin{hujosabstract}
+  \noindent\textbf{Abstract.} Measurement, reporting and verification (MRV) is the
+  bottleneck keeping emission reductions in low-emission rice from becoming
+  tradable credits, and monitoring is about three quarters of that cost. Because
+  every credit-eligible water-management action is already an \emph{actuation
+  command}, a farmer-written irrigation log looks like free evidence of the
+  highest rank under Decision 4801/QD-BNNMT. We built such a layer, proved it
+  cannot accuse a compliant farmer, and then attacked it. The attack is the
+  contribution. Replaying a log through the FAO-56 water balance under public
+  ERA5 forcing exposes claimed depths no soil can hold, but an adversary who
+  keeps the total volume and every individual depth intact and merely
+  \emph{shifts commands in time} inflates creditable dry phases by $69\%$ and
+  escapes both the physics layer and the pump meter in $91\%$ of cases. We
+  measure this over $281$ audited logs at three Mekong Delta stations across two
+  climate years, with the field deliberately violating every modelling
+  assumption: soil texture across the FAO-56 Table 2 range, staged crop
+  coefficient, irrigation efficiency $0.60$--$0.85$, field rainfall differing
+  from the grid cell, bund seepage, and farmers who forget, round and record
+  late. Under those conditions the published point-model detector falsely
+  accused $26.7\%$ of honest farmers. Matching the log against the gateway's
+  signed, time-stamped command record instead catches $116/116$ genuinely forged
+  logs and accuses none. The result is negative but carries a repair:
+  physics-based attestation cannot stand alone, and the timestamp must come from
+  a device, not the farmer.
+
+  \vspace{4pt}
+  \noindent\textbf{Keywords:} alternate wetting and drying; monitoring, reporting
+  and verification; carbon credit; low-emission rice; digital twin.
+
+  \vspace{10pt}
+  \end{hujosabstract}
+]
+
+% ---------------------------------------------------------------- than bai
+\input{blocks/01_intro}
+\input{blocks/07_system_model}
+\input{blocks/02_threat_attack}
+
+\begin{table}[!t]
+\centering
+\caption{The three forgeable quantities of Eq.~\eqref{eq:three}
+and which fraud class alters each. ``true'' means the quantity is preserved, so
+the corresponding defence is blind by Prop.~\ref{prop:blind}.}
+\label{tab:threat}
+\footnotesize
+\input{tables/tab_threat}
+\end{table}
+
+
+\input{blocks/03_guarantee}
+
+\begin{table}[!t]
+\centering
+\caption{The admissible depth bound Eq.~\eqref{eq:umax} across
+the FAO-56 Table 2 range. The previously published single value $61$\,mm is one
+row of this table.}
+\label{tab:umax}
+\footnotesize
+\input{tables/tab_umax}
+\end{table}
+
+\begin{table}[!t]
+\centering
+\caption{Reachability of the wilting-point filter over $150$
+configurations with an empty log, i.e.\ the driest forcing available.}
+\label{tab:f2reach}
+\footnotesize
+\input{tables/tab_f2_unreachable}
+\end{table}
+
+
+\input{blocks/04_anchor}
+\input{blocks/08_subsidence}
+\input{blocks/09_cost}
+
+\begin{table*}[!t]
+\centering
+\caption{MRV cost per hectare per season for the four
+architectures. Monitoring dominates MRV cost, so the architecture that avoids
+dedicated sensing wins on labour rather than hardware.}
+\label{tab:baseline}
+\footnotesize
+\input{tables/tab_baseline}
+\end{table*}
+
+
+\input{blocks/05_design_results}
+
+\begin{table}[!t]
+\centering
+\caption{Experimental configuration. Every value is
+reproducible from the released code and the public ERA5 forcing.}
+\label{tab:setup}
+\footnotesize
+\input{tables/tab_setup}
+\end{table}
+
+\begin{table}[!t]
+\centering
+\caption{False accusation on honest logs, the property the
+scheme is sold on. Paper conditions reproduce the prior $0/60$; field conditions
+expose the absolute gap threshold.}
+\label{tab:falseacc}
+\footnotesize
+\input{tables/tab_false_accusation}
+\end{table}
+
+\begin{table}[!t]
+\centering
+\caption{Creditable dry phases of at least $72$\,h, the
+quantity VM0051 and Decision 4801 pay for, against the honest field baseline.
+The last column counts attacks that actually altered the log.}
+\label{tab:credit}
+\footnotesize
+\input{tables/tab_credit}
+\end{table}
+
+\begin{table}[!t]
+\centering
+\caption{Main result. Escape rate is the fraction of forged
+logs neither tier flags; the anchor column is conditioned on the log having
+actually been altered.}
+\label{tab:defence}
+\footnotesize
+\input{tables/tab_defence}
+\end{table}
+
+
+\input{blocks/06_discussion_conclusion}
+
+% Bang rong: trai ca hai cot
+
+% ---------------------------------------------------------------- khai bao
+\section*{Data, Code and Declarations}
+
+Code, the two uncertainty sets, both adversary implementations, and all $281$
+audited logs are available at \url{https://github.com/mxuanvan02/TwinGate} under
+the MIT licence. Weather forcing is public ERA5 reanalysis served by the
+Open-Meteo archive. This research is funded by Hue University under Grant No.
+DHH2025-19-07. The authors declare no competing interests. Ethics approval is
+not applicable: the study uses public reanalysis data and simulation
+experiments, with no human participants, animals or field interventions.
+
+% ---------------------------------------------------------------- tieng Viet
+% Khoi tieng Viet bat buoc (muc 3), dat o cuoi bai vi bai viet bang tieng Anh.
+\input{blocks_vi}
+
+% ---------------------------------------------------------------- tai lieu
+\bibliographystyle{vancouver}
+\bibliography{refs}
+
+\end{document}

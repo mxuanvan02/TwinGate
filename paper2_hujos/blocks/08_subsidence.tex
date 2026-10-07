@@ -1,0 +1,31 @@
+\section{Subsidence Invariance}
+\label{sec:subsidence}
+
+AWD compliance is usually stated as an absolute water-table or ponding depth,
+for example $15$\,cm below the surface, the reflooding threshold of the Safe-AWD
+treatment in~\cite{balaine2019}. In a subsiding delta
+the surface elevation $z_s(t)$ falls at rate $\dot z$, so an absolute threshold
+measured against a fixed benchmark drifts.
+
+\begin{proposition}[Drift of an absolute threshold]
+\label{prop:subsid}
+Over a crediting period of $T_c$ years an absolute threshold expressed against
+a fixed datum shifts by $\dot z\,T_c$. For $\dot z\in[1.1,2.5]$\,cm/yr and
+$T_c=5$\,yr the shift is $5.5$--$12.5$\,cm, that is $37$--$83\%$ of a
+$15$\,cm threshold. A criterion written in the depletion fraction
+\eqref{eq:depl} has zero drift, because $FC$ and $WP$ are soil properties
+referenced to the root zone and not to an absolute elevation.
+\end{proposition}
+
+\begin{proof}
+The absolute criterion compares a measured depth to a constant benchmark; if
+the benchmark and the surface move apart at $\dot z$, the effective threshold
+changes by $\dot z T_c$ over $T_c$ years. The depletion criterion compares
+$FC-w_t$ to $(FC-WP)$, both of which are defined within the root zone and
+translate rigidly with the surface, so their ratio is invariant to $z_s$.
+\end{proof}
+
+The subsidence rates are those measured for the delta by
+\cite{minderhoud2017}. The practical consequence is that a scheme anchored on
+depletion fraction needs no re-surveying of field benchmarks during a five-year
+crediting period, whereas an absolute-depth scheme does.

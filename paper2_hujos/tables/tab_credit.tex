@@ -1,0 +1,19 @@
+% Sinh TU DONG tu outputs/eval_theta_*.csv boi experiments/make_tables_anchored.py
+% KHONG sua tay: moi con so deu truy nguon duoc ve CSV.
+
+\fittocol{%
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{2.57cm}c>{\raggedright\arraybackslash}p{1.34cm}>{\raggedright\arraybackslash}p{0.99cm}>{\raggedright\arraybackslash}p{1.68cm}@{}}
+\toprule
+Log type & $n$ & Creditable dry phases & Inflation & Attacks that changed the log \\
+\midrule
+Honest farmer (field conditions) & 60 & 3.23 & reference & --- \\
+Added irrigation events & 23 & 4.83 & +49\% & 23/23 \\
+Infeasible claimed depth & 23 & 4.04 & +25\% & 23/23 \\
+Omission of real commands & 23 & 4.61 & +43\% & 9/23 \\
+Claim consolidation, 24 h & 23 & 4.91 & +52\% & 23/23 \\
+Claim consolidation, 96 h & 23 & 4.96 & +53\% & 23/23 \\
+Time shifting (rational) & 23 & 5.48 & +69\% & 9/23 \\
+Rational adversary & 23 & 5.26 & +63\% & 6/23 \\
+\bottomrule
+\end{tabular}
+}

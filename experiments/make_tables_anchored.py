@@ -67,18 +67,35 @@ def table(spec: list[tuple[str, float]], lines: list[str], *, wide: bool = False
     for kind, w in spec:
         if kind == "p":
             total += w
-            cols.append("p{" + f"{w:.2f}" + "cm}")
+            # \raggedright TRONG O la bat buoc voi cot hep. Ly do do duoc tu log:
+            # 5/6 overfull con lai deu la "in paragraph at lines 4--NNN" trong bang,
+            # tuc la LaTeX canh deu (justify) trong o p{} rong ~1cm va tran khi mot
+            # tu khong vua dong. Day la loi kinh dien cua cot hep, khong phai do tu
+            # don dai (phep uoc tinh chieu rong ky tu cua lan chan doan truoc sai
+            # ~3 lan: dung 1.37pt/ky tu trong khi chu 8pt rong ~4pt).
+            # \arraybackslash de \\ o cuoi dong van hoat dong trong o.
+            cols.append(">{" + BS + "raggedright" + BS + "arraybackslash}p{"
+                        + f"{w:.2f}" + "cm}")
         else:
             # Cot l/c/r khong tu xuong dong. `w` o day la UOC TINH chieu rong noi
             # dung (0 = dung mac dinh 1.0cm). Gate van cong no vao tong, nen khai
             # bao hep hon thi phai chac noi dung that su ngan ("23", "60").
             total += (w if w > 0 else 1.0)
             cols.append(kind)
+    # Assert van giu lam sanity check cho spec khai bao, nhung KHONG du de dam
+    # bao khong tran: cot p{} chua \par nen do chieu rong bang \sbox cho ra so
+    # SAI (do duoc 7.92-8.01cm trong khi build that bao overfull 18-26pt ~ 8.8cm).
+    # Bisect co doi chung (caption that + tabular trivial -> 0 overfull) xac nhan
+    # thu pham la TABULAR. Vi vay ep dung bang \resizebox theo kho cot that.
     assert total <= usable + 1e-9, (
         f"tran khung: tong cot {total:.2f}cm > ngan sach {usable:.2f}cm "
         f"(kho {budget:.2f}cm, {ncols} cot, tabcolsep 3pt)")
     begin = BS + "begin{tabular}{@{}" + "".join(cols) + "@{}}"
-    return NL.join([begin] + lines + [BS + "end{tabular}"])
+    inner = NL.join([begin] + lines + [BS + "end{tabular}"])
+    # \fittocol chi thu nho khi that su tran, khong bao gio phong to (dinh nghia
+    # trong preamble.tex). Bang rong (table*) duoc do voi \columnwidth cua no vi
+    # o do \columnwidth = \textwidth, nen cung mot lenh dung cho ca hai.
+    return (BS + "fittocol{%" + NL + inner + NL + "}")
 
 
 def write(name: str, body: str) -> None:

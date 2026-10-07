@@ -1,0 +1,166 @@
+\section{Threat Model}
+\label{sec:threat}
+
+A claimed irrigation log is a finite map
+\begin{equation}
+L=\{(t_i,u_i)\}_{i=1}^{|L|},\qquad u_i>0,\ t_i\in[0,T),
+\label{eq:log}
+\end{equation}
+where $u_i$ is a claimed depth in millimetres and $t_i$ an hour index. Three
+independent quantities can be forged, and each defence tier observes a different
+subset of them:
+\begin{equation}
+\underbrace{\textstyle\sum_i u_i}_{\text{total volume}}\,,\qquad
+\underbrace{\{u_i\}}_{\text{individual depths}}\,,\qquad
+\underbrace{\{t_i\}}_{\text{timestamps}}\,.
+\label{eq:three}
+\end{equation}
+Table~\ref{tab:threat} lists the resulting fraud classes. The adversary is
+\emph{rational}: it maximises creditable dry phases subject to not being flagged,
+and it knows the detector, because the detector is published. Publishing a
+threshold is publishing the constraint the adversary optimises against; this is
+the sense in which $\varepsilon$ in \eqref{eq:v4} below is not a secret.
+
+Let $M$ be the volume actually pumped, measured at the cooperative station, and
+$U(L)=\sum_i u_i$ the claimed total. The tier-1 statistic is
+\begin{equation}
+G=M-U(L),
+\label{eq:gap}
+\end{equation}
+and the credit-relevant quantity counts \emph{dry phases}. Write
+$\mathcal{A}(\cdot)$ for the set of maximal intervals $[a,b)$ of a replayed
+trajectory over which the depletion stays at or above a threshold
+$d_{\mathrm{dry}}$ with no claimed irrigation, and which last at least $72$\,h ---
+the three-day minimum of Decision 4801~\cite{qd4801}:
+\begin{equation}
+\begin{aligned}
+\mathcal{A}\bigl(\{\hat d_t\}\bigr)=\Bigl\{[a,b):\ &\min_{t\in[a,b)}
+\hat d_t\ge d_{\mathrm{dry}},\\
+&u_t=0\ \forall t\in[a,b),\\
+&b-a\ge 72\,\mathrm{h}\Bigr\}.
+\end{aligned}
+\label{eq:awd}
+\end{equation}
+The credited count is then
+\begin{equation}
+n_{\mathrm{dry}}(L)=\bigl|\mathcal{A}\bigl(\mathcal{R}(L)\bigr)\bigr|,
+\label{eq:ndry}
+\end{equation}
+with $d_{\mathrm{dry}}=0.45$ used throughout the evaluation.
+Revenue is proportional to $n_{\mathrm{dry}}$, not to $U(L)$. This distinction is
+what makes the attack of Sec.~\ref{sec:timeshift} profitable, and it is invisible
+in a formulation that treats total volume as the target.
+
+\section{Physics-Based Filters and Their Exact Blind Spots}
+\label{sec:filters}
+
+Replaying $L$ through the FAO-56 root-zone bucket~\cite{fao56} under public ERA5
+forcing produces a trajectory $(\hat w_t,\hat d_t)$; the companion
+work~\cite{twingate2026} gives the balance in full. Three filters apply.
+
+\emph{$V_1$, saturation.} A claim issued while the root zone is already at field
+capacity cannot be stored:
+\begin{equation}
+V_1(L)=\{\,i:\ u_i>0\ \wedge\ \hat w_{t_i}^{-}\ \ge\ FC-\varepsilon\,\}.
+\label{eq:v1}
+\end{equation}
+
+\emph{$V_4$, storage excess.} A claim larger than the deficit available at that
+hour must have run off or percolated, so it was not ``applied'' in the sense the
+standard requires:
+\begin{equation}
+V_4(L)=\{\,i:\ u_i\ >\ \underbrace{(FC-\hat w_{t_i}^{-})}_{\text{deficit}}
+\ +\ \varepsilon\,\}.
+\label{eq:v4}
+\end{equation}
+
+\emph{$V_5$, infiltration bound.} Independent of state, a single event of
+duration $\tau_i$ cannot deliver more than the soil can accept:
+\begin{equation}
+u_i\ \le\ k_{\mathrm{inf}}\,\tau_i+p_{\max},
+\label{eq:v5}
+\end{equation}
+with $k_{\mathrm{inf}}=10$\,mm\,h$^{-1}$ and $p_{\max}=100$\,mm taken at the
+loose end of the published range for puddled rice, so that a farmer who records
+two adjacent events in one hour is not accused. At $\tau_i=1$\,h the bound is
+$110$\,mm.
+
+A fourth filter, on depletion below the wilting point, was included in the
+published version of this layer. It cannot activate: see
+Sec.~\ref{sec:v2reach}.
+
+\begin{proposition}[Exact blindness of aggregate defences]
+\label{prop:blind}
+Let $L$ and $L'$ share the same multiset of depths and the same total, i.e.\
+$\{u_i\}=\{u'_j\}$ as multisets. Then
+\begin{equation}
+G(L)=G(L')\qquad\text{and}\qquad |V_5(L)|=|V_5(L')|.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+$U(L)=\sum_i u_i$ is a symmetric function of the multiset, so it is invariant
+under any reassignment of depths to hours; $M$ is a property of the field, not of
+the log; hence $G=M-U$ is unchanged. Likewise \eqref{eq:v5} is evaluated per
+event and depends only on $(u_i,\tau_i)$, never on $t_i$ or on $\hat w$, so the
+count of violations is a function of the multiset alone.
+\end{proof}
+
+Proposition~\ref{prop:blind} is the whole difficulty in one line. The pump meter
+and the infiltration bound are the two defences that do not depend on the model
+being right, and both are \emph{exactly} invariant under the transformation the
+adversary needs. What remains is $V_1$ and $V_4$, which do depend on order
+through $\hat w_{t_i}^{-}$. They turn out not to help.
+
+\section{The Time-Shifting Attack}
+\label{sec:timeshift}
+
+\begin{proposition}[Credit gain and evasion are the same action]
+\label{prop:coincide}
+Let a claim at hour $t$ have available deficit $c_t=FC-\hat w_t^{-}$. Between
+consecutive claims the bucket loses
+$\Delta_t=\sum_{s}(\mathit{ETc}_s+\mathit{DP}_s-P_s^{+})\ge 0$, so delaying a
+claim by $\delta$ hours increases its deficit by the drainage accrued in those
+hours:
+\begin{equation}
+c_{t+\delta}\ \ge\ c_t+\min\!\bigl(\delta\cdot\overline{\Delta},\ FC-\hat w_t^{-}\bigr).
+\label{eq:delay}
+\end{equation}
+Consequently the transformation that moves claims \emph{out of} a dry interval
+and onto its boundary simultaneously
+\begin{enumerate}
+\item[(i)] increases $n_{\mathrm{dry}}$, because the interval is no longer
+interrupted; and
+\item[(ii)] increases $c_t$ at every moved claim, which by \eqref{eq:v4} makes
+$V_4$ \emph{less} likely to fire.
+\end{enumerate}
+There is no trade-off for the adversary to negotiate: the gradient of profit and
+the gradient of undetectability point the same way.
+\end{proposition}
+
+\begin{proof}
+(i) is definitional: $\mathcal{A}$ in \eqref{eq:ndry} requires no claim inside
+the interval, so removing one extends or creates a qualifying phase. For (ii),
+delaying a claim to $t+\delta$ means the bucket continues to lose water for
+$\delta$ further hours with no inflow, so $\hat w_{t+\delta}^{-}\le\hat w_t^{-}$
+and $c_{t+\delta}\ge c_t$; the bound \eqref{eq:delay} follows because the loss
+per hour is at least the mean $\overline{\Delta}$ until field capacity is
+reached, after which $c$ saturates at $FC-\hat w$. Since $V_4$ fires only when
+$u_i>c_{t_i}+\varepsilon$ and $u_i$ is unchanged, a larger $c_{t_i}$ can only
+reduce the violation set.
+\end{proof}
+
+This is why the attack cannot be closed by better hydrology. Any detector whose
+verdict is a function of the replayed trajectory must integrate the same
+drainage that makes the delayed claim look legitimate. The empirical version of
+the attack is a hill-climb over integer hour offsets in $[-36,36]$ that accepts a
+move only if the total is preserved bit-for-bit, every depth stays under
+\eqref{eq:v5}, and $n_{\mathrm{dry}}$ strictly increases.
+
+\begin{remark}
+The attack does not steal water. Total pumped volume is unchanged, so the farmer
+pays the same and the atmosphere sees the same methane. What is stolen is
+\emph{history}: the credit is issued for a dry-phase pattern that did not occur.
+Under VM0051 the crediting unit is precisely that pattern, so the loss is real
+even though no physical resource moved.
+\end{remark}
