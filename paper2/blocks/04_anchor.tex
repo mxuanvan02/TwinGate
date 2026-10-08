@@ -3,12 +3,11 @@
 
 \subsection{The gateway record}
 
-Proposition~\ref{prop:blind} shows that volume and depth are insufficient, and
-Proposition~\ref{prop:coincide} shows that order is exactly what the adversary
-manipulates. The defence must therefore observe timestamps --- and the only party
-that can vouch for a timestamp is the device that acted on it.
-
-Let the gateway hold a signed command record
+Propositions~\ref{prop:blind}--\ref{prop:coincide} show that volume and depth
+are insufficient and that order is exactly what the adversary manipulates, so
+the defence must observe timestamps --- and the only party that can vouch for
+a timestamp is the device that acted on it. Let the gateway hold a signed
+command record
 \begin{equation}
 \mathcal{G}=\{(t_j,u_j,\sigma_j)\},
 \label{eq:gateway}
@@ -16,16 +15,28 @@ Let the gateway hold a signed command record
 where $\sigma_j$ is a signature over $(t_j,u_j)$ produced by the controller at
 actuation time. The anchor test compares the claimed log against it:
 \begin{equation}
+\begin{aligned}
+\Delta_{\mathrm{time}}&=\{t_i\}\triangle\{t_j\},\\
+\Delta_{\mathrm{depth}}&=\max_{t}\bigl|u(t)-u_{\mathcal{G}}(t)\bigr|,
+\end{aligned}
+\label{eq:deltas}
+\end{equation}
+where $\triangle$ is the symmetric difference and $\Delta_{\mathrm{depth}}$ is
+taken over hours common to both records. The verdict is then
+\begin{equation}
 A(L,\mathcal{G})=
 \begin{cases}
-\text{forge}, & \{t_i\}\neq\{t_j\}\ \vee\ \exists t:\ |u(t)-u_{\mathcal{G}}(t)|>\epsilon,\\
+\text{forge}, & \Delta_{\mathrm{time}}\neq\emptyset
+\ \vee\ \Delta_{\mathrm{depth}}>\epsilon,\\
 \text{match}, & \text{otherwise},
 \end{cases}
 \label{eq:anchor}
 \end{equation}
 with $\epsilon=10^{-6}$\,mm, i.e.\ exact agreement up to floating-point noise.
-Time-shifting, consolidation, addition, omission and depth inflation all alter
-either the hour set or a depth at a common hour, so all are caught.
+Naming the two discrepancies separately matters: time-shifting alters
+$\Delta_{\mathrm{time}}$ only, depth inflation alters
+$\Delta_{\mathrm{depth}}$ only, and omission and addition alter both, so a
+single comparison catches every fraud class.
 
 \begin{proposition}[Completeness of the anchor]
 \label{prop:complete}
@@ -37,9 +48,9 @@ has occurred.
 \end{proposition}
 
 \begin{proof}
-The first clause is the definition of \eqref{eq:anchor}. For the second, total
-volume, individual depths and timestamps are all functions of the hour set and
-the per-hour depths, so agreement on those two fixes all three.
+Supplementary~S12: the first clause is the definition of \eqref{eq:anchor},
+and the second follows because all three forgeable quantities are functions of
+the hour set and the per-hour depths.
 \end{proof}
 
 \subsection{Why this does not re-introduce false accusation}
@@ -47,30 +58,24 @@ the per-hour depths, so agreement on those two fixes all three.
 Proposition~\ref{prop:complete} is strong enough to look dangerous: any
 discrepancy is treated as forgery, including the forgetting and rounding that
 Sec.~\ref{sec:guarantee} showed to be ubiquitous. The resolution is that the
-anchor does not compare a log against a \emph{model}; it compares a transcript
-against the \emph{source}. An honest farmer who forgets an entry is not accused
-of fraud, because the system of record is the gateway, not the farmer's memory:
-the claim is simply completed from $\mathcal{G}$. In operational terms the anchor
-turns the log from \emph{evidence the farmer must get right} into \emph{a view of
-a record the device already holds}. False accusation then requires the gateway to
-disagree with itself, which is a device-integrity question rather than a
-behavioural one, and is why the guarantee in Table~\ref{tab:falseacc} holds at
-$0/60$ while the behavioural tiers hold at $26.7\%$ and $5.0\%$.
+anchor compares a transcript against the \emph{source}, not a log against a
+\emph{model}: an honest farmer who forgets an entry is simply completed from
+$\mathcal{G}$. False accusation then requires the gateway to disagree with
+itself --- a device-integrity question --- which is why Table~\ref{tab:falseacc}
+holds at $0/60$ while the behavioural tiers hold at $26.7\%$ and $5.0\%$
+(Supplementary~S18).
 
 \subsection{Cost and the scope of the claim}
 
-The anchor requires the gateway of the companion work~\cite{twingate2026}, which
-actuates the pump and already writes a signed, time-stamped command record as
-part of its safety function. The marginal cost of attestation is therefore the
-storage and transmission of a record that exists regardless, which is why tier~0
-of Table~\ref{tab:cost} remains near zero.
-
-The scope must nonetheless be stated precisely, because it is narrower than the
-premise we started from. A log written by hand on a handset, with no device in
-the loop, is \emph{not} admissible evidence on its own: Sec.~\ref{sec:results}
-measures a rational adversary inflating credits by $+35\%$ in paired
-comparison while escaping every physics-based and volume-based test
-($6/6$ altered logs, under both the point model and the robust tier). The honest formulation of the result is that
-near-zero-cost MRV is achievable, but only where a controller stands between the
-farmer and the pump. Where irrigation is manual --- a sluice gate opened by hand
---- the anchor is unavailable and this layer does not apply.
+The anchor requires the gateway of the companion work~\cite{twingate2026},
+which actuates the pump and already writes a signed, time-stamped command
+record as part of its safety function; the marginal cost of attestation is
+storage and transmission of a record that exists regardless (Supplementary
+Table~S5). The scope is
+nonetheless narrower than the premise we started from: a hand-written log, with
+no device in the loop, is \emph{not} admissible evidence on its own, since
+Sec.~\ref{sec:results} measures a rational adversary inflating credits by
+$+35\%$ while escaping every physics- and volume-based test ($6/6$ altered
+logs). Near-zero-cost MRV is achievable only where a controller stands between
+the farmer and the pump; where irrigation is manual this layer does not
+apply.

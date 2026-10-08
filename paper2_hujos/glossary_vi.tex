@@ -1,0 +1,93 @@
+% =====================================================================
+% BANG THUAT NGU VIET-ANH (glossary) — dung chung cho main_hujos_vi.tex
+% va phu luc tieng Viet. Moi khai niem chi co MOT ban dich (academic-prose:
+% "a terminology decision made once per concept, recorded in the glossary and
+% enforced everywhere").
+%
+% PHAN LOAI theo 4 phep thu cua academic-prose:
+%   keep_source            : ten rieng/thuong hieu/van ban phap luat (rigid designator)
+%   translate              : linh vuc da co ban dich chuan
+%   translate_with_gloss   : dich + giu nguyen goc o lan dau tien
+%   keep_with_gloss        : giu nguyen + giai nghia tieng Viet (thuat nguyen dang)
+% =====================================================================
+
+% ---- keep_source (KHONG dich) ----
+% ERA5, Open-Meteo, Sentinel-1A/1B, FAO-56, VM0051, Decision 4801/QD-BNNMT
+%   -> "Quyết định 4801/QĐ-BNNMT" (van ban phap luat Viet Nam: dung ten tieng Viet)
+% Gilbert-Elliott, Penman-Monteith, SCS curve-number, MathType, IoT, PVC, gateway
+% "gateway" giu nguyen vi khong co ban dich chuan nganh (KHONG dung "cổng" tron:
+%   "cổng" trong bai nay da dung cho safety gate = "cổng an toàn").
+
+% ---- translate (ban dich chuan cua linh vuc) ----
+% alternate wetting and drying (AWD) : tưới khô ướt luân phiên (AWD)
+% monitoring, reporting and verification (MRV)
+%                                    : đo đạc, báo cáo, thẩm định (MRV)
+%                                      [dung dung chu cua QD4801 ban tieng Viet]
+% carbon credit                      : tín chỉ các-bon
+% low-emission rice                  : lúa phát thải thấp
+% digital twin                       : mô hình sinh đôi số
+% root zone                          : tầng rễ
+% field capacity (FC)                : sức chứa ẩm đồng ruộng (FC)
+% wilting point (WP)                 : điểm héo (WP)
+% depletion (fraction)               : (độ) cạn kiệt
+% dry phase                          : pha khô
+% irrigation efficiency              : hiệu suất tưới
+% crop coefficient (Kc)              : hệ số cây trồng (Kc)
+% reference evapotranspiration (ET0) : bốc thoát hơi nước tham chiếu (ET0)
+% surface runoff                     : dòng chảy mặt
+% deep percolation                   : thấm sâu
+% bund seepage                       : thấm bờ
+% infiltration bound                 : giới hạn thấm
+% subsidence                         : sụt lún
+% water-scarce / water-surplus year  : năm khan nước / năm thừa nước
+% hill-climb                         : leo đồi
+% false accusation                   : kết tội oan
+% escape (rate)                      : (tỷ lệ) lọt lưới
+% recall / detection power           : năng lực phát hiện
+% paired comparison                  : so sánh ghép cặp
+% uncertainty set                    : tập bất định
+% robust (tier/rule)                 : (tầng/quy tắc) bền vững
+% point model                        : mô hình điểm
+% device anchor / device-anchored    : neo thiết bị / được neo theo thiết bị
+% replay operator                    : toán tử phát lại
+% command record                     : bản ghi lệnh
+% signature / signed                 : chữ ký / có chữ ký
+% timestamp                          : dấu thời gian
+% admissible evidence                : bằng chứng được chấp nhận
+% audit trail                        : vết kiểm toán
+% tier                               : tầng
+% log                                : nhật ký
+% claim / claimed depth              : khai báo / độ sâu khai báo
+% forged / altered log               : nhật ký giả / nhật ký bị sửa
+% adversary                          : đối thủ
+% rational adversary                 : đối thủ duy lý
+% threat model                       : mô hình đe doạ
+% reality gap                        : khoảng cách thực tế
+% harness                            : bộ khung thử nghiệm
+% break-even                         : hoà vốn
+% creditable dry phase               : pha khô được cấp tín chỉ
+% omission fraud                     : gian lận bỏ sót
+% depth inflation                    : thổi phồng độ sâu
+% claim consolidation                : gộp khai báo
+% time shifting                      : dịch thời điểm
+% safety gate                        : cổng an toàn
+% companion work                     : công trình đồng hành
+% lossy channel                      : kênh có tổn thất
+% burst-noise channel                : kênh nhiễu cụm
+% measurement vs monitoring          : xem ghi chu duoi
+
+% ---- LUU Y DAC BIET ----
+% "Monitoring, reporting and verification": ban tieng Anh dung 'monitoring'
+%   (da sua tu 'measurement' o commit 4455a4b, vi tu khoa la 'monitoring' va
+%   Author Guidelines muc 3 yeu cau tu khoa phai xuat hien trong abstract).
+%   Ban tieng Viet van dich la "đo đạc, báo cáo, thẩm định" — dung nguyen van
+%   chu cua QD4801 ban tieng Viet, KHONG doi thanh "giám sát" vi se mat kha
+%   nang doi chieu voi van ban phap quy.
+%
+% "gate": trong bai nay co HAI nghia khac nhau, phai giu rieng:
+%   safety gate (co che chanh lenh)  = cổng an toàn
+%   QA gate (kiem tra chat luong)    = cổng kiểm  [chi xuat hien trong comment]
+%
+% "twin": dich "mô hình sinh đôi số" o lan dau, sau do co the viet "twin"
+%   trong ngoac khi noi ve plant vat ly. KHONG dich la "bản sao số" tron vi
+%   bai can phan biet twin (nhan lenh lam dau vao) voi predictor (AR(1)/Kalman).

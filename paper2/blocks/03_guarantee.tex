@@ -4,48 +4,42 @@
 \subsection{The admissible depth is a range, not a number}
 \label{sec:umax}
 
-The published version of this layer stated a single bound, $u\le 61$\,mm, as the
-largest claim that never raises an alarm. That number is an artefact of one soil
-profile and one initial condition. With $V_4$ firing when $u_i>c_{t_i}+\varepsilon$
-and $c_t=d_t\cdot\mathrm{span}$ where $\mathrm{span}=FC-WP$, the bound at a field
-whose initial depletion is $w_0$ and whose operator irrigates no later than
-$d^{*}$ is
+The published version of this layer stated a single bound, $u\le 61$\,mm, as
+the largest claim that never raises an alarm --- an artefact of one soil
+profile and one initial condition. With $V_4$ firing when
+$u_i>c_{t_i}+\varepsilon$ and $c_t=d_t\cdot\mathrm{span}$, the bound at a
+field with initial depletion $w_0$ irrigating no later than $d^{*}$ is
 \begin{equation}
 u_{\max}=\max(d^{*},w_0)\cdot\mathrm{span}+\varepsilon .
 \label{eq:umax}
 \end{equation}
-Two corrections follow, both of which we verified by scanning the replay operator
-rather than by algebra alone. First, \eqref{eq:umax} uses $\max$, not a
-difference: an initially dry field ($w_0=0.90$) admits \emph{larger} claims than a
-wet one, and the previously published expression $(d^{*}-w_0)\mathrm{span}+\varepsilon$
-yields $43.5$\,mm for $\mathrm{span}=70$\,mm and $w_0=0.25$, which corresponds to
-no physical state at all, since the operative deficit at that hour is either
-$0.25\,\mathrm{span}$ (initially) or $d^{*}\mathrm{span}$ (once the field has
-dried). Second, \eqref{eq:umax} is a bound \emph{per event}, not per season: the
-bucket drains continuously through deep percolation and evapotranspiration, so a
-season-long claim total is not bounded by $u_{\max}$ and an adversary issuing many
-sub-threshold claims can inflate the total without bound. Table~\ref{tab:umax}
-gives the range that must be published instead, $[49.0,86.0]$\,mm across
-$\Theta$.
+Two corrections follow, both verified by scanning the replay operator rather
+than by algebra alone (derivation in Supplementary~S14): \eqref{eq:umax} uses
+$\max$, not a difference --- an initially dry field admits \emph{larger}
+claims than a wet one, and the previously published expression corresponds to
+no physical state --- and it bounds a \emph{single event}, not the season, so
+an adversary issuing many sub-threshold claims can inflate the total without
+bound. Supplementary Table~S2 gives the range that must be published instead,
+$[49.0,86.0]$\,mm across $\Theta$.
 
 \subsection{Robust accusation under model uncertainty}
 \label{sec:robust}
 
-The auditor does not know the farmer's soil, the growth stage, or the efficiency
-of the delivery system. Let $\Theta$ be the uncertainty set and let
-$V_\theta(L)$ be the violation set obtained by replaying under configuration
-$\theta$. The published detector evaluated a single $\theta_0$ (the default
-profile) and treated every violation as guilt. We replace it by an intersection:
+The auditor knows neither the farmer's soil, nor the growth stage, nor the
+delivery efficiency. Let $\Theta$ be the uncertainty set and $V_\theta(L)$
+the violation set under configuration $\theta$; the published detector
+evaluated a single default $\theta_0$ and treated every violation as guilt.
+We replace it by an intersection:
 \begin{equation}
-V_{\mathrm{rob}}(L)=\bigcap_{\theta\in\Theta}V_\theta(L),
-\qquad
-\Theta=\underbrace{\mathcal{S}}_{5\ \text{soils}}\times
-\underbrace{\mathcal{K}}_{2\ K_c\ \text{regimes}}\times
-\underbrace{\mathcal{E}}_{3\ \eta}\times
-\underbrace{\mathcal{W}}_{5\ w_0},
+\begin{aligned}
+V_{\mathrm{rob}}(L)&=\bigcap_{\theta\in\Theta}V_\theta(L),\\
+\Theta&=\mathcal{S}\times\mathcal{K}\times\mathcal{E}\times\mathcal{W},
+\end{aligned}
 \label{eq:robust}
 \end{equation}
-so $|\Theta|=150$ and each log costs $150$ replays. The semantics are
+with $|\mathcal{S}|=5$ soil textures, $|\mathcal{K}|=2$ crop-coefficient
+regimes, $|\mathcal{E}|=3$ irrigation efficiencies and $|\mathcal{W}|=5$
+initial states, so $|\Theta|=150$ and each log costs $150$ replays. The semantics are
 deliberately one-sided:
 \begin{equation}
 a(L)=
@@ -68,50 +62,37 @@ $V_{\mathrm{rob}}(L)\subseteq V_{\theta^{*}}(L)=\emptyset$.
 \end{proof}
 
 Proposition~\ref{prop:noalarm} is what makes the layer deployable: model error
-can reduce detection power but cannot manufacture an accusation. The price is
-real and must be stated. Two implementation details matter, and getting either
-wrong silently breaks the proposition. A world that produces \emph{no} violation
-must contribute the \emph{empty set} to the intersection; skipping non-firing
-worlds computes $\bigcap$ over firing worlds only, which is an existential
-quantifier wearing the clothes of a universal one. And $\mathcal{W}$ must span the
-full range in which a claim can be legitimate: with
-$\mathcal{W}=\{0,0.25\}$ the largest admissible depth anywhere in $\Theta$ is
-$22.5$\,mm, so every claim above that is ``guilty in all worlds'' and the
-intersection becomes vacuous --- it fires on $102$ of $150$ worlds while $48$
-innocent worlds exist. Extending $\mathcal{W}$ to $\{0,0.25,0.5,0.75,0.9\}$
-restores the intended semantics.
+can reduce detection power but cannot manufacture an accusation, at a price
+that must be stated. Two implementation details --- the treatment of non-firing
+worlds and the span of $\mathcal{W}$ --- silently break the proposition if got
+wrong (Supplementary~S7).
 
 \subsection{A proportional pump-gap threshold}
 
-The absolute rule $G>\tau_0$ with $\tau_0=5$\,mm assumes the log is a faithful
-copy of what was pumped. It is not. Honest farmers forget entries, round to the
-nearest $5$\,mm, and record a day late. Each contributes to $G$ without any
-wrongdoing, so the threshold must scale with the number of recorded events:
+The absolute rule $G>\tau_0$ with $\tau_0=5$\,mm assumes the log is a
+faithful copy of what was pumped. It is not: forgetting, rounding to the
+nearest $5$\,mm and day-late entries all contribute to $G$ without wrongdoing,
+so the threshold must scale with the number of recorded events:
 \begin{equation}
-\tau(n)=\delta_{\mathrm{rel}}M+z\sqrt{n}\,\sigma_{\mathrm{event}},\qquad
-\sigma_{\mathrm{event}}^{2}=
-p(1-p)\bar u^{2}+\frac{r^{2}}{12}+q(1-q)(s\bar u)^{2},
+\begin{aligned}
+\tau(n)&=\delta_{\mathrm{rel}}M+z\sqrt{n}\,\sigma_{\mathrm{event}},\\
+\sigma_{\mathrm{event}}^{2}&=p(1-p)\bar u^{2}+\tfrac{r^{2}}{12}
++q(1-q)(s\bar u)^{2},
+\end{aligned}
 \label{eq:tau}
 \end{equation}
-with $p$ the forgetting rate, $r$ the rounding step, $q$ the depth-error rate,
-$s$ its amplitude, $\bar u=30$\,mm a typical event depth, $\delta_{\mathrm{rel}}=2\%$
-and $z=3$. The three variance terms are the forget, round and depth-error
-contributions; the absolute rule is the degenerate case $n\to 0$,
-$\sigma_{\mathrm{event}}\to 0$.
+with $p$ the forgetting rate, $r$ the rounding step, $q$ the depth-error rate
+and $s$ its amplitude, $\bar u=30$\,mm a typical event depth,
+$\delta_{\mathrm{rel}}=2\%$ and $z=3$; the absolute rule is the degenerate
+case $n\to0$, $\sigma_{\mathrm{event}}\to0$.
 
-\section{A Filter That Cannot Fire}
+\begin{remark}[A filter that cannot fire]
 \label{sec:v2reach}
-
-The published layer included a third physical filter, flagging depletion below
-the wilting point as physically impossible. It was doubly inoperative. Its
-threshold was set at $1.02$ while the reported indicator
-$\hat d_t=\min(1,\max(0,\cdot))$ is clipped to $[0,1]$, so the condition was
-unsatisfiable by construction: $0$ firings in $281$ logs. We repaired it by
-evaluating the unclipped depletion, and then measured whether the repaired filter
-can activate at all. Across three stations, two climate years, five textures and
-five initial states --- $150$ configurations --- with an empty log, i.e.\ the
-driest possible forcing, the unclipped depletion peaks at $0.9987$
-(Table~\ref{tab:f2reach}). A dry-season delta rice field does not reach the
-wilting point. The filter is therefore a \emph{safety} device that guarantees no
-absurd state is accepted; it is not evidence of detection, and the layer must be
-described as having two operative physical filters and one inert one.
+The published layer's third physical filter, flagging depletion below the
+wilting point, was doubly inoperative: its threshold ($1.02$) lay outside the
+clipped range of the reported indicator ($0$ firings in $281$ logs), and once
+repaired it still cannot activate --- across $150$ configurations with an empty
+log the unclipped depletion peaks at $0.9987$, and a dry-season delta rice
+field does not reach the wilting point (Supplementary Table~S3, derivation in
+S13). The layer has two operative physical filters and one inert safety device.
+\end{remark}

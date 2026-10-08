@@ -1,0 +1,24 @@
+% Sinh TU DONG tu tables/tab_threat.tex (ban tieng Anh, von sinh tu outputs/*.csv)
+% boi experiments/make_tables_hujos_vi.py. KHONG sua tay.
+% Nhan dich qua bang tra cuong che; so chi doi dinh dang sang kieu Viet Nam (dau phay thap phan).
+% Da assert: cung so dong, cung so vach, cung tap chu so voi ban EN.
+
+% Sinh TU DONG tu outputs/eval_theta_*.csv boi experiments/make_tables_anchored.py
+% KHONG sua tay: moi con so deu truy nguon duoc ve CSV.
+
+\fittocol{%
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{2.85cm}>{\raggedright\arraybackslash}p{0.95cm}>{\raggedright\arraybackslash}p{1.05cm}>{\raggedright\arraybackslash}p{0.95cm}>{\raggedright\arraybackslash}p{2.20cm}@{}}
+\toprule
+Biến thể gian lận & Tổng mm & Từng độ sâu & Thời điểm & Làm giả cái gì \\
+\midrule
+Nông dân trung thực (điều kiện ruộng) & đúng & đúng & đúng & Mốc: bảy trục khác biệt thực tế đang bật \\
+Thêm lệnh tưới & SAI & đúng & đúng & Thổi phồng hồ sơ hoạt động quản lý \\
+Độ sâu khai không khả thi & SAI & SAI & đúng & Một phần ba số mục đặt bằng toàn bộ dung tích chứa \\
+Bỏ sót lệnh thật & SAI & đúng & đúng & Xoá cửa sổ 96 h để tạo ra một pha khô \\
+Gộp khai báo, 24 h & đúng & thay đổi & SAI & Cùng lượng nước, ít lần tưới hơn và lớn hơn \\
+Gộp khai báo, 96 h & đúng & thay đổi & SAI & Cùng lượng nước, các lần tưới bám vào lưới thô \\
+Dịch thời điểm (duy lý) & đúng & đúng & SAI & Leo đồi theo từng giờ để tối đa số pha khô được cấp tín chỉ \\
+Đối thủ duy lý & đúng & đúng & SAI & Chọn cửa sổ gộp làm tối đa số pha khô \\
+\bottomrule
+\end{tabular}
+}

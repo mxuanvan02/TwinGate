@@ -1,0 +1,67 @@
+\section{Cost Model and Break-Even}
+\label{sec:cost}
+
+Let a cooperative serve $A$ hectares with $N$ cropping seasons of device life,
+and let the MRV cost per hectare per season decompose as
+\begin{equation}
+C=\underbrace{\frac{n_{\mathrm{dev}}\,p_{\mathrm{dev}}}{A\,N}}_{\text{hardware}}
++\underbrace{c_{\mathrm{conn}}}_{\text{connectivity}}
++\underbrace{h\,w}_{\text{labour}}
++\underbrace{\frac{c_{\mathrm{audit}}}{A}}_{\text{verification}},
+\label{eq:cost}
+\end{equation}
+where $n_{\mathrm{dev}}$ and $p_{\mathrm{dev}}$ are the number and unit price of
+devices, $h$ is the labour hours per hectare per season and $w$ the rural wage.
+Revenue per hectare is
+\begin{equation}
+R=\kappa\,\rho ,
+\label{eq:revenue}
+\end{equation}
+with $\kappa$ credits issued per hectare and $\rho$ the price per credit. The
+scheme is economically viable when
+\begin{equation}
+C\ \le\ \beta R ,\qquad \beta\in(0,1),
+\label{eq:breakeven}
+\end{equation}
+and $\beta=0.5$ is the level at which monitoring consumes half of the credit
+revenue. Substituting \eqref{eq:revenue} gives the break-even issuance
+\begin{equation}
+\kappa_{\min}=\frac{C}{\beta\rho}.
+\label{eq:kappamin}
+\end{equation}
+
+The tiers differ in $n_{\mathrm{dev}}$ and, more importantly, in which of the
+three forgeable quantities of \eqref{eq:three} they can observe. Tier~0 is the
+physics layer: $n_{\mathrm{dev}}=0$ beyond the controller, the log is written on
+a handset the farmer already owns, and the filters of Sec.~\ref{sec:filters} run
+on public weather data at no marginal cost. Tier~1 adds one flow meter at the
+cooperative pumping station --- $n_{\mathrm{dev}}=1$ for the whole area $A$
+rather than one per plot --- which observes the total volume. Tier~2 adds one
+water-level node per cooperative, re-anchoring the twin and restoring the
+calibration property a measurement-based MRV needs anyway.
+
+None of the three observes timestamps, and by Prop.~\ref{prop:blind} the first
+two are exactly invariant under the transformation that pays. The device anchor
+of Sec.~\ref{sec:anchor} is therefore not an optional fourth tier but a
+precondition of admissibility: it is produced by the same controller that
+actuates the pump, so it adds storage and transmission of a record that already
+exists, and no additional $n_{\mathrm{dev}}$.
+
+Table~\ref{tab:baseline} compares the scheme with the three architectures it
+replaces. With
+$\kappa\in[4,6]$ and $\rho\in[\$15,\$25]$~\cite{rmi2025rice,upstream2026price},
+revenue is $R\in[\$60,\$150]$ per hectare per season, so
+$\kappa_{\min}$ at $\beta=0.5$ corresponds to a monitoring budget of
+$\$30$--$75$ per hectare. The full stack sits an order of magnitude below that
+ceiling, and the incremental cost of the anchor over a controller that is already
+installed is about $1\%$ of conservative revenue. Table~\ref{tab:baseline}
+decomposes the comparison against the three architectures it replaces; the
+connectivity term is shown separately because it is the one that distinguishes a
+sensor-per-plot design from a single shared gateway.
+
+\begin{remark}
+The device prices in Table~\ref{tab:baseline} are planning estimates, not
+quotations. The ordering of the tiers and the break-even inequality
+\eqref{eq:breakeven} do not depend on them; only the absolute margin does. A
+quotation should replace the estimates before any procurement decision.
+\end{remark}

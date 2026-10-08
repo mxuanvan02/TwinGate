@@ -1,0 +1,82 @@
+% BAN TIENG VIET cua 04_anchor.tex (2026-10-08). So lieu giu nguyen.
+\section{Chứng thực neo theo thiết bị}
+\label{sec:anchor}
+
+\subsection{Bản ghi của gateway}
+
+Các mệnh đề~\ref{prop:blind}--\ref{prop:coincide} cho thấy tổng lượng và độ
+sâu là chưa đủ, và thứ tự thời gian chính xác là thứ đối thủ thao túng, nên
+phòng thủ buộc phải quan sát dấu thời gian --- và bên duy nhất có thể bảo chứng
+cho một dấu thời gian là thiết bị đã thực thi nó. Giả sử gateway giữ một bản
+ghi lệnh có chữ ký
+\begin{equation}
+\mathcal{G}=\{(t_j,u_j,\sigma_j)\},
+\label{eq:gateway}
+\end{equation}
+trong đó $\sigma_j$ là chữ ký trên $(t_j,u_j)$ do bộ điều khiển tạo ra tại
+thời điểm đóng mở máy bơm. Phép thử neo đối chiếu nhật ký khai báo với bản ghi
+đó:
+\begin{equation}
+\begin{aligned}
+\Delta_{\mathrm{time}}&=\{t_i\}\triangle\{t_j\},\\
+\Delta_{\mathrm{depth}}&=\max_{t}\bigl|u(t)-u_{\mathcal{G}}(t)\bigr|,
+\end{aligned}
+\label{eq:deltas}
+\end{equation}
+trong đó $\triangle$ là hiệu đối xứng và $\Delta_{\mathrm{depth}}$ lấy trên các
+giờ có mặt ở cả hai bản ghi. Phán quyết khi đó là
+\begin{equation}
+A(L,\mathcal{G})=
+\begin{cases}
+\text{giả mạo}, & \Delta_{\mathrm{time}}\neq\emptyset
+\ \vee\ \Delta_{\mathrm{depth}}>\epsilon,\\
+\text{khớp}, & \text{trường hợp còn lại},
+\end{cases}
+\label{eq:anchor}
+\end{equation}
+với $\epsilon=10^{-6}$~mm, tức khớp chính xác tới mức nhiễu dấu phẩy động.
+Việc gọi tên riêng hai loại sai lệch là quan trọng: dịch thời điểm chỉ làm thay
+đổi $\Delta_{\mathrm{time}}$, thổi phồng độ sâu chỉ làm thay đổi
+$\Delta_{\mathrm{depth}}$, còn bỏ sót và thêm mới làm thay đổi cả hai, nên một
+phép đối chiếu duy nhất bắt được mọi lớp gian lận.
+
+\begin{proposition}[Tính đầy đủ của neo thiết bị]
+\label{prop:complete}
+Nếu nhật ký khai báo $L$ khác bản ghi gateway $\mathcal{G}$ về đa tập hợp các
+giờ hoặc về bất kỳ độ sâu nào tại một giờ chung, thì $A(L,\mathcal{G})$ trả về
+\text{giả mạo}. Nếu $L$ và $\mathcal{G}$ khớp cả hai, thì $L$ là một bản sao
+trung thực và không có sự giả mạo nào đối với ba đại lượng trong
+\eqref{eq:three}.
+\end{proposition}
+
+\begin{proof}
+Xem Phụ lục~S12: mệnh đề thứ nhất là định nghĩa của \eqref{eq:anchor}, còn
+mệnh đề thứ hai suy ra được vì cả ba đại lượng có thể làm giả đều là hàm của
+tập giờ và các độ sâu theo giờ.
+\end{proof}
+
+\subsection{Vì sao điều này không đưa việc kết tội oan trở lại}
+
+Mệnh đề~\ref{prop:complete} mạnh tới mức trông nguy hiểm: mọi sai lệch đều bị
+coi là giả mạo, kể cả việc quên ghi và làm tròn mà Mục~\ref{sec:guarantee} đã
+chỉ ra là rất phổ biến. Cách hoá giải là ở chỗ neo thiết bị đối chiếu một bản
+sao với \emph{nguồn}, chứ không đối chiếu một nhật ký với một \emph{mô hình}:
+một nông dân trung thực quên một mục ghi chỉ đơn giản được bổ sung từ
+$\mathcal{G}$. Khi đó, kết tội oan đòi hỏi gateway phải mâu thuẫn với chính nó
+--- một vấn đề toàn vẹn thiết bị --- đó là lý do Bảng~\ref{tab:falseacc} giữ ở
+mức $0/60$ trong khi các tầng hành vi giữ ở mức $26{,}7\%$ và $5{,}0\%$
+(Phụ lục~S18).
+
+\subsection{Chi phí và phạm vi của tuyên bố}
+
+Neo thiết bị đòi hỏi gateway của công trình đồng hành~\cite{twingate2026}, vốn
+đóng mở máy bơm và đã ghi một bản ghi lệnh có chữ ký kèm dấu thời gian như một
+phần chức năng an toàn của nó; chi phí biên của việc chứng thực là lưu trữ và
+truyền một bản ghi đằng nào cũng tồn tại (Bảng~S5 của Phụ lục). Dù vậy, phạm
+vi hẹp hơn tiền đề ban đầu của chúng tôi: một nhật ký viết tay, không có thiết
+bị nào trong vòng lặp, tự nó \emph{không} phải bằng chứng được chấp nhận, vì
+Mục~\ref{sec:results} đo được một đối thủ duy lý thổi phồng tín chỉ thêm
+$+35\%$ trong khi lọt qua mọi phép thử dựa trên vật lý và tổng lượng ($6/6$
+nhật ký bị sửa). MRV với chi phí gần như bằng không chỉ khả thi ở nơi có một bộ
+điều khiển đứng giữa nông dân và máy bơm; ở nơi tưới thủ công, lớp này không áp
+dụng được.

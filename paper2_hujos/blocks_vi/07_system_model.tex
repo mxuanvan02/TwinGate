@@ -1,0 +1,62 @@
+% BAN TIENG VIET cua 07_system_model.tex (2026-10-08). So lieu giu nguyen.
+\section{Mô hình hệ thống}
+\label{sec:model}
+
+\subsection{Cân bằng nước của ruộng}
+
+Lượng nước trong tầng rễ $w_t$ [mm] biến đổi theo giờ dưới mô hình thùng chứa
+FAO-56~\cite{fao56}:
+\begin{equation}
+w_{t+1}=\mathrm{clip}_{\le FC}\!\left(w_t+P_t-RO_t-ET_{c,t}+u_t\right),
+\label{eq:bucket}
+\end{equation}
+với lượng bốc thoát hơi nước của cây trồng và hệ số ứng suất nước
+\begin{equation}
+ET_{c,t}=K_{s,t}\,K_c\,ET_{0,t},
+\qquad
+K_{s,t}=\frac{FC-w_t}{(1-p)\,\mathrm{TAW}},
+\label{eq:etc}
+\end{equation}
+trong đó $ET_{0,t}$ là bốc thoát hơi nước tham chiếu theo giờ
+(Penman-Monteith), $P_t$ là lượng mưa, $RO_t$ là dòng chảy mặt (phương pháp
+đường cong số SCS, tính theo ngày rồi chia đều cho các giờ của một trận mưa),
+và $u_t$ là độ sâu tưới áp dụng trong giờ $t$. Lượng nước vượt quá sức chứa ẩm
+đồng ruộng $FC$ bị toán tử cắt bỏ loại đi, nên bảo toàn khối lượng đúng tuyệt
+đối và được kiểm tra như một bất biến. Độ cạn kiệt của tầng rễ là
+\begin{equation}
+d_t=\frac{FC-w_t}{FC-WP},\qquad \mathrm{span}=FC-WP,
+\label{eq:depl}
+\end{equation}
+với $WP$ là điểm héo; đối với loại đất thịt pha sét limon tham chiếu của đồng
+bằng, $\mathrm{TAW}=FC-WP=70$~mm, $FC=160$~mm, $WP=90$~mm.
+
+\subsection{Phát lại một nhật ký khai báo}
+\label{sec:replay}
+
+Giả sử một nhật ký khai báo cung cấp số hạng tưới của \eqref{eq:bucket}.
+\emph{Toán tử phát lại} $\mathcal{R}$ ánh xạ một nhật ký sang quỹ đạo mà nó
+hàm ý, bằng cách lặp \eqref{eq:bucket} dưới dữ liệu khí tượng quan trắc
+$(P_t,ET_{0,t})$:
+\begin{equation}
+\mathcal{R}(L)=\{(\hat w_t,\hat d_t)\}_{t=0}^{T},
+\label{eq:replay}
+\end{equation}
+với $\hat w_0=w_{\mathrm{init}}$ và
+\begin{equation}
+u_t=\sum_{(t_i,u_i)\in L}u_i\,\mathbb{1}[t_i=t],
+\label{eq:uterm}
+\end{equation}
+sao cho $\hat w_t$ là lượng nước tầng rễ mà nhật ký \emph{khai} rằng ruộng đã
+có, và $\hat d_t$ là độ cạn kiệt của nó theo \eqref{eq:depl}; dấu mũ đánh dấu
+các đại lượng được tái dựng từ nhật ký chứ không đo được. Việc phát lại là
+tất định và chỉ dùng dữ liệu tái phân tích công khai, nên hai kiểm toán viên
+phát lại cùng một nhật ký sẽ thu được cùng một quỹ đạo và phán quyết có thể
+tái lập. Dấu mũ trừ chỉ trạng thái ngay \emph{trước} khi khai báo của giờ đó
+được áp dụng, như trong $\hat w_{t}^{-}$: lượng nước sẵn có để tiếp nhận một
+lần tưới, và đó là thứ bộ lọc phải xem xét.
+
+Toán tử này cũng là thứ làm cho phương án trở nên rẻ: không cảm biến nào bị
+truy vấn, và đầu vào duy nhất là nhật ký, chuỗi thời tiết công khai cùng một
+hồ sơ đất. Điểm yếu của nó, được trình bày ở Mục~\ref{sec:timeshift}, là nó
+chỉ kiểm tra được một quỹ đạo có \emph{khả dĩ} hay không, chứ không bao giờ
+biết được nó có \emph{đã xảy ra} hay không.

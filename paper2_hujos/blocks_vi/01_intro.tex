@@ -1,0 +1,65 @@
+% BAN TIENG VIET cua 01_intro.tex — dich tu ban EN 14 trang (2026-10-08).
+% Moi con so giu nguyen, chi doi sang dinh dang Viet Nam (dau phay thap phan).
+% Thuat ngu theo glossary_vi.tex. KHONG them/bot claim so voi ban EN.
+\section{Mở đầu}
+\label{sec:intro}
+
+Việt Nam đã cam kết một triệu héc-ta lúa phát thải thấp vào năm 2030, và
+phần nông học đã ngã ngũ: tăng độ khắc nghiệt của phơi hạn ngắt quãng làm giảm
+phát thải khí mê-tan từ $41$--$71\%$ so với ngập liên tục mà không làm giảm
+năng suất hạt~\cite{balaine2019}, và chế độ nước là nhân tố chi phối thông
+lượng mê-tan theo mùa trên các ruộng lúa châu Á~\cite{yan2005}. Điều chưa ngã
+ngũ là đo lường. Theo Quyết định 4801/QĐ-BNNMT, bằng chứng được xếp hạng cao
+nhất cho một yêu cầu cấp tín chỉ là bản ghi các hoạt động tưới và rút nước
+đã thực hiện~\cite{qd4801}, và theo VM0051 của Verra, chính bản ghi đó phải
+vượt qua thẩm định của bên thứ ba~\cite{vm0051}. Làm ra nó tốn khoản tiền mà
+một hợp tác xã nông hộ nhỏ không có: riêng giám sát chiếm khoảng $77\%$ chi
+phí MRV~\cite{jem2026mrv}, và quy trình hiện hành dựa vào việc chụp ảnh định
+kỳ một ống đo mực nước.
+
+Cách sửa hiển nhiên là nhận ra rằng một lệnh tưới hiện đại vốn đã là một sự
+kiện số: nếu gateway đóng mở máy bơm thì nó cũng có thể ghi lại lần đóng mở
+đó, và bản ghi ấy là dữ liệu hoạt động bậc 1 (Tier-1) theo nghĩa của Quyết
+định 4801 với chi phí biên bằng không --- đây là tiền đề của công trình đồng
+hành~\cite{twingate2026}, vốn dùng một mô hình sinh đôi số FAO-56 làm cổng an
+toàn quyết định một lệnh có được truyền qua kênh có tổn thất hay không. Chúng
+tôi đi thêm một bước và đặt câu hỏi: liệu chính mô hình sinh đôi số đó có thể
+\emph{kiểm toán} những gì nông dân khai báo sau vụ việc hay không, mà không
+cần triển khai cảm biến nào: một nhật ký các độ sâu khai báo được phát lại
+qua cân bằng nước dưới dữ liệu ERA5 công khai, và một khai báo mà đất không
+thể nào hấp thụ được là bằng chứng của sự ngụy tạo. Phiên bản đầu tiên của
+lớp này báo cáo không kết tội oan nhật ký trung thực nào trong $60$ nhật ký
+và phát hiện $60/60$ nhật ký giả --- đúng nhưng vô giá trị, vì các quỹ đạo
+được dán nhãn ``thật'' lại do chính mô hình sau đó kiểm toán chúng sinh ra:
+bộ phát hiện đang tự chấm bài của mình (Phụ lục~S10.4).
+
+Bài báo này trình bày điều xảy ra khi vòng luẩn quẩn đó bị gỡ bỏ: chúng tôi
+dựng lại ruộng sao cho nó vi phạm mọi giả định của mô hình sinh đôi số, và
+thay các kiểu gian lận ngây thơ bằng một đối thủ đã đọc bộ phát hiện. Ba phát
+hiện sau đây, đồng thời là ba đóng góp của bài. Thứ nhất, bộ phát hiện mô
+hình điểm không chỉ lạc quan, nó \emph{không an toàn}: nó kết tội oan
+$26{,}7\%$ nông dân trung thực, vì một ngưỡng tuyệt đối trên chênh lệch bơm
+đối xử với người quên một mục ghi y hệt người tưới trộm; quy tắc bền vững sửa
+được lỗi này --- một phép giao trên tập bất định $\Theta$ gồm $30$ cấu hình
+đất, hệ số cây trồng và hiệu suất (Mục~\ref{sec:robust}) --- phải trả giá
+bằng năng lực phát hiện, điều chúng tôi đo lường chứ không che giấu. Thứ
+hai, việc chứng thực dựa trên vật lý có một lỗ hổng mà không lượng mô hình
+hoá nào bịt được: một đối thủ giữ nguyên tổng lượng nước và từng độ sâu riêng
+lẻ có thể \emph{dịch lệnh theo thời gian}, làm thổi phồng các pha khô đủ
+điều kiện cấp tín chỉ --- đúng đại lượng mà VM0051 và Quyết định 4801 trả
+tiền --- thêm $+33\%$ trong so sánh ghép cặp ($t=5{,}29$; $+38\%$,
+$t=3{,}46$ với tập bất định đầy đủ). Không tầng vật lý nào thoát được --- mô
+hình điểm bắt được bốn trong chín nhật ký bị sửa nhưng lại chính là bộ phát
+hiện kết tội oan $26{,}7\%$ nông dân trung thực, trong khi tầng bền vững hạ
+tỷ lệ oan xuống $5{,}0\%$ thì để lọt tám trong chín --- và chúng tôi chứng
+minh điều này không thể tránh khỏi với mọi bộ phát hiện là hàm của quỹ đạo
+phát lại (Mục~\ref{sec:threat}, Mục~\ref{sec:timeshift}). Thứ ba, cách sửa
+rẻ và không mang tính vật lý: đối chiếu nhật ký với bản ghi lệnh có chữ ký và
+dấu thời gian của gateway bắt được $116/116$ nhật ký thật sự bị giả mạo và
+không kết tội oan nhật ký nào trong $60$ nhật ký trung thực, với chi phí
+không vượt quá chính gateway mà công trình đồng hành đã triển khai
+(Mục~\ref{sec:anchor}). Bài báo cũng sửa lại ba con số đã công bố trước đó:
+độ sâu chấp nhận được là một dải $[49{,}0; 86{,}0]$~mm chứ không phải một
+giá trị $61$~mm; bộ lọc vật lý thứ ba không thể kích hoạt trên lúa vụ khô
+đồng bằng; và ngưỡng tuyệt đối trên chênh lệch bơm là không thể chấp nhận
+(Mục~\ref{sec:umax}, Mục~\ref{sec:v2reach}).

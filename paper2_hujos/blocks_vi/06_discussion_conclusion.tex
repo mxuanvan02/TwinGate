@@ -1,0 +1,72 @@
+% BAN TIENG VIET cua 06_discussion_conclusion.tex (2026-10-08). So lieu giu nguyen.
+\section{Bàn luận}
+\label{sec:discussion}
+
+\subsection{Quan hệ với các công trình trước}
+
+Việc giám sát AWD đã được tiếp cận từ ba hướng --- cảm biến mực nước có thiết
+bị~\cite{delacruz2022}, viễn thám~\cite{lovell2019,islam2026alose,mlrice2025},
+và MRV ở cấp chương trình~\cite{qd1490,mae2026progress,irri2026mrv} --- trong
+khi phân tích tổng hợp nông học~\cite{carrijo2017} và các nghiên cứu về tiếp
+nhận~\cite{lampayan2015,enriquez2021} giải thích vì sao giám sát có thiết bị
+không lan rộng được. Không hướng nào đánh giá \emph{độ tin cậy của chính bản
+ghi hành động}, và đó là câu hỏi được đặt ra ở đây (khảo sát đầy đủ ở
+Phụ lục~S8). Với radar vệ tinh, phương án chi phí thấp hiển nhiên, chúng tôi đo
+chứ không tranh luận: Bảng~\ref{tab:benchmark} chấm điểm mọi phương án theo số
+pha khô đủ điều kiện cấp tín chỉ mà nó xác nhận được trong $150$ pha, một pha
+chỉ được tính nếu có ít nhất một lần quan sát rơi vào trong
+nó~\cite{clauss2017s1,hashemi2022s1,delacruz2022}. Hai điểm cần thận trọng: cột
+này đo khả năng \emph{kiếm} tín chỉ chứ không đo khả năng phát hiện gian lận ---
+ống đo và bản ghi lệnh cùng đạt $100\%$ nhưng khác nhau về chi phí và về thứ
+chúng chứng minh được --- và ảnh chụp kèm tự khai đạt $0\%$ vì nó không tạo ra
+chuỗi quan sát nào để đối chiếu. Do đó radar vẫn giữ vai trò mà Phụ lục 4 của
+VM0051 giao cho nó: một phép kiểm chéo theo thửa làm giảm tần suất kiểm tra thực
+địa~\cite{vm0051} (Phụ lục~S9.2).
+
+\subsection{Giới hạn}
+
+Bảy giới hạn ràng buộc các tuyên bố, tất cả đều được phát biểu đầy đủ ở
+Phụ lục~S21; hai giới hạn chi phối các kết quả chính là như sau. \emph{Nông dân
+mô phỏng}: các bản giả mạo được tiêm vào quỹ đạo mô phỏng, nên vẫn cần một thử
+nghiệm thực địa để đo phản ứng hành vi --- trên hết là liệu nông dân có thay đổi
+việc bơm \emph{thật sự} của mình một khi biết có neo thiết bị hay không, một tấn
+công làm thay đổi $M$ chứ không phải $L$ và mô hình của chúng tôi không biểu
+diễn được. \emph{Tấn công chỉ được minh hoạ trong năm khan nước}: năm 2025 phần
+lớn nhật ký rơi xuống dưới mức tối thiểu ba lệnh mà tại đó một tấn công thời điểm
+mới có thể dựng được --- trong $37$ nhật ký thật sự bị sửa ở $\Theta$ đầy đủ, cả
+$37$ đều thuộc năm 2024. Chính vách ngăn giữa hai năm đó là một phát hiện (rủi
+ro gian lận MRV tập trung ở nơi khan nước), nhưng kết quả tấn công chưa phải là
+bằng chứng về một mùa mưa; ở $\Theta$ rút gọn có mười hai nhật ký bị sửa thuộc
+năm 2025 và chúng hành xử giống nhau --- gợi ý chứ chưa kết luận. Năm giới hạn
+còn lại được liệt kê ở S21.
+
+\section{Kết luận}
+
+Chúng tôi khởi đầu với mục tiêu làm cho MRV lúa gần như miễn phí bằng cách kiểm
+toán một nhật ký tưới do nông dân tự ghi đối chiếu với vật lý nước trong đất.
+Phiên bản đầu tiên của lớp đó báo cáo không có kết tội oan và phát hiện trọn
+vẹn; cả hai con số đều là sản phẩm của một thửa ruộng do chính mô hình kiểm
+toán sinh ra, và việc dựng lại thửa ruộng đó trước một đối thủ tối ưu hoá đại
+lượng được cấp tín chỉ đã làm thay đổi kết luận.
+
+Bộ phát hiện mô hình điểm kết tội oan $26{,}7\%$ nông dân trung thực; một ngưỡng
+tỉ lệ và một phép giao trên tập bất định $150$ phần tử hạ con số đó xuống
+$5{,}0\%$ và $0/60$, với cái giá đo được về năng lực phát hiện ($9/9$ xuống
+$4/9$ ở gian lận bỏ sót). Trong khi đó một phép hoán vị thời điểm khai báo giữ
+nguyên tổng lượng nước làm thổi phồng số pha khô được cấp tín chỉ từ $33\%$ đến
+$38\%$, đồng thời lọt qua tầng bền vững ở $8$ trong $9$ và $3$ trong $3$ nhật ký
+bị sửa, và không cấu hình vật lý nào thoát khỏi sự đánh đổi đó: hoãn một khai báo
+vừa kéo dài pha khô vừa làm tăng phần thiếu hụt dành cho nó, nên lợi nhuận và sự
+không thể phát hiện dùng chung một gradient.
+
+Cách sửa không thuộc về thuỷ văn. Đối chiếu nhật ký khai báo với bản ghi lệnh có
+chữ ký và dấu thời gian của gateway bắt được $116/116$ nhật ký thật sự bị giả
+mạo và không kết tội oan nhật ký nào trong $60$ nhật ký trung thực, với chi phí
+không vượt quá một bộ điều khiển mà công trình đồng hành đã triển khai. Điều còn
+lại của tiền đề ban đầu là: vật lý \emph{ràng buộc} một nhật ký, nhưng chỉ một
+bản ghi thiết bị có chữ ký mới \emph{chứng thực} được nó --- MRV chi phí gần như
+bằng không chỉ khả thi ở nơi có một thiết bị đứng giữa nông dân và máy bơm. Ba
+con số đã công bố trước đó được sửa lại tương ứng ($[49{,}0; 86{,}0]$~mm thay vì
+$61$~mm; một bộ lọc thứ ba bất động; một phép thử chênh lệch tuyệt đối không thể
+chấp nhận). Mã nguồn, cả hai tập bất định, toàn bộ $281$ nhật ký đã kiểm toán và
+$46$ phép thử đơn vị đều được công khai.

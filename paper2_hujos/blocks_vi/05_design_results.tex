@@ -1,0 +1,82 @@
+% BAN TIENG VIET cua 05_design_results.tex (2026-10-08). So lieu giu nguyen.
+\section{Thiết kế thực nghiệm}
+\label{sec:design}
+
+Thiết kế này so sánh bốn tầng phòng thủ với chín loại nhật ký trên một thửa
+ruộng cố ý vi phạm mọi giả định của mô hình sinh đôi số: khác với đánh giá
+trước đây, mà $0/60$ ca kết tội oan chỉ đo tính tự nhất quán (Phụ lục~S10.4),
+ruộng ở đây được sinh ra bởi một tiến trình riêng biệt, khác mô hình sinh đôi
+số theo bảy trục, mỗi trục đều có nguồn đã công bố (mọi giá trị ở Bảng~S6 của
+Phụ lục; danh sách từng trục và ngữ nghĩa ghi chép theo sự kiện ở S20.1). Thời
+tiết là ERA5 theo giờ (kho lưu trữ Open-Meteo) cho Cần Thơ, Sóc Trăng và Cà Mau
+trong năm 2024 (khan nước) và 2025 (thừa nước), cửa sổ từ ngày 1 tháng Ba đến
+ngày 29 tháng Năm ($2\,160$~giờ), mùa khô mà AWD được áp dụng. Tầng~1 là bộ
+phát hiện mô hình điểm đã công bố (hồ sơ mặc định, ngưỡng tuyệt đối
+$\tau_0=5$~mm); Tầng~2 là bộ phát hiện bền vững của \eqref{eq:robust} với
+ngưỡng tỉ lệ của \eqref{eq:tau}, chạy trên cả $\Theta$ rút gọn ($24$ lần phát
+lại mỗi nhật ký, $10$ seed) và $\Theta$ đầy đủ ($150$ lần phát lại, dùng kiểm
+chéo); Tầng~3 là neo thiết bị của \eqref{eq:anchor}; Tầng~4 chỉ có vật lý, dùng
+làm mốc. Trong chín loại nhật ký, ba loại là giả mạo ngây thơ và bốn loại là
+đối kháng, được dựng bằng một bộ tối ưu chứ không theo một công thức cố định
+(danh sách đầy đủ ở S16); mọi thống kê tấn công đều có điều kiện trên cờ
+\texttt{changed}, vì một đối thủ không tìm được nước đi cải thiện sẽ trả về
+nguyên bản nhật ký, và các phép so sánh dùng mốc của chính biến thể đó (hai lỗi
+của bộ khung thử nghiệm, S10.2). Với mỗi tầng chúng tôi báo cáo tỷ lệ lọt lưới
+(nhật ký giả mà không tầng vật lý nào đánh dấu) và tỷ lệ kết tội oan trên nhật
+ký trung thực; về tác động tín chỉ, báo cáo $n_{\mathrm{dry}}$ của
+\eqref{eq:ndry} so với mốc ruộng trung thực, theo ghép cặp. Tổng lượng nước chỉ
+xuất hiện như một chỉ số chẩn đoán (S10.3).
+
+\section{Kết quả}
+\label{sec:results}
+
+\subsection{Bộ phát hiện đã công bố không an toàn, chứ không chỉ lạc quan}
+
+Bảng~\ref{tab:falseacc} đưa ra kết quả phủ định trung tâm: bộ phát hiện mô hình
+điểm không kết tội ai trên nhật ký điều kiện giấy, tái hiện đúng $0/60$ của lần
+trước, nhưng kết tội oan $26{,}7\%$ nông dân trung thực trên nhật ký điều kiện
+ruộng. Nguyên nhân là \eqref{eq:gap} với một ngưỡng tuyệt đối --- quên ghi, làm
+tròn hoặc ghi trễ một ngày đều tạo ra $G>5$~mm mà không có hành vi sai trái
+nào; chênh lệch đo được trên nhật ký trung thực điều kiện ruộng lên tới
+$65$~mm. Ngưỡng tỉ lệ của \eqref{eq:tau} hạ con số này xuống $5{,}0\%$, và neo
+thiết bị hạ xuống $0/60$.
+
+\subsection{Vật lý không nhìn thấy tấn công sinh lợi}
+
+Bảng~\ref{tab:credit} là kết quả phủ định thứ hai, và là kết quả quan trọng về
+mặt kinh tế. Mọi con số thổi phồng đều là so sánh \emph{ghép cặp} với nhật ký
+trung thực của cùng quỹ đạo, chỉ tính trên các tấn công thật sự thay đổi bản
+ghi; cách tính không ghép cặp sẽ phóng đại lợi ích lên khoảng hai lần (S15).
+Dịch thời điểm nâng số pha khô được cấp tín chỉ từ $4{,}78$ lên $6{,}33$ mỗi
+vụ, tức $+33\%$ trên chín nhật ký bị sửa ($t=5{,}29$); với tập bất định đầy đủ,
+$+38\%$ trên ba nhật ký ($t=3{,}46$); đối thủ duy lý đạt $+35\%$ và $+40\%$.
+Gộp khai báo hầu như không được gì khi ghép cặp ($+1\%$, $+2\%$), và hai kiểu
+giả mạo thô sơ thậm chí \emph{làm giảm} số pha khô được cấp tín chỉ ($-1\%$,
+$-17\%$): chỉ có phép hoán vị dấu thời điểm giữ nguyên tổng lượng nước là sinh
+lợi, đúng như Mệnh đề~\ref{prop:coincide} dự đoán. Tỷ lệ lọt lưới trong
+Bảng~\ref{tab:defence} là phần cốt lõi của kết quả: dịch thời điểm lọt qua tầng
+vật lý bền vững ở $8$ trong $9$ nhật ký bị sửa, đối thủ duy lý ở $6$ trong $6$.
+Mô hình điểm bắt được nhiều hơn ($4$ trong $9$), nhưng nó lại chính là bộ phát
+hiện kết tội oan $26{,}7\%$ nông dân trung thực; tầng bền vững hạ tỷ lệ đó xuống
+$5{,}0\%$ và đổi lại giao phần lớn khả năng phát hiện về tay đối thủ ($1$ trong
+$9$) --- \emph{không cấu hình vật lý nào thoát khỏi sự đánh đổi đó}, vì cả hai
+tầng đều là hàm của quỹ đạo phát lại. Bộ lọc thấm $V_5$ kích hoạt $648$ lần,
+nhưng chỉ trên kiểu giả mạo thổi phồng độ sâu thô sơ: hữu ích, và trực giao với
+mối đe doạ sinh lợi.
+
+\subsection{Neo thiết bị bịt mọi lớp, và cái giá của sự bền vững}
+
+Bảng~\ref{tab:defence} cũng đưa ra nửa kiến tạo: trong $281$ nhật ký được kiểm
+toán, $116$ nhật ký thật sự bị sửa, và neo thiết bị bắt được $116/116$ trong
+khi không kết tội oan nhật ký nào trong $60$ nhật ký trung thực điều kiện ruộng
+($37/37$ và $0/18$ với $\Theta$ đầy đủ). Giả mạo ngây thơ bị mọi tầng bắt được;
+khác biệt nằm hoàn toàn ở các dòng đối kháng, nơi cả vật lý lẫn tổng lượng đều
+thất bại và chỉ có neo thiết bị đứng vững. Tính bền vững không miễn phí: trên
+chín nhật ký gian lận bỏ sót thật sự bị sửa, mô hình điểm bắt được $9/9$ trong
+khi quy tắc bền vững bắt $4/9$ ($4/4$ so với $2/4$ ở $\Theta$ đầy đủ) --- một sự
+mất mát năng lực phát hiện, không phải một cải thiện Pareto, dù chúng tôi coi
+đó là phía đúng của sự đánh đổi. Mọi kết luận đều đúng với cả $\Theta$ rút gọn
+($24$ lần phát lại, $281$ nhật ký, $10$ seed) và $\Theta$ đầy đủ ($150$ lần phát
+lại, $85$ nhật ký, $3$ seed): kết tội oan $0/60$ và $0/18$, tính đầy đủ của neo
+$116/116$ và $37/37$, lọt lưới dịch thời điểm $8/9$ và $3/3$, thổi phồng ghép
+cặp $+33\%$ và $+38\%$ (Phụ lục~S17).

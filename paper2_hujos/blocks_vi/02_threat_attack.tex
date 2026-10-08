@@ -1,0 +1,146 @@
+% BAN TIENG VIET cua 02_threat_attack.tex (2026-10-08). So lieu giu nguyen.
+\section{Mô hình đe doạ}
+\label{sec:threat}
+
+Một nhật ký tưới khai báo là một ánh xạ hữu hạn
+\begin{equation}
+L=\{(t_i,u_i)\}_{i=1}^{|L|},\qquad u_i>0,\ t_i\in[0,T),
+\label{eq:log}
+\end{equation}
+trong đó $u_i$ là độ sâu khai báo tính bằng milimét và $t_i$ là chỉ số giờ.
+Ba đại lượng độc lập có thể bị làm giả, và mỗi tầng phòng thủ quan sát một tập
+con khác nhau của chúng:
+\begin{equation}
+\underbrace{\textstyle\sum_i u_i}_{\text{tổng lượng}}\,,\qquad
+\underbrace{\{u_i\}}_{\text{từng độ sâu}}\,,\qquad
+\underbrace{\{t_i\}}_{\text{dấu thời gian}}\,.
+\label{eq:three}
+\end{equation}
+Bảng~S1 của Phụ lục liệt kê các lớp gian lận tương ứng. Đối thủ là
+\emph{duy lý}: nó tối đa hoá số pha khô được cấp tín chỉ với điều kiện không
+bị đánh dấu, và nó biết bộ phát hiện, vì bộ phát hiện đã được công bố; đó là
+nghĩa mà theo đó $\varepsilon$ trong \eqref{eq:v4} bên dưới không phải là bí
+mật.
+
+Gọi $M$ là lượng nước thật sự đã bơm, đo tại trạm của hợp tác xã, và
+$U(L)=\sum_i u_i$ là tổng lượng khai báo; thống kê của tầng~1 là
+\begin{equation}
+G=M-U(L),
+\label{eq:gap}
+\end{equation}
+và đại lượng liên quan đến tín chỉ thì đếm \emph{số pha khô}. Viết
+$\mathcal{A}(\cdot)$ cho tập các khoảng tối đại $[a,b)$ của một quỹ đạo phát
+lại mà trên đó độ cạn kiệt luôn ở mức từ $d_{\mathrm{dry}}$ trở lên và không
+có khai báo tưới nào, kéo dài ít nhất $72$~giờ --- mức tối thiểu ba ngày của
+Quyết định 4801~\cite{qd4801}:
+\begin{equation}
+\begin{aligned}
+\mathcal{A}\bigl(\{\hat d_t\}\bigr)=\Bigl\{[a,b):\ &\min_{t\in[a,b)}
+\hat d_t\ge d_{\mathrm{dry}},\\
+&u_t=0\ \forall t\in[a,b),\\
+&b-a\ge 72\,\mathrm{h}\Bigr\}.
+\end{aligned}
+\label{eq:awd}
+\end{equation}
+Số pha được cấp tín chỉ khi đó là
+\begin{equation}
+n_{\mathrm{dry}}(L)=\bigl|\mathcal{A}\bigl(\mathcal{R}(L)\bigr)\bigr|,
+\label{eq:ndry}
+\end{equation}
+với $d_{\mathrm{dry}}=0{,}45$ trong toàn bộ bài. Doanh thu tỉ lệ với
+$n_{\mathrm{dry}}$ chứ không tỉ lệ với $U(L)$ --- chính sự phân biệt này làm
+cho tấn công ở Mục~\ref{sec:timeshift} sinh lợi, và nó vô hình trong một
+cách phát biểu coi tổng lượng nước là mục tiêu.
+
+\section{Các bộ lọc dựa trên vật lý và đúng điểm mù của chúng}
+\label{sec:filters}
+
+Phát lại $L$ dưới dữ liệu ERA5 công khai cho ra $(\hat w_t,\hat d_t)$ (công
+trình đồng hành~\cite{twingate2026} trình bày đầy đủ cân bằng này); có ba bộ
+lọc được áp dụng. \emph{$V_1$, bão hoà}: một khai báo phát ra khi tầng rễ đã
+ở sức chứa ẩm đồng ruộng thì không thể được lưu trữ:
+\begin{equation}
+V_1(L)=\{\,i:\ u_i>0\ \wedge\ \hat w_{t_i}^{-}\ \ge\ FC-\varepsilon\,\}.
+\label{eq:v1}
+\end{equation}
+
+\emph{$V_4$, vượt sức chứa}: một khai báo lớn hơn phần thiếu hụt sẵn có tại
+giờ đó hẳn đã chảy tràn hoặc thấm mất, nên nó không ``được áp dụng'' theo
+nghĩa mà quy chuẩn đòi hỏi:
+\begin{equation}
+V_4(L)=\{\,i:\ u_i\ >\ \underbrace{(FC-\hat w_{t_i}^{-})}_{\text{phần thiếu hụt}}
+\ +\ \varepsilon\,\}.
+\label{eq:v4}
+\end{equation}
+
+\emph{$V_5$, giới hạn thấm.} Không phụ thuộc trạng thái, một lần tưới kéo dài
+$\tau_i$ không thể cấp nhiều hơn lượng đất tiếp nhận được:
+\begin{equation}
+u_i\ \le\ k_{\mathrm{inf}}\,\tau_i+p_{\max},
+\label{eq:v5}
+\end{equation}
+với $k_{\mathrm{inf}}=10$~mm/h và $p_{\max}=100$~mm, lấy ở đầu rộng của dải
+giá trị đã công bố cho ruộng lúa làm dầm (giới hạn $110$~mm tại
+$\tau_i=1$~giờ), để một nông dân ghi hai lần tưới liền kề trong cùng một giờ
+không bị kết tội.
+
+Bộ lọc thứ tư, về độ cạn kiệt xuống dưới điểm héo, đã có trong phiên bản công
+bố của lớp này. Nó không thể kích hoạt: xem Mục~\ref{sec:v2reach}.
+
+\begin{proposition}[Điểm mù chính xác của các phòng thủ tổng hợp]
+\label{prop:blind}
+Giả sử $L$ và $L'$ có cùng đa tập hợp các độ sâu và cùng tổng lượng, tức
+$\{u_i\}=\{u'_j\}$ theo nghĩa đa tập hợp. Khi đó
+\begin{equation}
+G(L)=G(L')\qquad\text{và}\qquad |V_5(L)|=|V_5(L')|.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Xem Phụ lục~S11; cả hai đại lượng đều là hàm đối xứng của đa tập hợp độ sâu
+và không bao giờ phụ thuộc $t_i$.
+\end{proof}
+
+Mệnh đề~\ref{prop:blind} gói trọn toàn bộ khó khăn trong một dòng: hai phòng
+thủ không phụ thuộc việc mô hình có đúng hay không --- đồng hồ đo bơm và giới
+hạn thấm --- đều bất biến \emph{chính xác} dưới phép biến đổi mà đối thủ cần.
+Còn lại $V_1$ và $V_4$, vốn phụ thuộc thứ tự qua $\hat w_{t_i}^{-}$; hoá ra
+chúng không giúp được gì.
+
+\section{Tấn công dịch thời điểm}
+\label{sec:timeshift}
+
+\begin{proposition}[Lợi ích tín chỉ và sự lọt lưới là cùng một hành động]
+\label{prop:coincide}
+Giả sử một khai báo tại giờ $t$ có phần thiếu hụt sẵn có
+$c_t=FC-\hat w_t^{-}$. Giữa hai khai báo liên tiếp, thùng chứa mất đi
+$\Delta_t=\sum_{s}(\mathit{ETc}_s+\mathit{DP}_s-P_s^{+})\ge 0$, nên việc hoãn
+một khai báo thêm $\delta$ giờ làm tăng phần thiếu hụt của nó đúng bằng lượng
+nước đã thoát đi trong các giờ đó:
+\begin{equation}
+c_{t+\delta}\ \ge\ c_t+\min\!\bigl(\delta\cdot\overline{\Delta},\ FC-\hat w_t^{-}\bigr).
+\label{eq:delay}
+\end{equation}
+Do đó phép biến đổi dời các khai báo \emph{ra khỏi} một khoảng khô và đặt lên
+biên của khoảng đó đồng thời (i)~làm tăng $n_{\mathrm{dry}}$, vì khoảng đó
+không còn bị ngắt quãng, và (ii)~làm tăng $c_t$ tại mỗi khai báo bị dời, điều
+mà theo \eqref{eq:v4} khiến $V_4$ \emph{ít} có khả năng kích hoạt hơn. Đối
+thủ không phải đánh đổi điều gì: gradient của lợi nhuận và gradient của sự
+không thể phát hiện cùng chỉ một hướng.
+\end{proposition}
+
+\begin{proof}
+Xem Phụ lục~S11. Nói ngắn gọn: (i) đúng theo định nghĩa, vì $\mathcal{A}$ đòi
+hỏi không có khai báo nào bên trong khoảng; (ii) suy ra được vì hoãn một khai
+báo để thùng chứa tiếp tục thoát nước thêm $\delta$ giờ mà không có dòng vào,
+nên phần thiếu hụt sẵn có chỉ có thể tăng trong khi $u_i$ không đổi.
+\end{proof}
+
+Đó là lý do tấn công này không thể bị bịt bằng thuỷ văn tốt hơn: bất kỳ bộ
+phát hiện nào có phán quyết là hàm của quỹ đạo phát lại đều phải tích phân
+đúng lượng nước thoát đã làm cho khai báo bị hoãn trông có vẻ hợp pháp. Bản
+thực nghiệm của tấn công là một thuật toán leo đồi trên các độ lệch giờ
+nguyên trong $[-36,36]$, chỉ chấp nhận một bước dời nếu tổng lượng được bảo
+toàn từng bit, mọi độ sâu vẫn ở dưới \eqref{eq:v5}, và $n_{\mathrm{dry}}$
+tăng nghiêm ngặt. Tấn công không ăn cắp nước --- thứ bị ăn cắp là
+\emph{lịch sử} (Phụ lục~S19).
