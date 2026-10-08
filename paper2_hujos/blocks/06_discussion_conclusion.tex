@@ -1,157 +1,72 @@
+% BAN 14 TRANG (2026-10-08): 13.1 day du -> Supplementary S8; 13.3 -> S9.1;
+% 13.4 day du -> S9.2 (main giu tom tat + bang benchmark); 13.2 giu nguyen.
+% Ban day du 24 trang: _backups/20261008_105718/.
 \section{Discussion}
 \label{sec:discussion}
 
-\subsection{Relation to prior monitoring work}
+\subsection{Relation to prior work}
 
-AWD monitoring has been approached from three directions. \emph{Instrumented}: a
-low-cost wireless water-level sensor for lowland rice under
-AWD~\cite{delacruz2022}, which solves the measurement problem but multiplies
-device cost per plot. \emph{Remote sensing}: identification of AWD adoption in
-the Vietnamese Mekong Delta~\cite{lovell2019}, water-status monitoring with
-ALOS-2 scattering-power decomposition~\cite{islam2026alose}, and region-scale
-machine-learning mapping of water-saving practices~\cite{mlrice2025}; these cover
-large areas cheaply but revisit every two to four days and cannot resolve the
-$72$\,h dry phase that determines credit eligibility. \emph{Programme level}: the
-one-million-hectare high-quality low-emission rice programme~\cite{qd1490}, which
-had brought over $350\,000$ hectares under cultivation by 2026~\cite{mae2026progress},
-and MRV identified as the missing link for low-emission rice in Southeast
-Asia~\cite{irri2026mrv}.
-
-On the agronomic side, meta-analysis quantifies the water and yield effects of
-AWD~\cite{carrijo2017}, while adoption economics~\cite{lampayan2015} and the
-technical and institutional barriers to scaling~\cite{enriquez2021} explain why
-instrumented monitoring has not spread. None of these lines evaluates the
-\emph{reliability of the action record itself}, which is the question asked here.
-
-The gateway supplying the device-anchored timestamp is the controller of the
-companion work~\cite{twingate2026}, whose command dispatch runs over a
-burst-noise channel of the Gilbert--Elliott type~\cite{gilbert1960,elliott1963}.
-Our own prior scheduling results for safety-critical agricultural IoT networks
-address the same transmission regime~\cite{rabs,cawvou}, but neither establishes
-an evidence record, which is the function relied on here. Because that controller
-already signs every command it issues, the anchor adds storage and transmission
-of a record that exists regardless --- which is what keeps the marginal cost of
-attestation near zero.
-
-\subsection{What survives of the original claim}
-
-The premise that motivated this work was attractive: an irrigation command is
-already a digital event, so MRV evidence should be nearly free. That premise
-survives, but not in the form we first published. It survives because the
-controller that issues the command can also sign it, and the signed record is
-what makes the evidence admissible --- not because a hydrological model can
-detect a lie. Where the original draft claimed that physics attests the log, the
-correct statement is that physics \emph{constrains} the log: it rules out depths
-no soil can hold and states no field can reach, which is worth having, and it is
-silent about the one transformation that pays.
-
-\subsection{Why publishing the threshold is not the problem}
-
-One might conclude that $\varepsilon$ should be kept secret. It should not, for
-two reasons. A verifier must be able to reproduce a decision, which requires
-published parameters. And secrecy would not help: by Proposition~\ref{prop:blind}
-the time-shifting attack preserves the total volume and every individual depth,
-so it does not need to know $\varepsilon$ in order to stay beneath the
-infiltration bound --- it needs only to avoid moving water, which is visible to
-any farmer. The vulnerability is structural, not a consequence of disclosure.
-
-\subsection{Relation to remote sensing}
-
-Satellite radar is the obvious low-cost alternative, so rather than argue about it
-we measured it. Table~\ref{tab:benchmark} scores every route by one quantity: how
-many of the $150$ credit-eligible dry phases actually present across the $60$
-simulated fields it could confirm. A phase counts as confirmable only if at least
-one observation falls inside it, because a $72$\,h phase lying wholly between two
-passes cannot be evidenced at all --- which costs the farmer a credit even when
-the practice was performed correctly. Single-satellite Sentinel-1, revisiting every
-twelve days~\cite{clauss2017s1}, confirms $90/150$ ($60\%$); the full A+B
-constellation at six days~\cite{hashemi2022s1} reaches $124/150$ ($83\%$), and
-still misses one phase in six at zero device cost. A continuous water-level tube
-confirms all $150$, at one device per plot~\cite{delacruz2022}. The signed command
-record also confirms all $150$ --- because the phases are defined by the intervals
-between actuations, which the controller already timestamps --- at no additional
-device, since the controller is the one that opened the pump.
-Two cautions belong with that comparison. The confirmation column measures the
-ability to \emph{earn} a credit, not to detect fraud: the tube and the command
-record tie at $100\%$ here and differ entirely in cost and in what they can prove
-about a doctored log. And photograph-plus-self-report scores $0\%$ not because it
-is worthless but because it produces no observation series to reconcile against;
-every confirmation under it must come from a field visit.
-Radar therefore keeps the role VM0051 Appendix 4 assigns it: a per-plot cross-check
-that lowers the frequency of field verification~\cite{vm0051}.
+AWD monitoring has been approached from three directions --- instrumented
+water-level sensors~\cite{delacruz2022}, remote
+sensing~\cite{lovell2019,islam2026alose,mlrice2025}, and programme-level
+MRV~\cite{qd1490,mae2026progress,irri2026mrv} --- while agronomic
+meta-analysis~\cite{carrijo2017} and adoption
+studies~\cite{lampayan2015,enriquez2021} explain why instrumented monitoring
+has not spread. None evaluates the \emph{reliability of the action record
+itself}, which is the question asked here (full survey in Supplementary~S8). Satellite radar, the obvious low-cost alternative, we
+measured rather than argued about: Table~\ref{tab:benchmark} scores every
+route by how many of the $150$ credit-eligible dry phases it could confirm, a
+phase counting only if at least one observation falls inside
+it~\cite{clauss2017s1,hashemi2022s1,delacruz2022}. Two cautions: the column
+measures the ability to \emph{earn} a credit, not to detect fraud --- tube and
+command record tie at $100\%$ but differ in cost and in what they prove ---
+and photograph-plus-self-report scores $0\%$ because it produces no
+observation series to reconcile against. Radar therefore keeps the
+role VM0051 Appendix 4 assigns it: a per-plot cross-check lowering the
+frequency of field verification~\cite{vm0051} (Supplementary~S9.2).
 
 \subsection{Limitations}
 
-\begin{enumerate}
-\item \emph{Simulated farmers.} Forgeries are injected into simulated reference
-trajectories. A field pilot is needed to measure behavioural response, in
-particular whether farmers shift their \emph{actual} pumping once the anchor is
-known to exist --- an attack our model cannot represent, since it changes $M$
-rather than $L$.
-\item \emph{The anchor assumes an honest gateway.}
-Proposition~\ref{prop:complete} is completeness against log forgery, not against
-a compromised controller. Device integrity, key custody and replay protection
-are assumed from the companion work and are not re-established here.
-\item \emph{Not applicable to manual irrigation.} Where a sluice is opened by
-hand there is no command record, so the anchor is unavailable. This excludes a
-substantial share of delta farms and bounds the addressable population of the
-scheme.
-\item \emph{The attack is demonstrated in the water-scarce year only.} In the
-water-surplus year (2025) farmers need so little irrigation that most simulated
-logs fall below the three-command minimum at which a timing attack is even
-constructible: of $37$ genuinely altered logs under the full $\Theta$, all $37$
-come from 2024. The escarpment between the two years is itself a finding --- MRV
-fraud risk is concentrated where water is scarce --- but it also means the
-attack results are not yet evidence about a wet season. Under the reduced
-$\Theta$ twelve altered logs do come from 2025, and they behave the same way,
-which is suggestive rather than conclusive.
-\item \emph{$\Theta$ is a judgement.} Five textures, two $K_c$ regimes, three
-efficiencies and five initial states bracket the delta but do not exhaust it. A
-field outside $\Theta$ loses the guarantee of Proposition~\ref{prop:noalarm},
-which is exactly the situation the proportional threshold and the query verdict
-exist to absorb.
-\item \emph{Device prices are planning estimates, not quotations.} The tier
-ordering and the break-even inequality are unaffected; the absolute margin is.
-\item \emph{No emission quantification.} The layer produces activity data.
-Coupling it to a methane model and locally calibrated emission factors is
-separate work, as is the cost table's assumption that credits scale with
-$n_{\mathrm{dry}}$.
-\end{enumerate}
+Seven limitations bound the claims, all stated in full in Supplementary~S21;
+the two that condition the headline results are these. \emph{Simulated
+farmers}: forgeries are injected into simulated trajectories, so a field pilot
+is still needed to measure behavioural response --- above all whether farmers
+shift their \emph{actual} pumping once the anchor is known, an attack that
+changes $M$ rather than $L$ and that our model cannot represent. \emph{The
+attack is demonstrated in the water-scarce year only}: in 2025 most logs fall
+below the three-command minimum at which a timing attack is constructible ---
+of $37$ genuinely altered logs under the full $\Theta$, all $37$ come from
+2024. That escarpment is itself a finding (MRV fraud risk is concentrated
+where water is scarce), but the attack results are not yet evidence about a
+wet season; under the reduced $\Theta$ twelve altered logs do come from 2025
+and behave the same way --- suggestive rather than conclusive. The remaining
+five are enumerated in S21.
 
 \section{Conclusion}
 
 We set out to make rice MRV nearly free by auditing a farmer-written irrigation
-log against soil-water physics, and the first version of that layer reported no
-false accusation and complete detection. Both numbers were artefacts of a field
-generated by the auditing model itself. Rebuilding the field along seven axes of
-realism, and replacing fixed forgery recipes with an adversary that optimises the
-credited quantity, changes the conclusion.
+log against soil-water physics. The first version of that layer reported no
+false accusation and complete detection; both numbers were artefacts of a field
+generated by the auditing model itself, and rebuilding it against an adversary
+that optimises the credited quantity changes the conclusion.
 
-The point-model detector falsely accuses $26.7\%$ of honest farmers, because an
-absolute pump-gap threshold cannot distinguish a forgotten entry from a secret
-irrigation. A proportional threshold and an intersection over a $150$-element
-uncertainty set reduce that to $5.0\%$ and $0/60$ respectively, at a measured
-cost in detection of omission fraud, from $9/9$ to $4/9$ on the logs that were
-actually altered. Meanwhile a volume-preserving, depth-bounded permutation of
-claimed times inflates creditable dry phases by $33\%$ to $38\%$ in paired
-comparison while escaping the robust physical tier in $8$ of $9$ and $3$ of $3$
-altered logs --- and the point model that catches more of it is the same model
-that accuses $26.7\%$ of honest farmers, so no physical configuration escapes
-the trade-off. We prove this is unavoidable for any detector whose verdict
-is a function of the replayed trajectory: delaying a claim both lengthens the dry
-phase and increases the deficit available to it, so profit and undetectability
-share a gradient.
+The point-model detector falsely accuses $26.7\%$ of honest farmers; a
+proportional threshold and an intersection over a $150$-element uncertainty
+set reduce that to $5.0\%$ and $0/60$ at a measured cost in detection ($9/9$
+to $4/9$ on omission fraud). Meanwhile a volume-preserving permutation of
+claimed times inflates creditable dry phases by $33\%$ to $38\%$ while
+escaping the robust tier in $8$ of $9$ and $3$ of $3$ altered logs, and no
+physical configuration escapes that trade-off: delaying a claim both lengthens
+the dry phase and increases the deficit available to it, so profit and
+undetectability share a gradient.
 
 The repair is not hydrological. Matching the claimed log against the gateway's
 signed, time-stamped command record catches $116/116$ genuinely forged logs and
-accuses none of $60$ honest ones, and it costs nothing beyond a controller the
-companion work already deploys. The honest formulation of the result is
-therefore narrower and more useful than the one we started with: near-zero-cost
-MRV for low-emission rice is achievable, but only where a device stands between
-the farmer and the pump. Three previously published numbers are corrected
-accordingly --- the admissible depth is the range $[49.0,86.0]$\,mm rather than a
-single $61$\,mm; the third physical filter cannot activate on dry-season delta
-rice, clipped depletion peaking at $0.9987$ over $150$ configurations; and a
-subthreshold-based absolute gap test is inadmissible. Code, both uncertainty
-sets, all $281$ audited logs and $46$ unit tests, one per design hole, are
-public.
+accuses none of $60$ honest ones, at no cost beyond a controller the companion
+work already deploys. What survives of the original premise: physics
+\emph{constrains} a log, but only a signed device record \emph{attests} it
+--- near-zero-cost MRV is achievable only where a device stands between the
+farmer and the pump. Three previously published numbers are corrected
+accordingly ($[49.0,86.0]$\,mm rather than $61$\,mm; an inert third filter;
+an inadmissible absolute gap test). Code, both uncertainty sets, all $281$
+audited logs and $46$ unit tests are public.

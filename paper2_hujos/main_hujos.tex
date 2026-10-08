@@ -67,68 +67,17 @@
 \endgroup
 
 % ---------------------------------------------------------------- than bai
+% BAN 14 TRANG: tab_threat/tab_umax/tab_f2reach/tab_baseline/tab_setup va 2 muc
+% subsidence/cost da chuyen NGUYEN VAN sang supplementary.tex (S1-S5).
 \input{blocks/01_intro}
 \input{blocks/07_system_model}
 \input{blocks/02_threat_attack}
 
-\begin{table}[!t]
-\centering
-\caption{The three forgeable quantities of Eq.~\eqref{eq:three}
-and which fraud class alters each. ``true'' means the quantity is preserved, so
-the corresponding defence is blind by Prop.~\ref{prop:blind}.}
-\label{tab:threat}
-\footnotesize
-\input{tables/tab_threat}
-\end{table}
-
-
 \input{blocks/03_guarantee}
 
-\begin{table}[!t]
-\centering
-\caption{The admissible depth bound Eq.~\eqref{eq:umax} across
-the FAO-56 Table 2 range. The previously published single value $61$\,mm is one
-row of this table.}
-\label{tab:umax}
-\footnotesize
-\input{tables/tab_umax}
-\end{table}
-
-\begin{table}[!t]
-\centering
-\caption{Reachability of the wilting-point filter over $150$
-configurations with an empty log, i.e.\ the driest forcing available.}
-\label{tab:f2reach}
-\footnotesize
-\input{tables/tab_f2_unreachable}
-\end{table}
-
-
 \input{blocks/04_anchor}
-\input{blocks/08_subsidence}
-\input{blocks/09_cost}
-
-\begin{table}[!t]
-\centering
-\caption{MRV cost per hectare per season for the four
-architectures. Monitoring dominates MRV cost, so the architecture that avoids
-dedicated sensing wins on labour rather than hardware.}
-\label{tab:baseline}
-\footnotesize
-\input{tables/tab_baseline}
-\end{table}
-
 
 \input{blocks/05_design_results}
-
-\begin{table}[!t]
-\centering
-\caption{Experimental configuration. Every value is
-reproducible from the released code and the public ERA5 forcing.}
-\label{tab:setup}
-\footnotesize
-\input{tables/tab_setup}
-\end{table}
 
 \begin{table}[!t]
 \centering
@@ -142,9 +91,9 @@ expose the absolute gap threshold.}
 
 \begin{table}[!t]
 \centering
-\caption{Creditable dry phases of at least $72$\,h, the
-quantity VM0051 and Decision 4801 pay for, against the honest field baseline.
-The last column counts attacks that actually altered the log.}
+\caption{Creditable dry phases of at least $72$\,h --- the quantity VM0051
+and Decision 4801 pay for --- against the honest field baseline (paired). The
+last column counts attacks that actually altered the log.}
 \label{tab:credit}
 \footnotesize
 \input{tables/tab_credit}
@@ -152,10 +101,10 @@ The last column counts attacks that actually altered the log.}
 
 \begin{table}[!t]
 \centering
-\caption{Main result. Every rate is computed over the logs an
-attack \emph{actually altered}; the second column reports altered over generated,
-because the adversary returns the original log when it finds no improving move.
-Escape rate is the fraction neither physical tier flags.}
+\caption{Main result. Rates are computed over the logs an attack
+\emph{actually altered}; column 2 reports altered over generated, since the
+adversary returns the original log when it finds no improving move. Escape rate
+is the fraction neither physical tier flags.}
 \label{tab:defence}
 \footnotesize
 \input{tables/tab_defence}
@@ -168,7 +117,7 @@ Escape rate is the fraction neither physical tier flags.}
 % KHONG sua tay; moi con so truy nguon ve CSV.
 \begin{table}[!t]
 \centering
-\caption{Confirmable credit-eligible dry phases under each MRV route, over the $150$ phases actually present in the $60$ simulated fields. A phase is confirmable only if at least one observation falls inside it. The final two rows tie on this measure and differ in cost and in what they can prove about a doctored log.}
+\caption{Confirmable credit-eligible dry phases under each MRV route, over the $150$ phases present in the $60$ simulated fields; a phase counts only if at least one observation falls inside it. The final two rows tie here and differ in cost and in what they prove about a doctored log.}
 \label{tab:benchmark}
 \footnotesize
 \input{tables/tab_benchmark}
@@ -181,13 +130,11 @@ Escape rate is the fraction neither physical tier flags.}
 % ---------------------------------------------------------------- khai bao
 \section*{Data, Code and Declarations}
 
-Code, the two uncertainty sets, both adversary implementations, and all $281$
-audited logs are available at \url{https://github.com/mxuanvan02/TwinGate} under
-the MIT licence. Weather forcing is public ERA5 reanalysis served by the
-Open-Meteo archive. This research is funded by Hue University under Grant No.
-DHH2025-19-07. The authors declare no competing interests. Ethics approval is
-not applicable: the study uses public reanalysis data and simulation
-experiments, with no human participants, animals or field interventions.
+Code, both uncertainty sets, both adversaries and all $281$ audited logs are at
+\url{https://github.com/mxuanvan02/TwinGate} (MIT licence); weather forcing is
+public ERA5 reanalysis via Open-Meteo. Funded by Hue University, Grant
+No.~DHH2025-19-07. No competing interests. Ethics approval is not applicable
+(simulation and public data only).
 
 % ---------------------------------------------------------------- tieng Viet
 % Khoi tieng Viet bat buoc (muc 3), dat o cuoi bai vi bai viet bang tieng Anh.

@@ -16,19 +16,18 @@ ET_{c,t}=K_{s,t}\,K_c\,ET_{0,t},
 K_{s,t}=\frac{FC-w_t}{(1-p)\,\mathrm{TAW}},
 \label{eq:etc}
 \end{equation}
-where $ET_{0,t}$ is the hourly reference evapotranspiration from the
-Penman-Monteith equation, $P_t$ is rainfall, $RO_t$ is surface runoff from the
-SCS curve-number method evaluated at daily resolution and shared pro rata over
-the hours of a rain event, and $u_t$ is the irrigation depth applied in hour
-$t$. Drainage above field capacity $FC$ is removed by the clipping operator, so
-mass conservation holds exactly and is checked as an invariant. The root-zone
-depletion fraction is
+where $ET_{0,t}$ is hourly reference evapotranspiration (Penman-Monteith),
+$P_t$ rainfall, $RO_t$ surface runoff (SCS curve-number, evaluated daily and
+shared pro rata over the hours of a rain event), and $u_t$ the irrigation depth
+applied in hour $t$. Drainage above field capacity $FC$ is removed by the
+clipping operator, so mass conservation holds exactly and is checked as an
+invariant. The root-zone depletion fraction is
 \begin{equation}
 d_t=\frac{FC-w_t}{FC-WP},\qquad \mathrm{span}=FC-WP,
 \label{eq:depl}
 \end{equation}
-with wilting point $WP$. For the reference silty clay loam of the delta,
-$\mathrm{TAW}=70$\,mm, $FC=160$\,mm, $WP=90$\,mm, so $\mathrm{span}=70$\,mm.
+with wilting point $WP$; for the reference silty clay loam of the delta,
+$\mathrm{TAW}=FC-WP=70$\,mm, $FC=160$\,mm, $WP=90$\,mm.
 
 \subsection{Replay of a claimed log}
 \label{sec:replay}
@@ -45,16 +44,16 @@ with $\hat w_0=w_{\mathrm{init}}$ and
 u_t=\sum_{(t_i,u_i)\in L}u_i\,\mathbb{1}[t_i=t],
 \label{eq:uterm}
 \end{equation}
-so that $\hat w_t$ is the root-zone water content the log \emph{claims} the field
-had, and $\hat d_t$ its depletion fraction under \eqref{eq:depl}. The hat marks
-quantities reconstructed from the log rather than measured. Replay is
-deterministic and uses only public reanalysis, so two auditors replaying the same
-log obtain the same trajectory and the verdict is reproducible. A superscript
-minus denotes the state immediately \emph{before} the claim of that hour is
-applied, as in $\hat w_{t}^{-}$, which is what a filter must inspect: the water
-available to receive an event.
+so that $\hat w_t$ is the root-zone water content the log \emph{claims} the
+field had, and $\hat d_t$ its depletion fraction under \eqref{eq:depl}; the
+hat marks quantities reconstructed from the log rather than measured. Replay is
+deterministic and uses only public reanalysis, so two auditors replaying the
+same log obtain the same trajectory and the verdict is reproducible. A
+superscript minus denotes the state immediately \emph{before} that hour's
+claim is applied, as in $\hat w_{t}^{-}$: the water available to receive an
+event, which is what a filter must inspect.
 
-The operator is also what makes the scheme cheap. No sensor is queried; the only
-inputs are the log, the public weather series and a soil profile. Its weakness,
-developed in Sec.~\ref{sec:timeshift}, is that it can only check whether a
-trajectory is \emph{possible}, never whether it \emph{happened}.
+The operator is also what makes the scheme cheap: no sensor is queried, and the
+only inputs are the log, the public weather series and a soil profile. Its
+weakness, developed in Sec.~\ref{sec:timeshift}, is that it can only check
+whether a trajectory is \emph{possible}, never whether it \emph{happened}.

@@ -37,12 +37,20 @@ results = []
 
 
 def span_replace(path: Path, start_anchor: str, end_anchor: str, new: str, label: str,
-                 done_marker: str) -> None:
+                 done_marker: str, stale: tuple = ()) -> None:
     """Thay doan [start_anchor .. het end_anchor] bang `new`, bang toa do literal.
 
     start_anchor : chuoi ngan chac chan nam o DAU doan can thay
     end_anchor   : chuoi ngan nam o CUOI doan can thay (duoc giu lai neu muon)
     done_marker  : chuoi dac trung cua ban MOI, de biet da sua chua (idempotent)
+    stale        : cac chuoi SO CU ma gate phai bao dam KHONG con trong file
+
+    BAI HOC (2026-10-08): script nay la migration MOT LAN. Khi bai duoc viet lai
+    (rut 24 -> 14 trang), ca start_anchor lan done_marker deu mat khop => gate bao
+    FAIL du so cu da sach. Gate dung phai hoi "SO CU CO CON TRONG FILE KHONG",
+    khong phai "chuoi cua lan sua truoc co con khop khong". Vi vay: neu khong tim
+    thay start_anchor MA moi token trong `stale` deu vang mat => SKIP (da sach),
+    neu bat ky token nao con => FAIL that su.
     """
     s = path.read_text(encoding="utf-8")
     if done_marker in s:
@@ -50,8 +58,15 @@ def span_replace(path: Path, start_anchor: str, end_anchor: str, new: str, label
         return
     i = s.find(start_anchor)
     if i < 0:
+        con = [t for t in stale if t in s]
+        if stale and not con:
+            results.append(("SKIP (viet lai, so cu da sach)", label))
+            print(f"  ~ {label}: anchor cu khong con (bai da viet lai), "
+                  f"kiem {len(stale)} token so cu: 0 con sot")
+            return
         results.append(("FAIL (khong thay anchor dau)", label))
-        print(f"  !! {label}: khong tim thay {start_anchor[:60]!r}")
+        print(f"  !! {label}: khong tim thay {start_anchor[:60]!r}"
+              + (f"; so cu con sot: {con}" if con else ""))
         return
     j = s.find(end_anchor, i)
     if j < 0:
@@ -86,7 +101,8 @@ span_replace(P1,
              end_anchor="of cases.",
              new=NEW1,
              label="01_intro: 69/78/91 -> paired +33/+38, v1 4/9 vs v2 8/9",
-             done_marker="paired inflation of $+33")
+             done_marker="paired inflation of $+33",
+             stale=("$69", "$78", "$91"))
 
 # ---------------------------------------------------------------- 2) 01_intro.tex:75
 NEW2 = ("and we measure the" + NL +
@@ -98,7 +114,8 @@ span_replace(P1,
              end_anchor="ref{tab:credit}).",
              new=NEW2,
              label="01_intro contributions: 69-78% -> +33 to +38% paired",
-             done_marker="credit inflation at $+33$ to $+38")
+             done_marker="credit inflation at $+33$ to $+38",
+             stale=("$69", "$78"))
 
 # ---------------------------------------------------------------- 3) 04_anchor.tex:85
 # CHI sua con so. GIU claim "escaping every physics-based and volume-based test"
@@ -112,7 +129,8 @@ span_replace(P3,
              end_anchor="volume-based test.",
              new=NEW3,
              label="04_anchor: 69% -> +35% paired (giu claim 'escaping every test')",
-             done_marker="inflating credits by $+35")
+             done_marker="inflating credits by $+35",
+             stale=("by $69",))
 
 # ---------------------------------------------------------------- 4) 00_title_abstract.tex: FILE CHET
 P4 = B / "00_title_abstract.tex"

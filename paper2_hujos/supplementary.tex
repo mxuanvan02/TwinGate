@@ -1,0 +1,453 @@
+% !TeX program = xelatex
+% =====================================================================
+% SUPPLEMENTARY MATERIAL — Device-Anchored Irrigation Logs (HUJOS-TT)
+% =====================================================================
+% Ly do ton tai: bai chinh duoc rut ve ~14 trang theo muc bai da dang cua
+% HUJOS-TT. KHONG noi dung nao bi xoa: moi muc o day la NGUYEN VAN phan da
+% tach khoi bai chinh, danh so S1..S9 de bai chinh trich dan cheo.
+% Ban day du 24 trang (truoc khi tach) luu o _backups/20261008_105718/.
+% =====================================================================
+
+\input{preamble}
+
+\begin{document}
+
+\begingroup
+  \hujostitle{Supplementary Material\\
+  Device-Anchored Irrigation Logs: An Adversarial Evaluation of
+  Near-Zero-Cost MRV for Low-Emission Rice}
+
+  \vspace{8pt}
+  \hujosauthors{Xuan Van Mai$^{1}$, Tuong Tri Nguyen$^{2,3,*}$}
+
+  \vspace{4pt}
+  \hujosaffil{$^{*}$ Corresponding author: Tuong Tri Nguyen. E-mail: ntuongtri@hueuni.edu.vn}
+\endgroup
+
+\vspace{10pt}
+
+% STUB LABEL: blocks/08 va 09 (dung chung voi bai chinh) tham chieu toi eq/de
+% chi ton tai trong main_hujos.tex. Danh so lay tu main_hujos.aux cua ban
+% da build: eq:depl=(3), eq:three=(7), prop:blind=1, sec:filters=4, sec:anchor=8.
+% Neu bai chinh doi danh so, phai doi o day theo.
+\makeatletter
+% \newlabel chi dung duoc khi LaTeX doc .aux; trong than van dung \@namedef
+% de dinh nghia truc tiep noi bo \r@<label> ma \ref doc.
+\@namedef{r@eq:depl}{{3}{S1}}
+\@namedef{r@eq:three}{{7}{S1}}
+\@namedef{r@prop:blind}{{1}{S1}}
+\@namedef{r@sec:filters}{{4}{S1}}
+\@namedef{r@sec:anchor}{{8}{S1}}
+\@namedef{r@prop:complete}{{4}{S1}}
+\@namedef{r@eq:v4}{{12}{S1}}
+\@namedef{r@eq:v5}{{13}{S1}}
+\makeatother
+
+% ---------------------------------------------------------------- S1
+\section*{S1. Fraud classes and what each defence observes}
+
+\begin{table}[!h]
+\centering
+\caption{The three forgeable quantities of Eq.~(7) in the main text
+and which fraud class alters each. ``true'' means the quantity is preserved, so
+the corresponding defence is blind by Prop.~1 in the main text.}
+\footnotesize
+\input{tables/tab_threat}
+\end{table}
+
+% ---------------------------------------------------------------- S2
+\section*{S2. The admissible depth bound across $\Theta$}
+
+\begin{table}[!h]
+\centering
+\caption{The admissible depth bound $u_{\max}$ (Eq.~(16) in the main text) across
+the FAO-56 Table 2 range. The previously published single value $61$\,mm is one
+row of this table.}
+\footnotesize
+\input{tables/tab_umax}
+\end{table}
+
+% ---------------------------------------------------------------- S3
+\section*{S3. Reachability of the wilting-point filter}
+
+\begin{table}[!h]
+\centering
+\caption{Reachability of the wilting-point filter over $150$
+configurations with an empty log, i.e.\ the driest forcing available.}
+\footnotesize
+\input{tables/tab_f2_unreachable}
+\end{table}
+
+% ---------------------------------------------------------------- S4
+\input{blocks/08_subsidence}
+
+% ---------------------------------------------------------------- S5
+\input{blocks/09_cost}
+
+\begin{table}[!h]
+\centering
+\caption{MRV cost per hectare per season for the four
+architectures. Monitoring dominates MRV cost, so the architecture that avoids
+dedicated sensing wins on labour rather than hardware.}
+\label{tab:baseline}
+\footnotesize
+\input{tables/tab_baseline}
+\end{table}
+
+% ---------------------------------------------------------------- S6
+\section*{S6. Experimental configuration}
+
+\begin{table}[!h]
+\centering
+\caption{Experimental configuration. Every value is
+reproducible from the released code and the public ERA5 forcing.}
+\label{tab:setup}
+\footnotesize
+\input{tables/tab_setup}
+\end{table}
+
+% ---------------------------------------------------------------- S7
+\section*{S7. Two implementation details of the robust intersection}
+
+Two implementation details of $V_{\mathrm{rob}}$ matter, and getting either
+wrong silently breaks Proposition~3 of the main text. A world that produces
+\emph{no} violation must contribute the \emph{empty set} to the intersection;
+skipping non-firing worlds computes $\bigcap$ over firing worlds only, which is
+an existential quantifier wearing the clothes of a universal one. And
+$\mathcal{W}$ must span the full range in which a claim can be legitimate: with
+$\mathcal{W}=\{0,0.25\}$ the largest admissible depth anywhere in $\Theta$ is
+$22.5$\,mm, so every claim above that is ``guilty in all worlds'' and the
+intersection becomes vacuous --- it fires on $102$ of $150$ worlds while $48$
+innocent worlds exist. Extending $\mathcal{W}$ to $\{0,0.25,0.5,0.75,0.9\}$
+restores the intended semantics.
+
+% ---------------------------------------------------------------- S8
+\section*{S8. Relation to prior monitoring work (full text)}
+
+AWD monitoring has been approached from three directions. \emph{Instrumented}: a
+low-cost wireless water-level sensor for lowland rice under
+AWD~\cite{delacruz2022}, which solves the measurement problem but multiplies
+device cost per plot. \emph{Remote sensing}: identification of AWD adoption in
+the Vietnamese Mekong Delta~\cite{lovell2019}, water-status monitoring with
+ALOS-2 scattering-power decomposition~\cite{islam2026alose}, and region-scale
+machine-learning mapping of water-saving practices~\cite{mlrice2025}; these cover
+large areas cheaply but revisit every two to four days and cannot resolve the
+$72$\,h dry phase that determines credit eligibility. \emph{Programme level}: the
+one-million-hectare high-quality low-emission rice programme~\cite{qd1490}, which
+had brought over $350\,000$ hectares under cultivation by 2026~\cite{mae2026progress},
+and MRV identified as the missing link for low-emission rice in Southeast
+Asia~\cite{irri2026mrv}.
+
+On the agronomic side, meta-analysis quantifies the water and yield effects of
+AWD~\cite{carrijo2017}, while adoption economics~\cite{lampayan2015} and the
+technical and institutional barriers to scaling~\cite{enriquez2021} explain why
+instrumented monitoring has not spread. None of these lines evaluates the
+\emph{reliability of the action record itself}, which is the question asked here.
+
+The gateway supplying the device-anchored timestamp is the controller of the
+companion work~\cite{twingate2026}, whose command dispatch runs over a
+burst-noise channel of the Gilbert--Elliott type~\cite{gilbert1960,elliott1963}.
+Our own prior scheduling results for safety-critical agricultural IoT networks
+address the same transmission regime~\cite{rabs,cawvou}, but neither establishes
+an evidence record, which is the function relied on here. Because that controller
+already signs every command it issues, the anchor adds storage and transmission
+of a record that exists regardless --- which is what keeps the marginal cost of
+attestation near zero.
+
+% ---------------------------------------------------------------- S9
+\section*{S9. Extended discussion}
+
+\subsection*{S9.1 Why publishing the threshold is not the problem}
+
+One might conclude that $\varepsilon$ should be kept secret. It should not, for
+two reasons. A verifier must be able to reproduce a decision, which requires
+published parameters. And secrecy would not help: by Proposition~1 of the main
+text the time-shifting attack preserves the total volume and every individual
+depth, so it does not need to know $\varepsilon$ in order to stay beneath the
+infiltration bound --- it needs only to avoid moving water, which is visible to
+any farmer. The vulnerability is structural, not a consequence of disclosure.
+
+\subsection*{S9.2 Relation to remote sensing (full text)}
+
+Satellite radar is the obvious low-cost alternative, so rather than argue about it
+we measured it. Table~5 of the main text scores every route by one quantity: how
+many of the $150$ credit-eligible dry phases actually present across the $60$
+simulated fields it could confirm. A phase counts as confirmable only if at least
+one observation falls inside it, because a $72$\,h phase lying wholly between two
+passes cannot be evidenced at all --- which costs the farmer a credit even when
+the practice was performed correctly. Single-satellite Sentinel-1, revisiting every
+twelve days~\cite{clauss2017s1}, confirms $90/150$ ($60\%$); the full A+B
+constellation at six days~\cite{hashemi2022s1} reaches $124/150$ ($83\%$), and
+still misses one phase in six at zero device cost. A continuous water-level tube
+confirms all $150$, at one device per plot~\cite{delacruz2022}. The signed command
+record also confirms all $150$ --- because the phases are defined by the intervals
+between actuations, which the controller already timestamps --- at no additional
+device, since the controller is the one that opened the pump.
+Two cautions belong with that comparison. The confirmation column measures the
+ability to \emph{earn} a credit, not to detect fraud: the tube and the command
+record tie at $100\%$ here and differ entirely in cost and in what they can prove
+about a doctored log. And photograph-plus-self-report scores $0\%$ not because it
+is worthless but because it produces no observation series to reconcile against;
+every confirmation under it must come from a field visit.
+Radar therefore keeps the role VM0051 Appendix 4 assigns it: a per-plot cross-check
+that lowers the frequency of field verification~\cite{vm0051}.
+
+% ---------------------------------------------------------------- S10
+\section*{S10. Harness defects and design details}
+
+\subsection*{S10.1 Per-event, not per-hour, recording behaviour}
+
+Rounding and delay are applied per \emph{event}, not per hour: applying a
+$5$\,mm rounding to a $40$\,mm event spread over eight hours rounds each
+$5$\,mm fragment to zero and silently deletes the record, an artefact that
+produced empty logs in an early version of this harness.
+
+\subsection*{S10.2 Two harness defects that had to be fixed}
+
+Two harness defects had to be fixed before the reported numbers meant anything,
+and both are recorded in the source because they are easy to reintroduce.
+First, a fraud generator that finds no improving move returns the \emph{original}
+honest log, so an unconditional count of ``attacks caught'' silently includes
+cases where no attack occurred; every adversarial row therefore carries a
+\texttt{changed} flag and all attack statistics are conditioned on it. Second,
+comparisons must use the baseline of the variant itself: the paper-condition
+honest log is generated by a separate call, and scoring it against the
+field-condition record of a different soil realisation falsely ``caught'' $56$
+of $60$ honest logs.
+
+\subsection*{S10.3 Volume is a diagnostic, not a target}
+
+A configuration that maximises claimed volume is not automatically profitable:
+an early adversary that inflated claims by $344$\,mm drove $n_{\mathrm{dry}}$ to
+zero and would have earned nothing, so volume is reported only as a diagnostic.
+
+\subsection*{S10.4 The self-consistency artefact of the first version}
+
+The first version of the audited layer generated ``real'' trajectories with the
+default \texttt{SoilProfile}, noiseless ERA5 forcing, irrigation as a one-hour
+impulse of exactly $\{20,40\}$\,mm, a threshold of exactly $0.80$, and a farmer
+who records the right depth at the right hour every time. Its $0/60$ false
+accusations were therefore measurements of self-consistency. In the present
+design the field is generated by a separate process that differs from the twin
+along the seven axes listed in Table~S6.
+
+% ---------------------------------------------------------------- S11
+\section*{S11. Proofs of Propositions 1 and 2}
+
+\subsection*{Proof of Proposition 1 (exact blindness of aggregate defences)}
+
+$U(L)=\sum_i u_i$ is a symmetric function of the multiset, so it is invariant
+under any reassignment of depths to hours; $M$ is a property of the field, not
+of the log; hence $G=M-U$ is unchanged. Likewise the infiltration bound (Eq.~13
+of the main text) is evaluated per event and depends only on $(u_i,\tau_i)$,
+never on $t_i$ or on $\hat w$, so the count of violations is a function of the
+multiset alone.
+
+\subsection*{Proof of Proposition 2 (credit gain and evasion are the same action)}
+
+(i) is definitional: the set $\mathcal{A}$ requires no claim inside the
+interval, so removing one extends or creates a qualifying phase. For (ii),
+delaying a claim to $t+\delta$ means the bucket continues to lose water for
+$\delta$ further hours with no inflow, so $\hat w_{t+\delta}^{-}\le\hat w_t^{-}$
+and $c_{t+\delta}\ge c_t$; the bound on the deficit growth follows because the
+loss per hour is at least the mean $\overline{\Delta}$ until field capacity is
+reached, after which $c$ saturates at $FC-\hat w$. Since the storage-excess
+filter fires only when $u_i>c_{t_i}+\varepsilon$ and $u_i$ is unchanged, a
+larger $c_{t_i}$ can only reduce the violation set.
+
+% ---------------------------------------------------------------- S12
+\section*{S12. Proof of Proposition 4 (completeness of the anchor)}
+
+The first clause is the definition of the anchor verdict: any disagreement of
+the hour sets or of a depth at a shared hour triggers \text{forge}. For the
+second clause, total volume, individual depths and timestamps are all functions
+of the hour set and the per-hour depths, so agreement on those two fixes all
+three, and no forgery of the three quantities has occurred.
+
+% ---------------------------------------------------------------- S13
+\section*{S13. The wilting-point filter: full derivation}
+
+The published layer included a third physical filter, flagging depletion below
+the wilting point as physically impossible. It was doubly inoperative. Its
+threshold was set at $1.02$ while the reported indicator
+$\hat d_t=\min(1,\max(0,\cdot))$ is clipped to $[0,1]$, so the condition was
+unsatisfiable by construction: $0$ firings in $281$ logs. We repaired it by
+evaluating the unclipped depletion, and then measured whether the repaired filter
+can activate at all. Across three stations, two climate years, five textures and
+five initial states --- $150$ configurations --- with an empty log, i.e.\ the
+driest possible forcing, the unclipped depletion peaks at $0.9987$
+(Table~S3). A dry-season delta rice field does not reach the
+wilting point. The filter is therefore a \emph{safety} device that guarantees no
+absurd state is accepted; it is not evidence of detection, and the layer must be
+described as having two operative physical filters and one inert one.
+
+% ---------------------------------------------------------------- S14
+\section*{S14. The two corrections to the admissible-depth bound}
+
+First, Eq.~(16) of the main text uses $\max$, not a difference: an initially
+dry field ($w_0=0.90$) admits \emph{larger} claims than a wet one, and the
+previously published expression $(d^{*}-w_0)\,\mathrm{span}+\varepsilon$
+yields $43.5$\,mm for $\mathrm{span}=70$\,mm and $w_0=0.25$, which
+corresponds to no physical state at all, since the operative deficit at that
+hour is either $0.25\,\mathrm{span}$ (initially) or $d^{*}\mathrm{span}$
+(once the field has dried). Second, the bound is \emph{per event}, not per
+season: the bucket drains continuously through deep percolation and
+evapotranspiration, so a season-long claim total is not bounded by $u_{\max}$
+and an adversary issuing many sub-threshold claims can inflate the total
+without bound.
+
+% ---------------------------------------------------------------- S15
+\section*{S15. Why the paired baseline is the honest one}
+
+Forged variants are only generated where a trajectory carries enough commands
+to manipulate (three or more), and those trajectories are already drier than
+average: their honest baseline carries $4.87$ creditable dry phases against
+$3.23$ for all honest logs. An unpaired comparison against the broader baseline
+therefore attributes the pre-existing dryness to the attack and overstates the
+inflation roughly twofold. Every figure in Table~4 of the main text is computed
+on the paired subset (same station, year, seed and soil), conditioned on the
+\texttt{changed} flag.
+
+% ---------------------------------------------------------------- S16
+\section*{S16. The nine log types}
+
+Three are the naive forgeries of the prior work: added events on rainy days,
+one third of entries inflated to the whole storage span, and a $96$\,h window
+of claims deleted. Four are adversarial and, unlike the naive ones, are
+constructed by an optimiser rather than a fixed recipe: consolidation onto a
+$24$\,h and a $96$\,h grid; a rational adversary that selects whichever
+consolidation window maximises $n_{\mathrm{dry}}$ subject to preserving the
+total and respecting the infiltration bound; and the time-shifting hill-climb,
+which searches integer offsets in $[-36,36]$ and accepts a move only if the
+total is preserved bit-for-bit, every depth stays below the infiltration bound,
+and $n_{\mathrm{dry}}$ strictly increases. The remaining two honest classes
+(paper-condition and field-condition) are the baselines.
+
+% ---------------------------------------------------------------- S17
+\section*{S17. The cost of robustness, and agreement across uncertainty sets}
+
+\subsection*{S17.1 The measured detection loss}
+
+Replacing the point model by the intersection over $\Theta$ is not free, and
+the loss must be reported. On the nine omission-fraud logs that were actually
+altered, the point model catches $9/9$ while the robust rule catches $4/9$
+($44\%$); under the full $\Theta$ the figures are $4/4$ and $2/4$ ($50\%$).
+The same trade-off runs in the same direction as the proportional threshold,
+and for the same reason: a defence that refuses to accuse on the strength of
+one model configuration also refuses some true positives. Naive forgeries
+remain at $100\%$ under both. We regard this as the correct side of the trade,
+since a false accusation falls on a farmer with no means of appeal while a
+missed forgery falls on a verification body that samples anyway, but it is a
+loss of detection power and not a Pareto improvement.
+
+\subsection*{S17.2 Reduced and full uncertainty sets agree}
+
+Every conclusion holds under both the reduced $\Theta$ ($24$ replays per log,
+$281$ logs, $10$ seeds) and the full $\Theta$ ($150$ replays, $85$ logs,
+$3$ seeds): false accusation $0/60$ and $0/18$, anchor completeness $116/116$
+and $37/37$, robust-tier time-shift escape $8/9$ and $3/3$, paired credit
+inflation $+33\%$ ($t=5.29$) and $+38\%$ ($t=3.46$). The reduced set was used
+for the large runs because it contains the extremes of every axis, which is
+where an innocent world is most likely to exist; the full set confirms that no
+interior configuration changes a verdict.
+
+% ---------------------------------------------------------------- S18
+\section*{S18. Why the anchor does not re-introduce false accusation (full text)}
+
+Proposition~4 of the main text is strong enough to look dangerous: any
+discrepancy is treated as forgery, including the forgetting and rounding that
+the main text showed to be ubiquitous. The resolution is that the anchor does
+not compare a log against a \emph{model}; it compares a transcript against the
+\emph{source}. An honest farmer who forgets an entry is not accused of fraud,
+because the system of record is the gateway, not the farmer's memory: the claim
+is simply completed from $\mathcal{G}$. In operational terms the anchor turns
+the log from \emph{evidence the farmer must get right} into \emph{a view of a
+record the device already holds}. False accusation then requires the gateway to
+disagree with itself, which is a device-integrity question rather than a
+behavioural one, and is why the guarantee holds at $0/60$ while the behavioural
+tiers hold at $26.7\%$ and $5.0\%$.
+
+% ---------------------------------------------------------------- S19
+\section*{S19. What the attack steals}
+
+The attack does not steal water. Total pumped volume is unchanged, so the
+farmer pays the same and the atmosphere sees the same methane. What is stolen
+is \emph{history}: the credit is issued for a dry-phase pattern that did not
+occur. Under VM0051 the crediting unit is precisely that pattern, so the loss
+is real even though no physical resource moved.
+
+% ---------------------------------------------------------------- S20
+\section*{S20. Experimental design: full detail}
+
+\subsection*{S20.1 Removing the circularity, axis by axis}
+
+The field is generated by a separate process that differs from the twin along
+seven axes, each with a published source (Table~S6): soil texture drawn from
+the five FAO-56 Table 2 classes present in the delta; $K_c$ staged per Table 12
+rather than fixed at $1.05$; irrigation efficiency $\eta\in[0.60,0.85]$, so
+the farmer reports water \emph{pumped} while only $\eta u$ reaches the root
+zone; field rainfall drawn as $0.7$--$1.4$ times the grid cell plus Gaussian
+noise; bund seepage $0$--$0.02$\,mm\,h$^{-1}$; recording behaviour with $5\%$
+forgetting, rounding to $5$\,mm, a $35\%$ chance of a one-day delay and
+$15\%$ depth error within $\pm35\%$; and an initial depletion $w_0$ drawn
+from $[0,0.45]$ rather than assumed to be field capacity. Rounding and delay
+are applied per \emph{event}, not per hour (S10.1).
+
+\subsection*{S20.2 What survives of the original claim}
+
+The premise that motivated this work was attractive: an irrigation command is
+already a digital event, so MRV evidence should be nearly free. That premise
+survives, but not in the form we first published. It survives because the
+controller that issues the command can also sign it, and the signed record is
+what makes the evidence admissible --- not because a hydrological model can
+detect a lie. Where the original draft claimed that physics attests the log,
+the correct statement is that physics \emph{constrains} the log: it rules out
+depths no soil can hold and states no field can reach, which is worth having,
+and it is silent about the one transformation that pays. Keeping $\varepsilon$
+secret would not close the hole either: the attack does not need to know the
+threshold, and a verifier must be able to reproduce a decision in any case
+(S9.1).
+
+% ---------------------------------------------------------------- S21
+\section*{S21. Limitations (full text)}
+
+\begin{enumerate}
+\item \emph{Simulated farmers.} Forgeries are injected into simulated reference
+trajectories. A field pilot is needed to measure behavioural response, in
+particular whether farmers shift their \emph{actual} pumping once the anchor is
+known to exist --- an attack our model cannot represent, since it changes $M$
+rather than $L$.
+\item \emph{The anchor assumes an honest gateway.}
+Proposition~4 of the main text is completeness against log forgery, not against
+a compromised controller. Device integrity, key custody and replay protection
+are assumed from the companion work and are not re-established here.
+\item \emph{Not applicable to manual irrigation.} Where a sluice is opened by
+hand there is no command record, so the anchor is unavailable. This excludes a
+substantial share of delta farms and bounds the addressable population of the
+scheme.
+\item \emph{The attack is demonstrated in the water-scarce year only.} In the
+water-surplus year (2025) farmers need so little irrigation that most simulated
+logs fall below the three-command minimum at which a timing attack is even
+constructible: of $37$ genuinely altered logs under the full $\Theta$, all $37$
+come from 2024. The escarpment between the two years is itself a finding --- MRV
+fraud risk is concentrated where water is scarce --- but it also means the
+attack results are not yet evidence about a wet season. Under the reduced
+$\Theta$ twelve altered logs do come from 2025, and they behave the same way,
+which is suggestive rather than conclusive.
+\item \emph{$\Theta$ is a judgement.} Five textures, two $K_c$ regimes, three
+efficiencies and five initial states bracket the delta but do not exhaust it. A
+field outside $\Theta$ loses the guarantee of Proposition~3 of the main text,
+which is exactly the situation the proportional threshold and the query verdict
+exist to absorb.
+\item \emph{Device prices are planning estimates, not quotations.} The tier
+ordering and the break-even inequality are unaffected; the absolute margin is.
+\item \emph{No emission quantification.} The layer produces activity data.
+Coupling it to a methane model and locally calibrated emission factors is
+separate work, as is the cost table's assumption that credits scale with
+$n_{\mathrm{dry}}$.
+\end{enumerate}
+
+\bibliographystyle{vancouver}
+\bibliography{refs}
+
+\end{document}
