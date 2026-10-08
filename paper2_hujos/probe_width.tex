@@ -1,0 +1,31 @@
+\documentclass[10pt]{article}
+\usepackage[paperwidth=20.5cm,paperheight=29.7cm,top=1.5cm,bottom=1.5cm,left=2cm,right=2cm]{geometry}
+\usepackage{fontspec}
+\setmainfont{TeX Gyre Pagella}
+\usepackage{unicode-math}
+\setmathfont{TeX Gyre Pagella Math}
+\usepackage{booktabs}
+\usepackage{array}
+\setlength{\columnsep}{0.75cm}
+\setlength{\tabcolsep}{3pt}
+\newlength{\HUJOScol}
+\setlength{\HUJOScol}{7.875cm}
+\newsavebox{\probebox}
+\newcommand{\probe}[1]{%
+  \sbox{\probebox}{\footnotesize\input{#1}}%
+  \typeout{WIDTH #1 = \the\wd\probebox\space | column = \the\columnwidth}%
+}
+\begin{document}
+\twocolumn
+\typeout{PROBE columnwidth = \the\columnwidth}
+\typeout{PROBE tabcolsep = \the\tabcolsep}
+\probe{tables/tab_threat}
+\probe{tables/tab_defence}
+\probe{tables/tab_credit}
+\probe{tables/tab_umax}
+\probe{tables/tab_f2_unreachable}
+\probe{tables/tab_false_accusation}
+\probe{tables/tab_setup}
+\probe{tables/tab_baseline}
+x
+\end{document}

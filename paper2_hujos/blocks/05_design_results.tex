@@ -82,20 +82,40 @@ under paper conditions the point-model detector accuses nobody, reproducing the
 prior $0/60$. On the same detector applied to field-condition logs it accuses
 $26.7\%$ of honest farmers at tier~1. The cause is \eqref{eq:gap} with an
 absolute threshold: forgetting one entry, rounding, or recording a day late all
-produce $G>5$\,mm without any wrongdoing, and the measured gap on honest logs
-reached $75$\,mm. The proportional threshold of \eqref{eq:tau} reduces this to
+produce $G>5$\,mm without any wrongdoing, and the measured gap on honest
+field-condition logs reached $65$\,mm. The proportional threshold of \eqref{eq:tau} reduces this to
 $5.0\%$, and the device anchor to $0/60$.
 
 \subsection{Physics cannot see the attack that pays}
 
 Table~\ref{tab:credit} is the second negative result, and it is the one that
-matters economically. Relative to an honest field baseline of $3.23$ creditable
-dry phases per season, time-shifting raises the count to $5.48$, an inflation of
-$69\%$; under the full uncertainty set the figure is $6.14$ against $3.44$, or
-$78\%$. Consolidation reaches $+52\%$ and $+53\%$, and the rational adversary
-$+63\%$ and $+70\%$. Table~\ref{tab:defence} shows the corresponding escape
-rates: time-shifting escapes both the point model and the robust physics layer
-in $91\%$ of cases, and the rational adversary in $100\%$, exactly as
+matters economically. Every inflation figure in Table~\ref{tab:credit} is a
+\emph{paired} comparison: an altered log against the honest log of the same
+trajectory (station, year, seed and soil), restricted to attacks that actually
+changed the record, since the harness returns the original log when the adversary
+finds no improving move. Comparing instead against the mean of \emph{all}
+honest logs would overstate the gain roughly twofold, because forged variants
+are only generated where a trajectory carries enough commands to manipulate, and
+those trajectories are already drier than average ($4.87$ paired baselines
+against $3.23$ overall). Time-shifting raises creditable dry phases from $4.78$
+to $6.33$ per season, $+33\%$ over nine altered logs ($t=5.29$); under the full
+uncertainty set, from $5.33$ to $7.33$, $+38\%$ over three ($t=3.46$). The
+rational adversary reaches $+35\%$ and $+40\%$.
+Consolidation gains almost nothing once paired ($+1\%$ and $+2\%$), and the two
+crude forgeries \emph{reduce} creditable phases ($-1\%$ and $-17\%$): the
+depth-inflation forgery that maximises claimed volume destroys the very dry
+phases it is paid for. Only the volume-preserving permutation of timestamps is
+profitable, which is what Proposition~\ref{prop:coincide} predicts.
+Table~\ref{tab:defence} shows the corresponding escape
+rates, and they are the heart of the result: time-shifting escapes the robust
+physics layer in $8$ of $9$ altered logs and the rational adversary in $6$ of
+$6$. The point model catches more of it ($4$ of $9$), but it is precisely the
+detector that accuses $26.7\%$ of honest farmers; the robust tier cuts that
+false accusation to $5.0\%$ and, in exchange, hands most of the detection
+back to the adversary ($1$ of $9$). \emph{No physical configuration
+escapes that trade-off} --- it must either accuse the innocent or miss the
+permutation --- because both tiers are functions of the replayed trajectory,
+exactly as
 Proposition~\ref{prop:coincide} predicts. The infiltration filter $V_5$ fires
 $648$ times across the evaluation but exclusively on the crude
 depth-inflation forgery, never on a time-preserving-volume attack --- it is
@@ -113,8 +133,10 @@ fail and only the anchor holds.
 \subsection{The cost of robustness is measurable}
 
 Replacing the point model by the intersection over $\Theta$ is not free, and the
-loss must be reported. On omission fraud the point model catches $78.3\%$ of
-altered logs while the robust rule catches $40\%$ --- the same trade-off direction
+loss must be reported. On the nine omission-fraud logs that were actually
+altered, the point model catches $9/9$ while the robust rule catches $4/9$
+($44\%$); under the full $\Theta$ the figures are $4/4$ and $2/4$ ($50\%$).
+The same trade-off runs in the same direction
 as the proportional threshold, and for the same reason: a defence that refuses to
 accuse on the strength of one model configuration also refuses some true
 positives. Naive forgeries remain at $100\%$ under both. We regard this as the
@@ -127,7 +149,7 @@ anyway, but it is a loss of detection power and not a Pareto improvement.
 Every conclusion above holds under both the reduced $\Theta$ ($24$ replays per
 log, $281$ logs, $10$ seeds) and the full $\Theta$ ($150$ replays, $85$ logs,
 $3$ seeds): false accusation $0/60$ and $0/18$, anchor completeness $116/116$ and
-$37/37$, time-shift escape $91\%$ and $100\%$, credit inflation $+69\%$ and
-$+78\%$. The reduced set was used for the large runs because it contains the
+$37/37$, robust-tier time-shift escape $8/9$ and $3/3$, paired credit inflation
+$+33\%$ ($t=5.29$) and $+38\%$ ($t=3.46$). The reduced set was used for the large runs because it contains the
 extremes of every axis, which is where an innocent world is most likely to exist;
 the full set confirms that no interior configuration changes a verdict.

@@ -184,7 +184,7 @@ def tab_threat() -> None:
 # ---------------------------------------------------------------------------
 def tab_defence(by: dict) -> None:
     lines = [rule("top"),
-             row("Fraud variant", "$n$", "Escapes v1", "Escapes v2 physics",
+             row("Fraud variant", "Altered logs", "Escapes v1", "Escapes v2 physics",
                  "Caught by anchor"),
              rule("mid")]
     tot_ch = tot_an = 0
@@ -195,17 +195,21 @@ def tab_defence(by: dict) -> None:
         n = len(rs)
         if v.startswith("honest"):
             fa = sum(1 for r in rs if I(r, "v2_t0") or I(r, "v2_t1") or I(r, "anchor_flag"))
-            lines.append(row(disp, str(n),
+            lines.append(row(disp, f"0/{n} (honest)",
                              BS + "textbf{" + pct(fa, n) + "} accused",
                              pct(sum(I(r, "v2_t0") for r in rs), n),
                              pct(sum(I(r, "anchor_flag") for r in rs), n) + " accused"))
             continue
-        e1 = sum(1 for r in rs if not I(r, "v1_t0") and not I(r, "v1_t1"))
-        e2 = sum(1 for r in rs if not I(r, "v2_t0") and not I(r, "v2_t1"))
+        # CHI TINH TREN TAP changed==1. Truoc day e1/e2 chia cho len(rs)=23 gom ca
+        # 14 hang ma adversary tra ve NGUYEN BAN nhat ky (khong tim duoc nuoc di),
+        # nen "escape 91%" dem oan nhung truong hop khong co gian lan de thoat.
+        # Tren dung tap altered: 8/9 = 89%. Anchor van luon dung tap nay.
         ch = [r for r in rs if I(r, "changed")]
+        e1 = sum(1 for r in ch if not I(r, "v1_t0") and not I(r, "v1_t1"))
+        e2 = sum(1 for r in ch if not I(r, "v2_t0") and not I(r, "v2_t1"))
         an = sum(I(r, "anchor_flag") for r in ch)
         tot_ch += len(ch); tot_an += an
-        lines.append(row(disp, str(n), pct(e1, n), pct(e2, n),
+        lines.append(row(disp, f"{len(ch)}/{n}", pct(e1, len(ch)), pct(e2, len(ch)),
                          f"{an}/{len(ch)}"))
     lines += [rule("mid"),
               row(BS + "textbf{All genuinely forged}", BS + "textbf{" + str(tot_ch) + "}",
@@ -221,29 +225,66 @@ def tab_defence(by: dict) -> None:
 # ---------------------------------------------------------------------------
 # BANG 3 — Gia phai tra: tin chi bi thoi phong (n_dry)
 # ---------------------------------------------------------------------------
+def _pair_key(r: dict) -> tuple:
+    """Khoa ghep cap: cung tram, cung nam, cung seed, cung loai dat."""
+    return (r["station"], r["year"], r["seed"], r["soil"])
+
+
 def tab_credit(by: dict) -> None:
-    base_rs = by.get("honest_field", [])
-    base = statistics.mean(F(r, "n_dry") for r in base_rs) if base_rs else float("nan")
+    """Bang thoi phong tin chi, tinh theo CACH GHEP CAP.
+
+    LOI THONG KE DA SUA (anh Van phat hien 2026-10-07: "ket qua phai chay so sanh
+    voi benchmark, SOTA moi la minh chung"):
+
+    Ban cu tinh inflation = mean(n_dry cua variant) / mean(n_dry cua TOAN BO
+    honest_field). Hai tap do KHONG CUNG MAU: bien the gian lan chi duoc sinh khi
+    quy dao `testable` (>= MIN_CLAIMS lenh), ma chinh tap testable von da nhieu pha
+    kho hon. Do tren CSV that:
+        honest_field toan bo          = 3.23 pha
+        honest_field cung cap voi fraud_timing = 4.87 pha
+    Nen phan lon "thoi phong" la do chon mau lech, khong phai do tan cong.
+
+    Cach dung: ghep tung nhat ky gian lan voi nhat ky trung thuc CUA CHINH quy dao
+    do (station+year+seed+soil), va chi tinh tren nhung tan cong THAT SU doi nhat ky
+    (cot `changed`, vi harness tra ve nguyen ban khi adversary khong tim duoc nuoc di).
+    Bao cao kem t de nguoi doc biet hieu ung co that hay khong.
+
+    He qua: fraud_timing tu +69% xuong +33% (n=9, t=5.29). Ket luan KHONG doi —
+    tan cong van co loi that va van lot ca hai tang vat ly — nhung con so trung thuc.
+    """
+    hf = by.get("honest_field", [])
+    hfmap = {_pair_key(r): r for r in hf}
     lines = [rule("top"),
-             row("Log type", "$n$", "Creditable dry phases", "Inflation",
-                 "Attacks that changed the log"),
+             row("Log type", "Altered logs", "Paired dry phases (before " + BS + "to after)",
+                 "Inflation", "$t$"),
              rule("mid")]
     for v, disp, *_ in THREAT:
         rs = by.get(v, [])
         if not rs:
             continue
-        nd = statistics.mean(F(r, "n_dry") for r in rs)
         if v.startswith("honest"):
-            infl = "reference"
-        else:
-            infl = f"{(nd-base)/base*100:+.0f}" + BS + "%"
-        ch = sum(I(r, "changed") for r in rs)
-        note = f"{ch}/{len(rs)}" if v.startswith("fraud") else "---"
-        lines.append(row(disp, str(len(rs)), num(nd, 2), infl, note))
+            nd = statistics.mean(F(r, "n_dry") for r in rs)
+            lines.append(row(disp, "---", num(nd, 2) + " (reference)", "reference", "---"))
+            continue
+        # chi nhung tan cong that su doi nhat ky, va ghep duoc cap
+        pairs = [(F(r, "n_dry"), F(hfmap[_pair_key(r)], "n_dry"))
+                 for r in rs if I(r, "changed") and _pair_key(r) in hfmap]
+        if not pairs:
+            lines.append(row(disp, "0", "no altered log", "---", "---"))
+            continue
+        a = statistics.mean(x[0] for x in pairs)
+        b = statistics.mean(x[1] for x in pairs)
+        d = [x[0] - x[1] for x in pairs]
+        sd = statistics.stdev(d) if len(d) > 1 else 0.0
+        se = sd / len(d) ** 0.5 if d else 0.0
+        t = statistics.mean(d) / se if se else 0.0
+        infl = f"{(a - b) / b * 100:+.0f}" + BS + "%" if b else "n/a"
+        lines.append(row(disp, f"{len(pairs)}/{len(rs)}",
+                         f"{num(b, 2)} " + BS + "to " + num(a, 2), infl,
+                         num(t, 2)))
     lines.append(rule("bot"))
-    # 5 cot -> ngan sach 8.007cm
-    write("tab_credit", table([("p", 2.60), ("c", 0.45), ("p", 1.35), ("p", 1.00),
-                               ("p", 1.70)], lines))
+    write("tab_credit", table([("p", 2.90), ("c", 0.60), ("p", 1.90), ("c", 1.10),
+                               ("c", 0.60)], lines))
 
 
 # ---------------------------------------------------------------------------
@@ -433,13 +474,13 @@ def main() -> int:
     else:
         print(f"  PASS anchor bat {tot_an}/{tot_ch} = 100% nhat ky that su bi lam gia")
     # gian lan thuc su phai thoat duoc vat ly, neu khong thi khong co cau chuyen
-    tim = by.get("fraud_timing", [])
+    tim = [r for r in by.get("fraud_timing", []) if I(r, "changed")]
     esc = sum(1 for r in tim if not I(r, "v2_t0") and not I(r, "v2_t1"))
     if tim and esc / len(tim) < 0.5:
         print(f"  canh bao: dich gio chi thoat {esc}/{len(tim)} — cau chuyen doi truc yeu di")
     else:
         print(f"  PASS dich gio thoat vat ly {esc}/{len(tim)} "
-              f"({esc/len(tim)*100:.0f}%) -> can device anchor")
+              f"({esc/len(tim)*100:.0f}%) tren tap altered -> can device anchor")
     print("TABLE GATES:", "OK" if ok else "FAIL")
     return 0 if ok else 1
 

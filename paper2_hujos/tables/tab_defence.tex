@@ -4,16 +4,16 @@
 \fittocol{%
 \begin{tabular}{@{}>{\raggedright\arraybackslash}p{2.85cm}c>{\raggedright\arraybackslash}p{1.30cm}>{\raggedright\arraybackslash}p{1.50cm}>{\raggedright\arraybackslash}p{1.45cm}@{}}
 \toprule
-Fraud variant & $n$ & Escapes v1 & Escapes v2 physics & Caught by anchor \\
+Fraud variant & Altered logs & Escapes v1 & Escapes v2 physics & Caught by anchor \\
 \midrule
-Honest farmer (field conditions) & 60 & \textbf{5\%} accused & 0\% & 0\% accused \\
-Added irrigation events & 23 & 0\% & 0\% & 23/23 \\
-Infeasible claimed depth & 23 & 0\% & 0\% & 23/23 \\
-Omission of real commands & 23 & 22\% & 78\% & 9/9 \\
-Claim consolidation, 24 h & 23 & 39\% & 91\% & 23/23 \\
-Claim consolidation, 96 h & 23 & 39\% & 91\% & 23/23 \\
-Time shifting (rational) & 23 & 39\% & 91\% & 9/9 \\
-Rational adversary & 23 & 100\% & 100\% & 6/6 \\
+Honest farmer (field conditions) & 0/60 (honest) & \textbf{5\%} accused & 0\% & 0\% accused \\
+Added irrigation events & 23/23 & 0\% & 0\% & 23/23 \\
+Infeasible claimed depth & 23/23 & 0\% & 0\% & 23/23 \\
+Omission of real commands & 9/23 & 0\% & 56\% & 9/9 \\
+Claim consolidation, 24 h & 23/23 & 39\% & 91\% & 23/23 \\
+Claim consolidation, 96 h & 23/23 & 39\% & 91\% & 23/23 \\
+Time shifting (rational) & 9/23 & 56\% & 89\% & 9/9 \\
+Rational adversary & 6/23 & 100\% & 100\% & 6/6 \\
 \midrule
 \textbf{All genuinely forged} & \textbf{116} & \textbf{---} & \textbf{---} & \textbf{116/116} \\
 \bottomrule

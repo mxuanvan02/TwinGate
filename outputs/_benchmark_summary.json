@@ -1,0 +1,63 @@
+{
+ "rows": [
+  {
+   "tag": "photo",
+   "label": "Photo + self-report (current practice)",
+   "cite": "qd4801",
+   "cost": "0 (PVC tube)",
+   "confirm": 0,
+   "total": 150,
+   "pct": 0,
+   "obs": 0,
+   "n_traj": 60
+  },
+  {
+   "tag": "s1ab",
+   "label": "Sentinel-1A+1B (6-day revisit)",
+   "cite": "hashemi2022s1",
+   "cost": "0",
+   "confirm": 124,
+   "total": 150,
+   "pct": 83,
+   "obs": 15,
+   "n_traj": 60
+  },
+  {
+   "tag": "s1a",
+   "label": "Sentinel-1A alone (12-day revisit)",
+   "cite": "clauss2017s1",
+   "cost": "0",
+   "confirm": 90,
+   "total": 150,
+   "pct": 60,
+   "obs": 8,
+   "n_traj": 60
+  },
+  {
+   "tag": "iot",
+   "label": "Continuous water-level tube (IoT)",
+   "cite": "delacruz2022",
+   "cost": "1 per plot",
+   "confirm": 150,
+   "total": 150,
+   "pct": 100,
+   "obs": 2153,
+   "n_traj": 60
+  },
+  {
+   "tag": "anchor",
+   "label": "Signed command record (this work)",
+   "cite": "twingate2026",
+   "cost": "0 (controller)",
+   "confirm": 150,
+   "total": 150,
+   "pct": 100,
+   "obs": 2153,
+   "n_traj": 60
+  }
+ ],
+ "n_traj": 60,
+ "tot_phase": 150,
+ "zero_phase": 6,
+ "mean_phase": 2.5
+}

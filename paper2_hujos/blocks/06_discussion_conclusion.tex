@@ -57,12 +57,28 @@ any farmer. The vulnerability is structural, not a consequence of disclosure.
 
 \subsection{Relation to remote sensing}
 
-Satellite radar detects irrigation events but revisits every two to four days and
-cannot resolve a $72$\,h dry phase in mid-period, which is the crediting unit.
-It therefore cannot substitute for a command record, and it cannot detect
-time-shifting within a revisit interval either. Its role remains the one VM0051
-Appendix 4 assigns it: a per-plot cross-check that lowers the frequency of field
-verification~\cite{vm0051}.
+Satellite radar is the obvious low-cost alternative, so rather than argue about it
+we measured it. Table~\ref{tab:benchmark} scores every route by one quantity: how
+many of the $150$ credit-eligible dry phases actually present across the $60$
+simulated fields it could confirm. A phase counts as confirmable only if at least
+one observation falls inside it, because a $72$\,h phase lying wholly between two
+passes cannot be evidenced at all --- which costs the farmer a credit even when
+the practice was performed correctly. Single-satellite Sentinel-1, revisiting every
+twelve days~\cite{clauss2017s1}, confirms $90/150$ ($60\%$); the full A+B
+constellation at six days~\cite{hashemi2022s1} reaches $124/150$ ($83\%$), and
+still misses one phase in six at zero device cost. A continuous water-level tube
+confirms all $150$, at one device per plot~\cite{delacruz2022}. The signed command
+record also confirms all $150$ --- because the phases are defined by the intervals
+between actuations, which the controller already timestamps --- at no additional
+device, since the controller is the one that opened the pump.
+Two cautions belong with that comparison. The confirmation column measures the
+ability to \emph{earn} a credit, not to detect fraud: the tube and the command
+record tie at $100\%$ here and differ entirely in cost and in what they can prove
+about a doctored log. And photograph-plus-self-report scores $0\%$ not because it
+is worthless but because it produces no observation series to reconcile against;
+every confirmation under it must come from a field visit.
+Radar therefore keeps the role VM0051 Appendix 4 assigns it: a per-plot cross-check
+that lowers the frequency of field verification~\cite{vm0051}.
 
 \subsection{Limitations}
 
@@ -80,6 +96,15 @@ are assumed from the companion work and are not re-established here.
 hand there is no command record, so the anchor is unavailable. This excludes a
 substantial share of delta farms and bounds the addressable population of the
 scheme.
+\item \emph{The attack is demonstrated in the water-scarce year only.} In the
+water-surplus year (2025) farmers need so little irrigation that most simulated
+logs fall below the three-command minimum at which a timing attack is even
+constructible: of $37$ genuinely altered logs under the full $\Theta$, all $37$
+come from 2024. The escarpment between the two years is itself a finding --- MRV
+fraud risk is concentrated where water is scarce --- but it also means the
+attack results are not yet evidence about a wet season. Under the reduced
+$\Theta$ twelve altered logs do come from 2025, and they behave the same way,
+which is suggestive rather than conclusive.
 \item \emph{$\Theta$ is a judgement.} Five textures, two $K_c$ regimes, three
 efficiencies and five initial states bracket the delta but do not exhaust it. A
 field outside $\Theta$ loses the guarantee of Proposition~\ref{prop:noalarm},
@@ -106,10 +131,13 @@ The point-model detector falsely accuses $26.7\%$ of honest farmers, because an
 absolute pump-gap threshold cannot distinguish a forgotten entry from a secret
 irrigation. A proportional threshold and an intersection over a $150$-element
 uncertainty set reduce that to $5.0\%$ and $0/60$ respectively, at a measured
-cost in detection of omission fraud, from $78.3\%$ to $40\%$. Meanwhile a
-volume-preserving, depth-bounded permutation of claimed times inflates creditable
-dry phases by $69\%$ to $78\%$ while escaping both physical tiers in $91\%$ to
-$100\%$ of cases, and we prove this is unavoidable for any detector whose verdict
+cost in detection of omission fraud, from $9/9$ to $4/9$ on the logs that were
+actually altered. Meanwhile a volume-preserving, depth-bounded permutation of
+claimed times inflates creditable dry phases by $33\%$ to $38\%$ in paired
+comparison while escaping the robust physical tier in $8$ of $9$ and $3$ of $3$
+altered logs --- and the point model that catches more of it is the same model
+that accuses $26.7\%$ of honest farmers, so no physical configuration escapes
+the trade-off. We prove this is unavoidable for any detector whose verdict
 is a function of the replayed trajectory: delaying a claim both lengthens the dry
 phase and increases the deficit available to it, so profit and undetectability
 share a gradient.

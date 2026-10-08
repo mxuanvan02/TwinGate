@@ -1,0 +1,16 @@
+% Sinh TU DONG tu outputs/_benchmark_summary.json boi experiments/make_table_benchmark.py
+% KHONG sua tay: moi con so truy nguon ve benchmark_confirmation.py.
+
+\fittocol{
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{4.30cm}ccc@{}}
+\toprule
+Verification route & Confirmable dry phases ($n=150$) & Observations per season & Devices per plot \\
+\midrule
+Photo + self-report (current practice)~\cite{qd4801} & 0/150 (0\%) & --- & 0 (PVC tube) \\
+Sentinel-1A+1B (6-day revisit)~\cite{hashemi2022s1} & 124/150 (83\%) & 15 & 0 \\
+Sentinel-1A alone (12-day revisit)~\cite{clauss2017s1} & 90/150 (60\%) & 8 & 0 \\
+Continuous water-level tube (IoT)~\cite{delacruz2022} & 150/150 (100\%) & 2,153 & 1 per plot \\
+Signed command record (this work)~\cite{twingate2026} & 150/150 (100\%) & 2,153 & 0 (controller) \\
+\bottomrule
+\end{tabular}
+}

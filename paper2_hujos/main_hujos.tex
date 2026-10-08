@@ -39,28 +39,23 @@
 
   \vspace{6pt}
   \begin{hujosabstract}
-  \noindent\textbf{Abstract.} Measurement, reporting and verification (MRV) is the
-  bottleneck keeping emission reductions in low-emission rice from becoming
-  tradable credits, and monitoring is about three quarters of that cost. Because
-  every credit-eligible water-management action is already an \emph{actuation
-  command}, a farmer-written irrigation log looks like free evidence of the
-  highest rank under Decision 4801/QD-BNNMT. We built such a layer, proved it
-  cannot accuse a compliant farmer, and then attacked it. The attack is the
-  contribution. Replaying a log through the FAO-56 water balance under public
-  ERA5 forcing exposes claimed depths no soil can hold, but an adversary who
-  keeps the total volume and every individual depth intact and merely
-  \emph{shifts commands in time} inflates creditable dry phases by $69\%$ and
-  escapes both the physics layer and the pump meter in $91\%$ of cases. We
-  measure this over $281$ audited logs at three Mekong Delta stations across two
-  climate years, with the field deliberately violating every modelling
-  assumption: soil texture across the FAO-56 Table 2 range, staged crop
-  coefficient, irrigation efficiency $0.60$--$0.85$, field rainfall differing
-  from the grid cell, bund seepage, and farmers who forget, round and record
-  late. Under those conditions the published point-model detector falsely
-  accused $26.7\%$ of honest farmers. Matching the log against the gateway's
-  signed, time-stamped command record instead catches $116/116$ genuinely forged
-  logs and accuses none. The result is negative but carries a repair:
-  physics-based attestation cannot stand alone, and the timestamp must come from
+  \noindent\textbf{Abstract.} Monitoring, reporting and verification (MRV) is the bottleneck keeping emission
+  reductions in low-emission rice from becoming tradable carbon credits, and
+  monitoring is about three quarters of that cost. Because every credit-eligible
+  action under alternate wetting and drying is already an \emph{actuation command},
+  a farmer-written irrigation log looks like free evidence of the highest rank under
+  Decision 4801/QD-BNNMT. We built that layer on an FAO-56 digital twin, proved it
+  cannot accuse a compliant farmer, and then attacked it; the attack is the
+  contribution. Replaying a log under public ERA5 forcing exposes depths no soil can
+  hold, but an adversary who keeps the total volume and every individual depth and
+  merely \emph{shifts commands in time} inflates creditable dry phases by $33\%$ in
+  paired comparison. No physical tier escapes it usefully: the point model flags $4$
+  of $9$ altered logs yet accuses $26.7\%$ of honest farmers, and the robust tier that cuts false accusation to $5.0\%$ lets $8$ of $9$ through. Over $281$ audited logs at three Mekong
+  Delta stations and two climate years, with the field violating every modelling
+  assumption (soil texture, staged crop coefficient, efficiency $0.60$--$0.85$,
+  rainfall, seepage, recording noise), matching the log against the gateway's
+  signed, time-stamped command record catches $116/116$ forged logs and accuses
+  none. Physics-based attestation cannot stand alone; the timestamp must come from
   a device, not the farmer.
 
   \vspace{4pt}
@@ -157,14 +152,27 @@ The last column counts attacks that actually altered the log.}
 
 \begin{table}[!t]
 \centering
-\caption{Main result. Escape rate is the fraction of forged
-logs neither tier flags; the anchor column is conditioned on the log having
-actually been altered.}
+\caption{Main result. Every rate is computed over the logs an
+attack \emph{actually altered}; the second column reports altered over generated,
+because the adversary returns the original log when it finds no improving move.
+Escape rate is the fraction neither physical tier flags.}
 \label{tab:defence}
 \footnotesize
 \input{tables/tab_defence}
 \end{table}
 
+
+
+% Bang benchmark: so sanh voi cac phuong an MRV da cong bo (SOTA).
+% So sinh tu experiments/benchmark_confirmation.py -> _benchmark_summary.json
+% KHONG sua tay; moi con so truy nguon ve CSV.
+\begin{table}[!t]
+\centering
+\caption{Confirmable credit-eligible dry phases under each MRV route, over the $150$ phases actually present in the $60$ simulated fields. A phase is confirmable only if at least one observation falls inside it. The final two rows tie on this measure and differ in cost and in what they can prove about a doctored log.}
+\label{tab:benchmark}
+\footnotesize
+\input{tables/tab_benchmark}
+\end{table}
 
 \input{blocks/06_discussion_conclusion}
 
