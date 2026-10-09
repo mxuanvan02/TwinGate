@@ -44,18 +44,17 @@
   monitoring is about three quarters of that cost. Because every credit-eligible
   action under alternate wetting and drying is already an \emph{actuation command},
   a farmer-written irrigation log looks like free evidence of the highest rank under
-  Decision 4801/QD-BNNMT. We built that layer on an FAO-56 digital twin, proved it
-  cannot accuse a compliant farmer, and then attacked it; the attack is the
-  contribution. Replaying a log under public ERA5 forcing exposes depths no soil can
-  hold, but an adversary who keeps the total volume and every individual depth and
-  merely \emph{shifts commands in time} inflates creditable dry phases by $33\%$ in
-  paired comparison. No physical tier escapes it usefully: the point model flags $4$
-  of $9$ altered logs yet accuses $26.7\%$ of honest farmers, and the robust tier that cuts false accusation to $5.0\%$ lets $8$ of $9$ through. Over $281$ audited logs at three Mekong
-  Delta stations and two climate years, with the field violating every modelling
-  assumption (soil texture, staged crop coefficient, efficiency $0.60$--$0.85$,
-  rainfall, seepage, recording noise), matching the log against the gateway's
-  signed, time-stamped command record catches $116/116$ forged logs and accuses
-  none. Physics-based attestation cannot stand alone; the timestamp must come from
+  Decision 4801/QD-BNNMT. We built that layer on an FAO-56 digital twin, then
+  attacked it; the attack is the contribution. Replaying a log under public ERA5
+  forcing exposes claimed depths no soil can hold, but an adversary who keeps the
+  total volume and every individual depth and merely \emph{shifts commands in time}
+  inflates creditable dry phases by $33\%$ in paired comparison. No physical tier
+  escapes it usefully: the point model accuses $26.7\%$ of honest farmers, and the
+  robust tier that cuts false accusation to $5.0\%$ in turn misses most
+  time-shifting attacks. Over $281$ audited logs at three Mekong Delta stations
+  and two climate years, matching the log against the gateway's signed,
+  time-stamped command record catches $116/116$ forged logs and accuses none.
+  Physics-based attestation cannot stand alone; the timestamp must come from
   a device, not the farmer.
 
   \vspace{4pt}
@@ -93,7 +92,11 @@ expose the absolute gap threshold.}
 \centering
 \caption{Creditable dry phases of at least $72$\,h --- the quantity VM0051
 and Decision 4801 pay for --- against the honest field baseline (paired). The
-last column counts attacks that actually altered the log.}
+last column counts attacks that actually altered the log. The table carries two
+baselines, deliberately different: the inflation column uses the paired baselines
+against the honest log of the same station, year, seed and soil ($4.87$ for the
+adversarial variants), while the ``honest'' row reports the mean $3.23$ phases
+over all $60$ honest logs. See Supplementary~S15.}
 \label{tab:credit}
 \footnotesize
 \input{tables/tab_credit}

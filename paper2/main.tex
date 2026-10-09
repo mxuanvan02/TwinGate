@@ -39,6 +39,21 @@
 \usepackage{amsmath,amssymb,amsfonts}
 \usepackage{amsthm}
 \usepackage{booktabs}
+% array + fittocol: bang trong paper2/tables duoc sinh boi
+% experiments/make_tables_anchored.py (nguon dung chung voi ban HUJOS) nen co
+% wrapper \fittocol{} va cot >{\raggedright\arraybackslash}p{}. IEEEtran khong
+% nap array.sty va khong biet \fittocol -> phai dinh nghia o day, neu khong
+% build IEEE fatal "Undefined control sequence \fittocol" (da gap 2026-10-09).
+\usepackage{array}
+\newsavebox{\fitbox}
+% \providecommand: neu preamble khac da dinh nghia thi giu ban cua no.
+\providecommand{\fittocol}[1]{%
+  \begin{lrbox}{\fitbox}#1\end{lrbox}%
+  \ifdim\wd\fitbox>\columnwidth
+    \resizebox{\columnwidth}{!}{\usebox{\fitbox}}%
+  \else
+    \usebox{\fitbox}%
+  \fi}
 \usepackage{graphicx}
 \usepackage[hyphens]{url}
 \usepackage[hidelinks]{hyperref}

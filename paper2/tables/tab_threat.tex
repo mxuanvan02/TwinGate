@@ -1,7 +1,8 @@
 % Sinh TU DONG tu outputs/eval_theta_*.csv boi experiments/make_tables_anchored.py
 % KHONG sua tay: moi con so deu truy nguon duoc ve CSV.
 
-\begin{tabular}{@{}p{2.85cm}p{0.95cm}p{1.05cm}p{0.95cm}p{2.20cm}@{}}
+\fittocol{%
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{2.85cm}>{\raggedright\arraybackslash}p{0.95cm}>{\raggedright\arraybackslash}p{1.05cm}>{\raggedright\arraybackslash}p{0.95cm}>{\raggedright\arraybackslash}p{2.20cm}@{}}
 \toprule
 Fraud variant & Total mm & Each depth & Timing & What it forges \\
 \midrule
@@ -15,3 +16,4 @@ Time shifting (rational) & true & true & FALSE & Hill-climbs each hour to maximi
 Rational adversary & true & true & FALSE & Chooses the consolidation window that maximises dry phases \\
 \bottomrule
 \end{tabular}
+}

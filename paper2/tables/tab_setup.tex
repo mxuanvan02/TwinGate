@@ -1,7 +1,8 @@
 % Sinh TU DONG tu outputs/eval_theta_*.csv boi experiments/make_tables_anchored.py
 % KHONG sua tay: moi con so deu truy nguon duoc ve CSV.
 
-\begin{tabular}{@{}p{2.85cm}p{5.60cm}@{}}
+\fittocol{%
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{2.85cm}>{\raggedright\arraybackslash}p{5.60cm}@{}}
 \toprule
 Component & Value \\
 \midrule
@@ -21,3 +22,4 @@ Replays per log & 24 (reduced $\Theta$) and 150 (full $\Theta$) \\
 Logs audited & 281 \\
 \bottomrule
 \end{tabular}
+}

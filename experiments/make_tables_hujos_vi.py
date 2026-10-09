@@ -74,7 +74,7 @@ LABELS = {
     # --- tab_credit ---
     "Log type": "Loại nhật ký",
     "Altered logs": "Nhật ký bị sửa",
-    "Paired dry phases (before \\to after)": "Pha khô ghép cặp (trước \\to sau)",
+    "Paired dry phases (before $\\to$ after)": "Pha khô ghép cặp (trước $\\to$ sau)",
     "Inflation": "Thổi phồng",
     "$t$": "$t$",
     "no altered log": "không sửa nhật ký",
@@ -248,13 +248,23 @@ NUMERIC_CHARS = re.compile(r"^[-+0-9.,/():;\s\\%{}$^_~\[\]=<>|a-zA-Z]*$")
 
 
 def to_vn_numbers(s: str) -> str:
-    """Doi dinh dang so kieu Anh -> kieu Viet Nam trong mot o da dich xong chu."""
+    """Doi dinh dang so kieu Anh -> kieu Viet Nam trong mot o da dich xong chu.
+
+    LOI DA SUA (2026-10-09, peer review F3): thu tu cu doi dau phay nghin
+    TRUOC (2,153 -> 2.153) roi doi dau cham thap phan SAU (2.153 -> 2,153) —
+    hai buoc hoa nhau, ket qua '2,153' quay ve dung chu no bat dau. Bang 4 ban
+    VI in '2,153' ma nguoi Viet doc la 'hai phay mot nam ba'.
+    CACH SUA: dua dau cham thap phan ve ky tu trung gian (sentinel) TRUOC,
+    xu ly dau phay nghin, roi moi tra sentinel ve dau phay.
+    """
+    SENT = "\x00"
     out = s
-    # dau phay nghin kieu EN: 2,153 -> 2.153 (dung truoc, keo sau bi nham)
+    # 1) dau cham thap phan -> sentinel: 3.23 -> 3\x0023
+    out = re.sub(r"(?<=\d)\.(?=\d)", SENT, out)
+    # 2) dau phay nghin kieu EN -> dau cham: 2,153 -> 2.153
     out = re.sub(r"(?<=\d),(?=\d{3}(?!\d))", ".", out)
-    # dau cham thap phan -> dau phay: 3.23 -> 3,23 ; 0.60--0.85 -> 0,60--0,85
-    out = re.sub(r"(?<=\d)\.(?=\d)", ",", out)
-    return out
+    # 3) sentinel -> dau phay thap phan kieu Viet: 3\x0023 -> 3,23
+    return out.replace(SENT, ",")
 
 
 def digits_of(s: str) -> str:

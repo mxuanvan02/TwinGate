@@ -1,7 +1,8 @@
 % Sinh TU DONG tu outputs/eval_theta_*.csv boi experiments/make_tables_anchored.py
 % KHONG sua tay: moi con so deu truy nguon duoc ve CSV.
 
-\begin{tabular}{@{}p{1.55cm}cp{1.75cm}p{0.85cm}p{2.60cm}@{}}
+\fittocol{%
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{1.55cm}c>{\raggedright\arraybackslash}p{1.75cm}>{\raggedright\arraybackslash}p{0.85cm}>{\raggedright\arraybackslash}p{2.60cm}@{}}
 \toprule
 Station & Year & Max clipped depletion & $V_2$ fires & Interpretation \\
 \midrule
@@ -13,3 +14,4 @@ ca mau & 2024 & 0.991 & 0 & never below wilting point \\
 ca mau & 2025 & 0.980 & 0 & never below wilting point \\
 \bottomrule
 \end{tabular}
+}

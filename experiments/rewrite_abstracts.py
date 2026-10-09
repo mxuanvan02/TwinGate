@@ -46,97 +46,58 @@ def words(t: str) -> list[str]:
 
 
 # ---------------------------------------------------------------- EN
+# BAN CAT NGAN (2026-10-09, theo peer review): abstract chi giu 5 con so
+# (33%, 26.7%, 5.0%, 281, 116/116); 4/9 va 8/9 day xuong than bai (intro +
+# Muc 9.2 van giu nguyen). Bo danh sach gia dinh mo hinh va khoang hieu suat
+# 0.60-0.85 — chi tiet do thuoc Muc 8 (thiet ke thuc nghiem).
 EN_BASE = r"""Monitoring, reporting and verification (MRV) is the bottleneck keeping emission
   reductions in low-emission rice from becoming tradable carbon credits, and
   monitoring is about three quarters of that cost. Because every credit-eligible
   action under alternate wetting and drying is already an \emph{actuation command},
   a farmer-written irrigation log looks like free evidence of the highest rank under
-  Decision 4801/QD-BNNMT. We built that layer on an FAO-56 digital twin, proved it
-  cannot accuse a compliant farmer, and then attacked it; the attack is the
-  contribution. Replaying a log under public ERA5 forcing exposes depths no soil can
-  hold, but an adversary who keeps the total volume and every individual depth and
-  merely \emph{shifts commands in time} inflates creditable dry phases by $33\%$ in
-  paired comparison. No physical tier escapes it usefully: the point model flags $4$
-  of $9$ altered logs yet accuses $26.7\%$ of honest farmers, while the robust tier
-  that accuses none lets $8$ of $9$ through. Over $281$ audited logs at three Mekong
-  Delta stations and two climate years, with the field violating every modelling
-  assumption (soil texture, staged crop coefficient, efficiency $0.60$--$0.85$,
-  rainfall, seepage, recording noise), matching the log against the gateway's
-  signed, time-stamped command record catches $116/116$ forged logs and accuses
-  none. Physics-based attestation cannot stand alone; the timestamp must come from
+  Decision 4801/QD-BNNMT. We built that layer on an FAO-56 digital twin, then
+  attacked it; the attack is the contribution. Replaying a log under public ERA5
+  forcing exposes claimed depths no soil can hold, but an adversary who keeps the
+  total volume and every individual depth and merely \emph{shifts commands in time}
+  inflates creditable dry phases by $33\%$ in paired comparison. No physical tier
+  escapes it usefully: the point model accuses $26.7\%$ of honest farmers, and the
+  robust tier that cuts false accusation to $5.0\%$ in turn misses most
+  time-shifting attacks. Over $281$ audited logs at three Mekong Delta stations
+  and two climate years, matching the log against the gateway's signed,
+  time-stamped command record catches $116/116$ forged logs and accuses none.
+  Physics-based attestation cannot stand alone; the timestamp must come from
   a device, not the farmer."""
 
-EN_TRIMS = [
-    (r"We built that layer on an FAO-56 digital twin, proved it cannot accuse a compliant farmer, and then attacked it; the attack is the contribution.",
-     r"We built that layer on an FAO-56 digital twin, proved it cannot accuse a compliant farmer, then attacked it; the attack is the contribution."),
-    (r"and\n  monitoring is about three quarters of that cost",
-     r"and monitoring is three quarters of that cost"),
-    (r"(soil texture, staged crop coefficient, efficiency $0.60$--$0.85$,\n  rainfall, seepage, recording noise)",
-     r"(soil texture, staged crop coefficient, efficiency $0.60$--$0.85$, rainfall, seepage, noise)"),
-    (r"Replaying a log under public ERA5 forcing exposes depths no soil can\n  hold, but an adversary who keeps the total volume and every individual depth and\n  merely",
-     r"Replaying a log under public ERA5 forcing exposes depths no soil can hold, but an adversary who keeps total volume and every depth and merely"),
-    (r"Over $281$ audited logs at three Mekong\n  Delta stations and two climate years, with the field violating every modelling\n  assumption",
-     r"Over $281$ audited logs at three Mekong Delta stations and two climate years, with the field violating every modelling assumption"),
-]
+EN_TRIMS = []
 
 EN_KEYWORDS = ["alternate wetting and drying",
                "monitoring, reporting and verification",
                "carbon credit", "low-emission rice", "digital twin"]
 
 # ---------------------------------------------------------------- VI
-VI_BASE = r"""MRV là nút thắt khiến lượng phát thải giảm được trong lúa phát thải thấp chưa
-thành tín chỉ các-bon mua bán được; riêng giám sát chiếm ba phần tư chi phí đó. Vì
-mọi hành động quản lý nước trong tưới khô ướt luân phiên (AWD) đủ điều kiện cấp tín
-chỉ vốn là một lệnh điều khiển, nhật ký do nông dân tự ghi trông như bằng chứng gần
-như miễn phí, xếp hạng cao nhất theo Quyết định 4801/QĐ-BNNMT. Chúng tôi dựng lớp đó
-trên mô hình sinh đôi số FAO-56, chứng minh nó không kết tội oan nông dân tuân thủ,
-rồi tấn công chính nó; phần tấn công là đóng góp của bài. Phát lại nhật ký với ERA5
-công khai phơi bày độ sâu tưới không đất nào chứa được; nhưng đối thủ chỉ dịch thời
-điểm lệnh, giữ nguyên tổng lượng và từng độ sâu, đã thổi phồng số pha khô được cấp
-tín chỉ thêm $33\%$ (ghép cặp). Không lớp vật lý nào thoát được một cách dùng được:
-bộ phát hiện bắt $4/9$ nhật ký bị sửa thì cũng kết tội oan $26{,}7\%$ nông dân trung
-thực, còn bộ bền vững không kết tội oan thì bỏ lọt $8/9$. Trên $281$ nhật ký tại ba
-trạm Đồng bằng sông Cửu Long, hai năm khí hậu, đối chiếu với bản ghi lệnh có chữ ký
-và dấu thời gian của gateway bắt $116/116$ nhật ký giả, không kết tội oan ai. Vật lý
-không thể đứng một mình; dấu thời gian phải do thiết bị cấp."""
+VI_BASE = r"""MRV là nút thắt khiến mức giảm phát thải của lúa phát thải thấp chưa thành tín
+chỉ các-bon; giám sát chiếm ba phần tư chi phí. Vì mọi hành động quản lý nước
+đủ điều kiện cấp tín chỉ trong tưới khô ướt luân phiên (AWD) vốn là lệnh điều
+khiển, nhật ký nông dân tự ghi trông như bằng chứng gần như miễn phí, xếp hạng cao
+nhất theo Quyết định 4801/QĐ-BNNMT. Chúng tôi dựng lớp đó trên mô hình sinh đôi số
+FAO-56 rồi tấn công nó; phần tấn công là đóng góp. Phát lại nhật ký với
+ERA5 công khai phơi bày độ sâu không đất nào chứa được, nhưng đối thủ giữ
+nguyên tổng lượng và từng độ sâu, chỉ dịch thời điểm lệnh, làm số pha khô được cấp tín
+chỉ tăng $33\%$ (ghép cặp). Không lớp vật lý nào thoát hữu ích: bộ phát hiện
+mô hình điểm kết tội oan $26{,}7\%$ nông dân trung thực, còn bộ bền vững giảm oan xuống
+$5{,}0\%$ lại bỏ lọt phần lớn tấn công dịch thời điểm. Trên $281$ nhật ký tại ba trạm
+Đồng bằng sông Cửu Long, hai năm khí hậu, đối chiếu nhật ký với bản ghi lệnh có chữ ký, dấu thời gian của gateway bắt $116/116$ nhật ký giả, không oan ai. Vật lý không thể
+đứng một mình; dấu thời gian phải do thiết bị cấp, không phải nông dân."""
 
 # Cat theo thu tu: bo chu thua truoc (khong mat y), roi moi gop cau.
 # Moi trim deu giu NGUYEN VEN 5 tu khoa va moi con so da verify (co assert o buoc 2).
-VI_TRIMS = [
-    # -1 tu: "luong phat thai" -> "phat thai" (nghia khong doi)
-    (r"MRV là nút thắt khiến lượng phát thải giảm được trong lúa phát thải thấp chưa\nthành tín chỉ các-bon mua bán được",
-     r"MRV là nút thắt khiến phát thải giảm được trong lúa phát thải thấp chưa thành\ntín chỉ các-bon mua bán được"),
-    # -1 tu: "riêng giám sát chiếm ba phần tư chi phí đó" -> bo "đó"
-    (r"mua bán được; riêng giám sát chiếm ba phần tư chi phí đó.",
-     r"mua bán được; riêng giám sát chiếm ba phần tư chi phí."),
-    # -1 tu: "nhật ký do nông dân tự ghi" -> "nhật ký nông dân tự ghi"
-    (r"nhật ký do nông dân tự ghi trông như bằng chứng gần\nnhư miễn phí",
-     r"nhật ký nông dân tự ghi trông như bằng chứng gần như miễn phí"),
-    # -3 tu: "phần tấn công là đóng góp của bài" -> "--- chính là đóng góp của bài"
-    (r"rồi tấn công chính nó; phần tấn công là đóng góp của bài.",
-     r"rồi tấn công chính nó --- chính là đóng góp của bài."),
-    # -2 tu: "đã thổi phồng số pha khô được cấp tín chỉ thêm $33\%$"
-    #         -> "làm số pha khô được cấp tín chỉ tăng $33\%$"
-    (r"đã thổi phồng số pha khô được cấp\ntín chỉ thêm $33\%$ (ghép cặp).",
-     r"làm số pha khô được cấp tín chỉ tăng $33\%$ (ghép cặp)."),
-    # -2 tu: "Không lớp vật lý nào thoát được một cách dùng được" -> "Không lớp vật lý nào dùng được"
-    (r"Không lớp vật lý nào thoát được một cách dùng được:",
-     r"Không lớp vật lý nào dùng được:"),
-    # -2 tu: "còn bộ bền vững không kết tội oan thì bỏ lọt" -> "còn bộ bền vững không oan ai thì bỏ lọt"
-    (r"còn bộ bền vững không kết tội oan thì bỏ lọt $8/9$.",
-     r"còn bộ bền vững không oan ai thì bỏ lọt $8/9$."),
-    # -3 tu: "đối chiếu với bản ghi lệnh ... không kết tội oan ai"
-    #         -> "đối chiếu bản ghi lệnh ... không oan ai"
-    (r"đối chiếu với bản ghi lệnh có chữ ký\nvà dấu thời gian của gateway bắt $116/116$ nhật ký giả, không kết tội oan ai.",
-     r"đối chiếu bản ghi lệnh có chữ ký và dấu thời gian của gateway bắt $116/116$\nnhật ký giả, không oan ai."),
-]
+VI_TRIMS = []
 
 VI_KEYWORDS = ["tưới khô ướt luân phiên", "MRV", "tín chỉ các-bon",
                "lúa phát thải thấp", "mô hình sinh đôi số"]
 
-REQUIRED_EN = ["33", "4", "9", "26.7", "8", "281", "116/116", "4801", "FAO-56",
-               "ERA5", "0.60", "0.85"]
-REQUIRED_VI = ["33", "4/9", "8/9", "26", "281", "116/116", "4801", "FAO-56", "ERA5"]
+REQUIRED_EN = ["33", "26.7", "5.0", "281", "116/116", "4801", "FAO-56", "ERA5"]
+REQUIRED_VI = ["33", "26", "5", "281", "116/116", "4801", "FAO-56", "ERA5"]
 
 
 def fit(base: str, trims: list[tuple[str, str]], lang: str) -> tuple[str, list[str]]:

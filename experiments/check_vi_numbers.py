@@ -45,7 +45,12 @@ FILES = ["01_intro", "07_system_model", "02_threat_attack", "03_guarantee",
 STRUCTURAL = [
     re.compile(r"\\ref\{[^}]*\}"),
     re.compile(r"\\eqref\{[^}]*\}"),
-    re.compile(r"(?:Table|Bảng|Supplementary|Phụ lục)~?S?\d+(?:\.\d+)?"),
+    # NHAN TAI LIEU PHAP LY: phai doi xung ca hai ngon ngu. LOI DA SUA
+    # (2026-10-09): chi liet ke Table/Bang/Supplementary/Phu luc, nen ban VI
+    # "Phu luc~2" bi loai con ban Anh "Annex~2" thi KHONG -> gate bao lech gia
+    # 1 so ('2') o 01_intro. Tuong tu "Bieu mau~3.3"/"Form~3.3": ca hai deu la
+    # so hieu bieu mau cua van ban luat, khong phai so do cua nghien cuu.
+    re.compile(r"(?:Table|Bảng|Supplementary|Phụ lục|Annex|Form|Biểu mẫu)~?S?\d+(?:\.\d+)?"),
     re.compile(r"Sec\.~?\\?\w*\{?(?:sec:)?\w*\}?"),
     re.compile(r"\\label\{[^}]*\}"),
     re.compile(r"S\d+(?:\.\d+)?"),        # S1, S10.4, S9.2 (phu luc dung chung)

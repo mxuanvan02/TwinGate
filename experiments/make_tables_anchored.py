@@ -194,11 +194,19 @@ def tab_defence(by: dict) -> None:
             continue
         n = len(rs)
         if v.startswith("honest"):
-            fa = sum(1 for r in rs if I(r, "v2_t0") or I(r, "v2_t1") or I(r, "anchor_flag"))
+            # LOI DA SUA (2026-10-09, peer review F1): o cot "Escapes v1" cua dong
+            # honest truoc day in hop v2_t0|v2_t1|anchor (3/60 = 5%) — tuc la so
+            # cua v2 nam duoi nhan v1, mau thuan voi Bang 4 (v1_t1 = 16/60 =
+            # 26,7%). Dung ngu nghia: moi cot in ty le nhat ky trung thuc BI TANG
+            # DO KET TOI OAN boi chinh tang do, dung phep hop t0|t1 nhu e1/e2 cua
+            # cac dong gian lan phia duoi.
+            fa1 = sum(1 for r in rs if I(r, "v1_t0") or I(r, "v1_t1"))
+            fa2 = sum(1 for r in rs if I(r, "v2_t0") or I(r, "v2_t1"))
+            faa = sum(I(r, "anchor_flag") for r in rs)
             lines.append(row(disp, f"0/{n} (honest)",
-                             BS + "textbf{" + pct(fa, n) + "} accused",
-                             pct(sum(I(r, "v2_t0") for r in rs), n),
-                             pct(sum(I(r, "anchor_flag") for r in rs), n) + " accused"))
+                             BS + "textbf{" + pct(fa1, n) + "} accused",
+                             pct(fa2, n) + " accused",
+                             pct(faa, n) + " accused"))
             continue
         # CHI TINH TREN TAP changed==1. Truoc day e1/e2 chia cho len(rs)=23 gom ca
         # 14 hang ma adversary tra ve NGUYEN BAN nhat ky (khong tim duoc nuoc di),
@@ -255,7 +263,9 @@ def tab_credit(by: dict) -> None:
     hf = by.get("honest_field", [])
     hfmap = {_pair_key(r): r for r in hf}
     lines = [rule("top"),
-             row("Log type", "Altered logs", "Paired dry phases (before " + BS + "to after)",
+             # $\to$ PHAI nam trong math mode: \to tran la math-only, IEEEtran
+             # fatal "Missing $ inserted" (da gap 2026-10-09 khi build paper2/main.tex).
+             row("Log type", "Altered logs", "Paired dry phases (before $" + BS + "to$ after)",
                  "Inflation", "$t$"),
              rule("mid")]
     for v, disp, *_ in THREAT:
@@ -280,7 +290,7 @@ def tab_credit(by: dict) -> None:
         t = statistics.mean(d) / se if se else 0.0
         infl = f"{(a - b) / b * 100:+.0f}" + BS + "%" if b else "n/a"
         lines.append(row(disp, f"{len(pairs)}/{len(rs)}",
-                         f"{num(b, 2)} " + BS + "to " + num(a, 2), infl,
+                         f"{num(b, 2)} $" + BS + "to$ " + num(a, 2), infl,
                          num(t, 2)))
     lines.append(rule("bot"))
     write("tab_credit", table([("p", 2.90), ("c", 0.60), ("p", 1.90), ("c", 1.10),

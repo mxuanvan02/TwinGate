@@ -47,19 +47,19 @@
   % TRAN 250 TU: ban dau 316 tu (vuot 26%). Da cat nhung cho lap y voi than bai
   % (danh sach 6 truc vi pham mo hinh, giai thich "do chinh la dong gop"), giu
   % NGUYEN VEN moi con so va moi hedge. Dem bang script check_abstract_words.
-  \noindent\textbf{Tóm tắt.} Đo đạc, báo cáo, thẩm định (MRV) là nút thắt khiến mức giảm phát
-  thải của lúa phát thải thấp chưa thành tín chỉ các-bon; giám sát chiếm khoảng ba phần tư chi
-  phí. Vì mỗi hành động quản lý nước đủ điều kiện cấp tín chỉ trong tưới khô ướt luân phiên
-  (AWD) vốn là một lệnh điều khiển, nhật ký nông dân tự ghi trông như bằng chứng gần như miễn
-  phí, xếp hạng cao nhất theo Quyết định 4801/QĐ-BNNMT. Chúng tôi dựng lớp đó trên mô hình sinh
-  đôi số FAO-56, chứng minh nó không kết tội oan nông dân tuân thủ, rồi tấn công chính nó. Đối
-  thủ giữ nguyên tổng lượng và từng độ sâu, chỉ dịch thời điểm lệnh, làm số pha khô được cấp tín
-  chỉ tăng $33\%$ (ghép cặp). Không lớp vật lý nào thoát một cách hữu ích: bộ phát hiện bắt
-  $4/9$ nhật ký bị sửa thì cũng kết tội oan $26{,}7\%$ nông dân trung thực, còn bộ bền vững giảm
-  oan xuống $5{,}0\%$ thì bỏ lọt $8/9$. Trên $281$ nhật ký tại ba trạm Đồng bằng sông Cửu Long,
-  hai năm khí hậu, với ruộng vi phạm mọi giả định mô hình, đối chiếu nhật ký với bản ghi lệnh có
-  chữ ký kèm dấu thời gian của gateway bắt $116/116$ nhật ký giả, không oan ai. Vật lý không thể
-  đứng một mình; dấu thời gian phải do thiết bị cấp, không phải do nông dân.
+  \noindent\textbf{Tóm tắt.} MRV là nút thắt khiến mức giảm phát thải của lúa phát thải thấp chưa thành tín
+chỉ các-bon; giám sát chiếm ba phần tư chi phí. Vì mọi hành động quản lý nước
+đủ điều kiện cấp tín chỉ trong tưới khô ướt luân phiên (AWD) vốn là lệnh điều
+khiển, nhật ký nông dân tự ghi trông như bằng chứng gần như miễn phí, xếp hạng cao
+nhất theo Quyết định 4801/QĐ-BNNMT. Chúng tôi dựng lớp đó trên mô hình sinh đôi số
+FAO-56 rồi tấn công nó; phần tấn công là đóng góp. Phát lại nhật ký với
+ERA5 công khai phơi bày độ sâu không đất nào chứa được, nhưng đối thủ giữ
+nguyên tổng lượng và từng độ sâu, chỉ dịch thời điểm lệnh, làm số pha khô được cấp tín
+chỉ tăng $33\%$ (ghép cặp). Không lớp vật lý nào thoát hữu ích: bộ phát hiện
+mô hình điểm kết tội oan $26{,}7\%$ nông dân trung thực, còn bộ bền vững giảm oan xuống
+$5{,}0\%$ lại bỏ lọt phần lớn tấn công dịch thời điểm. Trên $281$ nhật ký tại ba trạm
+Đồng bằng sông Cửu Long, hai năm khí hậu, đối chiếu nhật ký với bản ghi lệnh có chữ ký, dấu thời gian của gateway bắt $116/116$ nhật ký giả, không oan ai. Vật lý không thể
+đứng một mình; dấu thời gian phải do thiết bị cấp, không phải nông dân.
 
   \vspace{4pt}
   \noindent\textbf{Từ khóa:} tưới khô ướt luân phiên; đo đạc, báo cáo, thẩm định; tín chỉ
@@ -94,7 +94,11 @@ phơi bày ngưỡng chênh lệch tuyệt đối.}
 \centering
 \caption{Số pha khô được cấp tín chỉ dài ít nhất $72$~giờ --- đại lượng mà
 VM0051 và Quyết định 4801 trả tiền --- so với mốc ruộng trung thực (ghép cặp).
-Cột cuối đếm số tấn công thật sự sửa nhật ký.}
+Cột cuối đếm số tấn công thật sự sửa nhật ký. Bảng có hai mốc: dòng ``trung
+thực'' là trung bình $3{,}23$ pha của toàn bộ $60$ nhật ký trung thực, còn
+cột ``trước'' của mỗi dòng gian lận là nhật ký trung thực \emph{ghép cặp} cùng
+trạm, năm, seed và loại đất ($4{,}87$ với các biến thể đối kháng) --- hai mốc
+khác nhau có chủ đích, xem Phụ lục~S15.}
 \label{tab:credit}
 \footnotesize
 \input{tables_vi/tab_credit}
@@ -183,18 +187,17 @@ DHH2025-19-07.\\[4pt]
   monitoring is about three quarters of that cost. Because every credit-eligible
   action under alternate wetting and drying is already an \emph{actuation command},
   a farmer-written irrigation log looks like free evidence of the highest rank under
-  Decision 4801/QD-BNNMT. We built that layer on an FAO-56 digital twin, proved it
-  cannot accuse a compliant farmer, and then attacked it; the attack is the
-  contribution. Replaying a log under public ERA5 forcing exposes depths no soil can
-  hold, but an adversary who keeps the total volume and every individual depth and
-  merely \emph{shifts commands in time} inflates creditable dry phases by $33\%$ in
-  paired comparison. No physical tier escapes it usefully: the point model flags $4$
-  of $9$ altered logs yet accuses $26.7\%$ of honest farmers, and the robust tier that cuts false accusation to $5.0\%$ lets $8$ of $9$ through. Over $281$ audited logs at three Mekong
-  Delta stations and two climate years, with the field violating every modelling
-  assumption (soil texture, staged crop coefficient, efficiency $0.60$--$0.85$,
-  rainfall, seepage, recording noise), matching the log against the gateway's
-  signed, time-stamped command record catches $116/116$ forged logs and accuses
-  none. Physics-based attestation cannot stand alone; the timestamp must come from
+  Decision 4801/QD-BNNMT. We built that layer on an FAO-56 digital twin, then
+  attacked it; the attack is the contribution. Replaying a log under public ERA5
+  forcing exposes claimed depths no soil can hold, but an adversary who keeps the
+  total volume and every individual depth and merely \emph{shifts commands in time}
+  inflates creditable dry phases by $33\%$ in paired comparison. No physical tier
+  escapes it usefully: the point model accuses $26.7\%$ of honest farmers, and the
+  robust tier that cuts false accusation to $5.0\%$ in turn misses most
+  time-shifting attacks. Over $281$ audited logs at three Mekong Delta stations
+  and two climate years, matching the log against the gateway's signed,
+  time-stamped command record catches $116/116$ forged logs and accuses none.
+  Physics-based attestation cannot stand alone; the timestamp must come from
   a device, not the farmer.
 
   \vspace{4pt}
