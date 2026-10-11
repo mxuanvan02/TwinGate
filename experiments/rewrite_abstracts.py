@@ -76,11 +76,18 @@ EN_KEYWORDS = ["alternate wetting and drying",
                "carbon credit", "low-emission rice", "digital twin"]
 
 # ---------------------------------------------------------------- VI
+# THUAT NGU 'digital twin' (2026-10-09, anh Van bat loi): ban cu dich la
+# 'mô hình sinh đôi số' — CHU TU DAT, khong co trong tai lieu tieng Viet nao.
+# Tra cuu that: Hoc vien Nong nghiep VN ('Bản sao số của hệ thống lắp ráp bóng đèn
+# – ĐHBKHN'), VNPT, tai lieu cong nghiep deu dung 'bản sao số'.
+# Ly do glossary cu tu choi 'bản sao số' (can phan biet twin voi predictor AR(1)/
+# Kalman) khong dung: phan biet hai khai niem la viec cua cau van, khong phai ly do
+# de bia thuat ngu moi. Lan dung dau giu tieng Anh trong ngoac de khong mat nghia.
 VI_BASE = r"""Đo đạc, báo cáo, thẩm định (MRV) là nút thắt khiến mức giảm phát thải của lúa phát thải thấp chưa thành tín
 chỉ các-bon; giám sát chiếm ba phần tư chi phí. Vì mọi hành động quản lý nước
 đủ điều kiện cấp tín chỉ trong tưới khô ướt luân phiên (AWD) vốn là lệnh điều
 khiển, nhật ký nông dân tự ghi trông như bằng chứng gần như miễn phí, xếp hạng cao
-nhất theo Quyết định 4801/QĐ-BNNMT. Chúng tôi dựng lớp đó trên mô hình sinh đôi số
+nhất theo Quyết định 4801/QĐ-BNNMT. Chúng tôi dựng lớp đó trên bản sao số (digital twin)
 FAO-56 rồi tấn công nó; phần tấn công là đóng góp. Phát lại nhật ký với
 ERA5 công khai phơi bày độ sâu không đất nào chứa được, nhưng đối thủ giữ
 nguyên tổng lượng và từng độ sâu, chỉ dịch thời điểm lệnh, làm số pha khô được cấp tín
@@ -102,7 +109,7 @@ VI_TRIMS = []
 # chuoi khac voi chuoi duoc in. Ban EN khong mac vi EN_KEYWORDS giu cum day du.
 # NGUYEN TAC: danh sach tu khoa phai la ban sao cua dong duoc IN, khong viet tay.
 VI_KEYWORDS = ["tưới khô ướt luân phiên", "đo đạc, báo cáo, thẩm định",
-               "tín chỉ các-bon", "lúa phát thải thấp", "mô hình sinh đôi số"]
+               "tín chỉ các-bon", "lúa phát thải thấp", "bản sao số"]
 
 REQUIRED_EN = ["33", "26.7", "5.0", "281", "116/116", "4801", "FAO-56", "ERA5"]
 REQUIRED_VI = ["33", "26", "5", "281", "116/116", "4801", "FAO-56", "ERA5"]
