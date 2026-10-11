@@ -5,7 +5,7 @@
 \subsection{Độ sâu chấp nhận được là một dải, không phải một con số}
 \label{sec:umax}
 
-Phiên bản trước của lớp này nêu một giới hạn duy nhất, $u\le 61$~mm, là khai báo lớn nhất không bao giờ gây báo động. Con số đó là sản phẩm của một hồ sơ đất và một điều kiện đầu duy nhất. Với $V_4$ kích hoạt khi
+Thiết kế ban đầu của lớp này nêu một giới hạn duy nhất, $u\le 61$~mm, là khai báo lớn nhất không bao giờ gây báo động. Con số đó là sản phẩm của một hồ sơ đất và một điều kiện đầu duy nhất. Với $V_4$ kích hoạt khi
 $u_i>c_{t_i}+\varepsilon$ và $c_t=d_t\cdot\mathrm{span}$, giới hạn tại một
 ruộng có độ cạn kiệt ban đầu $w_0$ và tưới không muộn hơn $d^{*}$ là
 \begin{equation}
@@ -14,7 +14,7 @@ u_{\max}=\max(d^{*},w_0)\cdot\mathrm{span}+\varepsilon .
 \end{equation}
 Hai điều chỉnh rút ra, cả hai đều được xác minh bằng cách quét toán tử phát lại
 chứ không chỉ bằng đại số (dẫn xuất ở Phụ lục~S14). \eqref{eq:umax} dùng $\max$ chứ không dùng hiệu. Một ruộng khô ban đầu chấp nhận khai báo
-\emph{lớn hơn} ruộng ướt, và biểu thức trong phiên bản trước không tương ứng với trạng thái vật lý nào, và nó chặn một \emph{lần tưới đơn lẻ} chứ không chặn
+\emph{lớn hơn} ruộng ướt, và biểu thức ban đầu không tương ứng với trạng thái vật lý nào, và nó chặn một \emph{lần tưới đơn lẻ} chứ không chặn
 cả vụ, nên một đối thủ phát nhiều khai báo dưới ngưỡng có thể thổi phồng tổng
 lượng mà không có giới hạn. Bảng~S2 của Phụ lục đưa ra dải cần được báo cáo
 thay thế, $[49{,}0; 86{,}0]$~mm trên toàn $\Theta$.
@@ -24,7 +24,7 @@ thay thế, $[49{,}0; 86{,}0]$~mm trên toàn $\Theta$.
 
 Kiểm toán viên không biết đất của nông dân, không biết giai đoạn sinh trưởng,
 cũng không biết hiệu suất của hệ thống dẫn nước. Gọi $\Theta$ là tập bất định
-và $V_\theta(L)$ là tập vi phạm dưới cấu hình $\theta$; bộ phát hiện của phiên bản trước
+và $V_\theta(L)$ là tập vi phạm dưới cấu hình $\theta$; bộ phát hiện ban đầu
 chỉ đánh giá một $\theta_0$ mặc định và coi mọi vi phạm là có tội. Chúng tôi
 thay nó bằng một phép giao:
 \begin{equation}
@@ -82,7 +82,7 @@ $n\to0$, $\sigma_{\mathrm{event}}\to0$.
 
 \begin{remark}[Một bộ lọc không thể kích hoạt]
 \label{sec:v2reach}
-Bộ lọc vật lý thứ ba của phiên bản trước, đánh dấu độ cạn kiệt xuống dưới
+Bộ lọc vật lý thứ ba của thiết kế ban đầu, đánh dấu độ cạn kiệt xuống dưới
 điểm héo, đã không hoạt động theo hai cách: ngưỡng của nó ($1{,}02$) nằm ngoài
 dải đã cắt ngọn của chỉ số được báo cáo ($0$ lần kích hoạt trong $281$ nhật
 ký), và sau khi sửa thì nó vẫn không thể kích hoạt. Qua $150$ cấu hình với một nhật ký rỗng, độ cạn kiệt chưa cắt ngọn chỉ đạt đỉnh $0{,}9987$, và một
