@@ -248,7 +248,23 @@ for _i, _m in enumerate(reversed(_eq_spans), start=1):      # di nguoc de khong 
     body = body[:_m.end()] + f"\n\nEQNUM: {_idx}\n\n" + body[_m.end():]
     _n_eq += 1
 rep(f"[6c] them {_n_eq} marker EQNUM (so hieu cong thuc cho ban Word)")
-assert _n_eq == len(_eq_spans) == 26, (_n_eq, len(_eq_spans))
+# LOI DA SUA (2026-10-09): assert cu la `_n_eq == len(_eq_spans) == 26` — so 26 la
+# HANG SO CUNG cua ban 24 trang. Sau khi cat bai con 14 trang, nguon that chi con
+# 22 equation (07:5 + 02:10 + 03:4 + 04:3), nen script chet o day. Vi write_text
+# nam SAU assert, body.tex KHONG duoc ghi lai va docx_build/ giu ban cu (Oct 7)
+# chua toan bo so da bi bac bo (69%, 78%, 91%, 6.14, 3.44) — tuc artifact Word
+# lech hoan toan so voi bai. KHONG duoc chi doi 26 -> 22 (lai thanh hang so cung
+# cho lan cat tiep theo): phai DOI CHIEU HAI NGUON DOC LAP.
+_n_eq_aux = len([k for k in labels if k.startswith("eq:")])
+_n_unlabeled = sum(1 for _m in _eq_spans
+                   if not re.search(r"\\label\{eq:[^}]+\}", _m.group(1)))
+rep(f"[6c] doi chieu: body co {_n_eq} equation | aux co {_n_eq_aux} nhan eq: | "
+    f"body co {_n_unlabeled} equation khong nhan")
+assert _n_eq == len(_eq_spans) > 0, (_n_eq, len(_eq_spans))
+assert _n_eq_aux + _n_unlabeled == _n_eq, (
+    f"lech giua body va aux: {_n_eq_aux} nhan + {_n_unlabeled} khong nhan "
+    f"!= {_n_eq} equation trong body. Nghia la body (sau inline \\input) va "
+    f"main_hujos.aux khong con khop nhau — build lai truoc khi chay script nay.")
 
 # ---------------------------------------------------------------- 7) CHECK CUOI
 leftover = re.findall(r"\\(?:ref|eqref|cite[tp]?|label)\{([^}]*)\}", body)
