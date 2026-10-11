@@ -7,6 +7,12 @@ authors:
     given-names: "Xuan Van"
   - family-names: "Nguyen"
     given-names: "Tuong Tri"
+  - family-names: "Le Duc"
+    given-names: "Minh Phuong"
+  - family-names: "Nguyen"
+    given-names: "Dang Tri"
+  - family-names: "Truong"
+    given-names: "Khanh Duy"
 repository-code: "https://github.com/mxuanvan02/TwinGate"
 license: MIT
 version: "1.0.0"

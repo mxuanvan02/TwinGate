@@ -1,13 +1,27 @@
-# TwinGate — Digital-Twin Safety Gate for Irrigation Command Dispatch over Lossy Networks
+# TwinGate — Device-Anchored MRV & Digital-Twin Safety Gate for Low-Emission Rice
 
-Reference implementation for the paper
+Research software repository for the Hue University Grant **DHH2025-19-07**.
+It contains the source, data provenance, experiments and manuscripts of two
+companion papers:
 
-> **A Digital-Twin Safety Gate for Irrigation Command Dispatch over Lossy
-> Networks and Its Relevance to Emission MRV**
+> **Paper A (this repo's namesake).** *A Digital-Twin Safety Gate for Irrigation
+> Command Dispatch over Lossy Networks and Its Relevance to Emission MRV*
+> — chance-constrained safety gate deciding whether an irrigation command may
+> be sent over a lossy channel.
 >
-> Mai Xuan Van, Nguyen Tuong Tri (corresponding) — Hue University, Vietnam.
-> Funded by Hue University, Grant No. DHH2025-19-07.
-> Manuscript under review at the Hue University Journal of Science (HUJOS-TT).
+> **Paper B (under review at HUJOS-TT).** *An Inherent Blind Spot of
+> Physics-Based Attestation for Irrigation Logs, and Device-Anchored Repair in
+> Monitoring, Reporting and Verification for Low-Emission Rice* — Vietnamese
+> and English manuscripts in `paper2_hujos/`, IEEE-format blocks in `paper2/`.
+>
+> Mai Xuan Van, Nguyen Tuong Tri\*, Le Duc Minh Phuong\*, Nguyen Dang Tri,
+> Truong Khanh Duy — Hue University / Gia Dinh University, Vietnam.
+> (\* co-corresponding authors.)
+
+**Where to start.** `README` (this file) → problem and layout; `reproduce.sh`
+→ regenerate every published number; `outputs/` → raw CSVs behind every claim;
+`paper2_hujos/HUJOS_manuscript_vi.pdf` → the manuscript under review;
+`docs/` → design proposals and the robustness-upgrade findings.
 
 TwinGate decides, once every 24-hour epoch, *whether* an irrigation command may
 be sent at all — and with what depth — when the command channel drops packets
@@ -106,8 +120,8 @@ python3 experiments/fraud_detection.py           # 240 logs, exits non-zero on a
 python3 experiments/make_tables_paper2.py        # regenerates paper2/tables/*.tex from the CSV
 ```
 
-Design notes: `PROPOSAL_TWIN_ATTESTED.md` (the proposal) and
-`PROPOSAL_MRV_COST.md` (the four-architecture cost comparison). Hardware prices
+Design notes: `docs/PROPOSAL_TWIN_ATTESTED.md` (the proposal) and
+`docs/PROPOSAL_MRV_COST.md` (the four-architecture cost comparison). Hardware prices
 there are planning estimates, not quotations.
 
 ## What the robustness upgrade found (read this before quoting the paper)
@@ -161,7 +175,7 @@ Two further honesty corrections:
   bucket drains continuously so a season-long inflation of many sub-threshold claims
   is not bounded by it.
 
-Full measurement log: `UPGRADE_FINDINGS.md`.
+Full measurement log: `docs/UPGRADE_FINDINGS.md`.
 
 ```bash
 python3 tests/test_log_filters.py                       # 46 tests, one per hole
@@ -224,13 +238,22 @@ src/ncs_loop.py          the 3-state NCS loop, 5 metrics, budget accounting
 tests/                   7 test scripts incl. the 6 paper invariants (I1–I7)
 experiments/             main grid, ablation, deployment sweep, multi-field,
                          σ×δ sweep, salinity scenario, Wilcoxon stats,
-                         LaTeX table generator
+                         LaTeX table generator, manuscript QA gates
+                         (numbers, acronyms, title, claim verification)
 data/                    ERA5 fetch script + cached 2024/2025 hourly weather
                          for Can Tho, Soc Trang, Ca Mau (Open-Meteo archive;
                          provenance JSONs included)
 figures/                 all 8 paper figures, drawn from outputs/*.csv
 outputs/                 every raw CSV and summary behind every paper number
+paper2/                  Paper B, IEEE format: blocks/*.tex + tables/
+                         (shared with paper2_hujos — edit once, both update)
+paper2_hujos/            Paper B, HUJOS-TT submission: main_hujos.tex (EN),
+                         main_hujos_vi.tex (VI), blocks_vi/ + tables_vi/,
+                         glossary_vi.tex, supplementary.tex, built PDFs
+docs/                    design proposals (PROPOSAL_*.md) and
+                         UPGRADE_FINDINGS.md (read before quoting v1 numbers)
 reproduce.sh             one-command full reproduction
+CITATION.cff             machine-readable citation metadata
 ```
 
 ## Reproducing every number in the paper
