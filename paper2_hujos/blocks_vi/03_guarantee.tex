@@ -5,9 +5,7 @@
 \subsection{Độ sâu chấp nhận được là một dải, không phải một con số}
 \label{sec:umax}
 
-Phiên bản đã công bố của lớp này nêu một giới hạn duy nhất, $u\le 61$~mm, là
-khai báo lớn nhất không bao giờ gây báo động --- đó là sản phẩm của một hồ sơ
-đất và một điều kiện đầu duy nhất. Với $V_4$ kích hoạt khi
+Phiên bản đã công bố của lớp này nêu một giới hạn duy nhất, $u\le 61$~mm, là khai báo lớn nhất không bao giờ gây báo động. Con số đó là sản phẩm của một hồ sơ đất và một điều kiện đầu duy nhất. Với $V_4$ kích hoạt khi
 $u_i>c_{t_i}+\varepsilon$ và $c_t=d_t\cdot\mathrm{span}$, giới hạn tại một
 ruộng có độ cạn kiệt ban đầu $w_0$ và tưới không muộn hơn $d^{*}$ là
 \begin{equation}
@@ -15,10 +13,8 @@ u_{\max}=\max(d^{*},w_0)\cdot\mathrm{span}+\varepsilon .
 \label{eq:umax}
 \end{equation}
 Hai điều chỉnh rút ra, cả hai đều được xác minh bằng cách quét toán tử phát lại
-chứ không chỉ bằng đại số (dẫn xuất ở Phụ lục~S14): \eqref{eq:umax} dùng
-$\max$ chứ không dùng hiệu --- một ruộng khô ban đầu chấp nhận khai báo
-\emph{lớn hơn} ruộng ướt, và biểu thức đã công bố trước đó không tương ứng với
-trạng thái vật lý nào --- và nó chặn một \emph{lần tưới đơn lẻ} chứ không chặn
+chứ không chỉ bằng đại số (dẫn xuất ở Phụ lục~S14). \eqref{eq:umax} dùng $\max$ chứ không dùng hiệu. Một ruộng khô ban đầu chấp nhận khai báo
+\emph{lớn hơn} ruộng ướt, và biểu thức đã công bố trước đó không tương ứng với trạng thái vật lý nào, và nó chặn một \emph{lần tưới đơn lẻ} chứ không chặn
 cả vụ, nên một đối thủ phát nhiều khai báo dưới ngưỡng có thể thổi phồng tổng
 lượng mà không có giới hạn. Bảng~S2 của Phụ lục đưa ra dải phải được công bố
 thay thế, $[49{,}0; 86{,}0]$~mm trên toàn $\Theta$.
@@ -61,16 +57,14 @@ $\theta^{*}$, thì $V_{\mathrm{rob}}(L)=\emptyset$ và nông dân không bị k�
 $V_{\mathrm{rob}}(L)\subseteq V_{\theta^{*}}(L)=\emptyset$.
 \end{proof}
 
-Mệnh đề~\ref{prop:noalarm} là thứ làm cho lớp này triển khai được: sai số mô
+Mệnh đề~\ref{prop:noalarm} là thứ làm cho lớp này triển khai được. Sai số mô
 hình có thể làm giảm năng lực phát hiện nhưng không thể tạo ra một lời kết
-tội, với một cái giá phải được nói rõ. Hai chi tiết cài đặt --- cách xử lý các
-thế giới không kích hoạt và độ trải của $\mathcal{W}$ --- sẽ âm thầm phá vỡ
-mệnh đề nếu làm sai (Phụ lục~S7).
+tội, với một cái giá phải được nói rõ. Hai chi tiết cài đặt là cách xử lý các thế giới không kích hoạt và độ trải của $\mathcal{W}$; làm sai sẽ âm thầm phá vỡ mệnh đề (Phụ lục~S7).
 
 \subsection{Ngưỡng chênh lệch bơm tỉ lệ thuận}
 
 Quy tắc tuyệt đối $G>\tau_0$ với $\tau_0=5$~mm giả định nhật ký là bản sao
-trung thực của lượng nước đã bơm. Nó không phải vậy: quên ghi, làm tròn đến
+trung thực của lượng nước đã bơm. Nó không phải vậy, vì quên ghi, làm tròn đến
 $5$~mm gần nhất và ghi trễ một ngày đều đóng góp vào $G$ mà không có hành vi
 sai trái nào, nên ngưỡng phải co giãn theo số lần tưới được ghi:
 \begin{equation}
@@ -91,8 +85,7 @@ $n\to0$, $\sigma_{\mathrm{event}}\to0$.
 Bộ lọc vật lý thứ ba của phiên bản đã công bố, đánh dấu độ cạn kiệt xuống dưới
 điểm héo, đã không hoạt động theo hai cách: ngưỡng của nó ($1{,}02$) nằm ngoài
 dải đã cắt ngọn của chỉ số được báo cáo ($0$ lần kích hoạt trong $281$ nhật
-ký), và sau khi sửa thì nó vẫn không thể kích hoạt --- qua $150$ cấu hình với
-một nhật ký rỗng, độ cạn kiệt chưa cắt ngọn chỉ đạt đỉnh $0{,}9987$, và một
+ký), và sau khi sửa thì nó vẫn không thể kích hoạt. Qua $150$ cấu hình với một nhật ký rỗng, độ cạn kiệt chưa cắt ngọn chỉ đạt đỉnh $0{,}9987$, và một
 ruộng lúa vụ khô ở đồng bằng không chạm tới điểm héo (Bảng~S3 của Phụ lục, dẫn
 xuất ở S13). Lớp này có hai bộ lọc vật lý hoạt động và một thiết bị an toàn
 bất động.
