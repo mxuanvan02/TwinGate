@@ -9,7 +9,8 @@ differs from the twin along seven axes, each with a published source (every
 value in Supplementary Table~S6; axis-by-axis list and per-event recording
 semantics in S20.1). Weather is hourly ERA5~\cite{hersbach2020} (Open-Meteo archive) for Can Tho,
 Soc Trang and Ca Mau over 2024 (water-scarce) and 2025 (water-surplus), window
-1 March to 29 May ($2\,160$\,h), the dry season in which AWD is practised. Layer~1 is the published point-model detector (default profile, absolute
+1 March to 29 May ($2\,160$\,h), the dry season in which AWD is
+practised~\cite{tuong2003}. Layer~1 is the point-model detector of the earlier version (default profile, absolute
 threshold $\tau_0=5$\,mm); Layer~2 the robust detector of \eqref{eq:robust}
 with the proportional threshold of \eqref{eq:tau}, on both a reduced
 $\Theta$ ($24$ replays per log, $10$ seeds) and the full one ($150$ replays,
@@ -27,7 +28,7 @@ as a diagnostic (S10.3).
 \section{Results}
 \label{sec:results}
 
-\subsection{The published detector is unsafe, not merely optimistic}
+\subsection{The earlier detector is unsafe, not merely optimistic}
 
 Table~\ref{tab:falseacc} gives the central negative result: the point-model
 detector accuses nobody on paper-condition logs, reproducing the prior $0/60$,

@@ -17,7 +17,8 @@ subset of them:
 \end{equation}
 Supplementary Table~S1 lists the resulting fraud classes. The adversary is
 \emph{rational}: it maximises creditable dry phases subject to not being
-flagged, and it knows the detector, because the detector is published; this is
+flagged, and it knows the detector, because the detector's design was described openly in
+the earlier version; this is
 the sense in which $\varepsilon$ in \eqref{eq:v4} below is not a secret.
 
 Let $M$ be the volume actually pumped, measured at the cooperative station, and
@@ -45,7 +46,9 @@ The credited count is then
 n_{\mathrm{dry}}(L)=\bigl|\mathcal{A}\bigl(\mathcal{R}(L)\bigr)\bigr|,
 \label{eq:ndry}
 \end{equation}
-with $d_{\mathrm{dry}}=0.45$ throughout. Revenue is proportional to
+with $d_{\mathrm{dry}}=0.45$ throughout; this value is a modelling choice of ours,
+set high enough that a dry phase is meaningful rather than merely not flooded (its
+sensitivity is examined in Appendix~S20). Revenue is proportional to
 $n_{\mathrm{dry}}$, not to $U(L)$ --- the distinction that makes the attack of
 Sec.~\ref{sec:timeshift} profitable, invisible in a formulation that treats
 total volume as the target.
@@ -78,12 +81,11 @@ u_i\ \le\ k_{\mathrm{inf}}\,\tau_i+p_{\max},
 \label{eq:v5}
 \end{equation}
 with $k_{\mathrm{inf}}=10$\,mm\,h$^{-1}$ and $p_{\max}=100$\,mm at the
-loose end of the published range for puddled rice (bound $110$\,mm at
-$\tau_i=1$\,h), so that a farmer who records two adjacent events in one hour
-is not accused.
+loose end of the published range for puddled rice~\cite{kukal2004,bouman2001}
+(bound $110$\,mm at $\tau_i=1$\,h), so that a farmer who records two adjacent
+events in one hour is not accused.
 
-A fourth filter, on depletion below the wilting point, was included in the
-published version of this layer. It cannot activate: see
+A fourth filter, on depletion below the wilting point, was included in the earlier version of this layer. It cannot activate: see
 Sec.~\ref{sec:v2reach}.
 
 \begin{proposition}[Exact blindness of aggregate defences]

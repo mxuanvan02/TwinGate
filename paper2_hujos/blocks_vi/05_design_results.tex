@@ -11,10 +11,10 @@ Phụ lục; danh sách từng trục và ngữ nghĩa ghi chép theo sự kiệ
 Thời
 tiết là ERA5 theo giờ~\cite{hersbach2020} (kho lưu trữ Open-Meteo) cho Cần Thơ, Sóc Trăng và Cà Mau
 trong năm 2024 (khan nước) và 2025 (thừa nước), cửa sổ từ ngày 1 tháng Ba đến
-ngày 29 tháng Năm ($2\,160$~giờ), mùa khô mà AWD được áp dụng.
+ngày 29 tháng Năm ($2\,160$~giờ), mùa khô mà AWD được áp dụng~\cite{tuong2003}.
 
 Bốn tầng phòng thủ được cài đặt như sau. Tầng~1 là bộ
-phát hiện mô hình điểm đã công bố (hồ sơ mặc định, ngưỡng tuyệt đối
+phát hiện mô hình điểm của phiên bản trước (hồ sơ mặc định, ngưỡng tuyệt đối
 $\tau_0=5$~mm); Tầng~2 là bộ phát hiện bền vững của \eqref{eq:robust} với
 ngưỡng tỉ lệ của \eqref{eq:tau}, chạy trên cả $\Theta$ rút gọn ($24$ lần phát
 lại mỗi nhật ký, $10$ seed) và $\Theta$ đầy đủ ($150$ lần phát lại, dùng kiểm
@@ -37,7 +37,7 @@ xuất hiện như một chỉ số chẩn đoán (S10.3).
 \section{Kết quả}
 \label{sec:results}
 
-\subsection{Bộ phát hiện đã công bố không an toàn, chứ không chỉ lạc quan}
+\subsection{Bộ phát hiện của phiên bản trước không an toàn, chứ không chỉ lạc quan}
 
 Bảng~\ref{tab:falseacc} đưa ra kết quả phủ định trung tâm. Bộ phát hiện mô hình
 điểm không kết tội ai trên nhật ký điều kiện giấy, tái hiện đúng $0/60$ của lần
@@ -84,7 +84,7 @@ khi không kết tội oan nhật ký nào trong $60$ nhật ký trung thực đ
 khác biệt nằm ở các dòng đối kháng, nơi cả vật lý lẫn tổng lượng đều
 thất bại và chỉ có neo thiết bị đứng vững.
 
-Tính bền vững không miễn phí. Trên
+Tính bền vững không miễn phí, vì trên
 chín nhật ký gian lận bỏ sót thật sự bị sửa, mô hình điểm bắt được $9/9$ trong
 khi quy tắc bền vững bắt $4/9$ ($4/4$ so với $2/4$ ở $\Theta$ đầy đủ). Đó là một sự mất mát năng lực phát hiện, không phải một cải thiện Pareto, dù chúng tôi coi
 đó là phía đúng của sự đánh đổi. Mọi kết luận đều đúng với cả $\Theta$ rút gọn
