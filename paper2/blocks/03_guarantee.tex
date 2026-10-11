@@ -4,9 +4,7 @@
 \subsection{The admissible depth is a range, not a number}
 \label{sec:umax}
 
-The initial design of this layer stated a single bound, $u\le 61$\,mm, as
-the largest claim that never raises an alarm --- an artefact of one soil
-profile and one initial condition. With $V_4$ firing when
+This layer stated a single bound, $u\le 61$\,mm, as the largest claim that never raises an alarm --- an artefact of one soil profile and one initial condition. With $V_4$ firing when
 $u_i>c_{t_i}+\varepsilon$ and $c_t=d_t\cdot\mathrm{span}$, the bound at a
 field with initial depletion $w_0$ irrigating no later than $d^{*}$ is
 \begin{equation}
@@ -16,7 +14,7 @@ u_{\max}=\max(d^{*},w_0)\cdot\mathrm{span}+\varepsilon .
 Two corrections follow, both verified by scanning the replay operator rather
 than by algebra alone (derivation in Supplementary~S14): \eqref{eq:umax} uses
 $\max$, not a difference --- an initially dry field admits \emph{larger}
-claims than a wet one, and the original expression corresponds to
+claims than a wet one, and the difference-form expression corresponds to
 no physical state --- and it bounds a \emph{single event}, not the season, so
 an adversary issuing many sub-threshold claims can inflate the total without
 bound. Supplementary Table~S2 gives the range that must be reported instead,
@@ -27,7 +25,7 @@ $[49.0,86.0]$\,mm across $\Theta$.
 
 The auditor knows neither the farmer's soil, nor the growth stage, nor the
 delivery efficiency. Let $\Theta$ be the uncertainty set and $V_\theta(L)$
-the violation set under configuration $\theta$; the original detector
+the violation set under configuration $\theta$; the point-model detector
 evaluated a single default $\theta_0$ and treated every violation as guilt.
 We replace it by an intersection:
 \begin{equation}
@@ -88,11 +86,6 @@ case $n\to0$, $\sigma_{\mathrm{event}}\to0$.
 
 \begin{remark}[A filter that cannot fire]
 \label{sec:v2reach}
-The initial design's third physical filter, flagging depletion below the
-wilting point, was doubly inoperative: its threshold ($1.02$) lay outside the
-clipped range of the reported indicator ($0$ firings in $281$ logs), and once
-repaired it still cannot activate --- across $150$ configurations with an empty
-log the unclipped depletion peaks at $0.9987$, and a dry-season delta rice
-field does not reach the wilting point (Supplementary Table~S3, derivation in
+The third physical filter, flagging depletion below the wilting point, was doubly inoperative: its threshold ($1.02$) lay outside the clipped range of the reported indicator ($0$ firings in $281$ logs), and once repaired it still cannot activate --- across $150$ configurations with an empty log the unclipped depletion peaks at $0.9987$, and a dry-season delta rice field does not reach the wilting point (Supplementary Table~S3, derivation in
 S13). The layer has two operative physical filters and one inert safety device.
 \end{remark}

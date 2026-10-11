@@ -222,10 +222,9 @@ A configuration that maximises claimed volume is not automatically profitable:
 an early adversary that inflated claims by $344$\,mm drove $n_{\mathrm{dry}}$ to
 zero and would have earned nothing, so volume is reported only as a diagnostic.
 
-\subsection*{S10.4 The self-consistency artefact of the first version}
+\subsection*{S10.4 The self-consistency artefact}
 
-The first version of the audited layer generated ``real'' trajectories with the
-default \texttt{SoilProfile}, noiseless ERA5 forcing, irrigation as a one-hour
+The audited layer generated ``real'' trajectories with the default \texttt{SoilProfile}, noiseless ERA5 forcing, irrigation as a one-hour
 impulse of exactly $\{20,40\}$\,mm, a threshold of exactly $0.80$, and a farmer
 who records the right depth at the right hour every time. Its $0/60$ false
 accusations and $60/60$ detections were therefore both measurements of
@@ -270,8 +269,7 @@ three, and no forgery of the three quantities has occurred.
 % ---------------------------------------------------------------- S13
 \section*{S13. The wilting-point filter: full derivation}
 
-The initial design included a third physical filter, flagging depletion below
-the wilting point as physically impossible. It was doubly inoperative. Its
+The layer included a third physical filter, flagging depletion below the wilting point as physically impossible. It was doubly inoperative. Its
 threshold was set at $1.02$ while the reported indicator
 $\hat d_t=\min(1,\max(0,\cdot))$ is clipped to $[0,1]$, so the condition was
 unsatisfiable by construction: $0$ firings in $281$ logs. We repaired it by
@@ -400,8 +398,7 @@ are applied per \emph{event}, not per hour (S10.1).
 
 The premise that motivated this work was attractive: an irrigation command is
 already a digital event, so MRV evidence should be nearly free. That premise
-survives, but not in the form the first draft claimed. It survives because the
-controller that issues the command can also sign it, and the signed record is
+survives, but not in the form originally claimed. It survives because the controller that issues the command can also sign it, and the signed record is
 what makes the evidence admissible --- not because a hydrological model can
 detect a lie. Where the original draft claimed that physics attests the log,
 the correct statement is that physics \emph{constrains} the log: it rules out

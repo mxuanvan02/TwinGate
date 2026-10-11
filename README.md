@@ -12,7 +12,8 @@ companion papers:
 > **Paper B (under review at HUJOS-TT).** *An Inherent Blind Spot of
 > Physics-Based Attestation for Irrigation Logs, and Device-Anchored Repair in
 > Monitoring, Reporting and Verification for Low-Emission Rice* — Vietnamese
-> and English manuscripts in `paper2_hujos/`, IEEE-format blocks in `paper2/`.
+> and English manuscripts in `paper2_hujos/`; shared LaTeX body blocks and
+> generated tables in `paper2/`.
 >
 > Mai Xuan Van, Nguyen Tuong Tri\*, Le Duc Minh Phuong\*, Nguyen Dang Tri,
 > Truong Khanh Duy — Hue University / Gia Dinh University, Vietnam.
@@ -245,8 +246,9 @@ data/                    ERA5 fetch script + cached 2024/2025 hourly weather
                          provenance JSONs included)
 figures/                 all 8 paper figures, drawn from outputs/*.csv
 outputs/                 every raw CSV and summary behind every paper number
-paper2/                  Paper B, IEEE format: blocks/*.tex + tables/
-                         (shared with paper2_hujos — edit once, both update)
+paper2/                  Paper B shared sources: blocks/*.tex (EN body) +
+                         tables/ + refs.bib — consumed by paper2_hujos builds
+                         via symlinks; no standalone driver any more
 paper2_hujos/            Paper B, HUJOS-TT submission: main_hujos.tex (EN),
                          main_hujos_vi.tex (VI), blocks_vi/ + tables_vi/,
                          glossary_vi.tex, supplementary.tex, built PDFs
