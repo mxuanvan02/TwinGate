@@ -4,6 +4,10 @@
 \section{Khi nào được kết tội một nông dân?}
 \label{sec:guarantee}
 
+Hai mục trước cho thấy lớp kiểm toán vật lý vừa bỏ lọt đối thủ tinh vi vừa có nguy
+cơ kết tội oan người trung thực. Mục này xử lý vế thứ hai trước khi tổng hợp thành
+khẳng định điểm mù tất yếu.
+
 \subsection{Độ sâu chấp nhận được là một dải, không phải một con số}
 \label{sec:umax}
 
@@ -43,8 +47,8 @@ V_{\mathrm{rob}}(L)&=\bigcap_{\theta\in\Theta}V_\theta(L),\\
 \end{equation}
 với $|\mathcal{S}|=5$ loại đất, $|\mathcal{K}|=2$ chế độ hệ số cây trồng,
 $|\mathcal{E}|=3$ mức hiệu suất tưới và $|\mathcal{W}|=5$ trạng thái đầu, nên
-$|\Theta|=150$ và mỗi nhật ký tốn $150$ lần phát lại. Ngữ nghĩa phán quyết được
-chọn cố ý lệch về một phía:
+$|\Theta|=150$ và mỗi nhật ký tốn $150$ lần phát lại. Ngữ nghĩa của phán quyết được chọn cố ý lệch về phía bảo vệ nông dân, tức ưu tiên
+tránh kết tội oan hơn là tối đa năng lực phát hiện:
 \begin{equation}
 a(L)=
 \begin{cases}
@@ -64,11 +68,11 @@ $\theta^{*}$, thì $V_{\mathrm{rob}}(L)=\emptyset$ và nông dân không bị k�
 $V_{\mathrm{rob}}(L)\subseteq V_{\theta^{*}}(L)=\emptyset$.
 \end{proof}
 
-Mệnh đề~\ref{prop:noalarm} là điều làm cho lớp này triển khai được. Sai số mô
-hình có thể làm giảm năng lực phát hiện nhưng không thể tạo ra một lời kết tội
-oan, và cái giá phải trả cho đảm bảo đó được nêu rõ ở phần sau. Hai chi tiết cài
-đặt có thể âm thầm phá vỡ mệnh đề nếu làm sai, đó là cách xử lý các thế giới
-không kích hoạt và độ trải của $\mathcal{W}$ (Phụ lục~S7).
+Mệnh đề~\ref{prop:noalarm} là cơ sở để lớp này triển khai được trong thực tế. Sai
+số mô hình có thể làm giảm năng lực phát hiện nhưng không thể tạo ra một lời kết
+tội oan, và cái giá phải trả cho đảm bảo đó được nêu rõ ở phần sau. Hai chi tiết cài đặt có thể âm thầm phá vỡ mệnh đề nếu làm sai, đó là cách xử lý
+những cấu hình trong tập bất định mà tại đó không bộ lọc nào kích hoạt, và độ trải
+của tập trạng thái đầu $\mathcal{W}$ (Phụ lục~S7).
 
 \subsection{Ngưỡng chênh lệch bơm tỉ lệ thuận}
 

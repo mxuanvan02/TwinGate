@@ -16,7 +16,8 @@ threshold $\tau_0=5$\,mm); Layer~2 the robust detector of \eqref{eq:robust}
 with the proportional threshold of \eqref{eq:tau}, on both a reduced
 $\Theta$ ($24$ replays per log, $10$ seeds) and the full one ($150$ replays,
 cross-check); Layer~3 the device anchor of \eqref{eq:anchor}; Layer~4 physics
-alone, for reference. Of the nine log types, three are naive forgeries and four adversarial, built by
+alone, for reference. Of the nine log types, two are honest (paper and field conditions), three are naive
+forgeries and four adversarial, built by
 an optimiser rather than a fixed recipe (full list in S16); all attack
 statistics are conditioned on a \texttt{changed} flag, because an adversary
 that finds no improving move returns the original log, and comparisons use the
@@ -65,8 +66,9 @@ depth-inflation forgery: useful, and orthogonal to the threat that pays.
 
 \subsection{The anchor closes every class, and the cost of robustness}
 
-Table~\ref{tab:defence} also gives the constructive half: of $281$ audited
-logs, $116$ were genuinely altered, and the device anchor caught $116/116$
+Table~\ref{tab:defence} also gives the constructive half. All $281$ logs were
+audited under the reduced uncertainty set, of which $85$ were re-audited under
+the full one (Supplementary~S17.2). Of the $281$ logs, $116$ were genuinely altered, and the device anchor caught $116/116$
 while accusing none of $60$ honest field-condition logs ($37/37$ and $0/18$
 under the full $\Theta$). Naive forgeries are caught by every layer; the
 distinction lies in the adversarial rows, where only the anchor holds.

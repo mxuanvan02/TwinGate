@@ -21,45 +21,51 @@ khâu giám sát đã chiếm khoảng $77\%$ chi phí MRV~\cite{jem2026mrv}, c�
 trình hiện hành chỉ dựa vào việc định kỳ chụp ảnh một ống đo mực
 nước~\cite{qd4801}.
 
-Hướng khắc phục hiển nhiên nằm ở chỗ một lệnh tưới do bộ điều khiển phát ra vốn đã là một sự kiện số. Nếu gateway đã đóng mở máy bơm thì nó cũng ghi lại được lần đóng mở
+Hướng khắc phục xuất phát từ một nhận xét đơn giản, đó là mỗi lệnh tưới do bộ điều khiển phát ra tự thân đã là một sự kiện số. Nếu gateway đã đóng mở máy bơm thì nó cũng ghi lại được lần đóng mở
 đó, và bản ghi này là dữ liệu hoạt động bậc 1 (Tier-1) theo nghĩa của Quyết
 định 4801~\cite{qd4801}, với chi phí biên bằng không. Đây cũng là tiền đề của
 công trình đồng hành~\cite{twingate2026}, trong đó một bản sao số (digital twin) FAO-56 đóng
 vai trò cổng an toàn để quyết định xem một lệnh có được truyền qua kênh có tổn
 thất hay không.
 
-Chúng tôi đi thêm một bước và đặt câu hỏi liệu chính bản sao số đó có thể
-\emph{kiểm toán} những gì nông dân đã khai báo hay không mà không cần triển
-khai cảm biến nào. Cách làm là phát lại nhật ký gồm các độ sâu khai báo qua mô
+Chúng tôi mở rộng hướng này và đặt câu hỏi liệu chính bản sao số đó có thể
+\emph{kiểm toán} những gì nông dân đã khai báo mà không cần triển khai thêm
+cảm biến nào hay không. Cách làm là phát lại nhật ký gồm các độ sâu khai báo qua mô
 hình cân bằng nước, dùng dữ liệu ERA5 công khai~\cite{hersbach2020}; khi đó một
 khai báo mà đất không thể nào hấp thụ được chính là bằng chứng của sự ngụy
-tạo. Tuy nhiên, nếu thửa ruộng thử nghiệm được sinh ra bằng chính bản sao số
-dùng để kiểm toán, tức điều mà chúng tôi gọi là \emph{điều kiện giấy}, thì lớp
-kiểm toán không kết tội oan nhật ký trung thực nào trong $60$ nhật ký và phát
-hiện $60/60$ nhật ký giả. Hai kết quả đó đúng nhưng không có ý nghĩa thực tiễn, vì các quỹ đạo
-được dán nhãn ``thật'' lại do chính mô hình kiểm toán chúng sinh ra, nghĩa là bộ phát hiện đang đánh giá chính dữ liệu do nó sinh ra (Phụ lục~S10.4).
+tạo. Tuy nhiên, khi thửa ruộng thử nghiệm do chính bản sao số dùng để kiểm toán
+sinh ra, tức trường hợp chúng tôi gọi là \emph{điều kiện giấy}, thì lớp kiểm
+toán không kết tội oan nhật ký trung thực nào trong $60$ nhật ký và phát hiện
+đúng $60/60$ nhật ký giả. Ngược lại, thửa ruộng do một tiến trình độc lập sinh
+ra và vi phạm các giả định của bản sao số được gọi là \emph{điều kiện ruộng}. Hai kết quả đó đúng về mặt logic nhưng chưa có ý nghĩa thực tiễn, vì các quỹ
+đạo được dán nhãn ``thật'' lại do chính mô hình kiểm toán sinh ra, nghĩa là bộ
+phát hiện đang tự đánh giá trên dữ liệu do nó tạo ra (Phụ lục~S10.4).
 
 Bài báo này gỡ bỏ vòng luẩn quẩn đó. Chúng tôi dựng thửa ruộng thử nghiệm sao
 cho nó vi phạm mọi giả định của bản sao số, đồng thời thay các kiểu gian lận
-ngây thơ bằng một đối thủ đã đọc kỹ bộ phát hiện. Ba phát hiện dưới đây cũng là
-ba đóng góp của bài.
+ngây thơ bằng một đối thủ đã đọc kỹ bộ phát hiện. Ba phát hiện dưới đây cũng là ba đóng góp của bài. Phần còn lại được tổ chức
+như sau. Mục~\ref{sec:model} mô tả cân bằng nước và cách phát lại một nhật ký
+khai báo, Mục~\ref{sec:threat} chỉ ra điểm mù tất yếu của mọi bộ phát hiện dựa
+trên quỹ đạo phát lại, Mục~\ref{sec:guarantee} xử lý việc kết tội oan,
+Mục~\ref{sec:anchor} trình bày cơ chế neo thiết bị, và Mục~\ref{sec:results}
+báo cáo thực nghiệm.
 
 Thứ nhất, bộ phát hiện mô hình điểm không chỉ lạc quan mà còn \emph{không an
 toàn}, vì nó kết tội oan $26{,}7\%$ nông dân trung thực. Nguyên nhân là một
 ngưỡng tuyệt đối đặt trên chênh lệch bơm, khiến người quên ghi một mục bị xử lý
-giống hệt người tưới trộm. Quy tắc bền vững sửa được lỗi này bằng một phép giao
-trên tập bất định $\Theta$ gồm $30$ cấu hình đất, hệ số cây trồng và hiệu suất
-(Mục~\ref{sec:robust}), nhưng phải trả giá bằng năng lực phát hiện, một cái giá
-mà chúng tôi đo lường chứ không che giấu.
+giống hệt người tưới trộm. Quy tắc bền vững sửa được lỗi này bằng cách chỉ kết tội khi mọi cấu hình khả dĩ
+đều cho thấy vi phạm, tức lấy giao các tập vi phạm trên tập bất định $\Theta$
+gồm $30$ cấu hình đất, hệ số cây trồng và hiệu suất, mỗi cấu hình được xét ở cả
+$5$ trạng thái đầu (Mục~\ref{sec:robust}), nhưng phải trả giá bằng năng lực
+phát hiện, một cái giá mà chúng tôi đo lường chứ không che giấu.
 
 Thứ hai, chứng thực dựa trên vật lý có một lỗ hổng mà không mức độ mô hình hoá
 nào bịt được. Một đối thủ giữ nguyên tổng lượng nước và từng độ sâu riêng lẻ,
 chỉ \emph{dịch các lệnh tưới theo thời gian}, đã làm tăng thêm $+33\%$ số pha
 khô đủ điều kiện cấp tín chỉ trong so sánh ghép cặp ($t=5{,}29$; $+38\%$ với
 $t=3{,}46$ khi dùng tập bất định đầy đủ), và đây đúng là đại lượng mà VM0051 và
-Quyết định 4801 trả tiền. Không tầng vật lý nào chặn được lỗ hổng đó. Mô hình
-điểm bắt được bốn trong chín nhật ký bị sửa, nhưng nó lại chính là bộ phát hiện
-kết tội oan $26{,}7\%$ nông dân trung thực; tầng bền vững hạ tỷ lệ oan xuống
+Quyết định 4801 trả tiền. Không tầng vật lý nào chặn được lỗ hổng đó. Mô hình điểm bắt được bốn trong chín nhật ký bị dịch thời điểm, nhưng nó lại
+chính là bộ phát hiện kết tội oan $26{,}7\%$ nông dân trung thực; tầng bền vững hạ tỷ lệ oan xuống
 $5{,}0\%$ thì để lọt tám trong chín. Chúng tôi chứng minh điều này không thể
 tránh khỏi với mọi bộ phát hiện có phán quyết là hàm của quỹ đạo phát lại
 (Mục~\ref{sec:threat}, Mục~\ref{sec:timeshift}).

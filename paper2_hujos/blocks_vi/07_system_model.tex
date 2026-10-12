@@ -23,9 +23,10 @@ trong đó $ET_{0,t}$ là bốc thoát hơi nước tham chiếu theo giờ tín
 thức Penman-Monteith, $P_t$ là lượng mưa, $RO_t$ là dòng chảy mặt tính theo
 phương pháp đường cong số của Cơ quan Bảo tồn Đất Hoa Kỳ [SCS], lấy theo ngày
 rồi chia đều cho các giờ của một trận mưa, và $u_t$ là độ sâu tưới áp dụng trong
-giờ $t$. Phần nước vượt quá sức chứa ẩm đồng ruộng $FC$ bị toán tử cắt bỏ loại
-đi, nên khối lượng được bảo toàn đúng tuyệt đối và được kiểm tra như một bất
-biến. Độ cạn kiệt của tầng rễ là
+giờ $t$. Trong mô hình, phần nước vượt quá sức chứa ẩm đồng ruộng $FC$ được coi là chảy
+tràn hoặc thấm sâu và bị loại khỏi cân bằng, nên mô hình bảo toàn khối lượng
+tuyệt đối và chúng tôi kiểm tra tính bảo toàn đó như một bất biến trong mã
+nguồn. Độ cạn kiệt của tầng rễ là
 \begin{equation}
 d_t=\frac{FC-w_t}{FC-WP},\qquad \mathrm{span}=FC-WP,
 \label{eq:depl}
@@ -54,10 +55,9 @@ sao cho $\hat w_t$ là lượng nước tầng rễ mà nhật ký \emph{khai} r
 có, còn $\hat d_t$ là độ cạn kiệt tương ứng theo \eqref{eq:depl}. Dấu mũ đánh dấu
 những đại lượng được tái dựng từ nhật ký chứ không đo được. Việc phát lại là tất
 định và chỉ dùng dữ liệu tái phân tích công khai, nên hai kiểm toán viên phát lại
-cùng một nhật ký sẽ thu được cùng một quỹ đạo và phán quyết có thể tái lập. Dấu
-mũ trừ chỉ trạng thái ngay \emph{trước} khi khai báo của giờ đó được áp dụng, như
-trong $\hat w_{t}^{-}$, tức lượng nước sẵn có để tiếp nhận một lần tưới, và đó
-mới là thứ bộ lọc phải xem xét.
+cùng một nhật ký sẽ thu được cùng một quỹ đạo và phán quyết có thể tái lập. Dấu mũ trừ, như trong $\hat w_{t}^{-}$, chỉ trạng thái ngay \emph{trước} khi áp
+dụng khai báo của giờ đó, tức lượng nước sẵn có để tiếp nhận một lần tưới. Đây
+mới là đại lượng mà bộ lọc phải xem xét.
 
 Toán tử này cũng chính là lý do phương án trở nên rẻ, vì không cảm biến nào
 bị truy vấn và đầu vào duy nhất là nhật ký, chuỗi thời tiết công khai cùng một hồ

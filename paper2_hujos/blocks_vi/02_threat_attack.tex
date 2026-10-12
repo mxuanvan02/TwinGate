@@ -20,8 +20,8 @@ một tập con trong số đó:
 \end{equation}
 Bảng~S1 của Phụ lục liệt kê các lớp gian lận tương ứng. Chúng tôi giả định đối
 thủ \emph{duy lý}, nghĩa là nó tối đa hoá số pha khô được cấp tín chỉ với điều
-kiện không bị đánh dấu. Đối thủ cũng biết bộ phát hiện, vì bộ phát hiện được
-định nghĩa đầy đủ ngay trong bài này và mã nguồn được công khai. Vì vậy
+kiện không bị đánh dấu. Chúng tôi giả định đối thủ biết đầy đủ bộ phát hiện, vì nó được định nghĩa ngay
+trong bài này và mã nguồn được công khai. Vì vậy
 $\varepsilon$ trong \eqref{eq:v4} dưới đây không phải là một tham số bí mật.
 
 Gọi $M$ là lượng nước thật sự đã bơm, đo tại trạm của hợp tác xã, và gọi
@@ -31,9 +31,9 @@ G=M-U(L),
 \label{eq:gap}
 \end{equation}
 còn đại lượng quyết định tín chỉ lại là \emph{số pha khô}. Ký hiệu
-$\mathcal{A}(\cdot)$ là tập các khoảng tối đại $[a,b)$ trên một quỹ đạo phát
-lại, trong đó độ cạn kiệt luôn đạt từ $d_{\mathrm{dry}}$ trở lên và không có
-khai báo tưới nào, kéo dài ít nhất $72$~giờ, tức mức tối thiểu ba ngày theo
+$\mathcal{A}(\cdot)$ là tập các quãng liền nhau dài nhất có thể $[a,b)$ trên một
+quỹ đạo phát lại, trong đó độ cạn kiệt luôn đạt từ $d_{\mathrm{dry}}$ trở lên,
+không có khai báo tưới nào, và mỗi quãng kéo dài ít nhất $72$~giờ, tức mức tối thiểu ba ngày theo
 Quyết định 4801~\cite{qd4801}:
 \begin{equation}
 \begin{aligned}
@@ -53,45 +53,48 @@ với $d_{\mathrm{dry}}=0{,}45$ dùng chung cho toàn bài. Giá trị này là 
 chọn mô hình hoá của chúng tôi, đặt đủ cao để một pha khô thực sự có ý nghĩa
 chứ không chỉ là ruộng hơi ẩm; độ nhạy của nó được khảo sát ở Phụ lục~S20.
 Doanh thu của nông dân tỉ lệ với $n_{\mathrm{dry}}$ chứ không tỉ lệ với $U(L)$,
-và chính sự phân biệt này làm cho tấn công ở Mục~\ref{sec:timeshift} sinh lợi
-mà vẫn vô hình trước mọi cách phát biểu coi tổng lượng nước là mục tiêu.
+và chính sự phân biệt này khiến tấn công ở Mục~\ref{sec:timeshift} mang lại lợi
+ích tín chỉ mà vẫn vô hình trước mọi quy tắc chỉ đối chiếu tổng lượng khai báo
+với tổng lượng bơm thật.
 
 \section{Các bộ lọc dựa trên vật lý và đúng điểm mù của chúng}
 \label{sec:filters}
 
-Phát lại $L$ dưới dữ liệu ERA5 công khai cho ra $(\hat w_t,\hat d_t)$; công
+Phát lại $L$ với dữ liệu ERA5 công khai cho ra $(\hat w_t,\hat d_t)$; công
 trình đồng hành~\cite{twingate2026} trình bày đầy đủ cân bằng nước này. Trên
-nền đó có ba bộ lọc được áp dụng. Bộ lọc \emph{$V_1$, bão hoà} đánh dấu mọi
-khai báo phát ra khi tầng rễ đã đạt sức chứa ẩm đồng ruộng, vì lượng nước đó
-không thể được lưu trữ:
+nền đó có ba bộ lọc được áp dụng. Bộ lọc \emph{$V_1$} (bão hoà) đánh dấu mọi khai báo được ghi vào thời điểm tầng
+rễ đã đạt sức chứa ẩm đồng ruộng, vì lượng nước đó không thể được tầng rễ lưu
+trữ thêm:
 \begin{equation}
 V_1(L)=\{\,i:\ u_i>0\ \wedge\ \hat w_{t_i}^{-}\ \ge\ FC-\varepsilon\,\}.
 \label{eq:v1}
 \end{equation}
 
-Bộ lọc \emph{$V_4$, vượt sức chứa} đánh dấu mọi khai báo vượt quá phần thiếu hụt tại giờ đó, vì lượng dư hẳn đã chảy
-tràn hoặc thấm mất nên không thể coi là ``đã được áp dụng'' theo nghĩa mà quy chuẩn đòi
-hỏi:
+Bộ lọc \emph{$V_4$} (vượt sức chứa) đánh dấu mọi khai báo vượt quá phần thiếu hụt
+tại giờ đó, vì lượng dư hoặc đã chảy tràn hoặc đã thấm mất, nên không thể coi là
+``đã được áp dụng'' theo nghĩa mà quy chuẩn đòi hỏi:
 \begin{equation}
 V_4(L)=\{\,i:\ u_i\ >\ \underbrace{(FC-\hat w_{t_i}^{-})}_{\text{phần thiếu hụt}}
 \ +\ \varepsilon\,\}.
 \label{eq:v4}
 \end{equation}
 
-Bộ lọc \emph{$V_5$, giới hạn thấm} không phụ thuộc trạng thái, mà chỉ dùng ràng
-buộc rằng một lần tưới kéo dài $\tau_i$ không thể cấp nhiều hơn lượng đất tiếp
-nhận được:
+Bộ lọc \emph{$V_5$} (giới hạn thấm) không phụ thuộc vào trạng thái tầng rễ, mà
+chỉ áp dụng ràng buộc rằng một lần tưới kéo dài $\tau_i$ không thể cấp nhiều hơn
+lượng nước mà đất thực sự tiếp nhận được:
 \begin{equation}
 u_i\ \le\ k_{\mathrm{inf}}\,\tau_i+p_{\max},
 \label{eq:v5}
 \end{equation}
 với $k_{\mathrm{inf}}=10$~mm\,h$^{-1}$ và $p_{\max}=100$~mm, lấy ở đầu rộng của dải giá
 trị đã công bố cho ruộng lúa làm dầm~\cite{kukal2004,bouman2001} (giới hạn
-$110$~mm tại $\tau_i=1$~giờ). Chọn đầu rộng như vậy để một nông dân ghi hai lần
-tưới liền kề trong cùng một giờ không bị kết tội.
+$110$~mm tại $\tau_i=1$~giờ). Chúng tôi chọn các hằng số ở đầu rộng của dải giá trị đã công bố để một nông dân
+gộp hai lần tưới liền kề vào cùng một giờ không bị kết tội oan.
 
-Bộ lọc thứ tư, đánh dấu độ cạn kiệt xuống dưới điểm héo, không thể kích hoạt
-trên lúa vụ khô đồng bằng; bằng chứng ở Ghi chú~\ref{sec:v2reach}.
+Bộ lọc thứ ba (đánh dấu độ cạn kiệt xuống dưới điểm héo) không thể kích hoạt trên
+lúa vụ khô đồng bằng; bằng chứng ở Ghi chú~\ref{sec:v2reach}. Cách đánh số
+$V_1$, $V_4$, $V_5$ theo công trình đồng hành nêu trên; bài này không dùng $V_2$
+và $V_3$.
 
 \begin{proposition}[Điểm mù chính xác của các phòng thủ tổng hợp]
 \label{prop:blind}
@@ -107,9 +110,9 @@ Xem Phụ lục~S11; cả hai đại lượng đều là hàm đối xứng củ
 không bao giờ phụ thuộc $t_i$.
 \end{proof}
 
-Mệnh đề~\ref{prop:blind} gói trọn toàn bộ khó khăn trong một dòng. Hai phòng
-thủ không phụ thuộc việc mô hình có đúng hay không, tức đồng hồ đo bơm và giới
-hạn thấm, đều bất biến \emph{chính xác} dưới phép biến đổi mà đối thủ cần. Hai
+Mệnh đề~\ref{prop:blind} gói trọn toàn bộ khó khăn trong một dòng. Hai phòng thủ không phụ thuộc việc mô hình có đúng hay không, tức quy tắc đối
+chiếu tổng lượng bơm thật $G$ ở \eqref{eq:gap} và giới hạn thấm $V_5$, đều bất
+biến \emph{chính xác} dưới phép dịch thời điểm mà đối thủ cần. Hai
 bộ lọc còn lại là $V_1$ và $V_4$, vốn phụ thuộc thứ tự qua $\hat w_{t_i}^{-}$,
 nhưng cả hai cũng không giúp được gì.
 
@@ -141,10 +144,11 @@ báo để thùng chứa tiếp tục thoát nước thêm $\delta$ giờ mà kh
 nên phần thiếu hụt chỉ có thể tăng trong khi $u_i$ không đổi.
 \end{proof}
 
-Vì vậy không thể bịt tấn công này bằng một mô hình thuỷ văn tốt hơn. Bất kỳ bộ
-phát hiện nào có phán quyết là hàm của quỹ đạo phát lại đều phải tích phân
-đúng lượng nước thoát đã làm cho khai báo bị hoãn trông có vẻ hợp pháp. Trên
-thực nghiệm chúng tôi cài đặt tấn công bằng một thuật toán leo đồi (hill
-climbing) trên các độ lệch giờ nguyên trong $[-36,36]$ và chỉ chấp nhận một
-bước dời khi tổng lượng được bảo toàn từng bit, mọi độ sâu vẫn nằm dưới
-\eqref{eq:v5} và $n_{\mathrm{dry}}$ tăng nghiêm ngặt. Tấn công này không ăn cắp nước mà đánh cắp \emph{lịch sử} (Phụ lục~S19).
+Vì vậy không thể bịt tấn công này bằng một mô hình thuỷ văn tốt hơn. Do đó, mọi bộ phát hiện mà phán quyết chỉ phụ thuộc vào quỹ đạo phát lại đều buộc
+phải tích phân đúng lượng nước đã thoát đi trong thời gian chờ, chính là lượng
+nước làm cho khai báo bị hoãn trở nên hợp lý về mặt vật lý. Trên
+thực nghiệm chúng tôi cài đặt tấn công bằng một thuật toán dò từng bước (leo đồi, hill
+climbing), mỗi bước thử dịch một lệnh tưới sang giờ khác trong khoảng
+$[-36,36]$ giờ, và chỉ giữ bước dịch đó khi tổng lượng nước không đổi đến từng
+chữ số, mọi độ sâu vẫn nằm dưới \eqref{eq:v5} và $n_{\mathrm{dry}}$ tăng nghiêm
+ngặt. Tấn công này không ăn cắp nước mà đánh cắp \emph{lịch sử} (Phụ lục~S19).

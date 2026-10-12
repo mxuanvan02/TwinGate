@@ -37,14 +37,14 @@ detector is not merely optimistic, it is \emph{unsafe}: it falsely accuses
 $26.7\%$ of honest farmers, because an absolute pump-gap threshold treats a
 farmer who forgets one entry exactly like one who irrigated secretly; the
 robust rule that fixes this --- an intersection over an uncertainty set
-$\Theta$ of $30$ soil, crop-coefficient and efficiency configurations
-(Sec.~\ref{sec:robust}) --- pays for it in detection power, which we measure
-rather than hide. Second, physics-based attestation has a hole no amount of
+$\Theta$ of $30$ soil, crop-coefficient and efficiency configurations, each
+examined at all $5$ initial states (Sec.~\ref{sec:robust}) --- pays for it in
+detection power, which we measure rather than hide. Second, physics-based attestation has a hole no amount of
 modelling closes: an adversary who preserves the total volume and every
 individual depth can \emph{shift commands in time}, inflating the
 credit-eligible dry phases that VM0051 and Decision 4801 pay for by $+33\%$
 in paired comparison ($t=5.29$; $+38\%$, $t=3.46$, full uncertainty set). No
-physical tier escapes --- the point model catches four of nine altered logs but
+physical tier escapes --- the point model catches four of nine time-shifted logs but
 is the very detector that accuses $26.7\%$ of honest farmers, while the robust
 tier that cuts false accusation to $5.0\%$ lets eight of nine through --- and
 we prove this is unavoidable for any detector that is a function of the
