@@ -20,12 +20,12 @@ tháng Năm, tức $2\,160$~giờ, đúng mùa khô mà AWD được áp dụng~
 Bốn tầng phòng thủ được cài đặt như sau. Tầng~1 là bộ phát hiện mô hình điểm với
 hồ sơ mặc định và ngưỡng tuyệt đối $\tau_0=5$~mm. Tầng~2 là bộ phát hiện bền vững
 của \eqref{eq:robust} kết hợp ngưỡng tỉ lệ của \eqref{eq:tau}, chạy trên cả
-$\Theta$ rút gọn ($24$ lần phát lại mỗi nhật ký, $10$ hạt giống ngẫu nhiên) lẫn $\Theta$ đầy đủ
-($150$ lần phát lại, dùng kiểm chéo). Tầng~3 là neo thiết bị của
+$\Theta$ rút gọn, với $24$ lần phát lại mỗi nhật ký và $10$ hạt giống ngẫu nhiên,
+lẫn $\Theta$ đầy đủ, gồm $150$ lần phát lại có kiểm chéo. Tầng~3 là neo thiết bị của
 \eqref{eq:anchor}. Tầng~4 chỉ dùng vật lý và đóng vai trò mốc so sánh.
 
-Trong chín loại nhật ký thì hai loại là nhật ký trung thực (điều kiện giấy và điều
-kiện ruộng), ba loại là giả mạo ngây thơ và bốn loại là đối kháng.
+Trong chín loại nhật ký thì hai loại là nhật ký trung thực, gồm điều kiện giấy và điều kiện ruộng, ba loại là
+giả mạo ngây thơ và bốn loại là đối kháng.
 Các biến thể đối kháng được dựng bằng một bộ tối ưu chứ không theo một công thức
 cố định, danh sách đầy đủ ở S16. Mọi thống kê tấn công đều được tính có điều kiện trên những nhật ký thật sự bị sửa,
 vì hai cạm bẫy của bộ khung thử nghiệm được ghi ở S10.2. Thứ nhất, một đối thủ
@@ -48,8 +48,8 @@ toàn không, vật lý có nhìn thấy tấn công sinh lợi không, và neo 
 
 \subsection{Bộ phát hiện mô hình điểm không an toàn, chứ không chỉ lạc quan}
 
-Bảng~\ref{tab:falseacc} đưa ra kết quả phủ định trung tâm của bài. Trên nhật ký điều kiện giấy (như đã giải thích ở phần Mở đầu), bộ phát hiện mô
-hình điểm không kết tội ai và tái hiện đúng con số $0/60$ của giao thức tự nhất
+Bảng~\ref{tab:falseacc} đưa ra kết quả phủ định trung tâm của bài. Trên nhật ký điều kiện giấy, như đã giải thích ở phần Mở đầu, bộ phát hiện mô hình
+điểm không kết tội ai và tái hiện đúng con số $0/60$ của giao thức tự nhất
 quán (Phụ lục~S10.4), nhưng trên nhật ký điều
 kiện ruộng thì nó kết tội oan $26{,}7\%$ nông dân trung thực. Nguyên nhân nằm ở
 \eqref{eq:gap} khi dùng một ngưỡng tuyệt đối, vì quên ghi, làm tròn hoặc ghi trễ
@@ -101,8 +101,9 @@ Tính bền vững không đạt được mà không có đánh đổi, vì trê
 sót thật sự bị sửa, mô hình điểm bắt được $9/9$ trong khi quy tắc bền vững chỉ bắt
 $4/9$ ($4/4$ so với $2/4$ ở $\Theta$ đầy đủ). Đây là một sự suy giảm năng lực phát
 hiện chứ không phải một cải thiện Pareto, dù chúng tôi cho rằng lợi ích ở phía tránh
-kết tội oan lớn hơn tổn thất ở phía phát hiện. Mọi kết luận đều đúng với cả $\Theta$ rút gọn ($24$ lần phát lại, $281$ nhật ký, $10$ hạt giống ngẫu nhiên) lẫn
-$\Theta$ đầy đủ ($150$ lần phát lại, $85$ nhật ký, $3$ hạt giống ngẫu nhiên),
+kết tội oan lớn hơn tổn thất ở phía phát hiện. Mọi kết luận đều đúng với cả $\Theta$ rút gọn, gồm $24$ lần phát lại trên $281$
+nhật ký với $10$ hạt giống ngẫu nhiên, lẫn $\Theta$ đầy đủ, gồm $150$ lần phát lại
+trên $85$ nhật ký với $3$ hạt giống ngẫu nhiên,
 cụ thể là kết tội oan $0/60$ và $0/18$, tính đầy đủ của neo $116/116$ và $37/37$,
 lọt lưới dịch thời điểm $8/9$ và $3/3$, thổi phồng ghép cặp $+33\%$ và $+38\%$
 (Phụ lục~S17).
