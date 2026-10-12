@@ -50,3 +50,6 @@ figures/*.png
 
 # Large data (only provenance JSONs are tracked)
 data/era5_multi/*.csv
+
+# Backup tạm khi agent sửa file — dọn ngay sau khi commit/push xác minh
+_backups/
