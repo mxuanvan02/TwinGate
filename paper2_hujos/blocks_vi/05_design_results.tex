@@ -26,16 +26,14 @@ $\Theta$ rút gọn ($24$ lần phát lại mỗi nhật ký, $10$ seed) lẫn $
 
 Trong chín loại nhật ký thì ba loại là giả mạo ngây thơ và bốn loại là đối kháng.
 Các biến thể đối kháng được dựng bằng một bộ tối ưu chứ không theo một công thức
-cố định, danh sách đầy đủ ở S16. Mọi thống kê tấn công đều được tính có điều kiện
-trên cờ \texttt{changed}, vì một đối thủ không tìm được nước đi cải thiện sẽ trả
-về nguyên bản nhật ký, và khi đó các phép so sánh phải dùng mốc của chính biến
+cố định, danh sách đầy đủ ở S16. Mọi thống kê tấn công đều được tính có điều kiện trên những nhật ký thật sự bị sửa, vì một đối thủ không tìm được nước đi cải thiện sẽ trả lại nhật ký mà không sửa gì, và
+khi đó các phép so sánh phải dùng mốc của chính biến
 thể đó (hai lỗi này của bộ khung thử nghiệm được ghi ở S10.2).
 
 Với mỗi tầng, chúng tôi báo cáo tỷ lệ lọt lưới, tức số nhật ký giả mà không tầng
 vật lý nào đánh dấu, và tỷ lệ kết tội oan trên nhật ký trung thực. Về tác động
 tín chỉ, chúng tôi báo cáo $n_{\mathrm{dry}}$ của \eqref{eq:ndry} theo ghép cặp
-so với mốc ruộng trung thực. Tổng lượng nước chỉ xuất hiện như một chỉ số chẩn
-đoán (S10.3).
+so với mốc ruộng trung thực. Tổng lượng nước chỉ được dùng để chẩn đoán (S10.3).
 
 \section{Kết quả}
 \label{sec:results}
@@ -81,7 +79,7 @@ và trực giao với mối đe doạ sinh lợi.
 
 \subsection{Neo thiết bị bịt mọi lớp, và cái giá của sự bền vững}
 
-Bảng~\ref{tab:defence} cũng đưa ra nửa kiến tạo của bài. Trong $281$ nhật ký được
+Bảng~\ref{tab:defence} cũng đưa ra kết quả xây dựng của bài. Trong $281$ nhật ký được
 kiểm toán có $116$ nhật ký thật sự bị sửa, và neo thiết bị bắt được $116/116$
 trong khi không kết tội oan nhật ký nào trong $60$ nhật ký trung thực điều kiện
 ruộng ($37/37$ và $0/18$ với $\Theta$ đầy đủ). Giả mạo ngây thơ bị mọi tầng bắt
@@ -90,9 +88,8 @@ ruộng ($37/37$ và $0/18$ với $\Theta$ đầy đủ). Giả mạo ngây thơ
 
 Tính bền vững không miễn phí, vì trên chín nhật ký gian lận bỏ sót thật sự bị
 sửa, mô hình điểm bắt được $9/9$ trong khi quy tắc bền vững chỉ bắt $4/9$ ($4/4$
-so với $2/4$ ở $\Theta$ đầy đủ). Đây là một sự mất mát năng lực phát hiện chứ
-không phải một cải thiện Pareto, dù chúng tôi coi đó là phía đúng của sự đánh
-đổi. Mọi kết luận đều đúng với cả $\Theta$ rút gọn ($24$ lần phát lại, $281$ nhật
+so với $2/4$ ở $\Theta$ đầy đủ). Đây là một sự mất mát năng lực phát hiện chứ không phải một cải thiện Pareto, dù chúng
+tôi đánh giá phần được lớn hơn phần mất. Mọi kết luận đều đúng với cả $\Theta$ rút gọn ($24$ lần phát lại, $281$ nhật
 ký, $10$ seed) lẫn $\Theta$ đầy đủ ($150$ lần phát lại, $85$ nhật ký, $3$ seed),
 cụ thể là kết tội oan $0/60$ và $0/18$, tính đầy đủ của neo $116/116$ và $37/37$,
 lọt lưới dịch thời điểm $8/9$ và $3/3$, thổi phồng ghép cặp $+33\%$ và $+38\%$

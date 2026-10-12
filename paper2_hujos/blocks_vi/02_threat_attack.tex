@@ -69,9 +69,9 @@ V_1(L)=\{\,i:\ u_i>0\ \wedge\ \hat w_{t_i}^{-}\ \ge\ FC-\varepsilon\,\}.
 \label{eq:v1}
 \end{equation}
 
-Bộ lọc \emph{$V_4$, vượt sức chứa} đánh dấu mọi khai báo lớn hơn phần thiếu hụt
-sẵn có tại giờ đó, vì phần dư hẳn đã chảy tràn hoặc thấm mất nên không ``được
-áp dụng'' theo nghĩa mà quy chuẩn đòi hỏi:
+Bộ lọc \emph{$V_4$, vượt sức chứa} đánh dấu mọi khai báo vượt quá phần thiếu hụt tại giờ đó, vì lượng dư hẳn đã chảy
+tràn hoặc thấm mất nên không thể coi là ``đã được áp dụng'' theo nghĩa mà quy chuẩn đòi
+hỏi:
 \begin{equation}
 V_4(L)=\{\,i:\ u_i\ >\ \underbrace{(FC-\hat w_{t_i}^{-})}_{\text{phần thiếu hụt}}
 \ +\ \varepsilon\,\}.
@@ -118,8 +118,7 @@ nhưng cả hai cũng không giúp được gì.
 
 \begin{proposition}[Lợi ích tín chỉ và sự lọt lưới là cùng một hành động]
 \label{prop:coincide}
-Giả sử một khai báo tại giờ $t$ có phần thiếu hụt sẵn có
-$c_t=FC-\hat w_t^{-}$. Giữa hai khai báo liên tiếp, thùng chứa mất đi
+Giả sử một khai báo tại giờ $t$ có phần thiếu hụt $c_t=FC-\hat w_t^{-}$. Giữa hai khai báo liên tiếp, thùng chứa mất đi
 $\Delta_t=\sum_{s}(\mathit{ETc}_s+\mathit{DP}_s-P_s^{+})\ge 0$, nên việc hoãn
 một khai báo thêm $\delta$ giờ làm tăng phần thiếu hụt của nó đúng bằng lượng
 nước đã thoát đi trong các giờ đó:
@@ -136,10 +135,10 @@ không thể phát hiện cùng chỉ một hướng.
 \end{proposition}
 
 \begin{proof}
-Xem Phụ lục~S11. Nói ngắn gọn: (i) đúng theo định nghĩa, vì $\mathcal{A}$ đòi
+Xem Phụ lục~S11. Nói ngắn gọn, (i) đúng theo định nghĩa, vì $\mathcal{A}$ đòi
 hỏi không có khai báo nào bên trong khoảng; (ii) suy ra được vì hoãn một khai
 báo để thùng chứa tiếp tục thoát nước thêm $\delta$ giờ mà không có dòng vào,
-nên phần thiếu hụt sẵn có chỉ có thể tăng trong khi $u_i$ không đổi.
+nên phần thiếu hụt chỉ có thể tăng trong khi $u_i$ không đổi.
 \end{proof}
 
 Vì vậy không thể bịt tấn công này bằng một mô hình thuỷ văn tốt hơn. Bất kỳ bộ
@@ -148,5 +147,4 @@ phát hiện nào có phán quyết là hàm của quỹ đạo phát lại đ�
 thực nghiệm chúng tôi cài đặt tấn công bằng một thuật toán leo đồi (hill
 climbing) trên các độ lệch giờ nguyên trong $[-36,36]$ và chỉ chấp nhận một
 bước dời khi tổng lượng được bảo toàn từng bit, mọi độ sâu vẫn nằm dưới
-\eqref{eq:v5} và $n_{\mathrm{dry}}$ tăng nghiêm ngặt. Tấn công này không ăn cắp
-nước, thứ bị đánh cắp là \emph{lịch sử} (Phụ lục~S19).
+\eqref{eq:v5} và $n_{\mathrm{dry}}$ tăng nghiêm ngặt. Tấn công này không ăn cắp nước mà đánh cắp \emph{lịch sử} (Phụ lục~S19).

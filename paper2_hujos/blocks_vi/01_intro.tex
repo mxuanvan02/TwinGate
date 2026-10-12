@@ -21,11 +21,10 @@ khâu giám sát đã chiếm khoảng $77\%$ chi phí MRV~\cite{jem2026mrv}, c�
 trình hiện hành chỉ dựa vào việc định kỳ chụp ảnh một ống đo mực
 nước~\cite{qd4801}.
 
-Hướng khắc phục hiển nhiên nằm ở chỗ một lệnh tưới hiện đại vốn đã là một sự
-kiện số. Nếu gateway đã đóng mở máy bơm thì nó cũng ghi lại được lần đóng mở
+Hướng khắc phục hiển nhiên nằm ở chỗ một lệnh tưới do bộ điều khiển phát ra vốn đã là một sự kiện số. Nếu gateway đã đóng mở máy bơm thì nó cũng ghi lại được lần đóng mở
 đó, và bản ghi này là dữ liệu hoạt động bậc 1 (Tier-1) theo nghĩa của Quyết
 định 4801~\cite{qd4801}, với chi phí biên bằng không. Đây cũng là tiền đề của
-công trình đồng hành~\cite{twingate2026}, trong đó một bản sao số FAO-56 đóng
+công trình đồng hành~\cite{twingate2026}, trong đó một bản sao số (digital twin) FAO-56 đóng
 vai trò cổng an toàn để quyết định xem một lệnh có được truyền qua kênh có tổn
 thất hay không.
 
@@ -37,9 +36,8 @@ khai báo mà đất không thể nào hấp thụ được chính là bằng ch
 tạo. Tuy nhiên, nếu thửa ruộng thử nghiệm được sinh ra bằng chính bản sao số
 dùng để kiểm toán, tức điều mà chúng tôi gọi là \emph{điều kiện giấy}, thì lớp
 kiểm toán không kết tội oan nhật ký trung thực nào trong $60$ nhật ký và phát
-hiện $60/60$ nhật ký giả. Hai kết quả đó đúng nhưng vô giá trị, vì các quỹ đạo
-được dán nhãn ``thật'' lại do chính mô hình kiểm toán chúng sinh ra, nghĩa là
-bộ phát hiện đang tự chấm bài của mình (Phụ lục~S10.4).
+hiện $60/60$ nhật ký giả. Hai kết quả đó đúng nhưng không có ý nghĩa thực tiễn, vì các quỹ đạo
+được dán nhãn ``thật'' lại do chính mô hình kiểm toán chúng sinh ra, nghĩa là bộ phát hiện đang đánh giá chính dữ liệu do nó sinh ra (Phụ lục~S10.4).
 
 Bài báo này gỡ bỏ vòng luẩn quẩn đó. Chúng tôi dựng thửa ruộng thử nghiệm sao
 cho nó vi phạm mọi giả định của bản sao số, đồng thời thay các kiểu gian lận
