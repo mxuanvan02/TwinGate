@@ -8,17 +8,20 @@ gay NameError ('b' is not defined). Vi vay o day dung tuple chi muc ro rang
 W = (page, xMin, yMin, xMax, yMax, text) va luon truy cap w[1]..w[5], khong
 unpack tung bien roi dung lai trong comprehension khac.
 """
+from pathlib import Path
 import re
 import statistics
 import subprocess
 import sys
 from collections import Counter
 
+REPO_ROOT = Path(__file__).resolve().parents[1]
+
 PT = 28.3465          # 1 cm
 PUB = [("/tmp/hujos_col/published_0.pdf", "XUAT BAN #1 (art.7830)"),
        ("/tmp/hujos_col/published_1.pdf", "XUAT BAN #2 (art.7862)")]
-MINE = ("/media/SAS/Van/DeTai2025/TwinGate_K1/paper2_hujos/main_hujos.pdf",
-        "BAN EM (LaTeX)")
+MINE = (str(REPO_ROOT / "paper2_hujos/main_hujos.pdf"),
+        "ours (LaTeX)")
 
 RE_W = re.compile(r'<word xMin="([\d.]+)" yMin="([\d.]+)" xMax="([\d.]+)" '
                   r'yMax="([\d.]+)">([^<]*)</word>')

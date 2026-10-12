@@ -17,10 +17,13 @@ Cach dung, dua vao ban chat van canh deu (justified):
      thuong; dinh thu hai (cao hon) = pitch + parskip. Chi tinh cap dong KE NHAU
      trong cung mot cot van xuoi, khong tinh cap vuot qua bang/cong thuc.
 """
+from pathlib import Path
 import re
 import statistics
 import subprocess
 from collections import Counter
+
+REPO_ROOT = Path(__file__).resolve().parents[1]
 
 PT = 28.3465
 LEFT, RIGHT = 2.00, 17.00
@@ -30,7 +33,7 @@ RE_PG = re.compile(r'<page width="([\d.]+)" height="([\d.]+)">(.*?)</page>', re.
 
 DOCS = [("/tmp/hujos_col/published_0.pdf", "XUAT BAN #1"),
         ("/tmp/hujos_col/published_1.pdf", "XUAT BAN #2"),
-        ("/media/SAS/Van/DeTai2025/TwinGate_K1/paper2_hujos/main_hujos.pdf", "BAN EM")]
+        (str(REPO_ROOT / "paper2_hujos/main_hujos.pdf"), "ours")]
 
 
 def rows(ws, ymin=2.6, ymax=25.0, tol=1.2, minwords=6, maxgap=1.0):
@@ -118,7 +121,7 @@ print("=" * 84)
 for lab, v in summary.items():
     print(f"  {lab:<14} parindent={v[1]:.2f}cm ({v[2]:>3} doan) | parskip={v[4]:+.2f}pt")
 pub = [v for lab, v in summary.items() if lab.startswith("XUAT BAN")]
-mine = summary.get("BAN EM")
+mine = summary.get("ours")
 if pub and mine:
     pi = statistics.median([v[1] for v in pub])
     ps = statistics.median([v[4] for v in pub])

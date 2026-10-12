@@ -18,6 +18,7 @@ cong cu sai, khong phai tai lieu sai):
 Moc so sanh van la 2 bai da xuat ban, cung mot thuong do, de tranh tu cham diem.
 """
 from __future__ import annotations
+from pathlib import Path
 
 import re
 import statistics
@@ -25,12 +26,14 @@ from collections import Counter
 
 import fitz
 
+REPO_ROOT = Path(__file__).resolve().parents[1]
+
 PT = 28.3465
 MID = 9.5                       # tam vung chu 2.00..17.00cm
 BODY_X0, BODY_X1 = 2.00, 17.00  # vung chu that, do tu bai da xuat ban
 DOCS = [("/tmp/hujos_col/published_0.pdf", "DA XUAT BAN #1"),
         ("/tmp/hujos_col/published_1.pdf", "DA XUAT BAN #2"),
-        ("/media/SAS/Van/DeTai2025/TwinGate_K1/paper2_hujos/main_hujos.pdf", "BAN EM")]
+        (str(REPO_ROOT / "paper2_hujos/main_hujos.pdf"), "ours")]
 
 RE_NUM_ONLY = re.compile(r"^\d{1,2}$")
 RE_TITLE_AFTER_NUM = re.compile(r"^[A-Z][A-Za-z]")
@@ -177,7 +180,7 @@ print("=" * 88)
 print("DOI CHIEU 3 TAI LIEU CUNG MOT THUONG DO")
 print("=" * 88)
 pub = [allres[k] for k in allres if k.startswith("DA XUAT BAN") and allres[k]]
-mine = allres.get("BAN EM", {})
+mine = allres.get("ours", {})
 if pub and mine:
     print(f"  abstract size : da dang {[p['C'][1] for p in pub]} | em {mine['C'][1]}")
     print(f"  abstract x0   : da dang {[round(p['C'][2],2) for p in pub]} | em {round(mine['C'][2],2)}")

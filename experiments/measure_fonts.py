@@ -14,6 +14,7 @@ PyMuPDF doc tung span: (text, font, size, bbox) -> phan loai theo noidung:
   * body         : phan con lai, size pho bien nhat
 In ra font + size that cua tung vai tro de bat chuc trong LaTeX.
 """
+from pathlib import Path
 import re
 import statistics
 import subprocess
@@ -22,9 +23,11 @@ from collections import Counter
 
 import fitz          # PyMuPDF
 
+REPO_ROOT = Path(__file__).resolve().parents[1]
+
 DOCS = [("/tmp/hujos_col/published_0.pdf", "XUAT BAN #1 (art.7830)"),
         ("/tmp/hujos_col/published_1.pdf", "XUAT BAN #2 (art.7862)"),
-        ("/media/SAS/Van/DeTai2025/TwinGate_K1/paper2_hujos/main_hujos.pdf", "BAN EM")]
+        (str(REPO_ROOT / "paper2_hujos/main_hujos.pdf"), "ours")]
 
 
 def spans(pdf):

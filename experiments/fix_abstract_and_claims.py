@@ -27,11 +27,13 @@ from __future__ import annotations
 
 from pathlib import Path
 
+REPO_ROOT = Path(__file__).resolve().parents[1]
+
 BS = chr(92)          # mot backslash
 DBL = BS + BS         # hai backslash
 NL = chr(10)
 
-D = Path("/media/SAS/Van/DeTai2025/TwinGate_K1")
+D = REPO_ROOT
 H = D / "paper2_hujos"
 B = D / "paper2" / "blocks"
 fixed = []

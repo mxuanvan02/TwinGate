@@ -25,7 +25,9 @@ import statistics
 import subprocess
 from pathlib import Path
 
-H = Path("/media/SAS/Van/DeTai2025/TwinGate_K1/paper2_hujos")
+REPO_ROOT = Path(__file__).resolve().parents[1]
+
+H = REPO_ROOT / "paper2_hujos"
 BLOCKS = H.parent / "paper2" / "blocks"
 PT = 28.3465                      # 1 cm = 28.3465 pt
 LEFT, RIGHT = 2.00, 17.00         # vung chu 19cm - le 2cm, do tu bai da xuat ban
@@ -68,7 +70,7 @@ def col_share(pdf, lo, hi, label):
 
 
 print("=== GATE 1: SO COT (do tren PDF that) ===")
-mine_pct, mine_verdict = col_share(H / "main_hujos.pdf", 8.0, 11.0, "BAN EM      ")
+mine_pct, mine_verdict = col_share(H / "main_hujos.pdf", 8.0, 11.0, "ours        ")
 p1_pct, _ = col_share("/tmp/hujos_col/published_0.pdf", 8.0, 11.0, "DA XUAT BAN #1")
 p2_pct, _ = col_share("/tmp/hujos_col/published_1.pdf", 8.0, 11.0, "DA XUAT BAN #2")
 

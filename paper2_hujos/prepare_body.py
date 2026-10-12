@@ -27,8 +27,10 @@ import sys
 from collections import Counter
 from pathlib import Path
 
-H = Path("/media/SAS/Van/DeTai2025/TwinGate_K1/paper2_hujos")
-BLOCKS = Path("/media/SAS/Van/DeTai2025/TwinGate_K1/paper2/blocks")
+REPO_ROOT = Path(__file__).resolve().parents[1]
+
+H = REPO_ROOT / "paper2_hujos"
+BLOCKS = REPO_ROOT / "paper2/blocks"
 OUT = H / "docx_build"
 OUT.mkdir(exist_ok=True)
 

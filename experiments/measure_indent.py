@@ -12,10 +12,13 @@ nhung cac dong do phan lon la dong TRONG BANG / phuong trinh, nen ra ket luan sa
 (indent 4.71cm cho ban cua minh). Phai loc dung bang tieu chi "doan truoc ket thuc
 som".
 """
+from pathlib import Path
 import re
 import statistics
 import subprocess
 from collections import Counter
+
+REPO_ROOT = Path(__file__).resolve().parents[1]
 
 PT = 28.3465
 RE_W = re.compile(r'<word xMin="([\d.]+)" yMin="([\d.]+)" xMax="([\d.]+)" '
@@ -24,7 +27,7 @@ RE_PG = re.compile(r'<page width="([\d.]+)" height="([\d.]+)">(.*?)</page>', re.
 
 DOCS = [("/tmp/hujos_col/published_0.pdf", "XUAT BAN #1"),
         ("/tmp/hujos_col/published_1.pdf", "XUAT BAN #2"),
-        ("/media/SAS/Van/DeTai2025/TwinGate_K1/paper2_hujos/main_hujos.pdf", "BAN EM")]
+        (str(REPO_ROOT / "paper2_hujos/main_hujos.pdf"), "ours")]
 
 
 def load(pdf):

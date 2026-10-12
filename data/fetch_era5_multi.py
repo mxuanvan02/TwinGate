@@ -16,7 +16,7 @@ No API key. Deterministic: the same (lat, lon, year) always returns the same
 ERA5 grid series, so the whole pipeline is reproducible without credentials.
 
 Station coordinates are copied verbatim from the RABS reproduction fetch script
-(/home/hitokiri/rabs_repro_20260702_112319/data/fetch_era5_vn.py) so that this
+(data/fetch_era5_vn.py from the local reproduction snapshot) so that this
 study and the two published papers share one definition of "Mekong delta zone".
 
 Usage:

@@ -28,7 +28,9 @@ from pathlib import Path
 
 from lxml import etree
 
-H = Path("/media/SAS/Van/DeTai2025/TwinGate_K1/paper2_hujos")
+REPO_ROOT = Path(__file__).resolve().parents[1]
+
+H = REPO_ROOT / "paper2_hujos"
 BUILD = H / "docx_build"
 W = "http://schemas.openxmlformats.org/wordprocessingml/2006/main"
 M = "http://schemas.openxmlformats.org/officeDocument/2006/math"

@@ -37,8 +37,10 @@ import sys
 import urllib.request
 from pathlib import Path
 
+REPO_ROOT = Path(__file__).resolve().parents[1]
+
 UA = {"User-Agent": "ref-check/1.0 (mailto:ntuongtri@hueuni.edu.vn)"}
-P = Path("/media/SAS/Van/DeTai2025/TwinGate_K1/paper2/refs.bib")
+P = REPO_ROOT / "paper2/refs.bib"
 bib = P.read_text(encoding="utf-8")
 n0 = len(bib)
 
