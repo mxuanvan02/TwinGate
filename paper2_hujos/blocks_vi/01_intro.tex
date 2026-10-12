@@ -1,68 +1,78 @@
-% BAN TIENG VIET cua 01_intro.tex — dich tu ban EN 14 trang (2026-10-08).
-% Moi con so giu nguyen, chi doi sang dinh dang Viet Nam (dau phay thap phan).
-% Thuat ngu theo glossary_vi.tex. KHONG them/bot claim so voi ban EN.
+% BAN TIENG VIET cua 01_intro.tex — viet lai 2026-10-12 theo academic-prose.
+% Moi con so, cite, label, ref giu NGUYEN so voi ban truoc (baseline /tmp/vi_baseline.json).
+% Thuat ngu theo glossary_vi.tex. KHONG them/bot claim.
 \section{Mở đầu}
 \label{sec:intro}
 
 Việt Nam đã cam kết một triệu héc-ta lúa phát thải thấp vào năm 2030~\cite{qd1490}.
-Về mặt nông học, cách làm đã rõ, vì tăng độ khắc nghiệt của phơi hạn ngắt quãng làm giảm
-phát thải khí mê-tan từ $41$--$71\%$ so với ngập liên tục mà không làm giảm
-năng suất hạt~\cite{balaine2019}, và chế độ nước là nhân tố chi phối thông
-lượng mê-tan theo mùa trên các ruộng lúa châu Á~\cite{yan2005}.
+Về mặt nông học, cách làm đã được khẳng định, vì phơi hạn ngắt quãng càng triệt
+để thì phát thải khí mê-tan càng giảm, ở mức $41$--$71\%$ so với ngập liên tục mà
+năng suất hạt không giảm~\cite{balaine2019}; chế độ nước cũng là nhân tố chi
+phối lượng mê-tan phát thải theo mùa trên các ruộng lúa châu Á~\cite{yan2005}.
 
-Điều chưa ngã
-ngữ là đo lường. Theo Quyết định 4801/QĐ-BNNMT, bằng chứng tài liệu cho một yêu
-cầu cấp tín chỉ được xếp theo thứ tự ưu tiên, và bản ghi các hoạt động tưới và
-rút nước đã thực hiện đứng đầu danh sách đó (Biểu mẫu~3.3, Phụ lục~2: hồ sơ
-tưới tiêu và rút nước thực tế xếp trên kế hoạch, lịch trình, ghi chú thực địa
-và tuyên bố đã ký)~\cite{qd4801}, và theo VM0051 của Verra, chính bản ghi đó phải
-vượt qua thẩm định của bên thứ ba~\cite{vm0051}. Làm ra nó tốn khoản tiền mà
-một hợp tác xã nông hộ nhỏ không có. Riêng giám sát chiếm khoảng $77\%$ chi
-phí MRV~\cite{jem2026mrv}, và quy trình hiện hành dựa vào việc chụp ảnh định
-kỳ một ống đo mực nước~\cite{qd4801}.
+Điều còn bỏ ngỏ nằm ở khâu đo lường. Theo Quyết định 4801/QĐ-BNNMT, bằng chứng
+tài liệu cho một yêu cầu cấp tín chỉ được xếp theo thứ tự ưu tiên, trong đó bản
+ghi các hoạt động tưới và rút nước đã thực hiện đứng đầu danh sách
+(Biểu mẫu~3.3, Phụ lục~2 xếp hồ sơ tưới tiêu và rút nước thực tế trên kế hoạch, lịch
+trình, ghi chú thực địa và tuyên bố đã ký)~\cite{qd4801}. Theo VM0051 của Verra,
+chính bản ghi đó còn phải qua thẩm định của bên thứ ba~\cite{vm0051}. Chi phí
+để có được bản ghi này vượt quá khả năng của một hợp tác xã nông hộ nhỏ. Riêng
+khâu giám sát đã chiếm khoảng $77\%$ chi phí MRV~\cite{jem2026mrv}, còn quy
+trình hiện hành chỉ dựa vào việc định kỳ chụp ảnh một ống đo mực
+nước~\cite{qd4801}.
 
-Cách sửa hiển nhiên là nhận ra rằng một lệnh tưới hiện đại vốn đã là một sự kiện số. Nếu gateway đóng mở máy bơm thì nó cũng có thể ghi lại lần đóng mở
-đó, và bản ghi ấy là dữ liệu hoạt động bậc 1 (Tier-1) theo nghĩa của Quyết
-định 4801~\cite{qd4801} với chi phí biên bằng không. Đây là tiền đề của công trình đồng hành~\cite{twingate2026}, vốn dùng một bản sao số FAO-56 làm cổng an
-toàn quyết định một lệnh có được truyền qua kênh có tổn thất hay không.
+Hướng khắc phục hiển nhiên nằm ở chỗ một lệnh tưới hiện đại vốn đã là một sự
+kiện số. Nếu gateway đã đóng mở máy bơm thì nó cũng ghi lại được lần đóng mở
+đó, và bản ghi này là dữ liệu hoạt động bậc 1 (Tier-1) theo nghĩa của Quyết
+định 4801~\cite{qd4801}, với chi phí biên bằng không. Đây cũng là tiền đề của
+công trình đồng hành~\cite{twingate2026}, trong đó một bản sao số FAO-56 đóng
+vai trò cổng an toàn để quyết định xem một lệnh có được truyền qua kênh có tổn
+thất hay không.
 
-Chúng
-tôi đi thêm một bước và đặt câu hỏi liệu chính bản sao số đó có thể
-\emph{kiểm toán} những gì nông dân khai báo sau vụ việc hay không, mà không
-cần triển khai cảm biến nào, đó là một nhật ký các độ sâu khai báo được phát lại
-qua cân bằng nước dưới dữ liệu ERA5 công khai~\cite{hersbach2020}, và một khai báo mà đất không
-thể nào hấp thụ được là bằng chứng của sự ngụy tạo. Tuy nhiên, nếu thửa ruộng
-thử nghiệm được sinh ra bằng chính bản sao số dùng để kiểm toán --- điều mà
-chúng tôi gọi là \emph{điều kiện giấy} --- thì lớp này báo cáo không kết tội
-oan nhật ký trung thực nào trong $60$ nhật ký và phát hiện $60/60$ nhật ký
-giả. Hai kết quả đó đúng nhưng vô giá trị, vì các quỹ đạo được dán nhãn
-``thật'' lại do chính mô hình kiểm toán chúng sinh ra: bộ phát hiện đang tự
-chấm bài của mình (Phụ lục~S10.4).
+Chúng tôi đi thêm một bước và đặt câu hỏi liệu chính bản sao số đó có thể
+\emph{kiểm toán} những gì nông dân đã khai báo hay không mà không cần triển
+khai cảm biến nào. Cách làm là phát lại nhật ký gồm các độ sâu khai báo qua mô
+hình cân bằng nước, dùng dữ liệu ERA5 công khai~\cite{hersbach2020}; khi đó một
+khai báo mà đất không thể nào hấp thụ được chính là bằng chứng của sự ngụy
+tạo. Tuy nhiên, nếu thửa ruộng thử nghiệm được sinh ra bằng chính bản sao số
+dùng để kiểm toán, tức điều mà chúng tôi gọi là \emph{điều kiện giấy}, thì lớp
+kiểm toán không kết tội oan nhật ký trung thực nào trong $60$ nhật ký và phát
+hiện $60/60$ nhật ký giả. Hai kết quả đó đúng nhưng vô giá trị, vì các quỹ đạo
+được dán nhãn ``thật'' lại do chính mô hình kiểm toán chúng sinh ra, nghĩa là
+bộ phát hiện đang tự chấm bài của mình (Phụ lục~S10.4).
 
-Bài báo này gỡ bỏ vòng luẩn quẩn đó. Chúng tôi
-dựng thửa ruộng thử nghiệm sao cho nó vi phạm mọi giả định của bản sao số, và
-thay các kiểu gian lận ngây thơ bằng một đối thủ đã đọc bộ phát hiện. Ba phát
-hiện sau đây, đồng thời là ba đóng góp của bài.
+Bài báo này gỡ bỏ vòng luẩn quẩn đó. Chúng tôi dựng thửa ruộng thử nghiệm sao
+cho nó vi phạm mọi giả định của bản sao số, đồng thời thay các kiểu gian lận
+ngây thơ bằng một đối thủ đã đọc kỹ bộ phát hiện. Ba phát hiện dưới đây cũng là
+ba đóng góp của bài.
 
-Thứ nhất, bộ phát hiện mô
-hình điểm không chỉ lạc quan mà còn \emph{không an toàn}, vì nó kết tội oan
-$26{,}7\%$ nông dân trung thực, vì một ngưỡng tuyệt đối trên chênh lệch bơm
-đối xử với người quên một mục ghi y hệt người tưới trộm; quy tắc bền vững sửa được lỗi này bằng một phép giao trên tập bất định $\Theta$ gồm $30$ cấu hình đất, hệ số cây trồng và hiệu suất (Mục~\ref{sec:robust}), nhưng phải trả giá bằng năng lực phát hiện, điều chúng tôi đo lường chứ không che giấu.
+Thứ nhất, bộ phát hiện mô hình điểm không chỉ lạc quan mà còn \emph{không an
+toàn}, vì nó kết tội oan $26{,}7\%$ nông dân trung thực. Nguyên nhân là một
+ngưỡng tuyệt đối đặt trên chênh lệch bơm, khiến người quên ghi một mục bị xử lý
+giống hệt người tưới trộm. Quy tắc bền vững sửa được lỗi này bằng một phép giao
+trên tập bất định $\Theta$ gồm $30$ cấu hình đất, hệ số cây trồng và hiệu suất
+(Mục~\ref{sec:robust}), nhưng phải trả giá bằng năng lực phát hiện, một cái giá
+mà chúng tôi đo lường chứ không che giấu.
 
-Thứ hai, việc chứng thực dựa trên vật lý có một lỗ hổng mà không lượng mô hình
-hoá nào bịt được. Một đối thủ giữ nguyên tổng lượng nước và từng độ sâu riêng
-lẻ có thể \emph{dịch lệnh theo thời gian}, làm thổi phồng các pha khô đủ điều kiện cấp tín chỉ (đúng đại lượng mà VM0051 và Quyết định 4801 trả tiền) thêm $+33\%$ trong so sánh ghép cặp ($t=5{,}29$; $+38\%$,
-$t=3{,}46$ với tập bất định đầy đủ). Không tầng vật lý nào thoát được. Mô hình điểm bắt được bốn trong chín nhật ký bị sửa nhưng lại chính là bộ phát hiện kết tội oan $26{,}7\%$ nông dân trung thực; tầng bền vững hạ tỷ lệ oan xuống $5{,}0\%$ thì để lọt tám trong chín. Chúng tôi chứng minh điều này không thể tránh khỏi với mọi bộ phát hiện là hàm của quỹ đạo
-phát lại (Mục~\ref{sec:threat}, Mục~\ref{sec:timeshift}).
+Thứ hai, chứng thực dựa trên vật lý có một lỗ hổng mà không mức độ mô hình hoá
+nào bịt được. Một đối thủ giữ nguyên tổng lượng nước và từng độ sâu riêng lẻ,
+chỉ \emph{dịch các lệnh tưới theo thời gian}, đã làm tăng thêm $+33\%$ số pha
+khô đủ điều kiện cấp tín chỉ trong so sánh ghép cặp ($t=5{,}29$; $+38\%$ với
+$t=3{,}46$ khi dùng tập bất định đầy đủ), và đây đúng là đại lượng mà VM0051 và
+Quyết định 4801 trả tiền. Không tầng vật lý nào chặn được lỗ hổng đó. Mô hình
+điểm bắt được bốn trong chín nhật ký bị sửa, nhưng nó lại chính là bộ phát hiện
+kết tội oan $26{,}7\%$ nông dân trung thực; tầng bền vững hạ tỷ lệ oan xuống
+$5{,}0\%$ thì để lọt tám trong chín. Chúng tôi chứng minh điều này không thể
+tránh khỏi với mọi bộ phát hiện có phán quyết là hàm của quỹ đạo phát lại
+(Mục~\ref{sec:threat}, Mục~\ref{sec:timeshift}).
 
-Thứ ba, cách sửa
-rẻ và không mang tính vật lý, đó là đối chiếu nhật ký với bản ghi lệnh có chữ ký và
-dấu thời gian của gateway bắt được $116/116$ nhật ký thật sự bị giả mạo và
-không kết tội oan nhật ký nào trong $60$ nhật ký trung thực, với chi phí
-không vượt quá chính gateway mà công trình đồng hành đã triển khai
-(Mục~\ref{sec:anchor}). Phân tích cũng cho ba hệ quả trực tiếp đối với lớp
-kiểm toán vật lý: độ sâu chấp nhận được là một dải $[49{,}0; 86{,}0]$~mm chứ
-không phải một giá trị $61$~mm; bộ lọc vật lý thứ ba không thể kích hoạt trên
-lúa vụ khô đồng bằng; và ngưỡng tuyệt đối trên chênh lệch bơm là không thể
-chấp nhận
-(Mục~\ref{sec:umax}, Mục~\ref{sec:v2reach}).
+Thứ ba, cách khắc phục vừa rẻ vừa không dựa trên vật lý. Đối chiếu nhật ký khai
+báo với bản ghi lệnh có chữ ký và dấu thời gian của gateway bắt được
+$116/116$ nhật ký thật sự bị giả mạo và không kết tội oan nhật ký nào trong
+$60$ nhật ký trung thực, với chi phí không vượt quá chính gateway mà công trình
+đồng hành đã triển khai (Mục~\ref{sec:anchor}). Phân tích cũng dẫn tới ba hệ
+quả trực tiếp đối với lớp kiểm toán vật lý, gồm độ sâu chấp nhận được là một
+dải $[49{,}0; 86{,}0]$~mm chứ không phải một giá trị $61$~mm, bộ lọc vật lý thứ
+ba không thể kích hoạt trên lúa vụ khô đồng bằng, và ngưỡng tuyệt đối đặt trên
+chênh lệch bơm là không thể chấp nhận (Mục~\ref{sec:umax},
+Ghi chú~\ref{sec:v2reach}).

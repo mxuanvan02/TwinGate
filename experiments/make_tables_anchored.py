@@ -184,8 +184,8 @@ def tab_threat() -> None:
 # ---------------------------------------------------------------------------
 def tab_defence(by: dict) -> None:
     lines = [rule("top"),
-             row("Fraud variant", "Altered logs", "Escapes v1", "Escapes v2 physics",
-                 "Caught by anchor"),
+             row("Fraud variant", "Altered logs", "Escapes point model",
+                 "Escapes robust detector", "Caught by anchor"),
              rule("mid")]
     tot_ch = tot_an = 0
     for v, disp, *_ in THREAT:
@@ -305,10 +305,10 @@ def tab_false_accusation(by: dict) -> None:
              row("Defence layer", "Honest, paper conditions", "Honest, field conditions"),
              rule("mid")]
     for label, key0, key1 in [
-            ("v1 tier 0 (physics, point model)", "v1_t0", None),
-            ("v1 tier 1 (absolute $G>5$" + BS + ",mm)", "v1_t1", None),
-            ("v2 tier 0 ($" + BS + "forall$" + " over $" + BS + "Theta$)", "v2_t0", None),
-            ("v2 tier 1 ($" + BS + "tau(n)$ scales with events)", "v2_t1", None),
+            ("Point model, physics only", "v1_t0", None),
+            ("Point model with absolute threshold ($G>5$" + BS + ",mm)", "v1_t1", None),
+            ("Robust rule ($" + BS + "forall$ over $" + BS + "Theta$), physics only", "v2_t0", None),
+            ("Robust rule with proportional $" + BS + "tau(n)$", "v2_t1", None),
             ("Device-anchored command log", "anchor_flag", None)]:
         cells = []
         for var in ("honest_paper", "honest_field"):

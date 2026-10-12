@@ -1,31 +1,38 @@
-% BAN TIENG VIET cua 03_guarantee.tex (2026-10-08). So lieu giu nguyen.
+% BAN TIENG VIET cua 03_guarantee.tex — viet lai 2026-10-12 theo academic-prose.
+% Moi con so, cite, label, ref, equation giu NGUYEN so voi ban truoc.
+% Thuat ngu theo glossary_vi.tex. KHONG them/bot claim.
 \section{Khi nào được kết tội một nông dân?}
 \label{sec:guarantee}
 
 \subsection{Độ sâu chấp nhận được là một dải, không phải một con số}
 \label{sec:umax}
 
-Cách tính ngây thơ --- lấy giới hạn từ một hồ sơ đất và một điều kiện đầu duy nhất --- cho ra một con số duy nhất, $u\le 61$~mm, là khai báo lớn nhất không bao giờ gây báo động. Với $V_4$ kích hoạt khi
-$u_i>c_{t_i}+\varepsilon$ và $c_t=d_t\cdot\mathrm{span}$, giới hạn tại một
-ruộng có độ cạn kiệt ban đầu $w_0$ và tưới không muộn hơn $d^{*}$ là
+Nếu chỉ lấy giới hạn từ một hồ sơ đất và một điều kiện đầu duy nhất thì cách
+tính cho ra đúng một con số, $u\le 61$~mm, là khai báo lớn nhất không bao giờ
+gây báo động. Vì $V_4$ kích hoạt khi $u_i>c_{t_i}+\varepsilon$ và
+$c_t=d_t\cdot\mathrm{span}$, giới hạn tại một ruộng có độ cạn kiệt ban đầu
+$w_0$ và tưới không muộn hơn $d^{*}$ là
 \begin{equation}
 u_{\max}=\max(d^{*},w_0)\cdot\mathrm{span}+\varepsilon .
 \label{eq:umax}
 \end{equation}
-Hai điều chỉnh rút ra, cả hai đều được xác minh bằng cách quét toán tử phát lại
-chứ không chỉ bằng đại số (dẫn xuất ở Phụ lục~S14). \eqref{eq:umax} dùng $\max$ chứ không dùng hiệu. Một ruộng khô ban đầu chấp nhận khai báo
-\emph{lớn hơn} ruộng ướt, và biểu thức dạng hiệu đó không tương ứng với trạng thái vật lý nào, và nó chặn một \emph{lần tưới đơn lẻ} chứ không chặn
-cả vụ, nên một đối thủ phát nhiều khai báo dưới ngưỡng có thể thổi phồng tổng
-lượng mà không có giới hạn. Bảng~S2 của Phụ lục đưa ra dải cần được báo cáo
-thay thế, $[49{,}0; 86{,}0]$~mm trên toàn $\Theta$.
+Từ đây rút ra hai điều chỉnh, cả hai đều được kiểm chứng bằng cách quét toán tử
+phát lại chứ không chỉ bằng đại số (dẫn xuất ở Phụ lục~S14). Thứ nhất,
+\eqref{eq:umax} dùng $\max$ chứ không dùng hiệu, nên một ruộng khô ban đầu lại
+chấp nhận khai báo \emph{lớn hơn} một ruộng ướt, còn biểu thức dạng hiệu thì
+không tương ứng với trạng thái vật lý nào. Thứ hai, giới hạn này chỉ chặn một
+\emph{lần tưới đơn lẻ} chứ không chặn cả vụ, nên một đối thủ phát nhiều khai báo
+dưới ngưỡng có thể thổi phồng tổng lượng mà không bị giới hạn nào chặn lại.
+Bảng~S2 của Phụ lục đưa ra dải cần được báo cáo thay thế, $[49{,}0; 86{,}0]$~mm
+trên toàn $\Theta$.
 
 \subsection{Kết tội bền vững dưới bất định mô hình}
 \label{sec:robust}
 
-Kiểm toán viên không biết đất của nông dân, không biết giai đoạn sinh trưởng,
-cũng không biết hiệu suất của hệ thống dẫn nước. Gọi $\Theta$ là tập bất định
-và $V_\theta(L)$ là tập vi phạm dưới cấu hình $\theta$; bộ phát hiện mô hình điểm
-chỉ đánh giá một $\theta_0$ mặc định và coi mọi vi phạm là có tội. Chúng tôi
+Kiểm toán viên không biết đất của nông dân, không biết giai đoạn sinh trưởng và
+cũng không biết hiệu suất của hệ thống dẫn nước. Gọi $\Theta$ là tập bất định và
+$V_\theta(L)$ là tập vi phạm dưới cấu hình $\theta$. Bộ phát hiện mô hình điểm
+chỉ đánh giá một $\theta_0$ mặc định rồi coi mọi vi phạm là có tội. Chúng tôi
 thay nó bằng một phép giao:
 \begin{equation}
 \begin{aligned}
@@ -36,8 +43,8 @@ V_{\mathrm{rob}}(L)&=\bigcap_{\theta\in\Theta}V_\theta(L),\\
 \end{equation}
 với $|\mathcal{S}|=5$ loại đất, $|\mathcal{K}|=2$ chế độ hệ số cây trồng,
 $|\mathcal{E}|=3$ mức hiệu suất tưới và $|\mathcal{W}|=5$ trạng thái đầu, nên
-$|\Theta|=150$ và mỗi nhật ký tốn $150$ lần phát lại. Ngữ nghĩa được chọn cố ý
-lệch về một phía:
+$|\Theta|=150$ và mỗi nhật ký tốn $150$ lần phát lại. Ngữ nghĩa phán quyết được
+chọn cố ý lệch về một phía:
 \begin{equation}
 a(L)=
 \begin{cases}
@@ -57,16 +64,18 @@ $\theta^{*}$, thì $V_{\mathrm{rob}}(L)=\emptyset$ và nông dân không bị k�
 $V_{\mathrm{rob}}(L)\subseteq V_{\theta^{*}}(L)=\emptyset$.
 \end{proof}
 
-Mệnh đề~\ref{prop:noalarm} là thứ làm cho lớp này triển khai được. Sai số mô
-hình có thể làm giảm năng lực phát hiện nhưng không thể tạo ra một lời kết
-tội, với một cái giá phải được nói rõ. Hai chi tiết cài đặt là cách xử lý các thế giới không kích hoạt và độ trải của $\mathcal{W}$; làm sai sẽ âm thầm phá vỡ mệnh đề (Phụ lục~S7).
+Mệnh đề~\ref{prop:noalarm} là điều làm cho lớp này triển khai được. Sai số mô
+hình có thể làm giảm năng lực phát hiện nhưng không thể tạo ra một lời kết tội
+oan, và cái giá phải trả cho đảm bảo đó được nêu rõ ở phần sau. Hai chi tiết cài
+đặt có thể âm thầm phá vỡ mệnh đề nếu làm sai, đó là cách xử lý các thế giới
+không kích hoạt và độ trải của $\mathcal{W}$ (Phụ lục~S7).
 
 \subsection{Ngưỡng chênh lệch bơm tỉ lệ thuận}
 
-Quy tắc tuyệt đối $G>\tau_0$ với $\tau_0=5$~mm giả định nhật ký là bản sao
-trung thực của lượng nước đã bơm. Nó không phải vậy, vì quên ghi, làm tròn đến
-$5$~mm gần nhất và ghi trễ một ngày đều đóng góp vào $G$ mà không có hành vi
-sai trái nào, nên ngưỡng phải co giãn theo số lần tưới được ghi:
+Quy tắc tuyệt đối $G>\tau_0$ với $\tau_0=5$~mm ngầm giả định nhật ký là bản sao
+trung thực của lượng nước đã bơm. Giả định này không đúng, vì quên ghi, làm tròn
+đến $5$~mm gần nhất và ghi trễ một ngày đều làm tăng $G$ mà không hề có hành vi
+sai trái nào. Vì vậy ngưỡng phải co giãn theo số lần tưới được ghi:
 \begin{equation}
 \begin{aligned}
 \tau(n)&=\delta_{\mathrm{rel}}M+z\sqrt{n}\,\sigma_{\mathrm{event}},\\
@@ -77,16 +86,17 @@ sai trái nào, nên ngưỡng phải co giãn theo số lần tưới được 
 \end{equation}
 với $p$ là tỷ lệ quên, $r$ là bước làm tròn, $q$ là tỷ lệ sai độ sâu và $s$ là
 biên độ của nó, $\bar u=30$~mm là độ sâu điển hình của một lần tưới,
-$\delta_{\mathrm{rel}}=2\%$ và $z=3$; quy tắc tuyệt đối là trường hợp suy biến
+$\delta_{\mathrm{rel}}=2\%$ và $z=3$. Quy tắc tuyệt đối là trường hợp suy biến
 $n\to0$, $\sigma_{\mathrm{event}}\to0$.
 
 \begin{remark}[Một bộ lọc không thể kích hoạt]
 \label{sec:v2reach}
-Bộ lọc vật lý thứ ba, đánh dấu độ cạn kiệt xuống dưới
-điểm héo, đã không hoạt động theo hai cách: ngưỡng của nó ($1{,}02$) nằm ngoài
-dải đã cắt ngọn của chỉ số được báo cáo ($0$ lần kích hoạt trong $281$ nhật
-ký), và sau khi sửa thì nó vẫn không thể kích hoạt. Qua $150$ cấu hình với một nhật ký rỗng, độ cạn kiệt chưa cắt ngọn chỉ đạt đỉnh $0{,}9987$, và một
-ruộng lúa vụ khô ở đồng bằng không chạm tới điểm héo (Bảng~S3 của Phụ lục, dẫn
-xuất ở S13). Lớp này có hai bộ lọc vật lý hoạt động và một thiết bị an toàn
-bất động.
+Bộ lọc vật lý thứ ba, đánh dấu độ cạn kiệt xuống dưới điểm héo, bất động theo hai
+nghĩa. Thứ nhất, ngưỡng của nó ($1{,}02$) nằm ngoài dải đã cắt ngọn của chỉ số
+được báo cáo, nên nó có $0$ lần kích hoạt trong $281$ nhật ký. Thứ hai, sau
+khi sửa để dùng độ cạn kiệt chưa cắt ngọn thì nó vẫn không thể kích hoạt, vì qua
+$150$ cấu hình với một nhật ký rỗng, độ cạn kiệt chưa cắt ngọn chỉ đạt đỉnh
+$0{,}9987$, mà một ruộng lúa vụ khô ở đồng bằng thì không chạm tới điểm héo
+(Bảng~S3 của Phụ lục, dẫn xuất ở S13). Như vậy lớp này có hai bộ lọc vật lý hoạt
+động và một thiết bị an toàn bất động.
 \end{remark}

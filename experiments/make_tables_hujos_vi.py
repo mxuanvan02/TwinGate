@@ -66,10 +66,10 @@ LABELS = {
     "Defence layer": "Lớp phòng thủ",
     "Honest, paper conditions": "Trung thực, điều kiện giấy",
     "Honest, field conditions": "Trung thực, điều kiện ruộng",
-    "v1 tier 0 (physics, point model)": "v1 tầng 0 (vật lý, mô hình điểm)",
-    "v1 tier 1 (absolute $G>5$\\,mm)": "v1 tầng 1 (tuyệt đối $G>5$\\,mm)",
-    "v2 tier 0 ($\\forall$ over $\\Theta$)": "v2 tầng 0 ($\\forall$ trên $\\Theta$)",
-    "v2 tier 1 ($\\tau(n)$ scales with events)": "v2 tầng 1 ($\\tau(n)$ co giãn theo số lệnh)",
+    "Point model, physics only": "Mô hình điểm, chỉ vật lý",
+    "Point model with absolute threshold ($G>5$\\,mm)": "Mô hình điểm với ngưỡng tuyệt đối ($G>5$\\,mm)",
+    "Robust rule ($\\forall$ over $\\Theta$), physics only": "Quy tắc bền vững ($\\forall$ trên $\\Theta$), chỉ vật lý",
+    "Robust rule with proportional $\\tau(n)$": "Quy tắc bền vững với $\\tau(n)$ tỉ lệ",
     "Device-anchored command log": "Bản ghi lệnh neo theo thiết bị",
     # --- tab_credit ---
     "Log type": "Loại nhật ký",
@@ -81,8 +81,8 @@ LABELS = {
     "reference": "mốc",
     # --- tab_defence ---
     "Fraud variant": "Biến thể gian lận",
-    "Escapes v1": "Lọt v1",
-    "Escapes v2 physics": "Lọt v2 vật lý",
+    "Escapes point model": "Lọt mô hình điểm",
+    "Escapes robust detector": "Lọt bộ phát hiện bền vững",
     "Caught by anchor": "Neo thiết bị bắt",
     "All genuinely forged": "Mọi nhật ký thật sự giả",
     # --- ten bien the (dung chung ca 3 bang) ---
