@@ -24,30 +24,31 @@ nước~\cite{qd4801}.
 
 Hướng khắc phục xuất phát từ một nhận xét đơn giản, đó là mỗi lệnh tưới do bộ điều khiển phát ra tự thân đã là một sự kiện số. Nếu gateway đã đóng mở máy bơm thì nó cũng ghi lại được lần đóng mở
 đó, và bản ghi này là dữ liệu hoạt động bậc 1 (Tier-1) theo nghĩa của Quyết
-định 4801~\cite{qd4801}, với chi phí biên bằng không. Đây cũng là tiền đề của
-công trình đồng hành~\cite{twingate2026}, trong đó một bản sao số (digital twin) FAO-56 đóng
+định 4801~\cite{qd4801}, với chi phí biên bằng không. Đây cũng là tiền đề của một công trình đang thẩm định của chính nhóm tác
+giả~\cite{twingate2026}, trong đó một bản sao số (digital twin) FAO-56 đóng
 vai trò cổng an toàn để quyết định xem một lệnh có được truyền qua kênh có tổn
 thất hay không.
 
 Chúng tôi mở rộng hướng này và đặt câu hỏi liệu chính bản sao số đó có thể
 \emph{kiểm toán} những gì nông dân đã khai báo mà không cần triển khai thêm
-cảm biến nào hay không. Cách làm là phát lại nhật ký gồm các độ sâu khai báo qua mô
-hình cân bằng nước, dùng dữ liệu ERA5 công khai~\cite{hersbach2020}; khi đó một
+cảm biến nào hay không. Cách làm là tính lại cân bằng nước của ruộng từ các độ sâu tưới mà nông dân đã
+ghi trong nhật ký, dùng dữ liệu ERA5 công khai~\cite{hersbach2020}; khi đó một
 khai báo mà đất không thể nào hấp thụ được chính là bằng chứng của sự ngụy
 tạo. Tuy nhiên, khi thửa ruộng thử nghiệm do chính bản sao số dùng để kiểm toán
 sinh ra, tức trường hợp chúng tôi gọi là \emph{điều kiện giấy}, thì lớp kiểm
 toán không kết tội oan nhật ký trung thực nào trong $60$ nhật ký và phát hiện
 đúng $60/60$ nhật ký giả. Ngược lại, thửa ruộng do một tiến trình độc lập sinh
 ra và vi phạm các giả định của bản sao số được gọi là \emph{điều kiện ruộng}. Hai kết quả đó đúng về mặt logic nhưng chưa có ý nghĩa thực tiễn, vì các quỹ
-đạo được dán nhãn ``thật'' lại do chính mô hình kiểm toán sinh ra, nghĩa là bộ
-phát hiện đang tự đánh giá trên dữ liệu do nó tạo ra (Phụ lục~S10.4).
+đạo được dán nhãn ``thật'' lại do chính mô hình kiểm toán sinh ra, nghĩa là bộ phát hiện đang tự chấm trên dữ liệu do chính nó sinh ra. Toàn bộ dẫn
+xuất, bảng số và kiểm chứng bổ sung nằm trong tệp Phụ lục nộp kèm bản thảo này,
+được đánh số S1 đến S21 và được trích dẫn ở dạng ``Phụ lục~S10.4''.
 
 Bài báo này gỡ bỏ vòng luẩn quẩn đó. Chúng tôi dựng thửa ruộng thử nghiệm sao
 cho nó vi phạm mọi giả định của bản sao số, đồng thời thay các kiểu gian lận
 ngây thơ bằng một đối thủ đã đọc kỹ bộ phát hiện. Ba phát hiện dưới đây cũng là ba đóng góp của bài. Phần còn lại được tổ chức
 như sau. Mục~\ref{sec:model} mô tả cân bằng nước và cách phát lại một nhật ký
-khai báo, Mục~\ref{sec:threat} chỉ ra điểm mù tất yếu của mọi bộ phát hiện dựa
-trên quỹ đạo phát lại, Mục~\ref{sec:guarantee} xử lý việc kết tội oan,
+khai báo, Mục~\ref{sec:threat} chỉ ra điểm mù cố hữu của mọi bộ phát hiện chỉ suy ra kết luận
+từ quỹ đạo độ ẩm được tính lại bằng cách phát lại nhật ký khai báo, Mục~\ref{sec:guarantee} xử lý việc kết tội oan,
 Mục~\ref{sec:anchor} trình bày cơ chế neo thiết bị, và Mục~\ref{sec:results}
 báo cáo thực nghiệm.
 
@@ -74,8 +75,8 @@ tránh khỏi với mọi bộ phát hiện có phán quyết là hàm của qu�
 Thứ ba, cách khắc phục vừa rẻ vừa không dựa trên vật lý. Đối chiếu nhật ký khai
 báo với bản ghi lệnh có chữ ký và dấu thời gian của gateway bắt được
 $116/116$ nhật ký thật sự bị giả mạo và không kết tội oan nhật ký nào trong
-$60$ nhật ký trung thực, với chi phí không vượt quá chính gateway mà công trình
-đồng hành đã triển khai (Mục~\ref{sec:anchor}). Phân tích cũng dẫn tới ba hệ
+$60$ nhật ký trung thực, với chi phí không vượt quá chính gateway mà công trình đang thẩm định nêu trên đã
+triển khai (Mục~\ref{sec:anchor}). Phân tích cũng dẫn tới ba hệ
 quả trực tiếp đối với lớp kiểm toán vật lý, gồm độ sâu chấp nhận được là một
 dải $[49{,}0; 86{,}0]$~mm chứ không phải một giá trị $61$~mm, bộ lọc vật lý thứ
 ba không thể kích hoạt trên lúa vụ khô đồng bằng, và ngưỡng tuyệt đối đặt trên

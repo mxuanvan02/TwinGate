@@ -9,7 +9,8 @@ Một nhật ký tưới khai báo là một ánh xạ hữu hạn
 L=\{(t_i,u_i)\}_{i=1}^{|L|},\qquad u_i>0,\ t_i\in[0,T),
 \label{eq:log}
 \end{equation}
-trong đó $u_i$ là độ sâu khai báo tính bằng milimét và $t_i$ là chỉ số giờ.
+trong đó $u_i$ là độ sâu khai báo, tức lượng nước nông dân ghi đã tưới vào thửa
+ruộng tính bằng milimét, và $t_i$ là chỉ số giờ của lần tưới đó.
 Đối thủ có thể làm giả ba đại lượng độc lập, và mỗi tầng phòng thủ chỉ quan sát
 một tập con trong số đó:
 \begin{equation}
@@ -60,8 +61,8 @@ với tổng lượng bơm thật.
 \section{Các bộ lọc dựa trên vật lý và đúng điểm mù của chúng}
 \label{sec:filters}
 
-Phát lại $L$ với dữ liệu ERA5 công khai cho ra $(\hat w_t,\hat d_t)$; công
-trình đồng hành~\cite{twingate2026} trình bày đầy đủ cân bằng nước này. Trên
+Phát lại $L$ với dữ liệu ERA5 công khai cho ra $(\hat w_t,\hat d_t)$; công trình đang thẩm định nêu trên~\cite{twingate2026} trình bày đầy đủ cân bằng
+nước này. Trên
 nền đó có ba bộ lọc được áp dụng. Bộ lọc \emph{$V_1$} (bão hoà) đánh dấu mọi khai báo được ghi vào thời điểm tầng
 rễ đã đạt sức chứa ẩm đồng ruộng, vì lượng nước đó không thể được tầng rễ lưu
 trữ thêm:
@@ -92,8 +93,7 @@ $110$~mm tại $\tau_i=1$~giờ. Chúng tôi chọn đầu rộng như vậy đ�
 hai lần tưới liền kề vào cùng một giờ không bị kết tội oan.
 
 Bộ lọc thứ ba, vốn đánh dấu độ cạn kiệt xuống dưới điểm héo, không thể kích hoạt
-trên lúa vụ khô đồng bằng; bằng chứng ở Ghi chú~\ref{sec:v2reach}. Cách đánh số
-$V_1$, $V_4$, $V_5$ theo công trình đồng hành nêu trên; bài này không dùng $V_2$
+trên lúa vụ khô đồng bằng; bằng chứng ở Ghi chú~\ref{sec:v2reach}. Cách đánh số $V_1$, $V_4$, $V_5$ theo công trình đang thẩm định nêu trên; bài này không dùng $V_2$
 và $V_3$.
 
 \begin{proposition}[Điểm mù chính xác của các phòng thủ tổng hợp]
