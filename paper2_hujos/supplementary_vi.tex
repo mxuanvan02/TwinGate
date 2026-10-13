@@ -1,0 +1,442 @@
+% !TeX program = xelatex
+% =====================================================================
+% PHU LUC TIENG VIET — Device-Anchored Irrigation Logs (HUJOS-TT)
+% =====================================================================
+% Ban dich cua supplementary.tex (EN). Bai chinh nop bang tieng Viet nen phu luc
+% cung phai bang tieng Viet (anh Van, 2026-10-13).
+%
+% BA NGUYEN TAC BAT BUOC khi sua file nay:
+%  1. KHONG go tay so cua bai chinh. Moi tham chieu cheo dung \ref/\eqref, so
+%     duoc sinh tu supp_stubs_vi.tex (doc main_hujos_vi.aux). Ban EN go tay nen
+%     da lech: sec:anchor EN=8/VI=7, eq:v4 EN=12/VI=11, eq:v5 EN=13/VI=12,
+%     eq:umax EN=16/VI=15.
+%  2. GIU NGUYEN moi con so va moi hedge. Thap phan kieu Viet: $26{,}7$, khong
+%     phai $26.7$. Dung nhu tables_vi/ (0,60--0,85 / w_0=0{,}90).
+%  3. Bang dung tables_vi/, block dung blocks_vi/ (ban EN cua 08/09 van \input
+%     boi supplementary.tex EN — hai phu luc doc lap, khong dung chung).
+%
+% HAI CHO TRO SAI CO SAN TRONG BAN EN, DA SUA O DAY (khong sua ban EN vi ban do
+% da nop/da doi chieu):
+%   S9.2 viet "Table~5 of the main text" — bai chi co 4 bang; bang so sanh phuong
+%        an MRV la tab:benchmark = 4  -> dung \ref{tab:benchmark}
+%   S15  viet "Table~4 of the main text" cho cac so ghep cap — bang co cot
+%        Inflation/ghep cap la tab:credit = 2 -> dung \ref{tab:credit}
+%
+% Tac gia va co quan lay DUNG khoi cua main_hujos_vi.tex (ban EN cua phu luc chi
+% ghi 2 tac gia trong khi bai chinh co 5 — phu luc phai khop bai chinh).
+% =====================================================================
+
+\def\HUJOSVI{}
+\input{preamble}
+
+\begin{document}
+
+% Bang cua phu luc danh so S1..S5 de khop nhan 'Bang SN' ma bai chinh trich dan.
+\renewcommand{\thetable}{S\arabic{table}}
+
+\begingroup
+  \hujostitle{Phụ lục\\
+  Điểm mù cố hữu của chứng thực vật lý đối với nhật ký tưới và giải pháp
+  neo theo thiết bị trong đo đạc, báo cáo, thẩm định lúa phát thải thấp}
+
+  \vspace{8pt}
+  \hujosauthors{Mai Xuân Văn$^{1}$, Lê Đức Minh Phương$^{2,*}$, Nguyễn Đăng Trị$^{3}$,
+  Trương Khánh Duy$^{2}$, Nguyễn Tương Tri$^{2,4,*}$}
+
+  \vspace{4pt}
+  \hujosaffil{$^{1}$ Trường Trung học phổ thông (THPT) Thuận Hóa, Trường Đại học Sư phạm, Đại học Huế, Huế, Việt Nam\\
+  $^{2}$ Viện Đào tạo Mở và Công nghệ thông tin, Đại học Huế, Huế, Việt Nam\\
+  $^{3}$ Trường Đại học Gia Định, Thành phố Hồ Chí Minh, Việt Nam\\
+  $^{4}$ Trường Đại học Sư phạm, Đại học Huế, 34 Lê Lợi, Huế, Việt Nam}
+
+  \vspace{4pt}
+  \hujosaffil{$^{*}$ Đồng tác giả liên hệ: Lê Đức Minh Phương. E-mail: Ldmphuong@hueuni.edu.vn;\\
+  Nguyễn Tương Tri. E-mail: ntuongtri@hueuni.edu.vn}
+\endgroup
+
+\vspace{10pt}
+
+% Stub nhan: TU SINH tu main_hujos_vi.aux. Build lai bai chinh roi chay
+%   python3 experiments/make_supp_stubs_vi.py
+% neu bai chinh doi danh so cong thuc/muc/bang.
+\InputIfFileExists{supp_stubs_vi.tex}{}{%
+  \errmessage{THIEU supp_stubs_vi.tex: chay python3 experiments/make_supp_stubs_vi.py}}
+
+% ---------------------------------------------------------------- S1
+\section*{S1. Các lớp gian lận và mỗi tầng phòng thủ quan sát được gì}
+
+\begin{table}[!h]
+\centering
+\caption{Ba đại lượng làm giả được của \eqref{eq:three} trong bài chính và lớp gian lận
+nào làm thay đổi từng đại lượng. ``đúng'' nghĩa là đại lượng đó được giữ nguyên, nên tầng
+phòng thủ tương ứng bị mù theo Mệnh đề~\ref{prop:blind} của bài chính.}
+\footnotesize
+\input{tables_vi/tab_threat}
+\end{table}
+
+% ---------------------------------------------------------------- S2
+\section*{S2. Biên độ sâu chấp nhận được trên toàn $\Theta$}
+
+\begin{table}[!h]
+\centering
+\caption{Biên độ sâu chấp nhận được $u_{\max}$ (\eqref{eq:umax} trong bài chính) trên
+toàn dải của FAO-56 Bảng 2. Giá trị đơn lẻ $61$\,mm ban đầu chỉ là một dòng của bảng này.}
+\footnotesize
+\input{tables_vi/tab_umax}
+\end{table}
+
+% ---------------------------------------------------------------- S3
+\section*{S3. Khả năng kích hoạt của bộ lọc điểm héo}
+
+\begin{table}[!h]
+\centering
+\caption{Khả năng kích hoạt của bộ lọc điểm héo trên $150$ cấu hình với nhật ký rỗng, tức
+điều kiện thời tiết khô hạn nhất có được.}
+\footnotesize
+\input{tables_vi/tab_f2_unreachable}
+\end{table}
+
+% ---------------------------------------------------------------- S4
+\input{blocks_vi/08_subsidence}
+
+% ---------------------------------------------------------------- S5
+\input{blocks_vi/09_cost}
+
+\begin{table}[!h]
+\centering
+\caption{Chi phí MRV mỗi héc-ta mỗi vụ cho bốn kiến trúc. Giám sát chiếm phần lớn chi phí
+MRV, nên kiến trúc tránh được cảm biến chuyên dụng thắng ở phần nhân công chứ không phải
+ở phần cứng.}
+\label{tab:baseline}
+\footnotesize
+\input{tables_vi/tab_baseline}
+\end{table}
+
+% ---------------------------------------------------------------- S6
+\section*{S6. Cấu hình thực nghiệm}
+
+\begin{table}[!h]
+\centering
+\caption{Cấu hình thực nghiệm. Mọi giá trị đều tái lập được từ mã nguồn đã công bố và dữ
+liệu ERA5 công khai.}
+\label{tab:setup}
+\footnotesize
+\input{tables_vi/tab_setup}
+\end{table}
+
+% ---------------------------------------------------------------- S7
+\section*{S7. Hai chi tiết triển khai của phép giao bền vững}
+
+Có hai chi tiết triển khai của $V_{\mathrm{rob}}$ là quan trọng, và làm sai chi tiết nào
+cũng âm thầm phá vỡ Mệnh đề~\ref{prop:noalarm} của bài chính. Một thế giới không sinh ra
+vi phạm nào phải đóng góp \emph{tập rỗng} vào phép giao; bỏ qua các thế giới không kích
+hoạt là tính $\bigcap$ chỉ trên các thế giới có kích hoạt, tức một lượng từ tồn tại mặc
+áo lượng từ phổ dụng. Và $\mathcal{W}$ phải trải hết dải mà một khai báo còn có thể hợp
+lệ: với $\mathcal{W}=\{0;0{,}25\}$ thì độ sâu chấp nhận được lớn nhất ở bất kỳ đâu trong
+$\Theta$ là $22{,}5$\,mm, nên mọi khai báo vượt mức đó đều ``có tội trong mọi thế giới''
+và phép giao trở nên rỗng nghĩa --- nó kích hoạt trên $102$ trong $150$ thế giới trong khi
+vẫn tồn tại $48$ thế giới vô tội. Mở rộng $\mathcal{W}$ thành
+$\{0;0{,}25;0{,}5;0{,}75;0{,}9\}$ khôi phục đúng ngữ nghĩa dự kiến.
+
+% ---------------------------------------------------------------- S8
+\section*{S8. Quan hệ với các công trình giám sát trước đây (toàn văn)}
+
+Giám sát AWD đã được tiếp cận từ ba hướng. \emph{Gắn thiết bị}: một cảm biến mực nước
+không dây giá rẻ cho lúa đồng bằng theo AWD~\cite{delacruz2022}, giải quyết được bài toán
+đo lường nhưng nhân chi phí thiết bị theo số thửa. \emph{Viễn thám}: nhận diện việc áp
+dụng AWD ở đồng bằng sông Cửu Long~\cite{lovell2019}, giám sát trạng thái nước bằng phân
+tách công suất tán xạ ALOS-2~\cite{islam2026alose}, và lập bản đồ học máy ở quy mô vùng
+cho các thực hành tiết kiệm nước~\cite{mlrice2025}; các hướng này phủ diện rộng với chi
+phí thấp nhưng hai đến bốn ngày mới chụp lại một lần nên không phân giải được pha khô
+$72$\,h vốn quyết định điều kiện cấp tín chỉ. \emph{Cấp chương trình}: chương trình một
+triệu héc-ta lúa chất lượng cao, phát thải thấp~\cite{qd1490}, đến năm 2026 đã đưa hơn
+$350\,000$ héc-ta vào canh tác~\cite{mae2026progress}, và MRV được xác định là mắt xích
+còn thiếu của lúa phát thải thấp ở Đông Nam Á~\cite{irri2026mrv}.
+
+Về phía nông học, phân tích tổng hợp định lượng tác động của AWD lên nước và năng
+suất~\cite{carrijo2017}, còn kinh tế học về việc chấp nhận~\cite{lampayan2015} cùng các
+rào cản kỹ thuật và thể chế khi mở rộng~\cite{enriquez2021} giải thích vì sao giám sát
+gắn thiết bị chưa lan rộng. Không hướng nào trong số đó đánh giá \emph{độ tin cậy của
+chính bản ghi hành động}, vốn là câu hỏi đặt ra ở đây.
+
+Gateway cung cấp dấu thời điểm được neo theo thiết bị chính là bộ điều khiển của công
+trình đồng hành~\cite{twingate2026}, trong đó việc phát lệnh chạy trên một kênh nhiễu
+chùm loại Gilbert--Elliott~\cite{gilbert1960,elliott1963}. Các kết quả lập lịch trước đây
+của chính chúng tôi cho mạng IoT nông nghiệp an toàn tới hạn cũng xử lý cùng chế độ
+truyền đó~\cite{rabs,cawvou}, nhưng không công trình nào thiết lập một bản ghi bằng
+chứng, vốn là chức năng được dựa vào ở đây. Vì bộ điều khiển đó đã ký mọi lệnh nó phát
+ra, neo chỉ thêm việc lưu trữ và truyền đi một bản ghi vốn đã tồn tại --- đó chính là
+điều giữ cho chi phí biên của việc chứng thực gần bằng không.
+
+% ---------------------------------------------------------------- S9
+\section*{S9. Bàn luận mở rộng}
+
+\subsection*{S9.1 Vì sao công bố ngưỡng không phải là vấn đề}
+
+Có thể kết luận rằng nên giữ bí mật $\varepsilon$. Không nên, vì hai lý do. Một kiểm toán
+viên phải tái lập được một phán quyết, và điều đó đòi hỏi tham số được công bố. Và giữ bí
+mật cũng không ích gì: theo Mệnh đề~\ref{prop:blind} của bài chính, tấn công dịch thời
+điểm giữ nguyên tổng lượng và từng độ sâu riêng lẻ, nên nó không cần biết $\varepsilon$ để
+nằm dưới giới hạn thấm --- nó chỉ cần tránh dịch chuyển nước, điều mà bất kỳ nông dân nào
+cũng nhìn thấy. Lỗ hổng có tính cấu trúc, không phải hệ quả của việc công bố.
+
+\subsection*{S9.2 Quan hệ với viễn thám (toàn văn)}
+
+Radar vệ tinh là phương án giá rẻ hiển nhiên, nên thay vì tranh luận về nó chúng tôi đo
+nó. Bảng~\ref{tab:benchmark} của bài chính chấm điểm mọi phương án bằng một đại lượng:
+trong số $150$ pha khô đủ điều kiện cấp tín chỉ có thật trên $60$ ruộng mô phỏng, phương án
+đó xác nhận được bao nhiêu. Một pha chỉ được tính là xác nhận được nếu có ít nhất một lần
+quan sát rơi vào trong nó, vì một pha $72$\,h nằm trọn giữa hai lần chụp thì không thể có
+bằng chứng nào --- điều đó làm nông dân mất một tín chỉ ngay cả khi thực hành được thực
+hiện đúng. Sentinel-1 một vệ tinh, chu kỳ mười hai ngày~\cite{clauss2017s1}, xác nhận
+$90/150$ ($60\%$); cả chòm A+B với chu kỳ sáu ngày~\cite{hashemi2022s1} đạt $124/150$
+($83\%$), và vẫn bỏ sót một pha trong mỗi sáu pha dù chi phí thiết bị bằng không. Một ống
+đo mực nước liên tục xác nhận cả $150$, với mỗi thửa một thiết bị~\cite{delacruz2022}. Bản
+ghi lệnh có chữ ký cũng xác nhận cả $150$ --- vì các pha được định nghĩa bằng những khoảng
+giữa hai lần đóng mở, mà bộ điều khiển vốn đã đóng dấu thời điểm --- và không cần thêm
+thiết bị nào, vì chính bộ điều khiển là thứ đã mở máy bơm.
+
+Có hai điểm cần thận trọng kèm theo phép so sánh đó. Cột xác nhận đo khả năng \emph{kiếm}
+được tín chỉ, chứ không đo khả năng phát hiện gian lận: ống đo và bản ghi lệnh hòa nhau ở
+$100\%$ tại đây nhưng khác nhau hoàn toàn về chi phí và về những gì chúng chứng minh được
+đối với một nhật ký đã bị sửa. Còn phương án chụp ảnh cộng tự khai báo đạt $0\%$ không phải
+vì nó vô giá trị mà vì nó không sinh ra chuỗi quan sát nào để đối chiếu; mọi xác nhận theo
+nó đều phải đến từ một chuyến đi thực địa.
+
+Vì vậy radar giữ đúng vai trò mà VM0051 Phụ lục 4 giao cho nó: một phép kiểm chéo theo
+từng thửa làm giảm tần suất xác minh thực địa~\cite{vm0051}.
+
+% ---------------------------------------------------------------- S10
+\section*{S10. Các lỗi của bộ khung thử nghiệm và chi tiết thiết kế}
+
+\subsection*{S10.1 Hành vi ghi chép theo từng sự kiện chứ không theo từng giờ}
+
+Việc làm tròn và trễ được áp theo từng \emph{sự kiện}, không theo từng giờ: áp mức làm tròn
+$5$\,mm cho một sự kiện $40$\,mm rải trên tám giờ sẽ làm tròn mỗi mảnh $5$\,mm về không và
+âm thầm xóa mất bản ghi, một ảo ảnh đã từng sinh ra các nhật ký rỗng trong phiên bản đầu
+của bộ khung này.
+
+\subsection*{S10.2 Hai lỗi bộ khung phải sửa}
+
+Phải sửa hai lỗi của bộ khung trước khi các con số được báo cáo có ý nghĩa gì, và cả hai
+đều được ghi lại trong mã nguồn vì chúng rất dễ bị đưa trở lại. Thứ nhất, một trình sinh
+gian lận không tìm được nước đi cải thiện sẽ trả lại nhật ký trung thực \emph{ban đầu}, nên
+nếu đếm vô điều kiện thì số ``tấn công bị bắt'' âm thầm gộp cả những ca không hề có tấn
+công; vì vậy mọi dòng đối kháng đều mang một cờ \texttt{changed} và tất cả thống kê tấn
+công đều được tính có điều kiện trên cờ đó. Thứ hai, các phép so sánh phải dùng mốc của
+chính biến thể đó: nhật ký trung thực điều kiện giấy được sinh ra bởi một lần gọi riêng,
+và việc chấm nó theo bản ghi điều kiện ruộng của một lần hiện thực hóa đất khác đã ``bắt''
+sai $56$ trong $60$ nhật ký trung thực.
+
+\subsection*{S10.3 Tổng lượng là chỉ báo chẩn đoán, không phải mục tiêu}
+
+Một cấu hình tối đa hóa tổng lượng khai báo không tự động sinh lợi: một đối thủ phiên bản
+sớm thổi phồng khai báo thêm $344$\,mm đã kéo $n_{\mathrm{dry}}$ về không và sẽ chẳng kiếm
+được gì, nên tổng lượng chỉ được báo cáo như một chỉ báo chẩn đoán.
+
+\subsection*{S10.4 Ảo ảnh tự nhất quán}
+
+Tầng được kiểm toán từng sinh ra các quỹ đạo ``thật'' bằng \texttt{SoilProfile} mặc định,
+dữ liệu ERA5 không nhiễu, tưới là một xung một giờ đúng bằng $\{20,40\}$\,mm, ngưỡng đúng
+bằng $0{,}80$, và một nông dân luôn ghi đúng độ sâu vào đúng giờ. Vì vậy cả $0/60$ ca kết
+tội oan lẫn $60/60$ ca phát hiện đều là phép đo tính tự nhất quán: bộ phát hiện đang chấm
+chính trình sinh đã tạo ra các quỹ đạo ``thật'' mà nó kiểm toán. Trong thiết kế hiện tại,
+thửa ruộng được sinh bởi một tiến trình riêng biệt, khác bản sao số theo bảy trục liệt kê
+ở Bảng~S5.
+
+% ---------------------------------------------------------------- S11
+\section*{S11. Chứng minh Mệnh đề 1 và Mệnh đề 2}
+
+\subsection*{Chứng minh Mệnh đề 1 (sự mù chính xác của các tầng phòng thủ tổng hợp)}
+
+$U(L)=\sum_i u_i$ là một hàm đối xứng của đa tập hợp, nên nó bất biến đối với mọi phép gán
+lại độ sâu cho các giờ; $M$ là tính chất của thửa ruộng chứ không phải của nhật ký; do đó
+$G=M-U$ không đổi. Tương tự, giới hạn thấm (\eqref{eq:v5} của bài chính) được đánh giá
+theo từng sự kiện và chỉ phụ thuộc $(u_i,\tau_i)$, không bao giờ phụ thuộc $t_i$ hay
+$\hat w$, nên số lần vi phạm là một hàm chỉ của đa tập hợp.
+
+\subsection*{Chứng minh Mệnh đề 2 (lợi ích tín chỉ và sự lọt lưới là cùng một hành động)}
+
+Phần (i) là theo định nghĩa: tập $\mathcal{A}$ không đòi hỏi khai báo nào bên trong khoảng,
+nên bỏ đi một khai báo sẽ kéo dài hoặc tạo ra một pha đạt điều kiện. Với phần (ii), hoãn
+một khai báo đến $t+\delta$ nghĩa là thùng chứa tiếp tục mất nước thêm $\delta$ giờ mà không
+có nước vào, nên $\hat w_{t+\delta}^{-}\le\hat w_t^{-}$ và $c_{t+\delta}\ge c_t$; cận trên
+của độ tăng phần thiếu hụt suy ra từ chỗ lượng mất mỗi giờ ít nhất bằng trung bình
+$\overline{\Delta}$ cho tới khi đạt sức chứa ẩm đồng ruộng, sau đó $c$ bão hòa tại
+$FC-\hat w$. Vì bộ lọc vượt sức chứa chỉ kích hoạt khi $u_i>c_{t_i}+\varepsilon$ và $u_i$
+không đổi, một $c_{t_i}$ lớn hơn chỉ có thể làm giảm tập vi phạm.
+
+% ---------------------------------------------------------------- S12
+\section*{S12. Chứng minh Mệnh đề 4 (tính đầy đủ của neo)}
+
+Vế thứ nhất chính là định nghĩa của phán quyết neo: bất kỳ sự bất đồng nào giữa các tập giờ,
+hoặc giữa độ sâu tại một giờ chung, đều kích hoạt phán quyết giả mạo. Với vế thứ hai, tổng
+lượng, từng độ sâu riêng lẻ và các dấu thời điểm đều là hàm của tập giờ và độ sâu theo giờ,
+nên sự trùng khớp trên hai thứ đó cố định cả ba, và không có sự giả mạo nào đối với ba đại
+lượng đã xảy ra.
+
+% ---------------------------------------------------------------- S13
+\section*{S13. Bộ lọc điểm héo: toàn bộ dẫn xuất}
+
+Tầng này từng gồm một bộ lọc vật lý thứ ba, đánh dấu việc cạn kiệt xuống dưới điểm héo là
+bất khả thi về mặt vật lý. Nó vô hiệu theo hai nghĩa. Ngưỡng của nó được đặt ở $1{,}02$
+trong khi chỉ báo được báo cáo $\hat d_t=\min(1,\max(0,\cdot))$ bị cắt về $[0,1]$, nên điều
+kiện không thể thỏa mãn ngay từ cách dựng: $0$ lần kích hoạt trong $281$ nhật ký. Chúng tôi
+sửa nó bằng cách đánh giá độ cạn kiệt chưa cắt ngọn, rồi đo xem bộ lọc đã sửa có kích hoạt
+được hay không. Trên ba trạm, hai năm khí hậu, năm loại đất và năm trạng thái đầu --- tức
+$150$ cấu hình --- với nhật ký rỗng, nghĩa là điều kiện thời tiết khô hạn nhất có thể, độ
+cạn kiệt chưa cắt ngọn đạt đỉnh $0{,}9987$ (Bảng~S3). Một ruộng lúa vụ khô ở đồng bằng
+không chạm tới điểm héo. Vì vậy bộ lọc này là một thiết bị \emph{an toàn} bảo đảm không một
+trạng thái vô lý nào được chấp nhận; nó không phải bằng chứng về năng lực phát hiện, và tầng
+này phải được mô tả là có hai bộ lọc vật lý hoạt động và một bộ lọc trơ.
+
+% ---------------------------------------------------------------- S14
+\section*{S14. Hai hiệu chỉnh đối với biên độ sâu chấp nhận được}
+
+Thứ nhất, \eqref{eq:umax} của bài chính dùng $\max$ chứ không dùng một hiệu số: một thửa
+ruộng khô ban đầu ($w_0=0{,}90$) chấp nhận những khai báo \emph{lớn hơn} một thửa ruộng ướt,
+còn biểu thức ban đầu $(d^{*}-w_0)\,\mathrm{span}+\varepsilon$ cho ra $43{,}5$\,mm với
+$\mathrm{span}=70$\,mm và $w_0=0{,}25$, một giá trị không tương ứng với trạng thái vật lý
+nào, vì phần thiếu hụt hữu hiệu tại giờ đó hoặc là $0{,}25\,\mathrm{span}$ (lúc đầu) hoặc là
+$d^{*}\mathrm{span}$ (khi ruộng đã khô). Thứ hai, biên này áp theo \emph{từng sự kiện} chứ
+không theo từng vụ: thùng chứa rút liên tục qua thấm sâu và bốc thoát hơi nước, nên tổng
+khai báo cả vụ không bị chặn bởi $u_{\max}$ và một đối thủ phát ra nhiều khai báo dưới
+ngưỡng có thể thổi phồng tổng lượng mà không có giới hạn.
+
+% ---------------------------------------------------------------- S15
+\section*{S15. Vì sao mốc ghép cặp mới là mốc trung thực}
+
+Các biến thể giả mạo chỉ được sinh ở những quỹ đạo mang đủ số lệnh để thao tác, tức từ ba
+lệnh trở lên, và những quỹ đạo đó vốn đã khô hơn trung bình: mốc trung thực của chúng mang
+$4{,}87$ pha khô cấp được tín chỉ so với $3{,}23$ của toàn bộ nhật ký trung thực. Vì vậy một
+phép so sánh không ghép cặp với mốc rộng hơn sẽ quy phần khô hạn vốn có cho cuộc tấn công và
+thổi phồng mức tăng lên xấp xỉ gấp đôi. Mọi con số trong Bảng~\ref{tab:credit} của bài chính
+đều được tính trên tập con ghép cặp, cùng trạm, cùng năm, cùng hạt giống và cùng loại đất,
+có điều kiện trên cờ \texttt{changed}.
+
+% ---------------------------------------------------------------- S16
+\section*{S16. Chín loại nhật ký}
+
+Ba loại là giả mạo ngây thơ: thêm sự kiện vào ngày mưa, thổi phồng một phần ba số mục lên
+bằng toàn bộ biên độ chứa, và xóa một cửa sổ khai báo dài $96$\,h. Bốn loại là đối kháng và,
+khác với các loại ngây thơ, được dựng bằng một bộ tối ưu chứ không theo một công thức cố
+định: gộp khai báo về lưới $24$\,h và lưới $96$\,h; một đối thủ duy lý chọn cửa sổ gộp nào
+làm tối đa $n_{\mathrm{dry}}$ với điều kiện giữ nguyên tổng lượng và tôn trọng giới hạn
+thấm; và phép leo đồi theo dịch thời điểm, tìm các độ lệch nguyên trong $[-36,36]$ và chỉ
+chấp nhận một nước đi nếu tổng lượng được giữ nguyên từng bít, mọi độ sâu đều nằm dưới giới
+hạn thấm, và $n_{\mathrm{dry}}$ tăng thực sự. Hai loại trung thực còn lại, điều kiện giấy và
+điều kiện ruộng, là các mốc so sánh.
+
+% ---------------------------------------------------------------- S17
+\section*{S17. Cái giá của tính bền vững và sự nhất quán giữa các tập bất định}
+
+\subsection*{S17.1 Mức mất mát năng lực phát hiện đo được}
+
+Thay mô hình điểm bằng phép giao trên $\Theta$ không miễn phí, và mức mất mát phải được báo
+cáo. Trên chín nhật ký gian lận bỏ sót thật sự bị sửa, mô hình điểm bắt được $9/9$ trong khi
+quy tắc bền vững bắt được $4/9$ ($44\%$); với $\Theta$ đầy đủ các con số là $4/4$ và $2/4$
+($50\%$). Cùng một sự đánh đổi chạy theo cùng hướng với ngưỡng tỉ lệ, và vì cùng một lý do:
+một tầng phòng thủ từ chối kết tội chỉ dựa trên sức mạnh của một cấu hình mô hình thì cũng từ
+chối một số ca dương tính thật. Giả mạo ngây thơ vẫn ở mức $100\%$ theo cả hai. Chúng tôi
+coi đây là phía đúng của sự đánh đổi, vì một ca kết tội oan rơi xuống một nông dân không có
+cách nào kháng cáo còn một ca giả mạo bị bỏ lọt thì rơi xuống một cơ quan xác minh vốn vẫn
+lấy mẫu, nhưng đó là sự mất mát năng lực phát hiện chứ không phải một cải thiện Pareto.
+
+\subsection*{S17.2 Tập rút gọn và tập đầy đủ cho cùng kết quả}
+
+Mọi kết luận đều đúng với cả $\Theta$ rút gọn, gồm $24$ lần phát lại mỗi nhật ký, $281$ nhật
+ký và $10$ hạt giống ngẫu nhiên, lẫn $\Theta$ đầy đủ, gồm $150$ lần phát lại, $85$ nhật ký và
+$3$ hạt giống ngẫu nhiên: kết tội oan $0/60$ và $0/18$, tính đầy đủ của neo $116/116$ và
+$37/37$, lọt lưới dịch thời điểm ở tầng bền vững $8/9$ và $3/3$, thổi phồng tín chỉ ghép cặp
+$+33\%$ ($t=5{,}29$) và $+38\%$ ($t=3{,}46$). Tập rút gọn được dùng cho các lần chạy lớn vì
+nó chứa các cực trị của mọi trục, tức nơi một thế giới vô tội dễ tồn tại nhất; tập đầy đủ xác
+nhận rằng không một cấu hình nằm bên trong nào làm thay đổi phán quyết.
+
+% ---------------------------------------------------------------- S18
+\section*{S18. Vì sao neo không đưa việc kết tội oan trở lại (toàn văn)}
+
+Mệnh đề~\ref{prop:complete} của bài chính mạnh tới mức thoạt trông có vẻ nguy hiểm: mọi sai
+lệch đều bị coi là giả mạo, kể cả việc quên ghi và làm tròn mà bài chính đã chỉ ra là rất phổ
+biến. Cách hóa giải nằm ở chỗ neo không đối chiếu một nhật ký với một \emph{mô hình}; nó đối
+chiếu một bản chép với \emph{nguồn}. Một nông dân trung thực quên một mục không bị kết tội
+gian lận, vì hệ thống lưu trữ hồ sơ là gateway chứ không phải trí nhớ của nông dân: khai báo
+đó đơn giản được bổ sung từ $\mathcal{G}$. Về mặt vận hành, neo biến nhật ký từ \emph{bằng
+chứng mà nông dân phải ghi cho đúng} thành \emph{một góc nhìn của bản ghi mà thiết bị đã
+giữ sẵn}. Khi đó việc kết tội oan đòi hỏi gateway phải bất đồng với chính nó, vốn là một câu
+hỏi về toàn vẹn thiết bị chứ không phải về hành vi, và đó là lý do bảo đảm này giữ ở mức
+$0/60$ trong khi các tầng dựa trên hành vi giữ ở mức $26{,}7\%$ và $5{,}0\%$.
+
+% ---------------------------------------------------------------- S19
+\section*{S19. Cuộc tấn công lấy đi thứ gì}
+
+Cuộc tấn công không lấy đi nước. Tổng lượng nước bơm không đổi, nên nông dân trả vẫn chừng
+đó và khí quyển vẫn thấy chừng đó mê-tan. Thứ bị lấy đi là \emph{lịch sử}: tín chỉ được cấp
+cho một mẫu pha khô đã không xảy ra. Theo VM0051, đơn vị cấp tín chỉ chính xác là mẫu đó, nên
+thiệt hại là có thật dù không có nguồn lực vật lý nào dịch chuyển.
+
+% ---------------------------------------------------------------- S20
+\section*{S20. Thiết kế thực nghiệm: toàn bộ chi tiết}
+
+\subsection*{S20.1 Gỡ bỏ tính vòng tròn, theo từng trục}
+
+Thửa ruộng được sinh bởi một tiến trình riêng biệt, khác bản sao số theo bảy trục, mỗi trục
+đều có một nguồn đã công bố (Bảng~S5): thành phần cơ giới của đất lấy từ năm cấp đất của
+FAO-56 Bảng 2 có mặt ở đồng bằng; $K_c$ phân theo giai đoạn đúng Bảng 12 chứ không cố định ở
+$1{,}05$; hiệu suất tưới $\eta\in[0{,}60;0{,}85]$, nên nông dân khai lượng nước \emph{đã bơm}
+trong khi chỉ $\eta u$ tới được tầng rễ; mưa tại ruộng lấy bằng $0{,}7$--$1{,}4$ lần ô lưới
+cộng nhiễu Gauss; thấm bờ $0$--$0{,}02$\,mm\,h$^{-1}$; hành vi ghi chép với $5\%$ quên ghi,
+làm tròn đến $5$\,mm, $35\%$ khả năng trễ một ngày và $15\%$ sai độ sâu trong phạm vi
+$\pm35\%$; và độ cạn kiệt ban đầu $w_0$ lấy từ $[0;0{,}45]$ thay vì được giả định là sức chứa
+ẩm đồng ruộng. Việc làm tròn và trễ được áp theo từng \emph{sự kiện} chứ không theo từng giờ
+(S10.1).
+
+\subsection*{S20.2 Phần còn lại được của tuyên bố ban đầu}
+
+Tiền đề thúc đẩy công trình này vốn hấp dẫn: một lệnh tưới tự thân đã là một sự kiện số, nên
+bằng chứng MRV lẽ ra gần như miễn phí. Tiền đề đó vẫn đứng vững, nhưng không ở dạng được
+tuyên bố ban đầu. Nó đứng vững vì bộ điều khiển phát ra lệnh cũng có thể ký lệnh đó, và chính
+bản ghi có chữ ký là thứ làm cho bằng chứng được chấp nhận --- chứ không phải vì một mô hình
+thủy văn có thể phát hiện một lời khai dối. Ở chỗ bản thảo ban đầu tuyên bố rằng vật lý chứng
+thực nhật ký, phát biểu đúng là vật lý \emph{ràng buộc} nhật ký: nó loại trừ những độ sâu mà
+không loại đất nào chứa được và những trạng thái mà không thửa ruộng nào đạt tới, điều đó
+đáng có, và nó im lặng về đúng phép biến đổi duy nhất sinh lợi. Giữ bí mật $\varepsilon$ cũng
+không bịt được lỗ hổng: cuộc tấn công không cần biết ngưỡng, và dù sao một kiểm toán viên
+cũng phải tái lập được phán quyết (S9.1).
+
+% ---------------------------------------------------------------- S21
+\section*{S21. Các giới hạn (toàn văn)}
+
+\begin{enumerate}
+\item \emph{Nông dân mô phỏng.} Các hành vi giả mạo được tiêm vào những quỹ đạo tham chiếu mô
+phỏng. Cần một thử nghiệm thực địa để đo phản ứng hành vi, cụ thể là liệu nông dân có thay
+đổi việc bơm \emph{thực tế} của họ một khi biết rằng neo tồn tại hay không --- một kiểu tấn
+công mà mô hình của chúng tôi không biểu diễn được, vì nó thay đổi $M$ chứ không thay đổi $L$.
+\item \emph{Neo giả định một gateway trung thực.} Mệnh đề~\ref{prop:complete} của bài chính là
+tính đầy đủ đối với việc giả mạo nhật ký, không phải đối với một bộ điều khiển đã bị chiếm
+quyền. Toàn vẹn thiết bị, việc giữ khóa và chống phát lại được giả định từ công trình đồng
+hành và không được thiết lập lại ở đây.
+\item \emph{Không áp dụng cho tưới thủ công.} Nơi một cửa cống được mở bằng tay thì không có
+bản ghi lệnh, nên neo không khả dụng. Điều này loại trừ một phần đáng kể số nông hộ ở đồng
+bằng và giới hạn quần thể mà phương án có thể phục vụ.
+\item \emph{Cuộc tấn công chỉ được minh họa trong năm khan nước.} Trong năm thừa nước (2025),
+nông dân cần tưới ít đến mức phần lớn nhật ký mô phỏng rơi xuống dưới mức tối thiểu ba lệnh,
+mức mà một tấn công thời điểm mới có thể dựng được: trong $37$ nhật ký thật sự bị sửa ở
+$\Theta$ đầy đủ thì cả $37$ đều thuộc năm 2024. Chính vách ngăn giữa hai năm đó đã là một
+phát hiện --- rủi ro gian lận MRV tập trung ở nơi khan nước --- nhưng nó cũng có nghĩa là các
+kết quả tấn công chưa phải bằng chứng về một mùa mưa. Ở $\Theta$ rút gọn có mười hai nhật ký
+bị sửa thuộc năm 2025 và chúng hành xử giống nhau, điều đó gợi ý chứ chưa kết luận được.
+\item \emph{$\Theta$ là một phán đoán chuyên môn.} Năm loại đất, hai chế độ $K_c$, ba mức hiệu
+suất và năm trạng thái đầu bao được đồng bằng nhưng không vét hết nó. Một thửa ruộng nằm ngoài
+$\Theta$ sẽ mất bảo đảm của Mệnh đề~\ref{prop:noalarm} trong bài chính, và đó chính xác là
+tình huống mà ngưỡng tỉ lệ cùng phán quyết chờ xác minh tồn tại để hấp thụ.
+\item \emph{Giá thiết bị là ước tính phục vụ lập kế hoạch, không phải báo giá.} Thứ tự giữa các
+tầng và bất đẳng thức hòa vốn không bị ảnh hưởng; biên độ tuyệt đối thì có.
+\item \emph{Không định lượng phát thải.} Tầng này sinh ra dữ liệu hoạt động. Việc ghép nó với
+một mô hình mê-tan và các hệ số phát thải được hiệu chuẩn tại chỗ là một công trình riêng,
+cũng như giả định của bảng chi phí rằng tín chỉ tăng theo $n_{\mathrm{dry}}$.
+\end{enumerate}
+
+\bibliographystyle{vancouver}
+\bibliography{refs}
+
+\end{document}

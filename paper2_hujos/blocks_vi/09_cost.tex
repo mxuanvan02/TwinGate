@@ -1,0 +1,74 @@
+% S5: ban TIENG VIET cua paper2/blocks/09_cost.tex.
+% Chi duoc \input boi paper2_hujos/supplementary_vi.tex.
+% \label{sec:cost} GIU LAI vi ban EN van \ref no.
+% Chu trong \underbrace dich theo dung ten cot cua Bang S5 (tables_vi/tab_baseline):
+% phan cung / ket noi / nhan cong / tham dinh.
+\section*{S5. Mô hình chi phí và điểm hòa vốn}
+\label{sec:cost}
+
+Giả sử một hợp tác xã phục vụ $A$ héc-ta với $N$ vụ mùa trong đời thiết bị, và chi phí
+MRV mỗi héc-ta mỗi vụ phân tích thành
+\begin{equation}
+C=\underbrace{\frac{n_{\mathrm{dev}}\,p_{\mathrm{dev}}}{A\,N}}_{\text{phần cứng}}
++\underbrace{c_{\mathrm{conn}}}_{\text{kết nối}}
++\underbrace{h\,w}_{\text{nhân công}}
++\underbrace{\frac{c_{\mathrm{audit}}}{A}}_{\text{thẩm định}},
+\label{eq:cost}
+\end{equation}
+trong đó $n_{\mathrm{dev}}$ và $p_{\mathrm{dev}}$ là số lượng và đơn giá thiết bị, $h$
+là số giờ công mỗi héc-ta mỗi vụ và $w$ là tiền công nông thôn. Doanh thu mỗi héc-ta là
+\begin{equation}
+R=\kappa\,\rho ,
+\label{eq:revenue}
+\end{equation}
+với $\kappa$ là số tín chỉ cấp cho mỗi héc-ta và $\rho$ là giá mỗi tín chỉ. Phương án
+khả thi về kinh tế khi
+\begin{equation}
+C\ \le\ \beta R ,\qquad \beta\in(0,1),
+\label{eq:breakeven}
+\end{equation}
+và $\beta=0{,}5$ là mức mà giám sát ngốn hết một nửa doanh thu tín chỉ. Thế
+\eqref{eq:revenue} vào ta được lượng tín chỉ tối thiểu để hòa vốn
+\begin{equation}
+\kappa_{\min}=\frac{C}{\beta\rho}.
+\label{eq:kappamin}
+\end{equation}
+
+Các tầng khác nhau ở $n_{\mathrm{dev}}$ và, quan trọng hơn, ở chỗ chúng quan sát được
+đại lượng nào trong ba đại lượng làm giả được của \eqref{eq:three}. Tầng~0 là tầng vật
+lý: $n_{\mathrm{dev}}=0$ ngoài bộ điều khiển, nhật ký được ghi trên điện thoại mà nông
+dân đã có sẵn, và các bộ lọc ở Mục~\ref{sec:filters} chạy trên dữ liệu thời tiết công
+khai với chi phí biên bằng không. Tầng~1 thêm một đồng hồ lưu lượng tại trạm bơm của hợp
+tác xã --- $n_{\mathrm{dev}}=1$ cho toàn bộ diện tích $A$ chứ không phải mỗi thửa một
+cái --- và quan sát được tổng lượng nước. Tầng~2 thêm một nút đo mực nước cho mỗi hợp
+tác xã, neo lại bản sao số và khôi phục tính hiệu chuẩn mà một hệ MRV dựa trên đo đạc
+dù sao cũng cần.
+
+Không tầng nào trong ba tầng đó quan sát được dấu thời điểm, và theo
+Mệnh đề~\ref{prop:blind} thì hai tầng đầu bất biến chính xác đối với phép biến đổi sinh
+lợi. Vì vậy neo thiết bị ở Mục~\ref{sec:anchor} không phải là một tầng thứ tư tuỳ chọn
+mà là điều kiện để bằng chứng được chấp nhận: nó do chính bộ điều khiển đóng máy bơm
+sinh ra, nên chỉ thêm việc lưu trữ và truyền đi một bản ghi vốn đã tồn tại, và không
+thêm $n_{\mathrm{dev}}$ nào.
+
+Bảng~\ref{tab:baseline} so sánh phương án này với ba kiến trúc mà nó thay thế. Với
+$\kappa\in[4,6]$ và $\rho\in[\$15,\$25]$~\cite{rmi2025rice,upstream2026price}, doanh thu
+là $R\in[\$60,\$150]$ mỗi héc-ta mỗi vụ, nên $\kappa_{\min}$ tại $\beta=0{,}5$ tương ứng
+với một ngân sách giám sát $30$--$75$~USD mỗi héc-ta. Toàn bộ ngăn xếp của bài tốn
+$8{,}4$ USD mỗi héc-ta mỗi vụ so với ngân sách $30$--$75$ đó, tức thấp hơn trần từ
+$3{,}6$ đến $8{,}9$ lần; vì vậy biên độ được phát biểu thành một dải chứ không phải một
+bậc độ lớn. Nó cũng không phải dòng rẻ nhất của Bảng~\ref{tab:baseline}: viễn thám kèm
+kiểm tra thực địa tốn $8{,}0$, tức rẻ hơn $0{,}4$. Hai phương án trả lời hai câu hỏi
+khác nhau --- phương án rẻ hơn xác nhận rằng một pha khô đã xảy ra nhưng không giữ bản
+ghi theo từng lệnh nào để đối chiếu với một nhật ký bị làm giả --- và chi phí tăng thêm
+của neo so với một bộ điều khiển đã lắp sẵn là khoảng $1\%$ doanh thu ở mức thận trọng.
+Bảng~\ref{tab:baseline} phân tích phép so sánh với ba kiến trúc mà nó thay thế; hạng mục
+kết nối được tách riêng vì đó chính là thứ phân biệt một thiết kế mỗi thửa một cảm biến
+với một gateway dùng chung.
+
+\begin{remark}
+Giá thiết bị trong Bảng~\ref{tab:baseline} là ước tính phục vụ lập kế hoạch, không phải
+báo giá. Thứ tự giữa các tầng và bất đẳng thức hòa vốn \eqref{eq:breakeven} không phụ
+thuộc vào chúng; chỉ có biên độ tuyệt đối là phụ thuộc. Cần thay các ước tính bằng báo
+giá trước bất kỳ quyết định mua sắm nào.
+\end{remark}
