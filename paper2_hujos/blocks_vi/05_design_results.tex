@@ -4,13 +4,12 @@
 \section{Thiết kế thực nghiệm}
 \label{sec:design}
 
-Thiết kế thực nghiệm so sánh bốn tầng phòng thủ trên chín loại nhật ký, dùng một
-thửa ruộng cố ý vi phạm mọi giả định của bản sao số. Lý do phải làm vậy là nếu
-thửa ruộng được sinh ra bằng chính bản sao số thì tỷ lệ $0/60$ ca kết tội oan chỉ
-đo tính tự nhất quán chứ không đo năng lực thật (Phụ lục~S10.4). Vì vậy thửa
-ruộng ở đây do một tiến trình riêng biệt sinh ra, khác bản sao số theo bảy trục,
-mỗi trục đều có nguồn đã công bố; mọi giá trị nằm ở Bảng~S5 của Phụ lục, còn danh
-sách từng trục và ngữ nghĩa ghi chép theo sự kiện ở S20.1.
+Thiết kế thực nghiệm so sánh bốn tầng phòng thủ trên chín loại nhật ký, dùng một thửa
+ruộng cố ý vi phạm mọi giả định của bản sao số, vì nếu thửa ruộng do chính bản sao số sinh
+ra thì tỷ lệ $0/60$ ca kết tội oan chỉ đo tính tự nhất quán chứ không đo năng lực thật
+(Phụ lục~S10.4). Thửa ruộng ở đây do một tiến trình riêng biệt sinh ra, khác bản sao số
+theo bảy trục, mỗi trục đều có nguồn đã công bố; mọi giá trị nằm ở Bảng~S5 của Phụ lục,
+còn danh sách từng trục và ngữ nghĩa ghi chép theo sự kiện ở S20.1.
 
 Dữ liệu thời tiết là ERA5 theo giờ~\cite{hersbach2020} lấy từ kho lưu trữ
 Open-Meteo cho ba trạm Cần Thơ, Sóc Trăng và Cà Mau, trong năm 2024 (khan nước)
@@ -24,15 +23,14 @@ $\Theta$ rút gọn, với $24$ lần phát lại mỗi nhật ký và $10$ hạ
 lẫn $\Theta$ đầy đủ, gồm $150$ lần phát lại có kiểm chéo. Tầng~3 là neo thiết bị của
 \eqref{eq:anchor}. Tầng~4 chỉ dùng vật lý và đóng vai trò mốc so sánh.
 
-Trong chín loại nhật ký thì hai loại là nhật ký trung thực, gồm điều kiện giấy và điều kiện ruộng, ba loại là
-giả mạo ngây thơ và bốn loại là đối kháng.
-Các biến thể đối kháng được dựng bằng một bộ tối ưu chứ không theo một công thức
-cố định, danh sách đầy đủ ở S16. Mọi thống kê tấn công đều được tính có điều kiện trên những nhật ký thật sự bị sửa,
-vì hai cạm bẫy của bộ khung thử nghiệm được ghi ở S10.2. Thứ nhất, một đối thủ
-không tìm được nước đi cải thiện sẽ trả lại nhật ký mà không sửa gì, nên nếu đếm vô
-điều kiện thì số ``tấn công bị bắt'' sẽ gồm cả những ca không hề có tấn công. Thứ
-hai, mỗi biến thể phải được so với mốc của chính nó, vì nhật ký trung thực điều
-kiện giấy do một lần sinh riêng tạo ra.
+Trong chín loại nhật ký thì hai loại là nhật ký trung thực, gồm điều kiện giấy và điều
+kiện ruộng, ba loại là giả mạo ngây thơ và bốn loại là đối kháng, được dựng bằng một bộ
+tối ưu chứ không theo một công thức cố định (danh sách đầy đủ ở S16). Mọi thống kê tấn
+công đều được tính có điều kiện trên những nhật ký thật sự bị sửa, vì hai cạm bẫy của bộ
+khung thử nghiệm được ghi ở S10.2. Thứ nhất, một đối thủ không tìm được nước đi cải
+thiện sẽ trả lại nhật ký mà không sửa gì, nên nếu đếm vô điều kiện thì số ``tấn công bị
+bắt'' sẽ gồm cả những ca không hề có tấn công. Thứ hai, mỗi biến thể phải được so với mốc
+của chính nó, vì nhật ký trung thực điều kiện giấy do một lần sinh riêng tạo ra.
 
 Với mỗi tầng, chúng tôi báo cáo tỷ lệ lọt lưới, tức số nhật ký giả mà không tầng
 vật lý nào đánh dấu, và tỷ lệ kết tội oan trên nhật ký trung thực. Về tác động
@@ -48,14 +46,14 @@ toàn không, vật lý có nhìn thấy tấn công sinh lợi không, và neo 
 
 \subsection{Bộ phát hiện mô hình điểm không an toàn, chứ không chỉ lạc quan}
 
-Bảng~\ref{tab:falseacc} đưa ra kết quả phủ định trung tâm của bài. Trên nhật ký điều kiện giấy, như đã giải thích ở phần Mở đầu, bộ phát hiện mô hình
-điểm không kết tội ai và tái hiện đúng con số $0/60$ của giao thức tự nhất
-quán (Phụ lục~S10.4), nhưng trên nhật ký điều
-kiện ruộng thì nó kết tội oan $26{,}7\%$ nông dân trung thực. Nguyên nhân nằm ở
-\eqref{eq:gap} khi dùng một ngưỡng tuyệt đối, vì quên ghi, làm tròn hoặc ghi trễ
-một ngày đều tạo ra $G>5$~mm mà không hề có hành vi sai trái nào; chênh lệch đo
-được trên nhật ký trung thực điều kiện ruộng lên tới $65$~mm. Ngưỡng tỉ lệ của
-\eqref{eq:tau} hạ tỷ lệ oan xuống $5{,}0\%$, còn neo thiết bị hạ xuống $0/60$.
+Bảng~\ref{tab:falseacc} đưa ra kết quả phủ định trung tâm của bài. Trên nhật ký điều
+kiện giấy, như đã giải thích ở phần Mở đầu, bộ phát hiện mô hình điểm không kết tội ai và
+tái hiện đúng con số $0/60$ của giao thức tự nhất quán (Phụ lục~S10.4), nhưng trên nhật
+ký điều kiện ruộng thì nó kết tội oan $26{,}7\%$ nông dân trung thực. Nguyên nhân nằm ở
+\eqref{eq:gap} khi dùng một ngưỡng tuyệt đối, vì quên ghi, làm tròn hoặc ghi trễ một ngày
+đều tạo ra $G>5$~mm mà không có hành vi sai trái nào; chênh lệch đo được trên nhật ký
+trung thực điều kiện ruộng lên tới $65$~mm. Ngưỡng tỉ lệ của \eqref{eq:tau} hạ tỷ lệ oan
+xuống $5{,}0\%$, còn neo thiết bị hạ xuống $0/60$.
 
 \subsection{Vật lý không nhìn thấy tấn công sinh lợi}
 \label{sec:results-attack}
@@ -66,44 +64,40 @@ mỗi nhật ký bị sửa với nhật ký trung thực của cùng một qu�
 ruộng, và chỉ tính trên các tấn công thật sự thay đổi bản
 ghi, vì cách tính không ghép cặp sẽ phóng đại lợi ích lên khoảng hai lần (S15).
 
-Dịch thời điểm nâng số pha khô được cấp tín chỉ từ $4{,}78$ lên $6{,}33$ mỗi vụ,
-tức $+33\%$ trên chín nhật ký bị sửa ($t=5{,}29$). Với tập bất định đầy đủ, mức
-tăng là $+38\%$ trên ba nhật ký ($t=3{,}46$, $p=0{,}074$), định hướng nhất quán
-nhưng chưa đạt mức ý nghĩa $0{,}05$ ở cỡ mẫu này. Đối thủ duy lý đạt $+35\%$ và
-$+40\%$ ($p=0{,}007$ và $p=0{,}30$). Ngược lại, gộp khai báo hầu như không thu
-được gì khi ghép cặp ($+1\%$, $+2\%$), còn hai kiểu giả mạo thô sơ thậm chí
-\emph{làm giảm} số pha khô được cấp tín chỉ ($-1\%$, $-17\%$). Như vậy chỉ có
-phép hoán vị dấu thời điểm giữ nguyên tổng lượng nước mới sinh lợi, đúng như Mệnh
-đề~\ref{prop:coincide} dự đoán.
+Dịch thời điểm nâng số pha khô được cấp tín chỉ từ $4{,}78$ lên $6{,}33$ mỗi vụ, tức
+$+33\%$ trên chín nhật ký bị sửa ($t=5{,}29$). Với tập bất định đầy đủ, mức tăng là $+38\%$
+trên ba nhật ký ($t=3{,}46$, $p=0{,}074$), cùng định hướng nhưng chưa đạt mức ý nghĩa
+$0{,}05$ ở cỡ mẫu này. Đối thủ duy lý đạt $+35\%$ và $+40\%$ ($p=0{,}007$ và $p=0{,}30$).
+Gộp khai báo hầu như không thu được gì khi ghép cặp ($+1\%$, $+2\%$), còn hai kiểu giả mạo
+thô sơ thậm chí \emph{làm giảm} số pha khô được cấp tín chỉ ($-1\%$, $-17\%$). Chỉ phép
+hoán vị dấu thời điểm giữ nguyên tổng lượng nước mới sinh lợi, đúng như
+Mệnh đề~\ref{prop:coincide} dự đoán.
 
-Tỷ lệ lọt lưới trong Bảng~\ref{tab:defence} là phần cốt lõi của kết quả. Dịch thời
-điểm lọt qua tầng vật lý bền vững ở $8$ trong $9$ nhật ký bị sửa, còn đối thủ duy
-lý lọt ở $6$ trong $6$. Mô hình điểm bắt được nhiều hơn ($4$ trong $9$), nhưng nó
-lại chính là bộ phát hiện kết tội oan $26{,}7\%$ nông dân trung thực; tầng bền
-vững hạ tỷ lệ oan xuống $5{,}0\%$ thì đổi lại giao phần lớn khả năng phát hiện về
-tay đối thủ ($1$ trong $9$). \emph{Không cấu hình vật lý nào thoát khỏi sự đánh đổi
-đó}, vì cả hai tầng đều là hàm của quỹ đạo phát lại. Bộ lọc thấm $V_5$ kích hoạt
-$648$ lần, nhưng chỉ trên kiểu giả mạo thổi phồng độ sâu thô sơ, nên nó hữu ích
-và trực giao với mối đe doạ sinh lợi.
+Tỷ lệ lọt lưới trong Bảng~\ref{tab:defence} là phần cốt lõi của kết quả. Dịch thời điểm
+lọt qua tầng vật lý bền vững ở $8$ trong $9$ nhật ký bị sửa, còn đối thủ duy lý lọt ở $6$
+trong $6$. Mô hình điểm bắt được nhiều hơn ($4$ trong $9$), nhưng chính nó kết tội oan
+$26{,}7\%$ nông dân trung thực; tầng bền vững hạ tỷ lệ oan xuống $5{,}0\%$ thì giao phần
+lớn khả năng phát hiện về tay đối thủ ($1$ trong $9$). \emph{Không cấu hình vật lý nào
+thoát khỏi sự đánh đổi đó}, vì cả hai tầng đều là hàm của quỹ đạo phát lại. Bộ lọc thấm
+$V_5$ kích hoạt $648$ lần nhưng chỉ trên kiểu giả mạo thổi phồng độ sâu thô sơ, nên nó
+hữu ích và trực giao với mối đe doạ sinh lợi.
 
 \subsection{Neo thiết bị bịt mọi lớp, và cái giá của sự bền vững}
 
-Bảng~\ref{tab:defence} cũng đưa ra kết quả xây dựng của bài. Toàn bộ $281$ nhật ký
-được kiểm toán bằng tập bất định rút gọn, trong đó $85$ nhật ký được kiểm toán lại
-bằng tập đầy đủ (Phụ lục~S17.2). Trong $281$ nhật ký có $116$ nhật ký thật sự bị
-sửa, và neo thiết bị bắt được $116/116$
-trong khi không kết tội oan nhật ký nào trong $60$ nhật ký trung thực điều kiện
-ruộng ($37/37$ và $0/18$ với $\Theta$ đầy đủ). Giả mạo ngây thơ bị mọi tầng phòng thủ bắt được, nên khác biệt giữa các tầng chỉ
-nằm ở các dòng đối kháng, nơi cả bộ phát hiện bền vững lẫn quy tắc đối chiếu tổng
-lượng đều bỏ lọt và chỉ có neo thiết bị bắt được.
+Bảng~\ref{tab:defence} cũng đưa ra kết quả xây dựng của bài. Toàn bộ $281$ nhật ký được
+kiểm toán bằng tập bất định rút gọn, trong đó $85$ nhật ký được kiểm toán lại bằng tập
+đầy đủ (Phụ lục~S17.2). Trong $281$ nhật ký có $116$ nhật ký thật sự bị sửa; neo thiết bị
+bắt được $116/116$ và không kết tội oan nhật ký nào trong $60$ nhật ký trung thực điều
+kiện ruộng ($37/37$ và $0/18$ với $\Theta$ đầy đủ). Giả mạo ngây thơ bị mọi tầng bắt được,
+nên khác biệt giữa các tầng chỉ nằm ở các dòng đối kháng, nơi cả bộ phát hiện bền vững lẫn
+quy tắc đối chiếu tổng lượng đều bỏ lọt và chỉ neo thiết bị bắt được.
 
-Tính bền vững không đạt được mà không có đánh đổi, vì trên chín nhật ký gian lận bỏ
-sót thật sự bị sửa, mô hình điểm bắt được $9/9$ trong khi quy tắc bền vững chỉ bắt
-$4/9$ ($4/4$ so với $2/4$ ở $\Theta$ đầy đủ). Đây là một sự suy giảm năng lực phát
-hiện chứ không phải một cải thiện Pareto, dù chúng tôi cho rằng lợi ích ở phía tránh
-kết tội oan lớn hơn tổn thất ở phía phát hiện. Mọi kết luận đều đúng với cả $\Theta$ rút gọn, gồm $24$ lần phát lại trên $281$
-nhật ký với $10$ hạt giống ngẫu nhiên, lẫn $\Theta$ đầy đủ, gồm $150$ lần phát lại
-trên $85$ nhật ký với $3$ hạt giống ngẫu nhiên,
-cụ thể là kết tội oan $0/60$ và $0/18$, tính đầy đủ của neo $116/116$ và $37/37$,
-lọt lưới dịch thời điểm $8/9$ và $3/3$, thổi phồng ghép cặp $+33\%$ và $+38\%$
-(Phụ lục~S17).
+Tính bền vững không đạt được mà không có đánh đổi: trên chín nhật ký gian lận bỏ sót
+thật sự bị sửa, mô hình điểm bắt được $9/9$ trong khi quy tắc bền vững chỉ bắt $4/9$
+($4/4$ so với $2/4$ ở $\Theta$ đầy đủ). Đây là một sự suy giảm năng lực phát hiện chứ
+không phải cải thiện Pareto, dù chúng tôi cho rằng lợi ích ở phía tránh kết tội oan lớn
+hơn tổn thất ở phía phát hiện. Mọi kết luận đều đúng với cả $\Theta$ rút gọn, gồm $24$
+lần phát lại trên $281$ nhật ký với $10$ hạt giống ngẫu nhiên, lẫn $\Theta$ đầy đủ, gồm
+$150$ lần phát lại trên $85$ nhật ký với $3$ hạt giống ngẫu nhiên, cụ thể là kết tội oan
+$0/60$ và $0/18$, tính đầy đủ của neo $116/116$ và $37/37$, lọt lưới dịch thời điểm $8/9$
+và $3/3$, thổi phồng ghép cặp $+33\%$ và $+38\%$ (Phụ lục~S17).

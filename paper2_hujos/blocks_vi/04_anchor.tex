@@ -78,20 +78,17 @@ và các độ sâu theo giờ.
 
 \subsection{Vì sao neo thiết bị không dẫn tới kết tội oan}
 
-Mệnh đề~\ref{prop:complete} có phạm vi rộng tới mức thoạt nghe dễ gây kết tội oan,
-vì mọi sai lệch giữa nhật ký và bản ghi gateway đều bị coi là giả mạo, kể cả những
-sai lệch do quên ghi hoặc làm tròn mà Mục~\ref{sec:guarantee} đã chỉ ra là rất phổ
-biến. Điểm hoá giải là neo thiết bị đối chiếu một bản sao với \emph{nguồn} chứ
-không đối chiếu một nhật ký với một \emph{mô hình}. Nói cách khác, nguồn sự thật
-là bản ghi của gateway chứ không phải trí nhớ của nông dân, nên nhật ký chỉ là một
-góc nhìn của bản ghi mà thiết bị đã giữ. Nếu nhật ký bỏ sót một lệnh có trong
-$\mathcal{G}$ thì đó là lỗi ghi chép và mục đó được bổ sung từ $\mathcal{G}$; còn
-nếu nhật ký khai thêm một lệnh không có trong $\mathcal{G}$, hoặc khai sai thời
-điểm hay độ sâu so với $\mathcal{G}$, thì theo \eqref{eq:anchor} đó là giả mạo. Khi đó, phép thử neo chỉ có thể kết tội oan một nông dân trung thực nếu bản ghi
-của gateway tự mâu thuẫn với chính nó, và đó là bài toán bảo đảm toàn vẹn thiết bị
-chứ không còn là bài toán kiểm toán nhật ký. Nhờ vậy Bảng~\ref{tab:falseacc} giữ ở mức $0/60$, trong khi các bộ phát hiện dựa
-trên quỹ đạo phát lại vẫn kết tội oan ở mức $26{,}7\%$ và $5{,}0\%$
-(Phụ lục~S18).
+Điểm hoá giải là neo thiết bị đối chiếu một bản sao với \emph{nguồn} chứ không đối chiếu
+một nhật ký với một \emph{mô hình}: nguồn sự thật là bản ghi của gateway chứ không phải
+trí nhớ của nông dân, nên nhật ký chỉ là một góc nhìn của bản ghi mà thiết bị đã giữ. Nếu
+nhật ký bỏ sót một lệnh có trong $\mathcal{G}$ thì đó là lỗi ghi chép và mục đó được bổ
+sung từ $\mathcal{G}$; còn nếu nhật ký khai thêm một lệnh không có trong $\mathcal{G}$,
+hoặc khai sai thời điểm hay độ sâu so với $\mathcal{G}$, thì theo \eqref{eq:anchor} đó là
+giả mạo. Khi đó phép thử neo chỉ có thể kết tội oan một nông dân trung thực nếu bản ghi
+của gateway tự mâu thuẫn với chính nó, và đó là bài toán bảo đảm toàn vẹn thiết bị chứ
+không còn là bài toán kiểm toán nhật ký. Nhờ vậy Bảng~\ref{tab:falseacc} giữ ở mức
+$0/60$, trong khi các bộ phát hiện dựa trên quỹ đạo phát lại vẫn kết tội oan ở mức
+$26{,}7\%$ và $5{,}0\%$ (Phụ lục~S18).
 
 \subsection{Chi phí và phạm vi của tuyên bố}
 
