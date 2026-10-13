@@ -9,8 +9,15 @@ Một nhật ký tưới khai báo là một ánh xạ hữu hạn
 L=\{(t_i,u_i)\}_{i=1}^{|L|},\qquad u_i>0,\ t_i\in[0,T),
 \label{eq:log}
 \end{equation}
-trong đó $u_i$ là độ sâu khai báo, tức lượng nước nông dân ghi đã tưới vào thửa
-ruộng tính bằng milimét, và $t_i$ là chỉ số giờ của lần tưới đó.
+trong đó:
+\begin{description}\small
+\item[$L$] nhật ký khai báo của một vụ, gồm các lần tưới mà nông dân đã ghi;
+\item[$|L|$] số lần tưới có trong nhật ký;
+\item[$u_i$] độ sâu khai báo, tức lượng nước nông dân ghi đã tưới vào thửa ruộng,
+  tính bằng milimét;
+\item[$t_i$] chỉ số giờ của lần tưới thứ $i$, nhận giá trị trong khoảng từ 0 đến
+  $T$ đã định nghĩa ở Mục~\ref{sec:model}.
+\end{description}
 Đối thủ có thể làm giả ba đại lượng độc lập, và mỗi tầng phòng thủ chỉ quan sát
 một tập con trong số đó:
 \begin{equation}
@@ -19,19 +26,37 @@ một tập con trong số đó:
 \underbrace{\{t_i\}}_{\text{dấu thời gian}}\,.
 \label{eq:three}
 \end{equation}
-Bảng~S1 của Phụ lục liệt kê các lớp gian lận tương ứng. Chúng tôi giả định đối
+Ba đại lượng được gạch chân ở trên là ba thứ mà đối thủ có thể làm giả, gồm tổng
+lượng nước, từng độ sâu riêng lẻ và dấu thời gian của mỗi lần tưới. Bảng~S1 của
+Phụ lục liệt kê các lớp gian lận tương ứng với từng đại lượng. Chúng tôi giả định đối
 thủ \emph{duy lý}, nghĩa là nó tối đa hoá số pha khô được cấp tín chỉ với điều
 kiện không bị đánh dấu. Chúng tôi giả định đối thủ biết đầy đủ bộ phát hiện, vì nó được định nghĩa ngay
 trong bài này và mã nguồn được công khai. Vì vậy
-$\varepsilon$ trong \eqref{eq:v4} dưới đây không phải là một tham số bí mật.
+$\varepsilon$ trong \eqref{eq:v4} dưới đây không phải là một tham số bí mật, mà
+là dung sai công bố cho sai số mô hình và được đặt bằng $5$~mm trong toàn bộ thí
+nghiệm, đúng bằng giá trị trong mã nguồn công khai. Tham số này khác với ngưỡng
+chênh lệch bơm $\tau_0$ ở Mục~\ref{sec:guarantee}.
 
-Gọi $M$ là lượng nước thật sự đã bơm, đo tại trạm của hợp tác xã, và gọi
-$U(L)=\sum_i u_i$ là tổng lượng khai báo. Tầng~1 dùng thống kê
+Tầng phòng thủ thứ nhất đối chiếu tổng lượng nước khai báo với tổng lượng nước
+thật sự đã bơm. Gọi $M$ là lượng nước thật sự đã bơm, đo tại trạm bơm của hợp tác
+xã, và gọi $U(L)=\sum_i u_i$ là tổng lượng mà nhật ký khai báo. Tầng~1 dùng thống
+kê chênh lệch
 \begin{equation}
 G=M-U(L),
 \label{eq:gap}
 \end{equation}
-còn đại lượng quyết định tín chỉ lại là \emph{số pha khô}. Ký hiệu
+trong đó:
+\begin{description}\small
+\item[$G$] chênh lệch bơm, tính bằng mm, là lượng nước bơm thật vượt quá tổng
+  lượng đã khai báo;
+\item[$M$] tổng lượng nước thật sự đã bơm trong vụ, đo tại trạm của hợp tác xã,
+  tính bằng mm;
+\item[$U(L)$] tổng các độ sâu khai báo trong nhật ký $L$, tính bằng mm.
+\end{description}
+
+$G$ dương nghĩa là nông dân khai thiếu, và đó là dấu hiệu gian lận theo hướng làm
+giảm lượng nước. Tuy nhiên đại lượng quyết định tín chỉ lại không phải $G$ mà là
+\emph{số pha khô}. Ký hiệu
 $\mathcal{A}(\cdot)$ là tập các quãng liền nhau dài nhất có thể $[a,b)$ trên một
 quỹ đạo phát lại, trong đó độ cạn kiệt luôn đạt từ $d_{\mathrm{dry}}$ trở lên,
 không có khai báo tưới nào, và mỗi quãng kéo dài ít nhất $72$~giờ, tức mức tối thiểu ba ngày theo
@@ -45,13 +70,31 @@ Quyết định 4801~\cite{qd4801}:
 \end{aligned}
 \label{eq:awd}
 \end{equation}
-Khi đó số pha được cấp tín chỉ là
+trong đó:
+\begin{description}\small
+\item[$\mathcal{A}(\cdot)$] toán tử trả về tập các pha khô đủ điều kiện cấp tín
+  chỉ của một quỹ đạo độ cạn kiệt;
+\item[$[a,b)$] một quãng giờ liền nhau, bắt đầu tại giờ $a$ và kết thúc trước giờ
+  $b$, là quãng dài nhất thoả điều kiện nên không thể mở rộng thêm;
+\item[$\hat d_t$] độ cạn kiệt tại giờ $t$ suy ra từ nhật ký, đã định nghĩa ở
+  Mục~\ref{sec:model};
+\item[$d_{\mathrm{dry}}$] ngưỡng cạn kiệt tối thiểu để một quãng được coi là pha
+  khô, là phân số không thứ nguyên;
+\item[$u_t$] độ sâu tưới áp dụng tại giờ $t$, bằng 0 trong suốt quãng khô;
+\item[$b-a$] độ dài của quãng, tính bằng giờ.
+\end{description}
+
+Ba điều kiện trong ngoặc nhọn của \eqref{eq:awd} lần lượt là ruộng phải đủ khô,
+không được tưới trong suốt quãng, và quãng phải đủ dài. Khi đó số pha được cấp tín
+chỉ là
 \begin{equation}
 n_{\mathrm{dry}}(L)=\bigl|\mathcal{A}\bigl(\mathcal{R}(L)\bigr)\bigr|,
 \label{eq:ndry}
 \end{equation}
-với $d_{\mathrm{dry}}=0{,}45$ dùng chung cho toàn bài. Giá trị này là một lựa
-chọn mô hình hoá của chúng tôi, đặt đủ cao để một pha khô thực sự có ý nghĩa
+trong đó $n_{\mathrm{dry}}(L)$ là số pha khô được cấp tín chỉ của nhật ký $L$, còn
+$\mathcal{R}(L)$ là quỹ đạo phát lại của nhật ký đó theo \eqref{eq:replay}, và ký
+hiệu $|\cdot|$ đếm số phần tử của tập. Ngưỡng $d_{\mathrm{dry}}=0{,}45$ được dùng
+chung cho toàn bài. Giá trị này là một lựa chọn mô hình hoá của chúng tôi, đặt đủ cao để một pha khô thực sự có ý nghĩa
 chứ không chỉ là ruộng hơi ẩm; độ nhạy của nó được khảo sát ở Phụ lục~S20.
 Doanh thu của nông dân tỉ lệ với $n_{\mathrm{dry}}$ chứ không tỉ lệ với $U(L)$,
 và chính sự phân biệt này khiến tấn công ở Mục~\ref{sec:timeshift} mang lại lợi
@@ -71,6 +114,10 @@ V_1(L)=\{\,i:\ u_i>0\ \wedge\ \hat w_{t_i}^{-}\ \ge\ FC-\varepsilon\,\}.
 \label{eq:v1}
 \end{equation}
 
+trong đó $V_1(L)$ là tập chỉ số của những lần khai báo bị bộ lọc thứ nhất đánh dấu,
+còn $\hat w_{t_i}^{-}$ là lượng nước tầng rễ ngay trước khi áp dụng lần khai báo
+thứ $i$, đã định nghĩa ở Mục~\ref{sec:model}.
+
 Bộ lọc \emph{$V_4$} (vượt sức chứa) đánh dấu mọi khai báo vượt quá phần thiếu hụt
 tại giờ đó, vì lượng dư hoặc đã chảy tràn hoặc đã thấm mất, nên không thể coi là
 ``đã được áp dụng'' theo nghĩa mà quy chuẩn đòi hỏi:
@@ -79,6 +126,10 @@ V_4(L)=\{\,i:\ u_i\ >\ \underbrace{(FC-\hat w_{t_i}^{-})}_{\text{phần thiếu 
 \ +\ \varepsilon\,\}.
 \label{eq:v4}
 \end{equation}
+
+trong đó $V_4(L)$ là tập chỉ số các lần khai báo bị đánh dấu, và biểu thức trong
+dấu ngoặc ôm là phần thiếu hụt, tức lượng nước mà tầng rễ còn tiếp nhận được tại
+giờ đó trước khi chạm sức chứa ẩm đồng ruộng.
 
 Bộ lọc \emph{$V_5$} (giới hạn thấm) không phụ thuộc vào trạng thái tầng rễ, mà
 chỉ áp dụng ràng buộc rằng một lần tưới kéo dài $\tau_i$ không thể cấp nhiều hơn
@@ -91,6 +142,15 @@ với $k_{\mathrm{inf}}=10$~mm\,h$^{-1}$ và $p_{\max}=100$~mm, lấy ở đầu
 trị đã công bố cho ruộng lúa làm dầm~\cite{kukal2004,bouman2001}, tức giới hạn
 $110$~mm tại $\tau_i=1$~giờ. Chúng tôi chọn đầu rộng như vậy để một nông dân gộp
 hai lần tưới liền kề vào cùng một giờ không bị kết tội oan.
+
+
+trong đó:
+\begin{description}\small
+\item[$\tau_i$] thời gian kéo dài của lần tưới thứ $i$, tính bằng giờ;
+\item[$k_{\mathrm{inf}}$] tốc độ thấm tối đa của ruộng, tính bằng mm mỗi giờ;
+\item[$p_{\max}$] lượng nước tối đa mà ruộng nhận được trong một trận tưới bất
+  kể thời gian, tính bằng mm. Cả hai hằng số này đã được nêu giá trị ở câu trên.
+\end{description}
 
 Bộ lọc thứ ba, vốn đánh dấu độ cạn kiệt xuống dưới điểm héo, không thể kích hoạt
 trên lúa vụ khô đồng bằng; bằng chứng ở Ghi chú~\ref{sec:v2reach}. Cách đánh số $V_1$, $V_4$, $V_5$ theo công trình đang thẩm định nêu trên; bài này không dùng $V_2$
@@ -129,6 +189,28 @@ nước đã thoát đi trong các giờ đó:
 c_{t+\delta}\ \ge\ c_t+\min\!\bigl(\delta\cdot\overline{\Delta},\ FC-\hat w_t^{-}\bigr).
 \label{eq:delay}
 \end{equation}
+trong đó:
+\begin{description}\small
+\item[$c_t$] phần thiếu hụt tại giờ $t$, tính bằng mm, bằng lượng nước mà tầng rễ
+  còn tiếp nhận được trước khi chạm sức chứa ẩm đồng ruộng;
+\item[$\Delta_t$] lượng nước mà thùng chứa mất đi giữa hai lần khai báo liên tiếp,
+  tính bằng mm;
+\item[$\mathit{ETc}_s$] bốc thoát hơi nước của cây trồng tại giờ $s$, chính là
+  $ET_{c,s}$ của \eqref{eq:etc};
+\item[$\mathit{DP}_s$] lượng thấm sâu xuống dưới tầng rễ tại giờ $s$, là phần
+  nước bị toán tử cắt bỏ loại đi trong \eqref{eq:bucket};
+\item[$P_s^{+}$] lượng mưa thực sự đi vào ruộng tại giờ $s$, sau khi đã trừ dòng
+  chảy mặt $RO_s$;
+\item[$\delta$] số giờ mà một khai báo bị hoãn lại;
+\item[$\overline{\Delta}$] lượng nước mất đi trung bình mỗi giờ trong quãng chờ.
+\end{description}
+
+Cả ba số hạng của $\Delta_t$ đều lấy từ cùng một phương trình thùng chứa
+\eqref{eq:bucket}, nên bất đẳng thức này không dựa trên giả định thuỷ văn nào mới.
+Ý nghĩa của nó là khi một lệnh tưới bị ghi muộn hơn, ruộng khô thêm trong quãng
+chờ nên số pha khô tăng lên, đồng thời đất khô hơn lại hấp thụ được đúng lượng
+nước đó khi lệnh cuối cùng được ghi, nên không bộ lọc vật lý nào thấy bất thường.
+
 Do đó phép biến đổi dời các khai báo \emph{ra khỏi} một khoảng khô và đặt lên
 biên của khoảng đó đồng thời (i)~làm tăng $n_{\mathrm{dry}}$, vì khoảng đó
 không còn bị ngắt quãng, và (ii)~làm tăng $c_t$ tại mỗi khai báo bị dời, điều

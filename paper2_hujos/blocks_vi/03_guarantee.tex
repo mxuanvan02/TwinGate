@@ -19,6 +19,15 @@ $w_0$ và tưới không muộn hơn $d^{*}$ là
 u_{\max}=\max(d^{*},w_0)\cdot\mathrm{span}+\varepsilon .
 \label{eq:umax}
 \end{equation}
+trong đó:
+\begin{description}\small
+\item[$u_{\max}$] độ sâu khai báo lớn nhất, tính bằng mm, mà bộ lọc không bao giờ đánh dấu;
+\item[$d^{*}$] độ cạn kiệt tại giờ tưới muộn nhất được xét, là phân số không thứ nguyên;
+\item[$w_0$] độ cạn kiệt ban đầu của ruộng, cùng đơn vị phân số;
+\item[$\mathrm{span}$] biên độ của thang cạn kiệt, bằng $FC-WP$ tính bằng mm, đã định nghĩa ở Mục~\ref{sec:model};
+\item[$\varepsilon$] dung sai công bố cho sai số mô hình, bằng $5$~mm như đã nêu ở Mục~\ref{sec:filters}.
+\end{description}
+
 Từ đây rút ra hai điều chỉnh, cả hai đều được kiểm chứng bằng cách quét toán tử
 phát lại chứ không chỉ bằng đại số (dẫn xuất ở Phụ lục~S14). Thứ nhất,
 \eqref{eq:umax} dùng $\max$ chứ không dùng hiệu, nên một ruộng khô ban đầu lại
@@ -44,9 +53,17 @@ V_{\mathrm{rob}}(L)&=\bigcap_{\theta\in\Theta}V_\theta(L),\\
 \end{aligned}
 \label{eq:robust}
 \end{equation}
-với $|\mathcal{S}|=5$ loại đất, $|\mathcal{K}|=2$ chế độ hệ số cây trồng,
-$|\mathcal{E}|=3$ mức hiệu suất tưới và $|\mathcal{W}|=5$ trạng thái đầu, nên
-$|\Theta|=150$ và mỗi nhật ký tốn $150$ lần phát lại. Ngữ nghĩa của phán quyết được chọn cố ý lệch về phía bảo vệ nông dân, tức ưu tiên
+trong đó:
+\begin{description}\small
+\item[$V_{\mathrm{rob}}(L)$] tập vi phạm bền vững của nhật ký $L$, chỉ khác rỗng khi $L$ vi phạm dưới mọi cấu hình;
+\item[$\Theta$] tập bất định, là tích của bốn tập thành phần dưới đây;
+\item[$\mathcal{S}$] tập loại đất, gồm $5$ loại;
+\item[$\mathcal{K}$] tập chế độ hệ số cây trồng, gồm $2$ chế độ;
+\item[$\mathcal{E}$] tập mức hiệu suất tưới, gồm $3$ mức;
+\item[$\mathcal{W}$] tập trạng thái đầu, gồm $5$ trạng thái.
+\end{description}
+
+Do đó $|\Theta|=150$ và mỗi nhật ký tốn $150$ lần phát lại. Ngữ nghĩa của phán quyết được chọn cố ý lệch về phía bảo vệ nông dân, tức ưu tiên
 tránh kết tội oan hơn là tối đa năng lực phát hiện:
 \begin{equation}
 a(L)=
@@ -56,6 +73,9 @@ a(L)=
 \end{cases}
 \label{eq:verdict}
 \end{equation}
+trong đó $a(L)$ là phán quyết dành cho nhật ký $L$. Phán quyết ``chờ xác minh''
+nghĩa là kiểm toán viên phải xác minh thêm tại thực địa, chứ hệ thống không tự kết
+luận là gian lận.
 
 \begin{proposition}[Không kết tội oan trong $\Theta$]
 \label{prop:noalarm}
@@ -87,9 +107,18 @@ sai trái nào. Vì vậy ngưỡng phải co giãn theo số lần tưới đư
 \end{aligned}
 \label{eq:tau}
 \end{equation}
-với $p$ là tỷ lệ quên, $r$ là bước làm tròn, $q$ là tỷ lệ sai độ sâu và $s$ là
-biên độ của nó, $\bar u=30$~mm là độ sâu điển hình của một lần tưới,
-$\delta_{\mathrm{rel}}=2\%$ và $z=3$. Quy tắc tuyệt đối là trường hợp suy biến
+trong đó:
+\begin{description}\small
+\item[$\tau(n)$] ngưỡng chênh lệch bơm cho phép, tính bằng mm, khi nhật ký có $n$ lần tưới;
+\item[$n$] số lần tưới được ghi trong nhật ký;
+\item[$\delta_{\mathrm{rel}}$] tỷ lệ sai lệch tương đối cho phép trên lượng bơm thật $M$, bằng $2\%$;
+\item[$z$] hệ số nhân của độ lệch chuẩn, đặt bằng $3$;
+\item[$\sigma_{\mathrm{event}}$] độ lệch chuẩn của sai số ghi chép trên mỗi lần tưới, tính bằng mm;
+\item[$p$] tỷ lệ quên ghi một lần tưới;
+\item[$r$] bước làm tròn độ sâu, bằng $5$~mm như đã nêu ở trên;
+\item[$q$] tỷ lệ ghi sai độ sâu, và $s$ là biên độ tương đối của lỗi đó;
+\item[$\bar u$] độ sâu điển hình của một lần tưới, bằng $30$~mm.
+\end{description} Quy tắc tuyệt đối là trường hợp suy biến
 $n\to0$, $\sigma_{\mathrm{event}}\to0$.
 
 \begin{remark}[Một bộ lọc không thể kích hoạt]
