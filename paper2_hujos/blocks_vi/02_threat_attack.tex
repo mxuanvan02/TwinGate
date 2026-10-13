@@ -13,8 +13,11 @@ trong đó:
 \begin{symbolist}
 \item[$L$] nhật ký khai báo của một vụ, gồm các lần tưới mà nông dân đã ghi;
 \item[$|L|$] số lần tưới có trong nhật ký;
-\item[$u_i$] độ sâu khai báo, tức lượng nước nông dân ghi đã tưới vào thửa ruộng,
-  tính bằng milimét;
+\item[$u_i$] độ sâu khai báo của lần tưới thứ $i$, tức lượng nước nông dân ghi đã
+  tưới vào thửa ruộng, tính bằng milimét. Đây là độ dày lớp nước nếu trải đều lượng
+  nước đó trên mặt ruộng, chứ không phải độ sâu của nước ngầm hay độ sâu tầng đất;
+  đại lượng này cùng đơn vị với sức chứa ẩm đồng ruộng $FC$ và lượng nước trong tầng
+  rễ $w_t$ đã định nghĩa ở Mục~\ref{sec:model};
 \item[$t_i$] chỉ số giờ của lần tưới thứ $i$, nhận giá trị trong khoảng từ 0 đến
   $T$ đã định nghĩa ở Mục~\ref{sec:model}.
 \end{symbolist}
@@ -22,7 +25,7 @@ trong đó:
 một tập con trong số đó:
 \begin{equation}
 \underbrace{\textstyle\sum_i u_i}_{\text{tổng lượng}}\,,\qquad
-\underbrace{\{u_i\}}_{\text{từng độ sâu}}\,,\qquad
+\underbrace{\{u_i\}}_{\text{từng độ sâu tưới}}\,,\qquad
 \underbrace{\{t_i\}}_{\text{dấu thời gian}}\,.
 \label{eq:three}
 \end{equation}

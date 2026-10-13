@@ -11,8 +11,11 @@ where:
 \item[$L$] the claimed log for one season, listing the irrigation events the farmer
   recorded;
 \item[$|L|$] the number of irrigation events in the log;
-\item[$u_i$] the claimed depth, that is, the water the farmer records as applied to
-  the field, in millimetres;
+\item[$u_i$] the claimed irrigation depth of event $i$, that is, the water the farmer
+  records as applied to the field, in millimetres. This is the thickness of the water
+  layer if that volume were spread evenly over the field surface, not a groundwater
+  depth and not a soil-layer depth; it carries the same unit as the field capacity
+  $FC$ and the root-zone storage $w_t$ defined in Sec.~\ref{sec:model};
 \item[$t_i$] the hour index of event $i$, taking values from 0 to $T$ as defined in
   Sec.~\ref{sec:model}.
 \end{symbolist} Three
@@ -20,7 +23,7 @@ independent quantities can be forged, and each defence tier observes a different
 subset of them:
 \begin{equation}
 \underbrace{\textstyle\sum_i u_i}_{\text{total volume}}\,,\qquad
-\underbrace{\{u_i\}}_{\text{individual depths}}\,,\qquad
+\underbrace{\{u_i\}}_{\text{individual irrigation depths}}\,,\qquad
 \underbrace{\{t_i\}}_{\text{timestamps}}\,.
 \label{eq:three}
 \end{equation}

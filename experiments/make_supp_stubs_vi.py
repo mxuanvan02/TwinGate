@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Sinh supp_stubs_vi.tex: dinh nghia \r@<label> cho cac nhan chi ton tai trong
+r"""Sinh supp_stubs_vi.tex: dinh nghia \r@<label> cho cac nhan chi ton tai trong
 bai chinh, doc SO THAT tu main_hujos_vi.aux.
 
 VI SAO CAN: paper2_hujos/supplementary.tex (ban EN) go TAY cac so nay bang
