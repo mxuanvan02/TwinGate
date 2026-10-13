@@ -29,9 +29,10 @@ một tập con trong số đó:
 \underbrace{\{t_i\}}_{\text{dấu thời gian}}\,.
 \label{eq:three}
 \end{equation}
-Bảng~S1 của Phụ lục liệt kê các lớp gian lận tương ứng với từng đại lượng. Chúng tôi giả định đối
-thủ \emph{duy lý}, nghĩa là nó tối đa hoá số pha khô được cấp tín chỉ với điều
-kiện không bị đánh dấu. Chúng tôi giả định đối thủ biết đầy đủ bộ phát hiện, vì nó được định nghĩa ngay
+Bảng~S1 của Phụ lục liệt kê các lớp gian lận tương ứng với từng đại lượng. Ở đây \emph{đối thủ} là bên nộp nhật ký có chủ ý gian lận, có thể là chính nông dân
+hoặc người vận hành ghi thay cho nông dân; bài này không suy đoán động cơ mà chỉ mô hình
+hoá hành vi của bên đó. Chúng tôi giả định đối thủ \emph{duy lý}, nghĩa là nó tối đa hoá
+số pha khô được cấp tín chỉ với điều kiện không bị đánh dấu. Chúng tôi giả định đối thủ biết đầy đủ bộ phát hiện, vì nó được định nghĩa ngay
 trong bài này và mã nguồn được công khai. Vì vậy
 $\varepsilon$ trong \eqref{eq:v4} dưới đây không phải là một tham số bí mật, mà
 là dung sai công bố cho sai số mô hình và được đặt bằng $5$~mm trong toàn bộ thí
@@ -99,11 +100,10 @@ và chính sự phân biệt này khiến tấn công ở Mục~\ref{sec:timeshi
 ích tín chỉ mà vẫn vô hình trước mọi quy tắc chỉ đối chiếu tổng lượng khai báo
 với tổng lượng bơm thật.
 
-\section{Các bộ lọc dựa trên vật lý và đúng điểm mù của chúng}
+\section{Các bộ lọc dựa trên vật lý và điểm mù chính xác của chúng}
 \label{sec:filters}
 
-Phát lại $L$ với dữ liệu ERA5 công khai cho ra $(\hat w_t,\hat d_t)$; công trình đang
-thẩm định nêu trên~\cite{twingate2026} trình bày đầy đủ cân bằng nước này. Trên nền đó có
+Phát lại $L$ với dữ liệu ERA5 công khai cho ra $(\hat w_t,\hat d_t)$; bản thảo chưa công bố nêu trên~\cite{twingate2026} trình bày đầy đủ cân bằng nước này. Trên nền đó có
 ba bộ lọc được áp dụng.
 
 trong đó $V_1(L)$ là tập chỉ số của những lần khai báo bị bộ lọc thứ nhất đánh dấu,
@@ -145,8 +145,7 @@ trong đó:
 \end{symbolist}
 
 Bộ lọc thứ ba, vốn đánh dấu độ cạn kiệt xuống dưới điểm héo, không thể kích hoạt
-trên lúa vụ khô đồng bằng; bằng chứng ở Ghi chú~\ref{sec:v2reach}. Cách đánh số $V_1$, $V_4$, $V_5$ theo công trình đang thẩm định nêu trên; bài này không dùng $V_2$
-và $V_3$.
+trên lúa vụ khô đồng bằng; bằng chứng ở Ghi chú~\ref{sec:v2reach}. Cách đánh số $V_1$, $V_4$, $V_5$ theo bản thảo chưa công bố nêu trên; bài này không dùng $V_2$ và $V_3$.
 
 \begin{proposition}[Điểm mù chính xác của các phòng thủ tổng hợp]
 \label{prop:blind}

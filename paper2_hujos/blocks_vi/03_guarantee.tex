@@ -38,7 +38,7 @@ dưới ngưỡng có thể thổi phồng tổng lượng mà không bị giớ
 Bảng~S2 của Phụ lục đưa ra dải cần được báo cáo thay thế, $[49{,}0; 86{,}0]$~mm
 trên toàn $\Theta$.
 
-\subsection{Kết tội bền vững dưới bất định mô hình}
+\subsection{Chỉ kết tội khi mọi kịch bản mô hình đều cho thấy vi phạm}
 \label{sec:robust}
 
 Kiểm toán viên không biết đất của nông dân, không biết giai đoạn sinh trưởng và
@@ -120,14 +120,17 @@ trong đó:
 \end{symbolist} Quy tắc tuyệt đối là trường hợp suy biến
 $n\to0$, $\sigma_{\mathrm{event}}\to0$.
 
-\begin{remark}[Một bộ lọc không thể kích hoạt]
+\begin{remark}[Bộ lọc thứ ba không bao giờ kích hoạt được]
 \label{sec:v2reach}
-Bộ lọc vật lý thứ ba, đánh dấu độ cạn kiệt xuống dưới điểm héo, bất động theo hai
-nghĩa. Thứ nhất, ngưỡng của nó ($1{,}02$) nằm ngoài dải đã cắt ngọn của chỉ số
-được báo cáo, nên nó có $0$ lần kích hoạt trong $281$ nhật ký. Thứ hai, sau
-khi sửa để dùng độ cạn kiệt chưa cắt ngọn thì nó vẫn không thể kích hoạt, vì qua
-$150$ cấu hình với một nhật ký rỗng, độ cạn kiệt chưa cắt ngọn chỉ đạt đỉnh
-$0{,}9987$, mà một ruộng lúa vụ khô ở đồng bằng thì không chạm tới điểm héo
-(Bảng~S3 của Phụ lục, dẫn xuất ở S13). Như vậy lớp này có hai bộ lọc vật lý hoạt
-động và một thiết bị an toàn bất động.
+Lớp vật lý có ba bộ lọc, nhưng bộ thứ ba --- đánh dấu ruộng cạn kiệt xuống dưới
+điểm héo --- không bao giờ kích hoạt được, vì hai lý do độc lập. Lý do thứ nhất
+thuộc về cách cài đặt: ngưỡng của nó là $1{,}02$, trong khi chỉ số được báo cáo đã
+bị cắt ngọn về một đoạn cố định, nên điều kiện không thể nào đúng và bộ lọc có $0$
+lần kích hoạt trong cả $281$ nhật ký. Lý do thứ hai thuộc về thực tế đồng ruộng:
+chúng tôi sửa lỗi đó bằng cách dùng độ cạn kiệt chưa cắt ngọn, rồi đo lại trên
+$150$ cấu hình với nhật ký rỗng, tức điều kiện khô hạn nhất có thể, thì giá trị này
+cũng chỉ đạt đỉnh $0{,}9987$. Nghĩa là một ruộng lúa vụ khô ở đồng bằng không cạn
+tới mức chạm điểm héo (Bảng~S3 của Phụ lục, dẫn xuất ở S13). Bộ lọc này vì vậy chỉ
+là một chốt an toàn chống trạng thái vô lý, không phải bằng chứng về năng lực phát
+hiện, và lớp này chỉ có hai bộ lọc vật lý thực sự hoạt động.
 \end{remark}
