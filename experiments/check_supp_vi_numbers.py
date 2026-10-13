@@ -54,6 +54,11 @@ def neutralize(text: str) -> str:
     s = text
     # (3) stub namedef: so cua bai chinh
     s = re.sub(r"\\@namedef\{r@[^}]*\}\{\{[^}]*\}\{[^}]*\}\}", " ", s)
+    # (5) khoang cach dan trang: \vspace{10pt} (EN) vs \clearpage (VI) —
+    # LOI DA SUA (Batch 5c): ban VI thay \vspace{10pt} sau \endgroup bang
+    # \clearpage (trang bia phu luc) -> so 10 bien mat khoi VI, gate bao
+    # THIEU gia. So cua lenh spacing khong phai so lieu nghien cuu.
+    s = re.sub(r"\\(?:vspace|hspace|vskip|smallskip|medskip|bigskip)\*?\{[^}]*\}", " ", s)
     # (2) front matter: \begingroup ... \endgroup (title/authors/affil)
     s = re.sub(r"\\begingroup.*?\\endgroup", " ", s, flags=re.S)
     # (1) cue+so cross-ref, ca EN lan VI (\ref/\eqref da duoc cvn.numbers cat).
