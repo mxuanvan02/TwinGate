@@ -10,14 +10,14 @@ L=\{(t_i,u_i)\}_{i=1}^{|L|},\qquad u_i>0,\ t_i\in[0,T),
 \label{eq:log}
 \end{equation}
 trong đó:
-\begin{description}\small
+\begin{symbolist}
 \item[$L$] nhật ký khai báo của một vụ, gồm các lần tưới mà nông dân đã ghi;
 \item[$|L|$] số lần tưới có trong nhật ký;
 \item[$u_i$] độ sâu khai báo, tức lượng nước nông dân ghi đã tưới vào thửa ruộng,
   tính bằng milimét;
 \item[$t_i$] chỉ số giờ của lần tưới thứ $i$, nhận giá trị trong khoảng từ 0 đến
   $T$ đã định nghĩa ở Mục~\ref{sec:model}.
-\end{description}
+\end{symbolist}
 Đối thủ có thể làm giả ba đại lượng độc lập, và mỗi tầng phòng thủ chỉ quan sát
 một tập con trong số đó:
 \begin{equation}
@@ -26,9 +26,7 @@ một tập con trong số đó:
 \underbrace{\{t_i\}}_{\text{dấu thời gian}}\,.
 \label{eq:three}
 \end{equation}
-Ba đại lượng được gạch chân ở trên là ba thứ mà đối thủ có thể làm giả, gồm tổng
-lượng nước, từng độ sâu riêng lẻ và dấu thời gian của mỗi lần tưới. Bảng~S1 của
-Phụ lục liệt kê các lớp gian lận tương ứng với từng đại lượng. Chúng tôi giả định đối
+Bảng~S1 của Phụ lục liệt kê các lớp gian lận tương ứng với từng đại lượng. Chúng tôi giả định đối
 thủ \emph{duy lý}, nghĩa là nó tối đa hoá số pha khô được cấp tín chỉ với điều
 kiện không bị đánh dấu. Chúng tôi giả định đối thủ biết đầy đủ bộ phát hiện, vì nó được định nghĩa ngay
 trong bài này và mã nguồn được công khai. Vì vậy
@@ -46,17 +44,16 @@ G=M-U(L),
 \label{eq:gap}
 \end{equation}
 trong đó:
-\begin{description}\small
+\begin{symbolist}
 \item[$G$] chênh lệch bơm, tính bằng mm, là lượng nước bơm thật vượt quá tổng
   lượng đã khai báo;
 \item[$M$] tổng lượng nước thật sự đã bơm trong vụ, đo tại trạm của hợp tác xã,
   tính bằng mm;
 \item[$U(L)$] tổng các độ sâu khai báo trong nhật ký $L$, tính bằng mm.
-\end{description}
+\end{symbolist}
 
-$G$ dương nghĩa là nông dân khai thiếu, và đó là dấu hiệu gian lận theo hướng làm
-giảm lượng nước. Tuy nhiên đại lượng quyết định tín chỉ lại không phải $G$ mà là
-\emph{số pha khô}. Ký hiệu
+$G$ dương nghĩa là nông dân khai thiếu. Tuy nhiên đại lượng quyết định tín chỉ
+không phải $G$ mà là \emph{số pha khô}. Ký hiệu
 $\mathcal{A}(\cdot)$ là tập các quãng liền nhau dài nhất có thể $[a,b)$ trên một
 quỹ đạo phát lại, trong đó độ cạn kiệt luôn đạt từ $d_{\mathrm{dry}}$ trở lên,
 không có khai báo tưới nào, và mỗi quãng kéo dài ít nhất $72$~giờ, tức mức tối thiểu ba ngày theo
@@ -71,7 +68,7 @@ Quyết định 4801~\cite{qd4801}:
 \label{eq:awd}
 \end{equation}
 trong đó:
-\begin{description}\small
+\begin{symbolist}
 \item[$\mathcal{A}(\cdot)$] toán tử trả về tập các pha khô đủ điều kiện cấp tín
   chỉ của một quỹ đạo độ cạn kiệt;
 \item[$[a,b)$] một quãng giờ liền nhau, bắt đầu tại giờ $a$ và kết thúc trước giờ
@@ -82,11 +79,9 @@ trong đó:
   khô, là phân số không thứ nguyên;
 \item[$u_t$] độ sâu tưới áp dụng tại giờ $t$, bằng 0 trong suốt quãng khô;
 \item[$b-a$] độ dài của quãng, tính bằng giờ.
-\end{description}
+\end{symbolist}
 
-Ba điều kiện trong ngoặc nhọn của \eqref{eq:awd} lần lượt là ruộng phải đủ khô,
-không được tưới trong suốt quãng, và quãng phải đủ dài. Khi đó số pha được cấp tín
-chỉ là
+Khi đó số pha được cấp tín chỉ là
 \begin{equation}
 n_{\mathrm{dry}}(L)=\bigl|\mathcal{A}\bigl(\mathcal{R}(L)\bigr)\bigr|,
 \label{eq:ndry}
@@ -145,12 +140,12 @@ hai lần tưới liền kề vào cùng một giờ không bị kết tội oan
 
 
 trong đó:
-\begin{description}\small
+\begin{symbolist}
 \item[$\tau_i$] thời gian kéo dài của lần tưới thứ $i$, tính bằng giờ;
 \item[$k_{\mathrm{inf}}$] tốc độ thấm tối đa của ruộng, tính bằng mm mỗi giờ;
 \item[$p_{\max}$] lượng nước tối đa mà ruộng nhận được trong một trận tưới bất
-  kể thời gian, tính bằng mm. Cả hai hằng số này đã được nêu giá trị ở câu trên.
-\end{description}
+    kể thời gian, tính bằng mm.
+\end{symbolist}
 
 Bộ lọc thứ ba, vốn đánh dấu độ cạn kiệt xuống dưới điểm héo, không thể kích hoạt
 trên lúa vụ khô đồng bằng; bằng chứng ở Ghi chú~\ref{sec:v2reach}. Cách đánh số $V_1$, $V_4$, $V_5$ theo công trình đang thẩm định nêu trên; bài này không dùng $V_2$
@@ -190,7 +185,7 @@ c_{t+\delta}\ \ge\ c_t+\min\!\bigl(\delta\cdot\overline{\Delta},\ FC-\hat w_t^{-
 \label{eq:delay}
 \end{equation}
 trong đó:
-\begin{description}\small
+\begin{symbolist}
 \item[$c_t$] phần thiếu hụt tại giờ $t$, tính bằng mm, bằng lượng nước mà tầng rễ
   còn tiếp nhận được trước khi chạm sức chứa ẩm đồng ruộng;
 \item[$\Delta_t$] lượng nước mà thùng chứa mất đi giữa hai lần khai báo liên tiếp,
@@ -203,13 +198,13 @@ trong đó:
   chảy mặt $RO_s$;
 \item[$\delta$] số giờ mà một khai báo bị hoãn lại;
 \item[$\overline{\Delta}$] lượng nước mất đi trung bình mỗi giờ trong quãng chờ.
-\end{description}
+\end{symbolist}
 
-Cả ba số hạng của $\Delta_t$ đều lấy từ cùng một phương trình thùng chứa
+Cả ba số hạng của $\Delta_t$ đều lấy từ cùng phương trình thùng chứa
 \eqref{eq:bucket}, nên bất đẳng thức này không dựa trên giả định thuỷ văn nào mới.
-Ý nghĩa của nó là khi một lệnh tưới bị ghi muộn hơn, ruộng khô thêm trong quãng
-chờ nên số pha khô tăng lên, đồng thời đất khô hơn lại hấp thụ được đúng lượng
-nước đó khi lệnh cuối cùng được ghi, nên không bộ lọc vật lý nào thấy bất thường.
+Nghĩa là khi một lệnh tưới bị ghi muộn, ruộng khô thêm trong quãng chờ nên số pha
+khô tăng, còn đất khô hơn lại hấp thụ đúng lượng nước đó, nên không bộ lọc vật lý
+nào thấy bất thường.
 
 Do đó phép biến đổi dời các khai báo \emph{ra khỏi} một khoảng khô và đặt lên
 biên của khoảng đó đồng thời (i)~làm tăng $n_{\mathrm{dry}}$, vì khoảng đó

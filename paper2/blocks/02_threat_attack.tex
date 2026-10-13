@@ -7,7 +7,7 @@ L=\{(t_i,u_i)\}_{i=1}^{|L|},\qquad u_i>0,\ t_i\in[0,T),
 \label{eq:log}
 \end{equation}
 where:
-\begin{description}\small
+\begin{symbolist}
 \item[$L$] the claimed log for one season, listing the irrigation events the farmer
   recorded;
 \item[$|L|$] the number of irrigation events in the log;
@@ -15,7 +15,7 @@ where:
   the field, in millimetres;
 \item[$t_i$] the hour index of event $i$, taking values from 0 to $T$ as defined in
   Sec.~\ref{sec:model}.
-\end{description} Three
+\end{symbolist} Three
 independent quantities can be forged, and each defence tier observes a different
 subset of them:
 \begin{equation}
@@ -24,8 +24,6 @@ subset of them:
 \underbrace{\{t_i\}}_{\text{timestamps}}\,.
 \label{eq:three}
 \end{equation}
-The three underbraced quantities above are the three things an adversary can forge,
-namely the total volume, each individual depth, and the timestamp of each event.
 Supplementary Table~S1 lists the fraud classes corresponding to each. The adversary is
 \emph{rational}: it maximises creditable dry phases subject to not being
 flagged, and it knows the detector, because the detector is fully specified in this paper
@@ -42,17 +40,16 @@ G=M-U(L),
 \label{eq:gap}
 \end{equation}
 where:
-\begin{description}\small
+\begin{symbolist}
 \item[$G$] the pump gap, in mm, being the volume really pumped in excess of the
   claimed total;
 \item[$M$] the total volume actually pumped over the season, measured at the
   cooperative station, in mm;
 \item[$U(L)$] the sum of the depths claimed in log $L$, in mm.
-\end{description}
+\end{symbolist}
 
-A positive $G$ means the farmer under-reported, which is fraud in the direction of
-reducing water. The credit-relevant quantity, however, is not $G$ but the number of
-\emph{dry phases}. Write $\mathcal{A}(\cdot)$ for the set of maximal intervals
+A positive $G$ means the farmer under-reported. The credit-relevant quantity, however,
+is not $G$ but the number of \emph{dry phases}. Write $\mathcal{A}(\cdot)$ for the set of maximal intervals
 $[a,b)$ of a replayed
 trajectory over which the depletion stays at or above $d_{\mathrm{dry}}$ with
 no claimed irrigation, lasting at least $72$\,h --- the three-day minimum of
@@ -67,7 +64,7 @@ Decision 4801~\cite{qd4801}:
 \label{eq:awd}
 \end{equation}
 where:
-\begin{description}\small
+\begin{symbolist}
 \item[$\mathcal{A}(\cdot)$] the operator returning the set of credit-eligible dry
   phases of a depletion trajectory;
 \item[$[a,b)$] a contiguous interval of hours, starting at hour $a$ and ending before
@@ -79,11 +76,9 @@ where:
 \item[$u_t$] the irrigation depth applied at hour $t$, equal to $0$ throughout a dry
   interval;
 \item[$b-a$] the length of the interval, in hours.
-\end{description}
+\end{symbolist}
 
-The three conditions inside the braces of \eqref{eq:awd} require, respectively, that
-the field be dry enough, that no irrigation be claimed during the interval, and that
-the interval be long enough. The credited count is then
+The credited count is then
 \begin{equation}
 n_{\mathrm{dry}}(L)=\bigl|\mathcal{A}\bigl(\mathcal{R}(L)\bigr)\bigr|,
 \label{eq:ndry}
@@ -140,12 +135,12 @@ events in one hour is not accused.
 
 
 where:
-\begin{description}\small
+\begin{symbolist}
 \item[$\tau_i$] the duration of irrigation event $i$, in hours;
 \item[$k_{\mathrm{inf}}$] the maximum infiltration rate of the field, in mm per hour;
 \item[$p_{\max}$] the maximum water the field accepts in one event regardless of
-  duration, in mm. Both constants are given their values in the sentence above.
-\end{description}
+    duration, in mm.
+\end{symbolist}
 
 A fourth filter, on depletion below the wilting point, was included in this layer. It cannot activate on dry-season delta rice: see Remark~\ref{sec:v2reach}.
 
@@ -184,7 +179,7 @@ c_{t+\delta}\ \ge\ c_t+\min\!\bigl(\delta\cdot\overline{\Delta},\ FC-\hat w_t^{-
 \label{eq:delay}
 \end{equation}
 where:
-\begin{description}\small
+\begin{symbolist}
 \item[$c_t$] the deficit at hour $t$, in mm, equal to the water the root zone can
   still accept before reaching field capacity;
 \item[$\Delta_t$] the water the bucket loses between two consecutive claims, in mm;
@@ -196,13 +191,13 @@ where:
   runoff $RO_s$ has been subtracted;
 \item[$\delta$] the number of hours by which a claim is delayed;
 \item[$\overline{\Delta}$] the mean water loss per hour over the waiting interval.
-\end{description}
+\end{symbolist}
 
-All three terms of $\Delta_t$ come from the same bucket equation \eqref{eq:bucket},
-so this inequality rests on no new hydrological assumption. Its meaning is that when a
-command is recorded later than it was issued, the field dries further during the wait,
-so the number of dry phases rises, while the drier soil can absorb exactly that water
-once the command is finally recorded, so no physical filter sees anything anomalous.
+All three terms of $\Delta_t$ come from the same bucket equation \eqref{eq:bucket}, so
+this inequality rests on no new hydrological assumption. When a command is recorded
+later than it was issued, the field dries further during the wait, so the number of dry
+phases rises, while the drier soil absorbs exactly that water and no physical filter
+sees anything anomalous.
 
 Consequently the transformation that moves claims \emph{out of} a dry interval
 and onto its boundary simultaneously (i)~increases $n_{\mathrm{dry}}$, because

@@ -3,17 +3,16 @@
 
 \subsection{Field water balance}
 
-This paper builds no new hydrological model. It reuses, unchanged, the standardised
-root-zone water balance of FAO-56 chapter~8~\cite{fao56}, so that every auditor
-starts from the same point. The root-zone water content $w_t$ [mm] evolves hourly
-under the bucket equation:
+This paper reuses, unchanged, the standardised root-zone water balance of FAO-56
+chapter~8~\cite{fao56}, so that every auditor starts from the same point. The root-zone
+water content $w_t$ [mm] evolves hourly under the bucket equation:
 \begin{equation}
 w_{t+1}=\mathrm{clip}_{\le FC}\!\left(w_t+P_t-RO_t-ET_{c,t}+u_t\right),
 \label{eq:bucket}
 \end{equation}
 That is, water in minus water out, with any excess above field capacity clipped
 away. Here:
-\begin{description}\small
+\begin{symbolist}
 \item[$w_t$] root-zone water content at hour $t$, in mm;
 \item[$P_t$] rainfall during hour $t$, in mm;
 \item[$RO_t$] surface runoff leaving the field during hour $t$, in mm, obtained
@@ -26,7 +25,7 @@ away. Here:
   drainage, in mm;
 \item[$\mathrm{clip}_{\le FC}$] the clipping operator, which passes values at or
   below $FC$ unchanged and maps anything above it to $FC$.
-\end{description}
+\end{symbolist}
 
 $ET_{c,t}$ cannot be measured, so it is computed from reference
 evapotranspiration by FAO-56 equations~83 and~84:
@@ -37,7 +36,7 @@ K_{s,t}=\frac{FC-w_t}{(1-p)\,\mathrm{TAW}},
 \label{eq:etc}
 \end{equation}
 where:
-\begin{description}\small
+\begin{symbolist}
 \item[$ET_{0,t}$] hourly reference evapotranspiration, computed by the hourly form
   of Penman-Monteith, FAO-56 equation~53, from public weather data;
 \item[$K_c$] the crop coefficient, characterising how much water rice uses relative
@@ -48,24 +47,24 @@ where:
   begins, taken from FAO-56;
 \item[$\mathrm{TAW}$] total available water in the root zone, equal to $FC-WP$ by
   FAO-56 equation~82.
-\end{description} Drainage above field capacity $FC$ is removed by the clipping operator, so mass
+\end{symbolist} Drainage above field capacity $FC$ is removed by the clipping operator, so mass
 conservation holds exactly and is checked as an invariant.
 
-What decides a dry phase is not $w_t$ itself but the relative depletion of the root
-zone, normalised to the interval from 0 to 1 as follows:
+What decides a dry phase is the relative depletion of the root zone, normalised to the
+interval from 0 to 1:
 \begin{equation}
 d_t=\frac{FC-w_t}{FC-WP},\qquad \mathrm{span}=FC-WP,
 \label{eq:depl}
 \end{equation}
 where:
-\begin{description}\small
+\begin{symbolist}
 \item[$d_t$] root-zone depletion at hour $t$, a dimensionless fraction equal to 0 at
   field capacity and to 1 at the wilting point;
 \item[$WP$] the wilting point, the moisture below which the crop can no longer
   extract water, in mm;
 \item[$\mathrm{span}$] the width of the depletion scale, equal to $FC-WP$, used to
   convert the fraction $d_t$ into a water amount in mm.
-\end{description}
+\end{symbolist}
 
 For the reference silty clay loam of the delta, the values
 $\mathrm{TAW}=FC-WP=70$\,mm, $FC=160$\,mm, $WP=90$\,mm are the mid-range entries
@@ -89,7 +88,7 @@ u_t=\sum_{(t_i,u_i)\in L}u_i\,\mathbb{1}[t_i=t],
 \label{eq:uterm}
 \end{equation}
 where:
-\begin{description}\small
+\begin{symbolist}
 \item[$L$] the claimed log, a list of hour-and-depth pairs recorded by the farmer;
 \item[$T$] the total number of hours in the simulation window;
 \item[$\hat w_t$] root-zone water content implied by the log, that is, the water the
@@ -98,10 +97,9 @@ where:
   through \eqref{eq:depl};
 \item[$\hat w_0=w_{\mathrm{init}}$] the initial condition, the field's moisture
   state before the first irrigation;
-\\item[{\\(\\mathbb{1}[\\cdot]\\)}] the indicator function, equal to 1 when the bracketed
-  condition holds and 0 otherwise, so \eqref{eq:uterm} sums only the depth of the
-  hour being evaluated.
-\end{description}
+\\item[{\\(\\mathbb{1}[\\cdot]\\)}] the indicator function, equal to 1 when the bracketed condition holds and 0
+  otherwise.
+\end{symbolist}
 
 The hat marks quantities reconstructed from the log rather than measured. This is the
 pivot of the whole paper: a replayed trajectory is what the farmer \emph{declared},

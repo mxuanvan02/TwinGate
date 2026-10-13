@@ -13,12 +13,12 @@ command record
 \label{eq:gateway}
 \end{equation}
 where:
-\begin{description}\small
+\begin{symbolist}
 \item[$\mathcal{G}$] the gateway's command record, covering every pump actuation in the season;
 \item[$t_j$] the hour at which the controller switched the pump for command $j$;
 \item[$u_j$] the water depth the controller delivered for that command, in mm;
 \item[$\sigma_j$] a digital signature over the pair $(t_j,u_j)$, produced by the controller at actuation time.
-\end{description} The anchor test compares the claimed log against it:
+\end{symbolist} The anchor test compares the claimed log against it:
 \begin{equation}
 \begin{aligned}
 \Delta_{\mathrm{time}}&=\{t_i\}\triangle\{t_j\},\\
@@ -27,13 +27,13 @@ where:
 \label{eq:deltas}
 \end{equation}
 where:
-\begin{description}\small
+\begin{symbolist}
 \item[$\Delta_{\mathrm{time}}$] the set of hours present in one record but absent from the other;
 \item[$\triangle$] the symmetric difference of the two hour sets, returning elements belonging to only one of them;
 \item[$u(t)$] the depth claimed at hour $t$ in log $L$;
 \item[$u_{\mathcal{G}}(t)$] the depth the gateway recorded at the same hour $t$;
 \item[$\Delta_{\mathrm{depth}}$] the largest discrepancy between the two depths, taken over hours common to both records.
-\end{description}
+\end{symbolist}
 
 The verdict is then
 \begin{equation}
@@ -46,11 +46,11 @@ A(L,\mathcal{G})=
 \label{eq:anchor}
 \end{equation}
 where:
-\begin{description}\small
+\begin{symbolist}
 \item[$A(L,\mathcal{G})$] the verdict of the anchor test on log $L$;
 \item[$\epsilon$] the depth-matching tolerance, equal to $10^{-6}$\,mm, i.e.\ exact agreement up to floating-point noise;
 \item[$\vee$] logical or, meaning that either discrepancy alone suffices to conclude forgery.
-\end{description}
+\end{symbolist}
 Naming the two discrepancies separately matters: time-shifting alters
 $\Delta_{\mathrm{time}}$ only, depth inflation alters
 $\Delta_{\mathrm{depth}}$ only, and omission and addition alter both, so a

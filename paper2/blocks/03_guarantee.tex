@@ -12,13 +12,13 @@ u_{\max}=\max(d^{*},w_0)\cdot\mathrm{span}+\varepsilon .
 \label{eq:umax}
 \end{equation}
 where:
-\begin{description}\small
+\begin{symbolist}
 \item[$u_{\max}$] the largest claimed depth, in mm, that never raises an alarm;
 \item[$d^{*}$] the depletion at the latest irrigated hour considered, a dimensionless fraction;
 \item[$w_0$] the initial depletion of the field, in the same fraction units;
 \item[$\mathrm{span}$] the width of the depletion scale, equal to $FC-WP$ in mm, defined in Sec.~\ref{sec:model};
-\item[$\varepsilon$] the published tolerance for model error, equal to $5$\,mm as stated in Sec.~\ref{sec:filters}.
-\end{description}
+\item[$\varepsilon$] the published tolerance for model error, equal to $5$\,mm as in Sec.~\ref{sec:filters}.
+\end{symbolist}
 
 Two corrections follow, both verified by scanning the replay operator rather
 than by algebra alone (derivation in Supplementary~S14): \eqref{eq:umax} uses
@@ -45,14 +45,14 @@ V_{\mathrm{rob}}(L)&=\bigcap_{\theta\in\Theta}V_\theta(L),\\
 \label{eq:robust}
 \end{equation}
 where:
-\begin{description}\small
+\begin{symbolist}
 \item[$V_{\mathrm{rob}}(L)$] the robust violation set of log $L$, non-empty only if $L$ violates under every configuration;
 \item[$\Theta$] the uncertainty set, the product of the four component sets below;
 \item[$\mathcal{S}$] the set of soil textures, of size $5$;
 \item[$\mathcal{K}$] the set of crop-coefficient regimes, of size $2$;
 \item[$\mathcal{E}$] the set of irrigation efficiencies, of size $3$;
 \item[$\mathcal{W}$] the set of initial states, of size $5$.
-\end{description}
+\end{symbolist}
 
 Hence $|\Theta|=150$ and each log costs $150$ replays. The semantics are
 deliberately one-sided:
@@ -64,8 +64,8 @@ a(L)=
 \end{cases}
 \label{eq:verdict}
 \end{equation}
-where $a(L)$ is the verdict for log $L$. A ``query'' verdict means the auditor must
-verify further in the field; the system does not conclude fraud on its own.
+where $a(L)$ is the verdict for log $L$. A ``query'' verdict means further field
+verification is required; the system does not conclude fraud on its own.
 
 \begin{proposition}[No false accusation within $\Theta$]
 \label{prop:noalarm}
@@ -99,17 +99,17 @@ so the threshold must scale with the number of recorded events:
 \label{eq:tau}
 \end{equation}
 where:
-\begin{description}\small
+\begin{symbolist}
 \item[$\tau(n)$] the admissible pump gap, in mm, when the log records $n$ events;
 \item[$n$] the number of irrigation events recorded in the log;
 \item[$\delta_{\mathrm{rel}}$] the relative tolerance on the true pumped volume $M$, equal to $2\%$;
 \item[$z$] the multiplier of the standard deviation, set to $3$;
 \item[$\sigma_{\mathrm{event}}$] the standard deviation of the recording error per event, in mm;
 \item[$p$] the rate of forgetting to record an event;
-\item[$r$] the depth rounding step, equal to $5$\,mm as stated above;
+\item[$r$] the depth rounding step, equal to $5$\,mm;
 \item[$q$] the depth-error rate, and $s$ its relative amplitude;
 \item[$\bar u$] a typical event depth, equal to $30$\,mm.
-\end{description}
+\end{symbolist}
 
 Here the absolute rule is the degenerate
 case $n\to0$, $\sigma_{\mathrm{event}}\to0$.

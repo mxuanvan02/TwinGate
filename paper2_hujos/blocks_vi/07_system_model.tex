@@ -6,16 +6,15 @@
 
 \subsection{Cân bằng nước của ruộng}
 
-Bài này không xây dựng mô hình thuỷ văn mới, mà dùng lại nguyên trạng mô hình
-cân bằng nước tầng rễ đã được chuẩn hoá trong FAO-56 chương 8~\cite{fao56} để
-mọi kiểm toán viên có cùng một điểm khởi đầu. Lượng nước trong tầng rễ $w_t$
-biến đổi theo giờ theo phương trình thùng chứa:
+Bài này dùng lại nguyên trạng mô hình cân bằng nước tầng rễ đã chuẩn hoá trong
+FAO-56 chương 8~\cite{fao56}, để mọi kiểm toán viên có cùng một điểm khởi đầu.
+Lượng nước trong tầng rễ $w_t$ biến đổi theo giờ theo phương trình thùng chứa:
 \begin{equation}
 w_{t+1}=\mathrm{clip}_{\le FC}\!\left(w_t+P_t-RO_t-ET_{c,t}+u_t\right),
 \label{eq:bucket}
 \end{equation}
 Nghĩa là nước vào trừ nước ra, và phần vượt sức chứa bị cắt bỏ. Trong đó:
-\begin{description}\small
+\begin{symbolist}
 \item[$w_t$] lượng nước trong tầng rễ tại giờ $t$, tính bằng mm;
 \item[$P_t$] lượng mưa rơi xuống trong giờ $t$, tính bằng mm;
 \item[$RO_t$] dòng chảy mặt tràn khỏi ruộng trong giờ $t$, tính bằng mm, suy ra từ phương pháp đường cong số của Cơ quan Bảo tồn Đất Hoa Kỳ (SCS-CN) công bố năm 1972, tính theo ngày rồi chia đều
@@ -27,7 +26,7 @@ Nghĩa là nước vào trừ nước ra, và phần vượt sức chứa bị c
   sau khi đã thoát nước tự do, tính bằng mm;
 \item[$\mathrm{clip}_{\le FC}$] toán tử cắt bỏ, giữ nguyên giá trị khi nhỏ hơn
   hoặc bằng $FC$ và đặt bằng $FC$ khi lớn hơn.
-\end{description}
+\end{symbolist}
 
 Đại lượng $ET_{c,t}$ không đo được nên phải tính tiếp từ bốc thoát hơi nước tham
 chiếu, theo đúng cặp phương trình 83 và 84 của FAO-56:
@@ -38,7 +37,7 @@ K_{s,t}=\frac{FC-w_t}{(1-p)\,\mathrm{TAW}},
 \label{eq:etc}
 \end{equation}
 trong đó:
-\begin{description}\small
+\begin{symbolist}
 \item[$ET_{0,t}$] bốc thoát hơi nước tham chiếu theo giờ, tính bằng công thức
   Penman-Monteith dạng theo giờ, tức phương trình 53 của FAO-56, từ số liệu khí
   tượng công khai;
@@ -50,26 +49,25 @@ trong đó:
   lấy theo FAO-56;
 \item[$\mathrm{TAW}$] tổng lượng nước sẵn có trong tầng rễ, tính bằng
   $FC-WP$ theo phương trình 82 của FAO-56.
-\end{description} Trong mô hình, phần nước vượt quá sức chứa ẩm đồng ruộng $FC$ được coi là chảy
-tràn hoặc thấm sâu và bị loại khỏi cân bằng, nên mô hình bảo toàn khối lượng
-tuyệt đối và chúng tôi kiểm tra tính bảo toàn đó như một bất biến trong mã
-nguồn.
+\end{symbolist} Phần nước vượt quá $FC$ được coi là chảy tràn hoặc thấm sâu và bị loại khỏi cân
+bằng, nên mô hình bảo toàn khối lượng tuyệt đối; chúng tôi kiểm tra điều đó như
+một bất biến trong mã nguồn.
 
-Đại lượng quyết định một pha khô không phải $w_t$ mà là mức cạn kiệt tương đối
-của tầng rễ, được chuẩn hoá về đoạn từ 0 đến 1 như sau:
+Đại lượng quyết định một pha khô là mức cạn kiệt tương đối của tầng rễ, chuẩn hoá
+về đoạn từ 0 đến 1:
 \begin{equation}
 d_t=\frac{FC-w_t}{FC-WP},\qquad \mathrm{span}=FC-WP,
 \label{eq:depl}
 \end{equation}
 trong đó:
-\begin{description}\small
+\begin{symbolist}
 \item[$d_t$] độ cạn kiệt của tầng rễ tại giờ $t$, là phân số không thứ nguyên,
   bằng 0 khi đất ở sức chứa ẩm đồng ruộng và bằng 1 khi đất chạm điểm héo;
 \item[$WP$] điểm héo, tức độ ẩm mà dưới mức đó cây không hút được nước nữa,
   tính bằng mm;
 \item[$\mathrm{span}$] biên độ của thang cạn kiệt, bằng $FC-WP$, dùng để đổi
   từ phân số $d_t$ sang lượng nước tính bằng mm.
-\end{description}
+\end{symbolist}
 
 Đối với loại đất thịt pha sét limon tham chiếu của đồng bằng, các giá trị
 $\mathrm{TAW}=FC-WP=70$~mm, $FC=160$~mm, $WP=90$~mm được lấy theo dải giữa của
@@ -95,7 +93,7 @@ u_t=\sum_{(t_i,u_i)\in L}u_i\,\mathbb{1}[t_i=t],
 \label{eq:uterm}
 \end{equation}
 trong đó:
-\begin{description}\small
+\begin{symbolist}
 \item[$L$] nhật ký khai báo, là danh sách các cặp giờ và độ sâu tưới mà nông dân
   đã ghi;
 \item[$T$] tổng số giờ của cửa sổ mô phỏng;
@@ -105,9 +103,8 @@ trong đó:
   \eqref{eq:depl};
 \item[$\hat w_0=w_{\mathrm{init}}$] điều kiện đầu, là trạng thái ẩm của ruộng
   trước lần tưới đầu tiên;
-\\item[{\\(\\mathbb{1}[\\cdot]\\)}] hàm chỉ báo, nhận giá trị 1 khi điều kiện trong ngoặc
-  đúng và 0 khi sai, nên \eqref{eq:uterm} chỉ cộng độ sâu của đúng giờ đang xét.
-\end{description}
+\\item[{\\(\\mathbb{1}[\\cdot]\\)}] hàm chỉ báo, nhận giá trị 1 khi điều kiện trong ngoặc đúng và 0 khi sai.
+\end{symbolist}
 
 Dấu mũ trên ký hiệu đánh dấu những đại lượng được tái dựng từ nhật ký chứ không
 đo được. Đây là điểm then chốt của toàn bài: quỹ đạo phát lại là thứ

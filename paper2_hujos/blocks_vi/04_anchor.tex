@@ -16,12 +16,12 @@ lệnh có chữ ký
 \label{eq:gateway}
 \end{equation}
 trong đó:
-\begin{description}\small
+\begin{symbolist}
 \item[$\mathcal{G}$] bản ghi lệnh của gateway, gồm mọi lệnh đóng mở máy bơm trong vụ;
 \item[$t_j$] giờ mà bộ điều khiển đóng máy bơm ở lệnh thứ $j$;
 \item[$u_j$] độ sâu nước mà bộ điều khiển đã cấp ở lệnh đó, tính bằng mm;
 \item[$\sigma_j$] chữ ký số trên cặp $(t_j,u_j)$, do bộ điều khiển tạo ra tại thời điểm đóng mở máy bơm.
-\end{description}
+\end{symbolist}
 
 Phép thử neo đối chiếu nhật ký khai báo với bản ghi đó:
 \begin{equation}
@@ -32,13 +32,13 @@ Phép thử neo đối chiếu nhật ký khai báo với bản ghi đó:
 \label{eq:deltas}
 \end{equation}
 trong đó:
-\begin{description}\small
+\begin{symbolist}
 \item[$\Delta_{\mathrm{time}}$] tập các giờ có mặt ở bản ghi này nhưng vắng ở bản ghi kia;
 \item[$\triangle$] phép hiệu đối xứng giữa hai tập giờ, trả về các phần tử chỉ thuộc một trong hai tập;
 \item[$u(t)$] độ sâu khai báo tại giờ $t$ trong nhật ký $L$;
 \item[$u_{\mathcal{G}}(t)$] độ sâu mà gateway ghi nhận tại cùng giờ $t$;
 \item[$\Delta_{\mathrm{depth}}$] độ lệch lớn nhất giữa hai độ sâu, lấy trên các giờ có mặt ở cả hai bản ghi.
-\end{description}
+\end{symbolist}
 
 Phán quyết khi đó là
 \begin{equation}
@@ -51,11 +51,11 @@ A(L,\mathcal{G})=
 \label{eq:anchor}
 \end{equation}
 trong đó:
-\begin{description}\small
+\begin{symbolist}
 \item[$A(L,\mathcal{G})$] phán quyết của phép thử neo đối với nhật ký $L$;
 \item[$\epsilon$] dung sai so khớp độ sâu, bằng $10^{-6}$~mm, tức khớp chính xác tới mức nhiễu dấu phẩy động;
 \item[$\vee$] phép hoặc logic, nghĩa là chỉ cần một trong hai loại sai lệch là đủ kết luận giả mạo.
-\end{description} Cần
+\end{symbolist} Cần
 gọi tên riêng hai loại sai lệch, vì dịch thời điểm chỉ làm thay đổi
 $\Delta_{\mathrm{time}}$, thổi phồng độ sâu chỉ làm thay đổi
 $\Delta_{\mathrm{depth}}$, còn bỏ sót và thêm mới thì làm thay đổi cả hai. Nhờ

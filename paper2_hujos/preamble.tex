@@ -254,6 +254,14 @@
 \usepackage{microtype}
 \usepackage{array}
 
+% Moi truong liet ke ky hieu cong thuc ('trong do:'). Dinh nghia o day chu khong o
+% blocks/ vi cac lenh \setlength chua CHU SO (0.5pt, 0pt) se bi gate
+% check_vi_numbers dem nhu so lieu nghien cuu -> lam loang gate.
+\newenvironment{symbolist}
+  {\begin{description}\footnotesize\setlength{\itemsep}{0.5pt}\setlength{\parsep}{0pt}}
+  {\end{description}}
+
+
 % graphicx la BAT BUOC cho \resizebox. Thieu no thi 24 loi fatal
 % "Undefined control sequence" + "Missing number" + "Illegal unit of measure"
 % (vi \resizebox bi phan tich sai). Da tra gia: ban IEEE co goi nay, ban HUJOS
