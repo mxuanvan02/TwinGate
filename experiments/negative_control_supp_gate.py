@@ -16,7 +16,12 @@ import hashlib, shutil, subprocess, sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-TARGET = ROOT / "paper2_hujos" / "supplementary_vi.tex"
+# LOI DA SUA (batch 17): gate check_supp_vi_numbers.py doc supp_body_vi.tex (than phu luc
+# dung chung) tu batch 16, con TARGET van tro supplementary_vi.tex -> tiem loi vao file
+# gate KHONG doc, ca 3 case "khong tim thay chuoi de pha -> bo qua", roi ket luan sai
+# rang "gate CO VAN DE — khong duoc tin ket qua PASS". Da chung minh gate van tot bang
+# kiem chung am that trong sandbox /tmp: 3/3 case bi bat (exit=1), sha256 hoan nguyen.
+TARGET = ROOT / "paper2_hujos" / "supp_body_vi.tex"
 GATE = [sys.executable, str(ROOT / "experiments" / "check_supp_vi_numbers.py")]
 
 # (chuoi that, chuoi pha, mo ta) — 3 phep thu tren 3 loai so khac nhau
@@ -44,6 +49,15 @@ def run_gate() -> int:
 def main() -> int:
     if not TARGET.exists():
         print(f"  !! khong thay {TARGET}"); return 1
+    # GUARD fail-closed (batch 17): TARGET phai la file ma gate THAT SU doc. Neu khong,
+    # moi case se "bo qua" va script ket luan SAI ve gate. Day dung la lop loi fail-open
+    # da ghi trong MEMORY: helper tra ve 0 khi thieu phu thuoc -> artifact bao 'ĐẠT'.
+    gate_path = Path(GATE[1])
+    gate_src = gate_path.read_text(encoding="utf-8") if gate_path.exists() else ""
+    if TARGET.name not in gate_src:
+        print(f"  !! TARGET {TARGET.name} KHONG xuat hien trong nguon cua gate "
+              f"{gate_path.name}: kiem chung am se vo nghia. Cap nhat TARGET.")
+        return 1
     backup = Path("/tmp/supp_vi_backup.tex")
     shutil.copy2(TARGET, backup)
     orig_sha = sha(TARGET)
@@ -55,11 +69,16 @@ def main() -> int:
         print("  !! gate FAIL truoc khi pha -> khong the kiem chung am"); return 1
 
     ok = True
+    inconclusive = False
     for i, (real, broken, desc) in enumerate(CASES, 1):
         s = backup.read_text(encoding="utf-8")
         if s.count(real) < 1:
             print(f"\n  [case {i}] !! khong tim thay {real!r} de pha ({desc}) -> bo qua")
-            ok = False
+            # LOI DA SUA (batch 17): docstring cua chinh file nay (dong 26-28) da ghi bai
+            # hoc "khi mot case khong chay duoc thi ket luan phai la KHONG XAC DINH, khong
+            # phai gate hong" — nhung code chua cai dat. Thieu bang chung khong phai la
+            # bang chung cua loi; ket luan "gate hong" khi chua chay case nao la sai.
+            inconclusive = True
             continue
         TARGET.write_text(s.replace(real, broken, 1), encoding="utf-8")
         rc = run_gate()
@@ -79,8 +98,12 @@ def main() -> int:
     print(f"  file giong het ban goc: {same}")
     backup.unlink(missing_ok=True)
 
-    if ok and final_rc == 0 and same:
-        print("\nKET LUAN: gate that su bat duoc so lieu bi sua sai (3/3 case).")
+    if inconclusive and ok:
+        print("\nKET LUAN: KHONG XAC DINH — co case khong chay duoc (thieu chuoi nguyen van "
+              "de pha), khong du bang chung de ket luan ve gate. Day KHONG phai 'gate hong'.")
+        return 1
+    if ok and final_rc == 0 and same and not inconclusive:
+        print(f"\nKET LUAN: gate that su bat duoc so lieu bi sua sai ({len(CASES)}/{len(CASES)} case).")
         return 0
     print("\nKET LUAN: gate CO VAN DE — khong duoc tin ket qua PASS cua no.")
     return 1

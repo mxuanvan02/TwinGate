@@ -205,6 +205,13 @@
   \newtheorem{proposition}{Mệnh đề}
   \newtheorem{remark}{Ghi chú}
   \renewcommand{\proofname}{Chứng minh}
+  % LOI DA SUA (batch 17): ban tieng Viet in heading TLTK bang tieng Anh 'References'.
+  % Da kiem ca 4 PDF: main_hujos_vi.pdf va supplementary_vi.pdf deu chi co 'References',
+  % khong tim thay 'Tài liệu tham khảo'. Day la sot chu khong phai quy uoc cua tap chi:
+  % bai khac cua chinh nhom (paper/main.tex) co dung dong
+  % \renewcommand{\refname}{Tài liệu tham khảo}. preamble da doi ten proposition/remark/
+  % proof theo tieng Viet trong nhanh nay nhung thieu \refname. Ban EN khong doi.
+  \renewcommand{\refname}{Tài liệu tham khảo}
 \else
   \newtheorem{proposition}{Proposition}
   \newtheorem{remark}{Remark}
@@ -267,6 +274,7 @@
 % (vi \resizebox bi phan tich sai). Da tra gia: ban IEEE co goi nay, ban HUJOS
 % quen -> build ra PDF 13 trang nhung la RAC, khong duoc bao cao la thanh cong.
 \usepackage{graphicx}
+\usepackage{placeins}
 
 % \fittocol: chi THU NHO bang khi no that su rong hon cot, KHONG BAO GIO phong to.
 %

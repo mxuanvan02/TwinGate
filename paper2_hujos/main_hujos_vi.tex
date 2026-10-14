@@ -220,6 +220,22 @@ DHH2025-19-07. Các tác giả tuyên bố không có xung đột lợi ích. Kh
 nghiệm mô phỏng, không có người tham gia, động vật hay can thiệp thực địa.
 
 % ---------------------------------------------------------------- tai lieu
+% LOI DA SUA (batch 17): \renewcommand{\thetable}{S\arabic{table}} nam o FRONT MATTER
+% cua supplementary_vi.tex, KHONG nam trong supp_body_vi.tex -> khi nhung vao bai chinh,
+% bang phu luc danh so tiep 4 bang cua than bai. Do that: .aux ban gop cho
+% tab:baseline=8, tab:setup=9 va PDF in 'Bảng 8. Chi phí MRV…', 'Bảng 9. Cấu hình thực
+% nghiệm.' trong khi van ben canh van viet 'Bảng~S4 của Phụ lục' -> caption va tham
+% chieu lech nhau. Fix: dat lai counter + nhan S ngay truoc khi nhung, de ban gop in
+% dung 'Bang S1..S5' giong het ban phu luc rieng. Da probe trong /tmp: .aux -> S4/S5,
+% 'Bảng 8/9' = 0 lan, 4 bang than bai van 1..4, 0 loi, so trang khong doi.
+% \clearpage: phu luc la khoi tai lieu rieng, phai bat dau trang moi. Do that: truoc
+% day S1 nam o dong 5/37 cua trang 20, dinh ngay sau cau ve phe duyet dao duc.
+\clearpage
+\appendix
+\setcounter{table}{0}
+\renewcommand{\thetable}{S\arabic{table}}
+\input{supp_body_vi}
+
 \bibliographystyle{vancouver}
 \bibliography{refs}
 

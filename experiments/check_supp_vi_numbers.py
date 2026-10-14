@@ -40,7 +40,7 @@ TABLES = ["tab_threat", "tab_umax", "tab_f2_unreachable", "tab_baseline", "tab_s
 
 def load(vi: bool) -> str:
     if vi:
-        parts = [H / "supplementary_vi.tex",
+        parts = [H / "supp_body_vi.tex",
                  H / "blocks_vi/08_subsidence.tex", H / "blocks_vi/09_cost.tex"]
         parts += [H / "tables_vi" / f"{t}.tex" for t in TABLES]
     else:
