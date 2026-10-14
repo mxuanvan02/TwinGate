@@ -21,7 +21,7 @@ trong đó:
 \item[$t_i$] chỉ số giờ của lần tưới thứ $i$, nhận giá trị trong khoảng từ 0 đến
   $T$ đã định nghĩa ở Mục~\ref{sec:model}.
 \end{symbolist}
-Đối thủ có thể làm giả ba đại lượng độc lập, và mỗi tầng phòng thủ chỉ quan sát
+Bên gian lận có thể làm giả ba đại lượng độc lập, và mỗi tầng phòng thủ chỉ quan sát
 một tập con trong số đó:
 \begin{equation}
 \underbrace{\textstyle\sum_i u_i}_{\text{tổng lượng}}\,,\qquad
@@ -29,10 +29,11 @@ một tập con trong số đó:
 \underbrace{\{t_i\}}_{\text{dấu thời gian}}\,.
 \label{eq:three}
 \end{equation}
-Bảng~S1 của Phụ lục liệt kê các lớp gian lận tương ứng với từng đại lượng. Ở đây \emph{đối thủ} là bên nộp nhật ký có chủ ý gian lận, có thể là chính nông dân
-hoặc người vận hành ghi thay cho nông dân; bài này không suy đoán động cơ mà chỉ mô hình
-hoá hành vi của bên đó. Chúng tôi giả định đối thủ \emph{duy lý}, nghĩa là nó tối đa hoá
-số pha khô được cấp tín chỉ với điều kiện không bị đánh dấu. Chúng tôi giả định đối thủ biết đầy đủ bộ phát hiện, vì nó được định nghĩa ngay
+Bảng~S1 của Phụ lục liệt kê các lớp gian lận tương ứng với từng đại lượng. Ở đây \emph{bên gian lận} (adversary) là bên nộp nhật ký có chủ ý làm sai lệch số liệu,
+có thể là chính nông dân hoặc người vận hành ghi thay cho nông dân; bài này không suy
+đoán động cơ và không giả định bên đó thuộc nhóm người nào, mà chỉ mô hình hoá hành vi
+của bên đó. Chúng tôi giả định bên gian lận \emph{duy lý}, nghĩa là nó tối đa hoá
+số pha khô được cấp tín chỉ với điều kiện không bị đánh dấu. Chúng tôi giả định bên gian lận biết đầy đủ bộ phát hiện, vì nó được định nghĩa ngay
 trong bài này và mã nguồn được công khai. Vì vậy
 $\varepsilon$ trong \eqref{eq:v4} dưới đây không phải là một tham số bí mật, mà
 là dung sai công bố cho sai số mô hình và được đặt bằng $5$~mm trong toàn bộ thí
@@ -163,7 +164,7 @@ không bao giờ phụ thuộc $t_i$.
 
 Mệnh đề~\ref{prop:blind} gói trọn toàn bộ khó khăn trong một dòng. Hai phòng thủ không phụ thuộc việc mô hình có đúng hay không, tức quy tắc đối
 chiếu tổng lượng bơm thật $G$ ở \eqref{eq:gap} và giới hạn thấm $V_5$, đều bất
-biến \emph{chính xác} dưới phép dịch thời điểm mà đối thủ cần. Hai
+biến \emph{chính xác} dưới phép dịch thời điểm mà bên gian lận cần. Hai
 bộ lọc còn lại là $V_1$ và $V_4$, vốn phụ thuộc thứ tự qua $\hat w_{t_i}^{-}$,
 nhưng cả hai cũng không giúp được gì.
 
@@ -205,8 +206,7 @@ nào thấy bất thường.
 Do đó phép biến đổi dời các khai báo \emph{ra khỏi} một khoảng khô và đặt lên
 biên của khoảng đó đồng thời (i)~làm tăng $n_{\mathrm{dry}}$, vì khoảng đó
 không còn bị ngắt quãng, và (ii)~làm tăng $c_t$ tại mỗi khai báo bị dời, điều
-mà theo \eqref{eq:v4} khiến $V_4$ \emph{ít} có khả năng kích hoạt hơn. Đối
-thủ không phải đánh đổi điều gì. Gradient của lợi nhuận và gradient của sự
+mà theo \eqref{eq:v4} khiến $V_4$ \emph{ít} có khả năng kích hoạt hơn. Bên gian lận không phải đánh đổi điều gì. Gradient của lợi nhuận và gradient của sự
 không thể phát hiện cùng chỉ một hướng.
 \end{proposition}
 
