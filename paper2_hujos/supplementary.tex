@@ -128,7 +128,7 @@ innocent worlds exist. Extending $\mathcal{W}$ to $\{0,0.25,0.5,0.75,0.9\}$
 restores the intended semantics.
 
 % ---------------------------------------------------------------- S8
-\section*{S8. Relation to prior monitoring work (full text)}
+\section*{S8. Full survey of prior monitoring work}
 
 AWD monitoring has been approached from three directions. \emph{Instrumented}: a
 low-cost wireless water-level sensor for lowland rice under
@@ -171,7 +171,7 @@ depth, so it does not need to know $\varepsilon$ in order to stay beneath the
 infiltration bound --- it needs only to avoid moving water, which is visible to
 any farmer. The vulnerability is structural, not a consequence of disclosure.
 
-\subsection*{S9.2 Relation to remote sensing (full text)}
+\subsection*{S9.2 Full survey of remote sensing}
 
 Satellite radar is the obvious low-cost alternative, so rather than argue about it
 we measured it. Table~5 of the main text scores every route by one quantity: how
@@ -239,7 +239,7 @@ along the seven axes listed in Table~S5.
 % ---------------------------------------------------------------- S11
 \section*{S11. Proofs of Propositions 1 and 2}
 
-\subsection*{Proof of Proposition 1 (exact blindness of aggregate defences)}
+\subsection*{Proof of Proposition 1 on the exact blindness of aggregate defences}
 
 $U(L)=\sum_i u_i$ is a symmetric function of the multiset, so it is invariant
 under any reassignment of depths to hours; $M$ is a property of the field, not
@@ -248,7 +248,7 @@ of the main text) is evaluated per event and depends only on $(u_i,\tau_i)$,
 never on $t_i$ or on $\hat w$, so the count of violations is a function of the
 multiset alone.
 
-\subsection*{Proof of Proposition 2 (credit gain and evasion are the same action)}
+\subsection*{Proof of Proposition 2 on credit gain and evasion being the same action}
 
 (i) is definitional: the set $\mathcal{A}$ requires no claim inside the
 interval, so removing one extends or creates a qualifying phase. For (ii),
@@ -261,7 +261,7 @@ filter fires only when $u_i>c_{t_i}+\varepsilon$ and $u_i$ is unchanged, a
 larger $c_{t_i}$ can only reduce the violation set.
 
 % ---------------------------------------------------------------- S12
-\section*{S12. Proof of Proposition 4 (completeness of the anchor)}
+\section*{S12. Proof of Proposition 4 on the completeness of the anchor}
 
 The first clause is the definition of the anchor verdict: any disagreement of
 the hour sets or of a depth at a shared hour triggers \text{forge}. For the
@@ -270,7 +270,7 @@ of the hour set and the per-hour depths, so agreement on those two fixes all
 three, and no forgery of the three quantities has occurred.
 
 % ---------------------------------------------------------------- S13
-\section*{S13. The wilting-point filter: full derivation}
+\section*{S13. Full derivation of the wilting-point filter}
 
 The layer included a third physical filter, flagging depletion below the wilting point as physically impossible. It was doubly inoperative. Its
 threshold was set at $1.02$ while the reported indicator
@@ -356,7 +356,7 @@ where an innocent world is most likely to exist; the full set confirms that no
 interior configuration changes a verdict.
 
 % ---------------------------------------------------------------- S18
-\section*{S18. Why the anchor does not re-introduce false accusation (full text)}
+\section*{S18. Why the anchor does not re-introduce false accusation}
 
 Proposition~4 of the main text is strong enough to look dangerous: any
 discrepancy is treated as forgery, including the forgetting and rounding that
@@ -381,7 +381,7 @@ occur. Under VM0051 the crediting unit is precisely that pattern, so the loss
 is real even though no physical resource moved.
 
 % ---------------------------------------------------------------- S20
-\section*{S20. Experimental design: full detail}
+\section*{S20. Full detail of the experimental design}
 
 \subsection*{S20.1 Removing the circularity, axis by axis}
 
@@ -412,7 +412,7 @@ threshold, and a verifier must be able to reproduce a decision in any case
 (S9.1).
 
 % ---------------------------------------------------------------- S21
-\section*{S21. Limitations (full text)}
+\section*{S21. The seven limitations, stated in full}
 
 \begin{enumerate}
 \item \emph{Simulated farmers.} Forgeries are injected into simulated reference
@@ -429,7 +429,7 @@ hand there is no command record, so the anchor is unavailable. This excludes a
 substantial share of delta farms and bounds the addressable population of the
 scheme.
 \item \emph{The attack is demonstrated in the water-scarce year only.} In the
-water-surplus year (2025) farmers need so little irrigation that most simulated
+water-surplus year 2025 farmers need so little irrigation that most simulated
 logs fall below the three-command minimum at which a timing attack is even
 constructible: of $37$ genuinely altered logs under the full $\Theta$, all $37$
 come from 2024. The escarpment between the two years is itself a finding --- MRV
