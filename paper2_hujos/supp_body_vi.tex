@@ -341,7 +341,11 @@ công mà mô hình của chúng tôi không biểu diễn được, vì nó tha
 \item \emph{Neo giả định một gateway trung thực.} Mệnh đề~\ref{prop:complete} của bài chính là
 tính đầy đủ đối với việc giả mạo nhật ký, không phải đối với một bộ điều khiển đã bị chiếm
 quyền. Toàn vẹn thiết bị, việc giữ khóa và chống phát lại được giả định từ công trình đồng
-hành và không được thiết lập lại ở đây.
+hành và không được thiết lập lại ở đây. Cũng cần nói thẳng rằng trong mô phỏng, bản ghi của
+gateway chính là nhật ký thật đã sinh ra cuộc tấn công, nên kết quả $116/116$ có một phần là
+hệ quả của cách dựng thí nghiệm chứ không chỉ của riêng cơ chế; giá trị thực của phép neo nằm
+ở chi phí biên gần bằng không và ở chỗ không tầng vật lý nào đạt được điều đó, còn một triển
+khai thật sẽ phải đối mặt với bộ điều khiển bị chiếm quyền hoặc đồng hồ bị lệch.
 \item \emph{Không áp dụng cho tưới thủ công.} Nơi một cửa cống được mở bằng tay thì không có
 bản ghi lệnh, nên neo không khả dụng. Điều này loại trừ một phần đáng kể số nông hộ ở đồng
 bằng và giới hạn quần thể mà phương án có thể phục vụ.

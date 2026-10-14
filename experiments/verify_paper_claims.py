@@ -267,6 +267,7 @@ check("escape v2 fraud_timing full tren changed=1 (3/3)", 100.0, e_chF, "%",
       f"escape(v2)/{len(tmF_ch)} tren tap changed==1 (full)", "CSV")
 print(f"    [tham khao] condition dung tren changed==1 (n={len(tmF_ch)}): {e_chF:.1f}%")
 
+DISCLOSURE_MISSING = False
 print(f"\n--- PHAN BO THEO NAM: 'across two climate years' ---")
 for lab, rows_ in (("reduced", R), ("full", Fu)):
     yr_all = defaultdict(int)
@@ -278,9 +279,27 @@ for lab, rows_ in (("reduced", R), ("full", Fu)):
     print(f"  [{lab}] tong hang theo nam : {dict(sorted(yr_all.items()))}")
     print(f"  [{lab}] TAN CONG THAT (changed=1) theo nam: {dict(sorted(yr_ch.items()))}")
     if yr_ch.get("2025", 0) == 0:
-        print(f"     !! NAM 2025 CO 0 TAN CONG THAT. Moi ket luan ve TAN CONG chi")
-        print(f"        dung cho nam 2024 (han). Bai viet 'across two climate years'")
-        print(f"        ma khong noi dieu nay -> CAN SUA.")
+        # LOI DA SUA (batch 18): canh bao cu khang dinh 'bai khong noi dieu nay ->
+        # CAN SUA' la STALE va SAI. Bai DA tiet lo o S21 muc 4 ('Cuoc tan cong chi
+        # duoc minh hoa trong nam khan nuoc' / 'The attack is demonstrated in the
+        # water-scarce year only') va o Muc 9. Khang dinh sai trong cong cu kiem tra
+        # nguy hiem hon khong khang dinh: no xui nguoi sau 'sua' mot cho von dung.
+        # Do do doi thanh KIEM TRA THAT: doc nguon phu luc tim chuoi tiet lo.
+        disclosed = False
+        for cand in [(ROOT / "paper2_hujos" / "supp_body_vi.tex"),
+                     (ROOT / "paper2_hujos" / "supplementary.tex")]:
+            if cand.exists():
+                body = cand.read_text(encoding="utf-8")
+                if "khan nước" in body or "water-scarce year only" in body:
+                    disclosed = True
+        if disclosed:
+            print(f"     i  NAM 2025 CO 0 TAN CONG THAT -> ket luan ve TAN CONG chi dung")
+            print(f"        cho nam khan nuoc. Bai DA tiet lo dieu nay (S21 muc 4, ca VI")
+            print(f"        lan EN) -> khong can sua. Chi con han che nay khi doc ket qua.")
+        else:
+            print(f"     !! NAM 2025 CO 0 TAN CONG THAT ma KHONG tim thay chuoi tiet lo")
+            print(f"        ('khan nuoc' / 'water-scarce year only') trong phu luc -> CAN SUA.")
+            DISCLOSURE_MISSING = True
 
 print(f"\n--- GAP 75mm tren nhat ky trung thuc ---")
 gaps = [abs(F(r, "gap_mm")) for r in hf if F(r, "gap_mm") == F(r, "gap_mm")]
@@ -302,3 +321,12 @@ if fails:
         print(f"      cach tinh: {how}")
 else:
     print("\nKhong co claim FAIL.")
+
+# LOI DA SUA (batch 18, Santa reviewer F3): script in 'CLAIM FAIL' roi liet ke tung
+# loi nhung KHONG bao loi qua exit code — 'sys.exit' xuat hien 0 lan trong 305 dong.
+# Moi caller doc exit code (CI, agent, vong lap gate) deu thay rc=0 va bao 'DAT' du
+# co claim sai. Day dung la lop loi fail-open da ghi trong MEMORY ('helper return 0
+# khi ImportError -> artifact bao DAT ma thieu that').
+if fails or DISCLOSURE_MISSING:
+    sys.exit(1)
+sys.exit(0)

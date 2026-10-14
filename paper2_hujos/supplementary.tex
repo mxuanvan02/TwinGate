@@ -424,7 +424,13 @@ rather than $L$.
 \item \emph{The anchor assumes an honest gateway.}
 Proposition~4 of the main text is completeness against log forgery, not against
 a compromised controller. Device integrity, key custody and replay protection
-are assumed from the companion work and are not re-established here.
+are assumed from the companion work and are not re-established here. It is also
+worth stating plainly that in simulation the gateway record is the ground-truth
+log from which the attack was derived, so the $116/116$ result is partly an
+artefact of the experimental construction rather than of the mechanism alone;
+the anchor's real value lies in its near-zero marginal cost and in the fact that
+no physical tier achieves it, whereas a real deployment must face a compromised
+controller or a drifting clock.
 \item \emph{Not applicable to manual irrigation.} Where a sluice is opened by
 hand there is no command record, so the anchor is unavailable. This excludes a
 substantial share of delta farms and bounds the addressable population of the
