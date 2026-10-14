@@ -167,9 +167,8 @@ kỹ thuật, thể chế khi mở rộng~\cite{enriquez2021} giải thích vì 
 chưa lan rộng. Không hướng nào đánh giá \emph{độ tin cậy của chính bản ghi hành động}, vốn
 là câu hỏi đặt ra ở đây.
 
-Gateway cung cấp dấu thời điểm neo theo thiết bị chính là bộ điều khiển trong bản thảo chưa công bố của cùng nhóm tác giả~\cite{twingate2026}, nơi việc phát lệnh chạy trên kênh nhiễu chùm loại Gilbert--Elliott~\cite{gilbert1960,elliott1963}.  Vì bộ điều khiển đã ký mọi lệnh nó phát ra, neo chỉ thêm việc
-lưu trữ và truyền đi một bản ghi vốn đã tồn tại --- điều đó giữ chi phí biên của việc chứng
-thực gần bằng không.
+Gateway cung cấp dấu thời điểm neo theo thiết bị chính là bộ điều khiển trong bản thảo chưa công bố của cùng nhóm tác giả~\cite{twingate2026}, nơi việc phát lệnh chạy trên kênh nhiễu chùm loại Gilbert--Elliott~\cite{gilbert1960,elliott1963};
+chi phí biên của việc chứng thực do Mục~\ref{sec:anchor} của bài chính phân tích.
 
 % ---------------------------------------------------------------- S9
 \section*{S9. Bàn luận mở rộng}
@@ -198,15 +197,10 @@ thiết bị~\cite{delacruz2022}. Bản ghi lệnh có chữ ký cũng xác nh�
 được định nghĩa bằng những khoảng giữa hai lần đóng mở mà bộ điều khiển vốn đã đóng dấu
 thời điểm --- và không cần thêm thiết bị, vì chính bộ điều khiển đã mở máy bơm.
 
-Hai điểm cần thận trọng kèm theo phép so sánh đó. Cột xác nhận đo khả năng \emph{kiếm} tín
-chỉ chứ không đo khả năng phát hiện gian lận: ống đo và bản ghi lệnh hòa nhau ở $100\%$ tại
-đây nhưng khác hẳn nhau về chi phí và về những gì chúng chứng minh được với một nhật ký đã
-bị sửa. Phương án chụp ảnh cộng tự khai báo đạt $0\%$ không phải vì vô giá trị mà vì không
-sinh ra chuỗi quan sát nào để đối chiếu; mọi xác nhận theo nó đều phải đến từ một chuyến đi
-thực địa.
-
-Vì vậy radar giữ đúng vai trò mà VM0051 Phụ lục 4 giao cho nó: một phép kiểm chéo theo
-từng thửa làm giảm tần suất xác minh thực địa~\cite{vm0051}.
+Điều bài chính chưa nói là hệ quả vận hành của hai con số đó. Phương án chụp ảnh cộng tự
+khai báo không vô giá trị, nhưng vì nó không sinh ra chuỗi quan sát nào để đối chiếu nên
+mọi xác nhận theo nó đều phải đến từ một chuyến đi thực địa: chi phí của nó nằm ở nhân công
+chứ không nằm ở thiết bị, và đó là chỗ mà bản ghi lệnh có chữ ký thắng được.
 
 % ---------------------------------------------------------------- S10
 \section*{S10. Các lỗi của bộ khung thử nghiệm và chi tiết thiết kế}

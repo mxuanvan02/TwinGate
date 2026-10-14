@@ -43,7 +43,7 @@
 \@namedef{r@eq:three}{{7}{S1}}
 \@namedef{r@prop:blind}{{1}{S1}}
 \@namedef{r@sec:filters}{{4}{S1}}
-\@namedef{r@sec:anchor}{{8}{S1}}
+\@namedef{r@sec:anchor}{{7}{S1}}
 \@namedef{r@prop:complete}{{4}{S1}}
 \@namedef{r@eq:v4}{{12}{S1}}
 \@namedef{r@eq:v5}{{13}{S1}}
@@ -152,11 +152,8 @@ instrumented monitoring has not spread. None of these lines evaluates the
 
 The gateway supplying the device-anchored timestamp is the controller of the
 companion work~\cite{twingate2026}, whose command dispatch runs over a
-burst-noise channel of the Gilbert--Elliott type~\cite{gilbert1960,elliott1963}.
- Because that controller
-already signs every command it issues, the anchor adds storage and transmission
-of a record that exists regardless --- which is what keeps the marginal cost of
-attestation near zero.
+burst-noise channel of the Gilbert--Elliott type~\cite{gilbert1960,elliott1963};
+the marginal cost of attestation is analysed in Sec.~\ref{sec:anchor} of the main text.
 
 % ---------------------------------------------------------------- S9
 \section*{S9. Extended discussion}
@@ -174,7 +171,7 @@ any farmer. The vulnerability is structural, not a consequence of disclosure.
 \subsection*{S9.2 Full survey of remote sensing}
 
 Satellite radar is the obvious low-cost alternative, so rather than argue about it
-we measured it. Table~5 of the main text scores every route by one quantity: how
+we measured it. Table~4 of the main text scores every route by one quantity: how
 many of the $150$ credit-eligible dry phases actually present across the $60$
 simulated fields it could confirm. A phase counts as confirmable only if at least
 one observation falls inside it, because a $72$\,h phase lying wholly between two
@@ -187,14 +184,11 @@ confirms all $150$, at one device per plot~\cite{delacruz2022}. The signed comma
 record also confirms all $150$ --- because the phases are defined by the intervals
 between actuations, which the controller already timestamps --- at no additional
 device, since the controller is the one that opened the pump.
-Two cautions belong with that comparison. The confirmation column measures the
-ability to \emph{earn} a credit, not to detect fraud: the tube and the command
-record tie at $100\%$ here and differ entirely in cost and in what they can prove
-about a doctored log. And photograph-plus-self-report scores $0\%$ not because it
-is worthless but because it produces no observation series to reconcile against;
-every confirmation under it must come from a field visit.
-Radar therefore keeps the role VM0051 Appendix 4 assigns it: a per-plot cross-check
-that lowers the frequency of field verification~\cite{vm0051}.
+What the main text does not state is the operational consequence of those two
+figures. Photograph-plus-self-report is not worthless, but because it produces no
+observation series to reconcile against, every confirmation under it must come
+from a field visit: its cost sits in labour rather than in devices, and that is
+where the signed command record wins.
 
 % ---------------------------------------------------------------- S10
 \section*{S10. Harness defects and design details}
@@ -308,7 +302,7 @@ to manipulate (three or more), and those trajectories are already drier than
 average: their honest baseline carries $4.87$ creditable dry phases against
 $3.23$ for all honest logs. An unpaired comparison against the broader baseline
 therefore attributes the pre-existing dryness to the attack and overstates the
-inflation roughly twofold. Every figure in Table~4 of the main text is computed
+inflation roughly twofold. Every figure in Table~2 of the main text is computed
 on the paired subset (same station, year, seed and soil), conditioned on the
 \texttt{changed} flag.
 
