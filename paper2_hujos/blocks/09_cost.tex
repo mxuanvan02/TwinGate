@@ -1,4 +1,7 @@
-\section{Cost Model and Break-Even}
+% S5: chi duoc \input boi paper2_hujos/supplementary.tex (kiem tra 2026-10-09).
+% Doi \section -> \section*{S5. ...} de khop nhan "Bang S5" ma than bai trich
+% dan (peer review F5). \label{sec:cost} GIU LAI vi paper2/main.tex van \ref no.
+\section*{S5. Cost Model and Break-Even}
 \label{sec:cost}
 
 Let a cooperative serve $A$ hectares with $N$ cropping seasons of device life,
@@ -52,9 +55,14 @@ replaces. With
 $\kappa\in[4,6]$ and $\rho\in[\$15,\$25]$~\cite{rmi2025rice,upstream2026price},
 revenue is $R\in[\$60,\$150]$ per hectare per season, so
 $\kappa_{\min}$ at $\beta=0.5$ corresponds to a monitoring budget of
-$\$30$--$75$ per hectare. The full stack sits an order of magnitude below that
-ceiling, and the incremental cost of the anchor over a controller that is already
-installed is about $1\%$ of conservative revenue. Table~\ref{tab:baseline}
+$\$30$--$75$ per hectare. The full stack costs $8.4$ per hectare per season against that $30$--$75$
+budget, i.e.\ $3.6$ to $8.9$ times below the ceiling; the margin is therefore
+stated as a range, not as an order of magnitude. It is also not the cheapest row
+of Table~\ref{tab:baseline}: remote sensing with field verification costs $8.0$,
+or $0.4$ less. The two answer different questions --- the cheaper route confirms
+that a dry phase occurred but holds no per-command record against which a forged
+log could be reconciled --- and the incremental cost of the anchor over an
+already-installed controller is about $1\%$ of conservative revenue. Table~\ref{tab:baseline}
 decomposes the comparison against the three architectures it replaces; the
 connectivity term is shown separately because it is the one that distinguishes a
 sensor-per-plot design from a single shared gateway.

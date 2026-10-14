@@ -110,7 +110,7 @@ Dấu mũ trên ký hiệu đánh dấu những đại lượng được tái d�
 đo được. Đây là điểm then chốt của toàn bài: quỹ đạo phát lại là thứ
 \emph{nông dân tự khai}, không phải thứ đồng ruộng tạo ra. Việc phát lại là tất
 định và chỉ dùng dữ liệu tái phân tích công khai, nên hai kiểm toán viên phát lại
-cùng một nhật ký sẽ thu được cùng một quỹ đạo và phán quyết có thể tái lập. Dấu mũ trừ, như trong $\hat w_{t}^{-}$, chỉ trạng thái ngay \emph{trước} khi áp
+cùng một nhật ký sẽ thu được cùng một quỹ đạo và phán quyết có thể tái lập. Hình~\ref{fig:method} tóm tắt đường đi đó, từ nhật ký nông dân qua bản sao số đến phán quyết của từng tầng phòng thủ. Dấu mũ trừ, như trong $\hat w_{t}^{-}$, chỉ trạng thái ngay \emph{trước} khi áp
 dụng khai báo của giờ đó, tức lượng nước sẵn có để tiếp nhận một lần tưới. Đây
 mới là đại lượng mà bộ lọc phải xem xét.
 
@@ -119,3 +119,10 @@ bị truy vấn và đầu vào duy nhất là nhật ký, chuỗi thời tiết
 sơ đất. Điểm yếu của nó được trình bày ở Mục~\ref{sec:timeshift}, đó là nó chỉ
 kiểm tra được một quỹ đạo có \emph{khả dĩ} hay không chứ không bao giờ biết được
 quỹ đạo đó có thật sự xảy ra hay không.
+
+
+\begin{figure}[!t]
+\centering
+\includegraphics[height=6.9cm]{figures_vi/fig1_method_vi.png}
+\caption{Đường đi của dữ liệu trong phương pháp. Lớp kiểm toán vật lý phát lại nhật ký khai báo qua bản sao số cân bằng nước rồi đi qua ba bộ lọc; lớp neo thiết bị đối chiếu cùng nhật ký đó với bản ghi lệnh có chữ ký của gateway. Mũi tên đứt cho thấy tấn công dịch thời điểm đi qua lớp vật lý mà không bị phát hiện.}\label{fig:method}
+\end{figure}

@@ -12,8 +12,13 @@ command record
 \mathcal{G}=\{(t_j,u_j,\sigma_j)\},
 \label{eq:gateway}
 \end{equation}
-where $\sigma_j$ is a signature over $(t_j,u_j)$ produced by the controller at
-actuation time. The anchor test compares the claimed log against it:
+where:
+\begin{symbolist}
+\item[$\mathcal{G}$] the gateway's command record, covering every pump actuation in the season;
+\item[$t_j$] the hour at which the controller switched the pump for command $j$;
+\item[$u_j$] the water depth the controller delivered for that command, in mm;
+\item[$\sigma_j$] a digital signature over the pair $(t_j,u_j)$, produced by the controller at actuation time.
+\end{symbolist} The anchor test compares the claimed log against it:
 \begin{equation}
 \begin{aligned}
 \Delta_{\mathrm{time}}&=\{t_i\}\triangle\{t_j\},\\
@@ -21,8 +26,16 @@ actuation time. The anchor test compares the claimed log against it:
 \end{aligned}
 \label{eq:deltas}
 \end{equation}
-where $\triangle$ is the symmetric difference and $\Delta_{\mathrm{depth}}$ is
-taken over hours common to both records. The verdict is then
+where:
+\begin{symbolist}
+\item[$\Delta_{\mathrm{time}}$] the set of hours present in one record but absent from the other;
+\item[$\triangle$] the symmetric difference of the two hour sets, returning elements belonging to only one of them;
+\item[$u(t)$] the depth claimed at hour $t$ in log $L$;
+\item[$u_{\mathcal{G}}(t)$] the depth the gateway recorded at the same hour $t$;
+\item[$\Delta_{\mathrm{depth}}$] the largest discrepancy between the two depths, taken over hours common to both records.
+\end{symbolist}
+
+The verdict is then
 \begin{equation}
 A(L,\mathcal{G})=
 \begin{cases}
@@ -32,7 +45,12 @@ A(L,\mathcal{G})=
 \end{cases}
 \label{eq:anchor}
 \end{equation}
-with $\epsilon=10^{-6}$\,mm, i.e.\ exact agreement up to floating-point noise.
+where:
+\begin{symbolist}
+\item[$A(L,\mathcal{G})$] the verdict of the anchor test on log $L$;
+\item[$\epsilon$] the depth-matching tolerance, equal to $10^{-6}$\,mm, i.e.\ exact agreement up to floating-point noise;
+\item[$\vee$] logical or, meaning that either discrepancy alone suffices to conclude forgery.
+\end{symbolist}
 Naming the two discrepancies separately matters: time-shifting alters
 $\Delta_{\mathrm{time}}$ only, depth inflation alters
 $\Delta_{\mathrm{depth}}$ only, and omission and addition alter both, so a
@@ -70,12 +88,12 @@ holds at $0/60$ while the behavioural tiers hold at $26.7\%$ and $5.0\%$
 The anchor requires the gateway of the companion work~\cite{twingate2026},
 which actuates the pump and already writes a signed, time-stamped command
 record as part of its safety function; the marginal cost of attestation is
-storage and transmission of a record that exists regardless (Supplementary
-Table~S5). The scope is
+storage and transmission of a record that exists regardless (Supplementary Table~S4). The scope is
 nonetheless narrower than the premise we started from: a hand-written log, with
 no device in the loop, is \emph{not} admissible evidence on its own, since
-Sec.~\ref{sec:results} measures a rational adversary inflating credits by
+Sec.~\ref{sec:results-attack} measures a rational adversary inflating credits by
 $+35\%$ while escaping every physics- and volume-based test ($6/6$ altered
-logs). Near-zero-cost MRV is achievable only where a controller stands between
+logs). Near-zero-\emph{marginal}-cost MRV is achievable only where a controller stands
+between
 the farmer and the pump; where irrigation is manual this layer does not
 apply.
