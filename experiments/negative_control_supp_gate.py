@@ -16,12 +16,12 @@ import hashlib, shutil, subprocess, sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-# LOI DA SUA (batch 17): gate check_supp_vi_numbers.py doc supp_body_vi.tex (than phu luc
-# dung chung) tu batch 16, con TARGET van tro supplementary_vi.tex -> tiem loi vao file
+# LOI DA SUA (batch 17): gate check_supp_vi_numbers.py doc supplementary_body.tex (than phu luc
+# dung chung) tu batch 16, con TARGET van tro supplementary_body.tex -> tiem loi vao file
 # gate KHONG doc, ca 3 case "khong tim thay chuoi de pha -> bo qua", roi ket luan sai
 # rang "gate CO VAN DE — khong duoc tin ket qua PASS". Da chung minh gate van tot bang
 # kiem chung am that trong sandbox /tmp: 3/3 case bi bat (exit=1), sha256 hoan nguyen.
-TARGET = ROOT / "paper2_hujos" / "supp_body_vi.tex"
+TARGET = ROOT / "paper2_vi_submission" / "src" / "supplementary_body.tex"
 GATE = [sys.executable, str(ROOT / "experiments" / "check_supp_vi_numbers.py")]
 
 # (chuoi that, chuoi pha, mo ta) — 3 phep thu tren 3 loai so khac nhau

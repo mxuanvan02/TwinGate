@@ -10,12 +10,9 @@ Cau hoi cu the (khong doan):
 Cach do: tim dong ngan (<=8 tu) bat dau bang so (vd "1 ", "2.1 "), roi in
 nguyen van + height chu + xMin. In nguyen van de TU MAT thay dau cham.
 """
-from pathlib import Path
 import re
 import statistics
 import subprocess
-
-REPO_ROOT = Path(__file__).resolve().parents[1]
 
 PT = 28.3465
 RE_W = re.compile(r'<word xMin="([\d.]+)" yMin="([\d.]+)" xMax="([\d.]+)" '
@@ -24,7 +21,7 @@ RE_PG = re.compile(r'<page width="([\d.]+)" height="([\d.]+)">(.*?)</page>', re.
 
 DOCS = [("/tmp/hujos_col/published_0.pdf", "XUAT BAN #1"),
         ("/tmp/hujos_col/published_1.pdf", "XUAT BAN #2"),
-        (str(REPO_ROOT / "paper2_hujos/main_hujos.pdf"), "ours")]
+        ("/media/SAS/Van/DeTai2025/TwinGate_K1/paper2_hujos/main_hujos.pdf", "BAN EM")]
 
 RE_NUM = re.compile(r"^\d+(\.\d+)*\.?\s+\S")
 

@@ -1,0 +1,33 @@
+% S4: ban TIENG VIET cua paper2/blocks/08_subsidence.tex.
+% Chi duoc \input boi paper2_hujos/supplementary_vi.tex.
+% NGUYEN TAC: giu nguyen moi con so va moi hedge; thap phan kieu Viet ({,});
+% tham chieu cheo toi bai chinh dung \eqref/\ref (so lay tu main.aux
+% boi experiments/make_supplementary_stubs.py) thay vi go tay "Eq.~(16)" — ban EN go tay
+% nen da lech so voi ban VI (eq:umax EN=16, VI=15).
+\section*{S4. Tính bất biến đối với sụt lún}
+
+Tuân thủ AWD thường được phát biểu bằng một mực nước ngầm hoặc độ sâu ngập tuyệt
+đối, ví dụ $15$\,cm dưới mặt ruộng, tức ngưỡng tưới lại của nghiệm thức Safe-AWD
+trong~\cite{balaine2019}. Ở một đồng bằng đang sụt lún, cao độ mặt ruộng $z_s(t)$ hạ
+với tốc độ $\dot z$, nên một ngưỡng tuyệt đối đo theo một mốc cố định sẽ trôi.
+
+\begin{proposition}[Độ trôi của một ngưỡng tuyệt đối]
+\label{prop:subsid}
+Trong một chu kỳ cấp tín chỉ dài $T_c$ năm, một ngưỡng tuyệt đối biểu diễn theo một
+cao độ gốc cố định sẽ dịch đi $\dot z\,T_c$. Với $\dot z\in[1{,}1;2{,}5]$~cm/năm và
+$T_c=5$~năm, độ dịch là $5{,}5$--$12{,}5$~cm, tức $37$--$83\%$ của một ngưỡng
+$15$\,cm. Một tiêu chí viết theo tỷ lệ cạn kiệt \eqref{eq:depl} có độ trôi bằng
+không, vì $FC$ và $WP$ là tính chất của đất quy về tầng rễ chứ không quy về một cao
+độ tuyệt đối.
+\end{proposition}
+
+\begin{proof}
+Tiêu chí tuyệt đối so một độ sâu đo được với một mốc không đổi; nếu mốc và mặt ruộng
+rời nhau với tốc độ $\dot z$ thì ngưỡng hữu hiệu thay đổi $\dot z T_c$ sau $T_c$ năm.
+Tiêu chí cạn kiệt so $FC-w_t$ với $(FC-WP)$, cả hai đều được định nghĩa bên trong tầng
+rễ và tịnh tiến cứng cùng mặt ruộng, nên tỷ số của chúng bất biến đối với $z_s$.
+\end{proof}
+
+Các tốc độ sụt lún là số đo cho đồng bằng này trong~\cite{minderhoud2017}. Hệ quả thực
+tiễn là một phương án neo theo tỷ lệ cạn kiệt không cần đo đạc lại các mốc ruộng trong
+suốt chu kỳ cấp tín chỉ năm năm, còn phương án dùng độ sâu tuyệt đối thì cần.

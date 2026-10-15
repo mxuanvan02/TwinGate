@@ -38,6 +38,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 HUJOS = ROOT / "paper2_hujos"
+SUBSRC = ROOT / "paper2_vi_submission" / "src"
 BS = chr(92)
 
 # Dai do dai quan sat duoc o 33 tieu de VI khong dau hai cham cua tap chi
@@ -64,8 +65,8 @@ PROPER = {"ERA5", "FAO-56", "VM0051", "IoT", "5G", "NSSI", "iRS-TREE", "ONTOLOGY
 
 
 def read_vi_title() -> str:
-    """Doc tieu de VI tu \\hujostitle{} dau tien cua main_hujos_vi.tex."""
-    p = HUJOS / "main_hujos_vi.tex"
+    """Doc tieu de VI tu \\hujostitle{} dau tien cua src/main.tex."""
+    p = SUBSRC / "main.tex"
     if not p.exists():
         raise SystemExit(f"thieu {p}")
     src = p.read_text(encoding="utf-8")

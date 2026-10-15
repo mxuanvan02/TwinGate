@@ -20,10 +20,8 @@ from pathlib import Path
 
 import fitz
 
-REPO_ROOT = Path(__file__).resolve().parents[1]
-
 PDF = sys.argv[1] if len(sys.argv) > 1 else (
-    str(REPO_ROOT / "paper2_hujos/main_hujos.pdf"))
+    "/media/SAS/Van/DeTai2025/TwinGate_K1/paper2_hujos/main_hujos.pdf")
 PT = 28.3465
 LEFT, RIGHT = 2.00, 17.00
 TOP, BOTTOM = 2.00, 25.00

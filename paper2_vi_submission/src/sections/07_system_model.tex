@@ -1,0 +1,128 @@
+% BAN TIENG VIET cua 07_system_model.tex — viet lai 2026-10-12 theo academic-prose.
+% Moi con so, cite, label, ref, equation giu NGUYEN so voi ban truoc.
+% Thuat ngu theo glossary.tex. KHONG them/bot claim.
+\section{Mô hình hệ thống}
+\label{sec:model}
+
+\subsection{Cân bằng nước của ruộng}
+
+Bài này dùng lại nguyên trạng mô hình cân bằng nước tầng rễ đã chuẩn hoá trong
+FAO-56 chương 8~\cite{fao56}, để mọi kiểm toán viên có cùng một điểm khởi đầu.
+Lượng nước trong tầng rễ $w_t$ biến đổi theo giờ theo phương trình thùng chứa:
+\begin{equation}
+w_{t+1}=\mathrm{clip}_{\le FC}\!\left(w_t+P_t-RO_t-ET_{c,t}+u_t\right),
+\label{eq:bucket}
+\end{equation}
+Nghĩa là nước vào trừ nước ra, và phần vượt sức chứa bị cắt bỏ. Trong đó:
+\begin{symbolist}
+\item[$w_t$] lượng nước trong tầng rễ tại giờ $t$, tính bằng mm;
+\item[$P_t$] lượng mưa rơi xuống trong giờ $t$, tính bằng mm;
+\item[$RO_t$] dòng chảy mặt tràn khỏi ruộng trong giờ $t$, tính bằng mm, suy ra từ phương pháp đường cong số của Cơ quan Bảo tồn Đất Hoa Kỳ (SCS-CN) công bố năm 1972, tính theo ngày rồi chia đều
+  cho các giờ của một trận mưa;
+\item[$ET_{c,t}$] lượng nước cây trồng bốc thoát trong giờ $t$, tính bằng mm;
+\item[$u_t$] độ sâu nước tưới áp dụng trong giờ $t$, tính bằng mm, là đại lượng
+  duy nhất do nhật ký của nông dân cung cấp;
+\item[$FC$] sức chứa ẩm đồng ruộng, tức lượng nước lớn nhất mà đất còn giữ được
+  sau khi đã thoát nước tự do, tính bằng mm;
+\item[$\mathrm{clip}_{\le FC}$] toán tử cắt bỏ, giữ nguyên giá trị khi nhỏ hơn
+  hoặc bằng $FC$ và đặt bằng $FC$ khi lớn hơn.
+\end{symbolist}
+
+Đại lượng $ET_{c,t}$ không đo được nên phải tính tiếp từ bốc thoát hơi nước tham
+chiếu, theo đúng cặp phương trình 83 và 84 của FAO-56:
+\begin{equation}
+ET_{c,t}=K_{s,t}\,K_c\,ET_{0,t},
+\qquad
+K_{s,t}=\frac{FC-w_t}{(1-p)\,\mathrm{TAW}},
+\label{eq:etc}
+\end{equation}
+trong đó:
+\begin{symbolist}
+\item[$ET_{0,t}$] bốc thoát hơi nước tham chiếu theo giờ, tính bằng công thức
+  Penman-Monteith dạng theo giờ, tức phương trình 53 của FAO-56, từ số liệu khí
+  tượng công khai;
+\item[$K_c$] hệ số cây trồng, đặc trưng cho mức dùng nước của lúa so với cỏ tham
+  chiếu;
+\item[$K_{s,t}$] hệ số ứng suất nước, giảm dần từ 1 về 0 khi ruộng khô đi, tính
+  theo phương trình 84 của FAO-56;
+\item[$p$] phần nước sẵn có mà cây còn dùng được trước khi bắt đầu bị stress,
+  lấy theo FAO-56;
+\item[$\mathrm{TAW}$] tổng lượng nước sẵn có trong tầng rễ, tính bằng
+  $FC-WP$ theo phương trình 82 của FAO-56.
+\end{symbolist} Phần nước vượt quá $FC$ được coi là chảy tràn hoặc thấm sâu và bị loại khỏi cân
+bằng, nên mô hình bảo toàn khối lượng tuyệt đối; chúng tôi kiểm tra điều đó như
+một bất biến trong mã nguồn.
+
+Đại lượng quyết định một pha khô là mức cạn kiệt tương đối của tầng rễ, chuẩn hoá
+về đoạn từ 0 đến 1:
+\begin{equation}
+d_t=\frac{FC-w_t}{FC-WP},\qquad \mathrm{span}=FC-WP,
+\label{eq:depl}
+\end{equation}
+trong đó:
+\begin{symbolist}
+\item[$d_t$] độ cạn kiệt của tầng rễ tại giờ $t$, là phân số không thứ nguyên,
+  bằng 0 khi đất ở sức chứa ẩm đồng ruộng và bằng 1 khi đất chạm điểm héo;
+\item[$WP$] điểm héo, tức độ ẩm mà dưới mức đó cây không hút được nước nữa,
+  tính bằng mm;
+\item[$\mathrm{span}$] biên độ của thang cạn kiệt, bằng $FC-WP$, dùng để đổi
+  từ phân số $d_t$ sang lượng nước tính bằng mm.
+\end{symbolist}
+
+Đối với loại đất thịt pha sét limon tham chiếu của đồng bằng, các giá trị
+$\mathrm{TAW}=FC-WP=70$~mm, $FC=160$~mm, $WP=90$~mm được lấy theo dải giữa của
+Bảng~12 trong FAO-56 cho tầng rễ $0{,}5$~m~\cite{fao56}. Ba phương trình trên là
+toàn bộ cơ sở vật lý mà lớp kiểm toán dùng; không có tham số nào do chúng tôi tự
+đặt ra.
+
+\subsection{Phát lại một nhật ký khai báo}
+\label{sec:replay}
+
+Giả sử một nhật ký khai báo cung cấp số hạng tưới của \eqref{eq:bucket}.
+\emph{Toán tử phát lại} $\mathcal{R}$ ánh xạ một nhật ký sang quỹ đạo mà nó hàm ý.
+Cách làm là thay các độ sâu nông dân đã ghi vào vị trí $u_t$ của
+\eqref{eq:bucket}, rồi lặp phương trình đó qua từng giờ dưới dữ liệu khí tượng
+quan trắc $(P_t,ET_{0,t})$:
+\begin{equation}
+\mathcal{R}(L)=\{(\hat w_t,\hat d_t)\}_{t=0}^{T},
+\label{eq:replay}
+\end{equation}
+với $\hat w_0=w_{\mathrm{init}}$ và
+\begin{equation}
+u_t=\sum_{(t_i,u_i)\in L}u_i\,\mathbb{1}[t_i=t],
+\label{eq:uterm}
+\end{equation}
+trong đó:
+\begin{symbolist}
+\item[$L$] nhật ký khai báo, là danh sách các cặp giờ và độ sâu tưới mà nông dân
+  đã ghi;
+\item[$T$] tổng số giờ của cửa sổ mô phỏng;
+\item[$\hat w_t$] lượng nước tầng rễ suy ra từ nhật ký, tức lượng nước mà nhật
+  ký \emph{khai} rằng ruộng đã có tại giờ $t$;
+\item[$\hat d_t$] độ cạn kiệt tương ứng, tính từ $\hat w_t$ theo
+  \eqref{eq:depl};
+\item[$\hat w_0=w_{\mathrm{init}}$] điều kiện đầu, là trạng thái ẩm của ruộng
+  trước lần tưới đầu tiên;
+\item[$\mathbb{1}\lbrack\cdot\rbrack$] hàm chỉ báo, nhận giá trị 1 khi điều kiện trong ngoặc đúng và 0 khi sai.
+\end{symbolist}
+
+Dấu mũ trên ký hiệu đánh dấu những đại lượng được tái dựng từ nhật ký chứ không
+đo được. Đây là điểm then chốt của toàn bài: quỹ đạo phát lại là thứ
+\emph{nông dân tự khai}, không phải thứ đồng ruộng tạo ra. Việc phát lại là tất
+định và chỉ dùng dữ liệu tái phân tích công khai, nên hai kiểm toán viên phát lại
+cùng một nhật ký sẽ thu được cùng một quỹ đạo và phán quyết có thể tái lập. Hình~\ref{fig:method} tóm tắt đường đi đó, từ nhật ký nông dân qua bản sao số đến phán quyết của từng tầng phòng thủ. Dấu mũ trừ, như trong $\hat w_{t}^{-}$, chỉ trạng thái ngay \emph{trước} khi áp
+dụng khai báo của giờ đó, tức lượng nước sẵn có để tiếp nhận một lần tưới. Đây
+mới là đại lượng mà bộ lọc phải xem xét.
+
+Toán tử này cũng chính là lý do phương án trở nên rẻ, vì không cảm biến nào
+bị truy vấn và đầu vào duy nhất là nhật ký, chuỗi thời tiết công khai cùng một hồ
+sơ đất. Điểm yếu của nó được trình bày ở Mục~\ref{sec:timeshift}, đó là nó chỉ
+kiểm tra được một quỹ đạo có \emph{khả dĩ} hay không chứ không bao giờ biết được
+quỹ đạo đó có thật sự xảy ra hay không.
+
+
+\begin{figure}[!t]
+\centering
+\includegraphics[height=6.9cm]{figures/fig1_method.png}
+\caption{Đường đi của dữ liệu trong phương pháp. Lớp kiểm toán vật lý phát lại nhật ký khai báo qua bản sao số cân bằng nước rồi đi qua ba bộ lọc; lớp neo thiết bị đối chiếu cùng nhật ký đó với bản ghi lệnh có chữ ký của gateway. Mũi tên đứt cho thấy tấn công dịch thời điểm đi qua lớp vật lý mà không bị phát hiện.}\label{fig:method}
+\end{figure}

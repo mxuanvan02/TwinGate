@@ -2,7 +2,7 @@
 """GATE: doi chieu MOI CON SO trong van xoi tieng Viet voi ban tieng Anh.
 
 VI SAO CAN (2026-10-08):
-  * Bang so: da an toan — tables_vi/ sinh TU DONG tu tables/ bang
+  * Bang so: da an toan — tables/ sinh TU DONG tu tables/ bang
     make_tables_hujos_vi.py, co assert tap chu so trung nhau.
   * Van xoi: nguoi dich (em) GO TAY. Da tung xuat hien loi that o chinh bai nay:
     "+69% -> +33%", "91% -> 89%", "75mm -> 65mm" (commit 4455a4b). Neu ban dich
@@ -34,7 +34,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 EN_DIR = ROOT / "paper2" / "blocks"
-VI_DIR = ROOT / "paper2_hujos" / "blocks_vi"
+VI_DIR = ROOT / "paper2_vi_submission" / "src" / "sections"
 
 # Cac file than bai (khong tinh 00_title_abstract vi la FILE CHET, khong duoc input)
 FILES = ["01_intro", "07_system_model", "02_threat_attack", "03_guarantee",

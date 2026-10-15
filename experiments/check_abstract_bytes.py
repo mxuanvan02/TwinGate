@@ -15,15 +15,14 @@ File nay gan BS = chr(92) o cap module roi moi dua vao f-string.
 """
 from pathlib import Path
 
-REPO_ROOT = Path(__file__).resolve().parents[1]
-
 BS = chr(92)          # mot dau backslash
 DBL = BS + BS         # hai dau backslash
 NL = chr(10)
 
-D = REPO_ROOT / "paper2_hujos"
+ROOT = Path(__file__).resolve().parent.parent
+D = ROOT / "paper2_hujos"
 TARGETS = [("main_hujos.tex", "shifts commands in time"),
-           ("blocks_vi.tex", "thổi phồng số pha khô")]
+           ("abstract_vi.tex", "thổi phồng số pha khô")]
 
 print("=== KIEM TRA BYTE THAT cua doan vua va ===")
 for name, anchor in TARGETS:
@@ -48,7 +47,7 @@ for name, anchor in TARGETS:
           f"   -> can >=1 cho moi '$33" + BS + "%$'")
     # so sanh voi ban IEEE (khong bi va bang raw string) lam doi chung
 print(f"{NL}=== DOI CHUNG: doan tuong ung trong ban IEEE (khong bi va) ===")
-ieee = REPO_ROOT / "paper2/main.tex"
+ieee = Path("/media/SAS/Van/DeTai2025/TwinGate_K1/paper2/main.tex")
 if ieee.exists():
     t = ieee.read_text(encoding="utf-8", errors="replace")
     j = t.find("shifts commands in time")

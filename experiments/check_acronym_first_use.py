@@ -48,6 +48,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 HUJOS = ROOT / "paper2_hujos"
+SUBSRC = ROOT / "paper2_vi_submission" / "src"
 
 BS = chr(92)
 
@@ -57,7 +58,7 @@ BS = chr(92)
 # ---------------------------------------------------------------------------
 CHAINS = {
     "EN": HUJOS / "main_hujos.tex",
-    "VI": HUJOS / "main_hujos_vi.tex",
+    "VI": SUBSRC / "main.tex",
 }
 
 
@@ -79,7 +80,7 @@ EXEMPT = {
     "VM0051": "ma phuong phap luan cua Verra",
     "SCS": "ten co quan (Soil Conservation Service) - da khai trien trong bai",
     # --- thiet bi / dinh dang ---
-    "IoT": "thuat ngu pho bien, giu nguyen theo glossary_vi.tex",
+    "IoT": "thuat ngu pho bien, giu nguyen theo glossary.tex",
     "PVC": "ten vat lieu ong do muc nuoc",
     "PDF": "dinh dang file",
     "CSV": "dinh dang file",

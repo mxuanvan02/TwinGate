@@ -35,8 +35,13 @@ from matplotlib.patches import FancyArrowPatch, FancyBboxPatch
 
 ROOT = Path("/media/SAS/Van/DeTai2025/TwinGate_K1")
 OUT = ROOT / "outputs"
-FIGD = ROOT / "paper2_hujos" / "figures_vi"
-FIGD.mkdir(parents=True, exist_ok=True)
+# Layout moi (migration v4, 2026-10-15):
+#   VI: paper2_vi_submission/src/figures/fig1_method.png  (khong con _vi)
+#   EN: paper2_hujos/figures_en/fig1_method_en.png         (giu _en)
+FIGD_VI = ROOT / "paper2_vi_submission" / "src" / "figures"
+FIGD_EN = ROOT / "paper2_hujos" / "figures_en"
+FIGD_VI.mkdir(parents=True, exist_ok=True)
+FIGD_EN.mkdir(parents=True, exist_ok=True)
 
 plt.rcParams.update({
     "font.family": "DejaVu Sans", "font.size": 5.4,
@@ -244,7 +249,11 @@ L = {
 }
 
 for lang in ["vi", "en"]:
-    S = L[lang]; sfx = "_vi" if lang == "vi" else "_en"
+    S = L[lang]
+    if lang == "vi":
+        figd, sfx = FIGD_VI, ""
+    else:
+        figd, sfx = FIGD_EN, "_en"
     D = lambda v, n: fmt(v, n, lang)
     # ---- HINH 1 ----
     BOXES.clear()
@@ -275,7 +284,7 @@ for lang in ["vi", "en"]:
     ax.text(0.5, 0.975, S["title"], ha="center", va="top", fontsize=5.8, fontweight="bold")
     ax.text(0.5, 0.020, S["foot"], ha="center", va="bottom", fontsize=5.3, color="#333333")
     no_overflow(ax, fig, f"fig1{sfx}")
-    p1 = FIGD / f"fig1_method{sfx}.png"; fig.savefig(p1); plt.close(fig)
+    p1 = figd / f"fig1_method{sfx}.png"; fig.savefig(p1); plt.close(fig)
     size_ok(p1, f"fig1{sfx}")
 
     # ---- HINH 2 ----
@@ -316,7 +325,7 @@ for lang in ["vi", "en"]:
     ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.14), ncol=2, fontsize=5.0)
     ax.grid(axis="y", lw=0.3, color="#DDDDDD"); ax.set_axisbelow(True)
     for sp in ["top", "right"]: ax.spines[sp].set_visible(False)
-    p2 = FIGD / f"fig2_tradeoff{sfx}.png"; fig.savefig(p2); plt.close(fig)
+    p2 = figd / f"fig2_tradeoff{sfx}.png"; fig.savefig(p2); plt.close(fig)
     size_ok(p2, f"fig2{sfx}")
 
     # ---- HINH 3 ----
@@ -342,10 +351,10 @@ for lang in ["vi", "en"]:
                       lw=0.4, alpha=0.92))
     ax.grid(axis="y", lw=0.3, color="#DDDDDD"); ax.set_axisbelow(True)
     for sp in ["top", "right"]: ax.spines[sp].set_visible(False)
-    p3 = FIGD / f"fig3_timeshift{sfx}.png"; fig.savefig(p3); plt.close(fig)
+    p3 = figd / f"fig3_timeshift{sfx}.png"; fig.savefig(p3); plt.close(fig)
     size_ok(p3, f"fig3{sfx}")
     print()
 
 print("=== TONG KET 6 HINH ===")
-for f in sorted(FIGD.glob("*.png")):
+for f in sorted(FIGD_VI.glob("*.png")) + sorted(FIGD_EN.glob("*.png")):
     print(f"  {f.name:28s} {f.stat().st_size//1024} KB")

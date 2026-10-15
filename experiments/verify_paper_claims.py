@@ -286,7 +286,7 @@ for lab, rows_ in (("reduced", R), ("full", Fu)):
         # nguy hiem hon khong khang dinh: no xui nguoi sau 'sua' mot cho von dung.
         # Do do doi thanh KIEM TRA THAT: doc nguon phu luc tim chuoi tiet lo.
         disclosed = False
-        for cand in [(ROOT / "paper2_hujos" / "supp_body_vi.tex"),
+        for cand in [(ROOT / "paper2_vi_submission" / "src" / "supplementary_body.tex"),
                      (ROOT / "paper2_hujos" / "supplementary.tex")]:
             if cand.exists():
                 body = cand.read_text(encoding="utf-8")

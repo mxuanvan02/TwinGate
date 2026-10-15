@@ -79,7 +79,7 @@ for n, k in big:
 print(f"  {len(const_values)} hang so cau hinh trong src/ + experiments/")
 
 # ---------------------------------------------------------------- 2) so trong bai
-tex_files = [H / "main_hujos.tex", H / "blocks_vi.tex"] + sorted(BLOCKS.glob("*.tex"))
+tex_files = [H / "main_hujos.tex", H / "abstract_vi.tex"] + sorted(BLOCKS.glob("*.tex"))
 paper = ""
 for f in tex_files:
     if f.exists():

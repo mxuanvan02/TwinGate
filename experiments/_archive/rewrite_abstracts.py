@@ -29,13 +29,11 @@ import re
 import unicodedata
 from pathlib import Path
 
-REPO_ROOT = Path(__file__).resolve().parents[1]
-
 BS = chr(92)
 NL = chr(10)
 LIMIT = 245            # bien an toan duoi tran 250
 
-D = REPO_ROOT
+D = Path("/media/SAS/Van/DeTai2025/TwinGate_K1")
 H = D / "paper2_hujos"
 B = D / "paper2" / "blocks"
 

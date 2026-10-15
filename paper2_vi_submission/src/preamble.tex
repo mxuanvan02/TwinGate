@@ -1,0 +1,360 @@
+% !TeX program = xelatex
+% =====================================================================
+% HUJOS-TT (Hue University Journal of Science: Techniques and Technology)
+% =====================================================================
+% Moi thong so lay TU QUY DINH THAT cua tap chi (khong doan):
+%   * https://jos.hueuni.edu.vn/index.php/hujos-tt/about/submissions
+%       - toi da 12 trang, kho 19 cm x 27 cm
+%       - font Palatino Linotype, 10 pt
+%       - le 2 cm ca bon ben
+%       - gian dong 1.15; 6 pt truoc va 3 pt sau moi doan
+%       - cong thuc danh so ben phai, goi bang "Eq. (1)"
+%       - caption BANG o TREN, caption HINH o DUOI, so bang/hinh IN DAM
+%       - co khoang trong giua gia tri so va don vi (tru do/phut/giay)
+%       - tai lieu tham khao kieu Vancouver (ngoac vuong) tu 2026
+%       - abstract + tu khoa ca TIENG VIET va TIENG ANH, <= 250 tu
+%       - tu khoa 3-5 cum, phai xuat hien trong abstract
+%       - cuoi bai: ho ten, hoc ham, hoc vi, co quan, dia chi, dien thoai,
+%         email, nguoi huong dan (neu co), chu ky tac gia, chi ro
+%         corresponding author
+%   * Template DOCX /tmp/hujos_tpl.docx — LUU Y: day la template cua HUJOS
+%     KHOA HOC TU NHIEN (Natural Science), KHONG phai cua HUJOS-TT. No ghi
+%     pgSz 20.5x29.7cm va HAI cot. Da tung bi dung nham lam chuan hinh hoc.
+%     do tu word/document.xml va word/styles.xml:
+%       - pgSz 11624 x 16840 twips = 20.5 x 29.7 cm, le tren/duoi 1.5 cm,
+%         trai/phai 2 cm, HAI cot, columnsep 425 twips = 0.75 cm
+%       - title 28 half-pt = 14 pt bold; tac gia 20 = 10 pt bold;
+%         co quan 18 = 9 pt regular; abstract/tu khoa 18 = 9 pt
+%       - Heading1 24 = 12 pt, before 360 twips = 18 pt, after 240 = 12 pt
+%       - Heading2 before 18 pt, after 8 pt
+%       - body spacing line 276 = 1.15, before 120 = 6 pt, after 60 = 3 pt
+%       - font nhung trong template: PalatinoLinotype-{regular,bold,italic,
+%         boldItalic}.ttf va Cardo
+%     => Template NS khac HUJOS-TT ve kho giay, le VA SO COT. Bai nay nop
+%        HUJOS-TT nen theo: 19x27 cm, le 2 cm deu, MOT cot — da xac nhan
+%        bang 2 bai HUJOS-TT da xuat ban (xem comment o phan geometry).
+%        KHONG duoc giu 2 cot: quy dinh van ban khong noi ve so cot, va
+%        bai da xuat ban cua chinh tap chi nay deu 1 cot.
+%   * Kiem tra font: Palatino Linotype that (trich tu template) co 16/16
+%     glyph tieng Viet theo cmap. `fc-list :lang=vi` bao KHONG ho tro tieng
+%     Viet la SAI -- fontconfig doan theo bang lang chu khong doc cmap.
+%     Dung TeX Gyre Pagella (clone Palatino, metric-compatible) de an toan
+%     ban quyen font, da test compile tieng Viet 0 missing character.
+% =====================================================================
+
+\documentclass[10pt,twoside]{article}
+
+% ---- CONG TAC NGON NGU (them 2026-10-08 cho ban tieng Viet main.tex) ----
+% Ban tieng Viet dinh nghia \HUJOSVI TRUOC khi \input{preamble}. Ban tieng Anh
+% khong dinh nghia gi => \ifhujosvi = false => MOI thu giong het truoc khi sua
+% (da kiem chung: main_hujos.pdf van 14 trang, 0 undefined, 0 overfull).
+% Ly do dung macro \HUJOSVI thay vi babel/polyglossia: tieng Viet trong TeX Live
+% chi co `zerohyph.tex` (khong co mau ngat am), nen nap polyglossia chi them
+% rui ro xung dot voi unicode-math ma khong duoc loi ich nao. Tu tieng Viet ngan
+% va tach bang dau cach nen diem ngat dong rat day du.
+\newif\ifhujosvi
+\ifdefined\HUJOSVI\hujosvitrue\fi
+
+% ---- hinh hoc ----
+% DA XAC MINH BANG BAI DA XUAT BAN THAT, khong con dua vao template nao.
+%
+% LOI DA MAC (ghi lai de khong tai pham): ban dau lay hinh hoc tu
+% /tmp/hujos_tpl.docx = A4 20.5x29.7cm, le 1.5cm tren/duoi, HAI cot, columnsep
+% 425 twips. File do CO that va cac con so do DUNG (425 twips nam trong the con
+% <w:col w:space="425" w:w="4465.5">, khong phai trong <w:cols/>). Nhung HEADER
+% BEN TRONG cua no ghi "Hue University Journal of Science: Natural Science
+% Vol. 129, No. 1B" — do la template cua HUJOS KHOA HOC TU NHIEN, mot tap chi
+% KHAC trong cung he thong. Bai nay nop HUJOS-TT (Ky thuat & Cong nghe).
+% Hau qua: dung layout cua tap chi khac, vung chu 16.74cm thay vi 15.01cm,
+% rong hon 11.5% -> so trang do duoc (13) khong co gia tri.
+%
+% BANG CHUNG QUYET DINH = 2 bai HUJOS-TT da xuat ban, tai tu
+% citation_pdf_url cua chinh trang bai (article 7830, 7862):
+%   pdfinfo     : 538.7 x 765.5 pt = 19.00 x 27.00 cm  (ca hai bai)
+%   vung chu    : xMin 2.00cm -> xMax 17.01cm, rong 15.01 cm
+%   le          : trai 2.00, phai 1.99 cm  -> le 2cm deu, dung nhu quy dinh van ban
+%   SO COT      : chu bat dau trong dai giua trang = 20.1% va 20.5% (day chu)
+%                 -> MOT COT. (Ban hai cot chi co 4.9%, vi ranh cot trong.)
+%   font        : PalatinoLinotype-Roman/Bold/Italic + Cambria + Arial-BoldMT
+% Kiem cheo: Author Guidelines cua HUJOS-TT noi "19 cm x 27 cm ... margins on
+% all sides of 2 cm ... Palatino Linotype ... font size 10", va NHAC DEN
+% "column" 0 LAN. Ba nguon (quy dinh van ban + 2 bai da xuat ban + template docx
+% ref_hujos*.docx 19x27 le 2 1 cot) nay THONG NHAT. Chi co hujos_tpl.docx lech,
+% va no thuoc tap chi khac.
+\usepackage[paperwidth=19cm,paperheight=27cm,
+            top=2cm,bottom=2cm,left=2cm,right=2cm,
+            headsep=0.4cm,footskip=0.6cm]{geometry}
+
+% ---- font: Palatino (TeX Gyre Pagella) + math khop ----
+% ---- GUARD ENGINE (batch 19) ----
+% LOI DA SUA: nguoi dung giai nen goi nguon roi chay `latexmk` tran hoac `latexmk -pdf`
+% hoac `pdflatex` thi nhan:
+%   ! Fatal Package fontspec Error: The fontspec package requires either XeTeX or
+%     LuaTeX.
+%   ! Emergency stop.
+% Thong bao do khong noi CACH SUA va 'Emergency stop' khien nguoi dung tuong nguon hu.
+% Guard nay doi no thanh chi dan cu the va dung han, khong de fontspec noi tiep.
+\usepackage{iftex}
+\ifXeTeX\else
+  \PackageError{preamble}{%
+    Ban thao nay BAT BUOC bien dich bang XeLaTeX\MessageBreak
+    (font Unicode tieng Viet TeX Gyre Pagella qua fontspec).\MessageBreak
+    Cach sua: chay `latexmk` tran (goi nguon co .latexmkrc dat pdf_mode=5),\MessageBreak
+    hoac `latexmk -xelatex`, hoac `xelatex main.tex`.\MessageBreak
+    `pdflatex` va `latexmk -pdf` se LUON that bai voi ban thao nay}%
+    {Xem README_BUILD.md di kem goi nguon.}%
+  \csname @@end\expandafter\endcsname\expandafter\end
+\fi
+
+\usepackage{fontspec}
+\setmainfont{TeX Gyre Pagella}
+\usepackage{unicode-math}
+\setmathfont{TeX Gyre Pagella Math}
+
+% ---- MOT COT (xac nhan bang 2 bai HUJOS-TT da xuat ban) ----
+% \columnsep khong con tac dung khi document khong \twocolumn; giu gia tri nay
+% chi de neu ai do build lai 2 cot thi khong vo tinh dung khoang cach cua tap chi
+% khac. Vung chu that = 15.01 cm theo bai da xuat ban.
+\setlength{\columnsep}{0.75cm}
+
+% ---- gian dong + indent doan: DO TU 2 BAI HUJOS-TT DA XUAT BAN ----
+% experiments/measure_indent.py (loc dung bang tieu chi "doan truoc ket thuc som
+% hon le phai 0.5cm", khong dem moi dong thut le vi nham voi dong trong bang):
+%   indent dau doan = 1.00 cm  (bai #1: 31/72 dong; bai #2: 30/58 dong — trung vi
+%                               cua ca hai dung bang 1.00)
+%   khoang cach doan = pitch tai cho bat dau doan tru them +3.01pt (bai #1)
+%                                            va +6.00pt (bai #2) so voi pitch thuong
+% Quy dinh van ban: "6 points before and 3 points after paragraph spacing".
+% template docx docDefaults: w:spacing before="120" after="60" line="276"
+% (= 6pt / 3pt / 1.15). Hai nguon nay khop nhau -> chon parskip 3pt.
+%
+% Ban cu de parindent 0.45cm va parskip 0pt: KHONG khop nguon nao.
+%
+% "1.15" CUA WORD KHAC \linespread{1.15} CUA LATEX — da giai bang phep do, khong
+% con la xung dot phai doan. Word nhan 1.15 voi (ascent+descent+lineGap) cua FONT;
+% LaTeX \linespread nhan voi baselineskip cua CLASS.
+%
+% experiments/probe_linespread.py: 7 PDF RIENG, moi PDF mot gia tri (probe dau tien
+% dat ca 4 gia tri trong cung mot file va tach doan bang khoang cach doc -> ham tach
+% gop ca 4 doan lipsum thanh 1, trung vi ra 15.54pt la TRON cua 4 gia tri, vo nghia;
+% \typeout khong xuat hien trong PDF nen khong dung lam moc duoc).
+%   baselineskip tu nhien cua TeX Gyre Pagella 10pt = 11.954pt
+%   (7 gia tri cho cung mot he so: 11.95-11.96pt, sai so 0.01pt)
+%   1.15 -> 13.75pt   1.25 -> 14.94pt   1.29 -> 15.42pt   1.30 -> 15.54pt
+% 2 bai HUJOS-TT da xuat ban do duoc pitch 15.48pt (n=225 va n=161 khoang cach).
+% => \linespread{1.29} cho 15.42pt, lech target -0.06pt. Chon 1.29.
+% Dung 1.15 (13.75pt) se chat hon bai cua chinh toa soan 1.13 lan.
+\linespread{1.29}
+\setlength{\parskip}{3pt plus 0.5pt}
+\setlength{\parindent}{1.0cm}
+
+% \raggedbottom la BAT BUOC o day. \documentclass[10pt,twoside] mac dinh bat
+% \flushbottom, tuc LaTeX keo gian KEO DOC de moi trang cao bang nhau. Hau qua do
+% duoc (experiments/verify_layout.py): parskip that cua ban em do ra +7.97pt thay vi
+% 3pt da dat, va khoang cach tai ranh doan phan tan 16.9/21.7/23.9pt trong khi 2 bai
+% da dang gom chat 18.1/21.5pt. \raggedbottom de trang ket thuc tu nhien, khong keo.
+% parskip GIU 3pt: 2 bai da dang do duoc +2.64pt tai ranh doan (ca hai bai giong
+% het nhau), khop "3 points after paragraph spacing" cua quy dinh van ban.
+\raggedbottom
+
+% ---- toan hoc ----
+% KHONG dung \numberwithin{equation}{section}: quy dinh HUJOS-TT yeu cau cong thuc
+% danh so lien tuc va duoc goi la "Eq. (1)", nen danh so theo section se ra (1.1)
+% va lam sai ca cach goi lan thu tu trong van ban.
+%
+% KHONG nap amssymb CUNG unicode-math. Da do bang build that: hai goi trung dinh
+% nghia 4 lenh va dung bien dich voi 4 loi fatal
+%   ! LaTeX Error: Command `\eth' already defined.
+%   ! LaTeX Error: Command `\smallsetminus' already defined.
+%   ! LaTeX Error: Command `\digamma' already defined.
+%   ! LaTeX Error: Command `\backepsilon' already defined.
+% unicode-math (nap o tren, kem TeX Gyre Pagella Math) da cung cap day du symbol
+% cua amssymb, nen bo amssymb la cach sua dung thay vi \let ghi de tung lenh.
+\usepackage{amsmath}
+
+% ---- bang: booktabs + caption tren bang ----
+\usepackage{booktabs}
+% Caption canh GIUA: do tu 2 bai da xuat ban (experiments/measure_venue_style.py),
+% 17/17 caption 'Table n.'/'Fig. n.' co mid = 9.50cm dung tam vung chu
+% (2.00..17.00cm), ke ca caption dai 2 dong (x=[2.79,16.21] va x=[2.74,16.09]).
+% Ban cu dung justification=raggedright + singlelinecheck=false = canh TRAI,
+% khong khop bai nao. font=small (9pt) giu nguyen: do duoc 9.14pt o bai da dang.
+% labelfont=bf giu nguyen: quy dinh noi "Figure numbers and table numbers are
+% printed in bold". labelsep=period giu nguyen: bai dang that la "Fig. 1." / "Table 1."
+\usepackage[font=small,labelfont=bf,labelsep=period,
+            skip=4pt,justification=centering]{caption}
+\captionsetup[table]{position=top}
+\captionsetup[figure]{position=bottom}
+% Ban tieng Viet: nhan float phai la "Bang 1." / "Hinh 1." chu khong phai "Table 1."
+% Quy dinh HUJOS ghi "table titles ABOVE the table, figure titles BELOW the figure"
+% va "table/figure numbers printed in BOLD" -- vi tri va do dam khong doi, chi doi
+% CHU cua nhan.
+\ifhujosvi
+  \captionsetup[table]{name=Bảng}
+  \captionsetup[figure]{name=Hình}
+\fi
+
+% ---- heading theo so do tu template ----
+\usepackage{titlesec}
+% Bai da dang: so muc "1" nam o x=[2.00,2.33]cm, CHU "Introduction" bat dau o
+% x=3.00cm (PyMuPDF tach thanh 2 span cung dong y=19.3). Tuc khoang cach tu CUOI
+% nhan den dau chu = 0.79cm (do lai lan 2: het nhan 2.21 -> chu 3.00, ca 2 bai
+% deu ra gap 0.79cm). Ban cu dung 0.5em (~0.21cm o 12pt) -> chu nam o
+% ~2.25cm; ban sua 0.67cm cho 2.88cm, van lech 0.12cm -> chot 0.79cm.
+% Subsection GIU 0.5em: bai #2 do duoc "2.1 Object Detection from UAV Imagery"
+% bat dau o x0=2.00cm, khong thut them.
+\titleformat{\section}{\normalfont\bfseries\fontsize{12}{14}\selectfont}
+  {\thesection}{0.79cm}{}
+\titlespacing*{\section}{0pt}{18pt}{12pt}
+\titleformat{\subsection}{\normalfont\bfseries\fontsize{10}{12}\selectfont}
+  {\thesubsection}{0.5em}{}
+\titlespacing*{\subsection}{0pt}{18pt}{8pt}
+\titleformat{\subsubsection}[runin]{\normalfont\itshape}
+  {\thesubsubsection}{0.5em}{}[.]
+\titlespacing*{\subsubsection}{0pt}{12pt}{0.5em}
+% 18 pt space after text in each section (template yeu cau)
+\titleformat{name=\section,numberless}{\normalfont\bfseries\fontsize{12}{14}\selectfont}
+  {}{0pt}{}
+\titlespacing*{name=\section,numberless}{0pt}{18pt}{12pt}
+
+% ---- dinh ly / chung minh ----
+\usepackage{amsthm}
+% Ban tieng Viet doi ten moi truong dinh ly (KHONG doi noi dung dinh ly).
+% Ten tieng Viet dung theo thong le toan hoc Viet Nam: proposition = Menh de.
+\ifhujosvi
+  \newtheorem{proposition}{Mệnh đề}
+  \newtheorem{remark}{Ghi chú}
+  \renewcommand{\proofname}{Chứng minh}
+  % LOI DA SUA (batch 17): ban tieng Viet in heading TLTK bang tieng Anh 'References'.
+  % Da kiem ca 4 PDF: main.pdf va supplementary_vi.pdf deu chi co 'References',
+  % khong tim thay 'Tài liệu tham khảo'. Day la sot chu khong phai quy uoc cua tap chi:
+  % bai khac cua chinh nhom (paper/main.tex) co dung dong
+  % \renewcommand{\refname}{Tài liệu tham khảo}. preamble da doi ten proposition/remark/
+  % proof theo tieng Viet trong nhanh nay nhung thieu \refname. Ban EN khong doi.
+  \renewcommand{\refname}{Tài liệu tham khảo}
+\else
+  \newtheorem{proposition}{Proposition}
+  \newtheorem{remark}{Remark}
+  \renewcommand{\proofname}{Proof}
+\fi
+
+% ---- trích dẫn Vancouver (ngoặc vuông) từ 2026 ----
+\usepackage[numbers,sort&compress]{natbib}
+\bibpunct{[}{]}{,}{n}{}{,}
+
+% ---- link (an vien, khong doi mau) ----
+% PHAI \PassOptionsToPackage TRUOC hyperref: hyperref tu nap url ben trong, nen
+% viet \usepackage[hyphens]{url} o SAU se dung "Option clash for package url"
+% va dung bien dich. Da tra gia: build bao P3=1 ma van xuat PDF 13 trang, trong
+% do 3 overfull cua .bbl giu nguyen 189.81/139.74/118.98pt -> hyphens chua an.
+\PassOptionsToPackage{hyphens}{url}
+\usepackage[hidelinks]{hyperref}
+
+% ---- header/footer nhu template: khong tu them so trang ngoai cac thu da set ----
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+% Header: ban tieng Viet ghi ten tac gia khong dau (dung quy uoc cua chinh tap chi
+% o cac bai tieng Viet da dang) va ten tap chi tieng Viet.
+\ifhujosvi
+  \fancyhead[LE]{\footnotesize\itshape M. X. Văn và cs.}
+  \fancyhead[RO]{\footnotesize\itshape Tạp chí Khoa học Đại học Huế: Kỹ thuật và Công nghệ}
+\else
+  \fancyhead[LE]{\footnotesize\itshape X. V. Mai et al.}
+  \fancyhead[RO]{\footnotesize\itshape Hue University Journal of Science: Techniques and Technology}
+\fi
+\fancyfoot[C]{\footnotesize\thepage}
+
+% ---- phu luc: doi ten "Appendix" thanh "Appendix" (giu nguyen) ----
+\usepackage{appendix}
+
+% ---- tien ich ----
+% [hyphens] la BAT BUOC: ba overfull nang nhat cua bai (189.81 / 139.74 /
+% 118.98 pt, tuc chu loi ra ngoai trang) deu nam trong .bbl va deu do URL dai
+% khong ngat duoc. Mac dinh goi url chi ngat o dau '/' va '.', ma ten mien nhu
+% 'technical-explainer-carbon-credits-for-improved-rice-cultivation' khong co '/'.
+% Option duoc truyen bang \PassOptionsToPackage o tren (truoc hyperref) de tranh
+% option clash, nen o day nap khong kem option.
+\usepackage{url}
+\usepackage{xspace}
+\usepackage{microtype}
+\usepackage{array}
+
+% Moi truong liet ke ky hieu cong thuc ('trong do:'). Dinh nghia o day chu khong o
+% blocks/ vi cac lenh \setlength chua CHU SO (0.5pt, 0pt) se bi gate
+% check_vi_numbers dem nhu so lieu nghien cuu -> lam loang gate.
+\newenvironment{symbolist}
+  {\begin{description}\footnotesize\setlength{\itemsep}{0.5pt}\setlength{\parsep}{0pt}}
+  {\end{description}}
+
+
+% graphicx la BAT BUOC cho \resizebox. Thieu no thi 24 loi fatal
+% "Undefined control sequence" + "Missing number" + "Illegal unit of measure"
+% (vi \resizebox bi phan tich sai). Da tra gia: ban IEEE co goi nay, ban HUJOS
+% quen -> build ra PDF 13 trang nhung la RAC, khong duoc bao cao la thanh cong.
+\usepackage{graphicx}
+\usepackage{placeins}
+
+% \fittocol: chi THU NHO bang khi no that su rong hon cot, KHONG BAO GIO phong to.
+%
+% Tai sao khong dung \sbox de do: cot p{} chua \par, ma \sbox = \savebox trong
+% \hbox nen khong do duoc vat lieu dang doan van. Do bang \sbox cho ra 7.92-8.01cm
+% trong khi build that bao overfull 18-26pt (~8.8cm) -> so do sai, dan den ket luan
+% sai rang "bang khong tran". lrbox la cong cu dung cho hop chua \par.
+%
+% Tai sao khong dung \resizebox{\columnwidth}{!} truc tiep: no CUONG BUC dung bang
+% kho cot, nen bang hep hon (vd tab_baseline 13.69cm trong table* 16.5cm) se bi
+% PHONG TO ~20%, chu to hon thiet ke.
+\newsavebox{\fitbox}
+\newcommand{\fittocol}[1]{%
+  \begin{lrbox}{\fitbox}#1\end{lrbox}%
+  \ifdim\wd\fitbox>\columnwidth
+    \resizebox{\columnwidth}{!}{\usebox{\fitbox}}%
+  \else
+    \usebox{\fitbox}%
+  \fi}
+
+% Cho phep keo gian khoang trang them 2em khi khong tim duoc diem ngat.
+% Ly do: cac doan chua nhieu \ref lien tiep (vd
+% "(Sec.~\ref{sec:umax}, Sec.~\ref{sec:v2reach}, Table~\ref{tab:umax},
+% Table~\ref{tab:f2reach})") tao ra chuoi khong ngat duoc, gay overfull
+% 34.89pt va 26.16pt trong 01_intro.tex. Day la cach sua khong doi noi dung.
+\setlength{\emergencystretch}{2em}
+
+% Kho cot that: MOT cot, vung chu 19 - 2 - 2 = 15.00 cm
+% (bai da xuat ban do duoc 15.01 cm — khop). \columnwidth = \textwidth o day.
+% Day la con so ma experiments/make_tables_hujos.py dung de gate chieu rong bang.
+\newlength{\HUJOScol}
+\setlength{\HUJOScol}{15.0cm}
+
+% ---------------- FRONT MATTER: moi con so DO TU 2 BAI HUJOS-TT DA XUAT BAN --------
+% experiments/measure_fonts.py (PyMuPDF, doc theo SPAN nen biet dung font cua tung
+% manh chu, khong gop dong):
+%   title        PalatinoLinotype-Bold 14.04pt, canh giua       -> em: 14pt bold center  (khop)
+%   authors      canh GIUA: mid = 9.59 va 9.53 cm (tam vung chu 9.5)
+%   affiliations canh GIUA: mid = 9.54 cm (ca 4 dong cua bai #1)
+%   abstract     9.00pt, x = [3.00, 16.08] cm -> THUT VAO 1.00 cm ca hai ben,
+%                trong khi than bai x = [2.00, 17.08] cm (khong thut)
+%   keywords     cung nam trong khoi thut 1.00 cm (x bat dau 3.00)
+%   caption      9.00pt, chi NHAN in dam: span 'Fig. 1.' = PalatinoLinotype-Bold,
+%                span con lai = PalatinoLinotype-Roman (10/10 caption bai #1,
+%                8/8 bai #2) -> labelfont=bf + font=small cua em da khop san
+% Ban cu de \raggedright cho authors/affil va khong thut le abstract: lech ca hai
+% bai da dang o dung nhung cho nay.
+\newcommand{\hujostitle}[1]{%
+  {\centering\normalfont\bfseries\fontsize{14}{17}\selectfont #1\par}}
+\newcommand{\hujosauthors}[1]{%
+  {\centering\normalfont\bfseries\fontsize{10}{12}\selectfont #1\par}}
+\newcommand{\hujosaffil}[1]{%
+  {\centering\normalfont\fontsize{9}{11}\selectfont #1\par}}
+% \leftskip/\rightskip = 1cm de abstract + keywords thut vao dung nhu bai da dang.
+% Keywords nam BEN TRONG hujosabstract trong main_hujos.tex nen cung duoc thut.
+% CO CHU ABSTRACT = 9pt, KHONG PHAI 11pt.
+% LOI EM VUA GAY RA TRONG CHINH LAN SUA NAY: go \fontsize{11}{13} thay vi {9}{11}
+% -> abstract se to hon than bai (10pt), nguoc hoan toan voi so do da do
+% (measure_fonts.py: abstract 9.00pt o ca 2 bai; body 9.96pt). Da sua lai 9/11.
+\newenvironment{hujosabstract}
+  {\par\vspace{10pt}\normalfont\fontsize{9}{11}\selectfont
+   \leftskip=1cm\rightskip=1cm\parindent=0pt\noindent\ignorespaces}
+  {\par}

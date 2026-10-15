@@ -47,7 +47,7 @@ def measure(pdf: str, dpi: int = 100):
     return rows
 
 def main():
-    pdf = sys.argv[1] if len(sys.argv) > 1 else "paper2_hujos/supplementary_vi.pdf"
+    pdf = sys.argv[1] if len(sys.argv) > 1 else "paper2_vi_submission/output/main.pdf"
     rows = measure(pdf)
     print(f"{'trang':<26}{'dong co chu':>12}{'khe trang lon nhat':>22}{'tu y0..y1 (cm)':>20}")
     worst = []

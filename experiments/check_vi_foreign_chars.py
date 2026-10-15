@@ -2,14 +2,14 @@
 """GATE: quet ky tu NGOAI LAI (CJK, Cyrillic, Hy Lap lac cho...) trong ban tieng Viet.
 
 LY DO (2026-10-08, 2 lan trong cung mot phien):
-  * "phan农 hoc" trong blocks_vi/01_intro.tex
-  * "tai引入" trong tieu de 8.2 cua blocks_vi/04_anchor.tex
+  * "phan农 hoc" trong sections/01_intro.tex
+  * "tai引入" trong tieu de 8.2 cua sections/04_anchor.tex
 Ca hai lot qua mat thuong khi doc; chi bi bat khi nhin ky. Bai hoc: ban dich
 tieng Viet PHAI co gate tu dong. Ky tu Han/ky tu la lan vao tu qua trinh sinh
 cua model la loi tai pham duoc, khong phai tai nan mot lan.
 
-Pham vi quet: moi file duoc main_hujos_vi.tex \input (blocks_vi/, glossary,
-blocks_vi.tex khoi tom tat), cong tables_vi/.
+Pham vi quet: moi file duoc src/main.tex \input (sections/, glossary,
+abstract_vi.tex khoi tom tat), cong tables/.
 
 Ky tu HOP LE trong file tieng Viet:
   * ASCII (lenh LaTeX, so, ky hieu toan)
@@ -30,6 +30,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 H = ROOT / "paper2_hujos"
+S = ROOT / "paper2_vi_submission" / "src"
 
 ALLOWED = [
     (0x0000, 0x007F),   # ASCII
@@ -72,10 +73,10 @@ def allowed(cp: int) -> bool:
 
 
 def main() -> int:
-    files = sorted((H / "blocks_vi").glob("*.tex"))
-    files += [H / "blocks_vi.tex", H / "main_hujos_vi.tex", H / "glossary_vi.tex",
-              H / "supplementary_vi.tex"]
-    files += sorted((H / "tables_vi").glob("*.tex"))
+    files = sorted((S / "sections").glob("*.tex"))
+    files += [H / "abstract_vi.tex", S / "main.tex", S / "glossary.tex",
+              S / "supplementary_body.tex"]
+    files += sorted((S / "tables").glob("*.tex"))
     bad_total = 0
     for f in files:
         if not f.exists():

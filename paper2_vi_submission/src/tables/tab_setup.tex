@@ -1,0 +1,30 @@
+% Sinh TU DONG tu tables/tab_setup.tex (ban tieng Anh, von sinh tu outputs/*.csv)
+% boi experiments/make_tables_hujos_vi.py. KHONG sua tay.
+% Nhan dich qua bang tra cuong che; so chi doi dinh dang sang kieu Viet Nam (dau phay thap phan).
+% Da assert: cung so dong, cung so vach, cung tap chu so voi ban EN.
+
+% Sinh TU DONG tu outputs/eval_theta_*.csv boi experiments/make_tables_anchored.py
+% KHONG sua tay: moi con so deu truy nguon duoc ve CSV.
+
+\fittocol{%
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{2.85cm}>{\raggedright\arraybackslash}p{5.60cm}@{}}
+\toprule
+Thành phần & Giá trị \\
+\midrule
+Thời tiết & ERA5 theo giờ qua kho lưu trữ Open-Meteo, không có giá trị thiếu \\
+Trạm & 3: Cà Mau, Cần Thơ, Sóc Trăng \\
+Năm khí hậu & 2024, 2025 (2024 khan nước, 2025 thừa nước) \\
+Cửa sổ & từ ngày 1 tháng Ba đến ngày 29 tháng Năm (2\,160 h), mùa khô đồng bằng \\
+Loại đất được lấy mẫu & 5 loại trải theo FAO-56 Bảng 2 \\
+Trục khác biệt thực tế & 7: đất, giai đoạn $K_c$, $\eta$, mưa tại ruộng, thấm bờ, hành vi ghi chép, $w_0$ \\
+Hiệu suất tưới $\eta$ & 0,60--0,85 (nước tới rễ / nước bơm) \\
+Chế độ $K_c$ & cố định 1,05 (như đã công bố) và theo giai đoạn 1,05/1,20/0,90 \\
+Nhiễu ghi chép & quên 5\%, làm tròn đến 5\,mm, trễ một ngày 35\%, sai độ sâu 15\% trong $\pm$35\% \\
+Biến thể gian lận & 7 (ba ngây thơ, bốn đối kháng) \\
+Tập bất định $|\Theta|$ & 30 = 5 loại đất $\times$ 2 chế độ $K_c$ $\times$ 3 hiệu suất \\
+Trạng thái đầu $|w_0|$ & 5, trải cạn kiệt từ 0 đến 0,90 \\
+Số lần phát lại mỗi nhật ký & 24 ($\Theta$ rút gọn) và 150 ($\Theta$ đầy đủ) \\
+Số nhật ký được kiểm & 281 \\
+\bottomrule
+\end{tabular}
+}

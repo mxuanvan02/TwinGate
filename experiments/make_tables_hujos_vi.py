@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Sinh bang LaTeX TIENG VIET cho ban HUJOS-TT tieng Viet (main_hujos_vi.tex).
+"""Sinh bang LaTeX TIENG VIET cho ban HUJOS-TT tieng Viet (src/main.tex).
 
 NGUYEN TAC BAT BUOC (giong make_tables_hujos.py): KHONG chep lai 400 dong sinh so.
 Script nay doc CAC FILE BANG DA SINH tu outputs/*.csv (ban tieng Anh), roi:
@@ -43,7 +43,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 SRC = ROOT / "paper2_hujos" / "tables"
-DEST = ROOT / "paper2_hujos" / "tables_vi"
+DEST = ROOT / "paper2_vi_submission" / "src" / "tables"
 
 # 4 bang than bai + 5 bang phu luc (S1-S6 cua ban tieng Anh).
 TABLES = [
@@ -400,7 +400,7 @@ def convert(name: str) -> None:
            f"% Da assert: cung so dong, cung so vach, cung tap chu so voi ban EN."
            f"{NL_}{NL_}")
     (DEST / f"{name}.tex").write_text(hdr + NL_.join(out_lines), encoding="utf-8")
-    print(f"  wrote tables_vi/{name}.tex ({n_rows} dong du lieu, 0 lech so)")
+    print(f"  wrote tables/{name}.tex ({n_rows} dong du lieu, 0 lech so)")
 
 
 def main() -> int:

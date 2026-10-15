@@ -3,17 +3,17 @@
 """GATE: doi chieu MOI CON SO trong PHU LUC tieng Viet vs tieng Anh.
 
 Bo sung cho check_vi_numbers.py (chi kiem 7 block THAN BAI). Phu luc S1-S21
-truoc day dung chung supplementary.tex (EN); nay co supplementary_vi.tex (VI)
+truoc day dung chung supplementary.tex (EN); nay co ban nop duy nhat main.tex
 nen can gate rieng de ban dich khong chep sai so (MEMORY: da tung co loi
 '+69%->+33%' o than bai).
 
 KHO KHAN dac thu cua phu luc (khac than bai):
   1. Ban VI dung \\ref/\\eqref cho MOI tham chieu cheo toi bai chinh (so sinh
-     tu supp_stubs_vi.tex). Ban EN go TAY 'Eq.~(16)','Prop.~1'... -> so cross-ref
+     tu supplementary_stubs.tex). Ban EN go TAY 'Eq.~(16)','Prop.~1'... -> so cross-ref
      co trong source EN nhung KHONG trong source VI. Day la KHAC BIET DUNG (chinh
      la 4 cho tro sai em sua: eq:umax EN=16/VI=15, eq:v4 12/11, eq:v5 13/12,
      sec:anchor 8/7), KHONG phai mat so lieu. -> Trung hoa cue+so cross-ref ca 2 ben.
-  2. Khoi tac gia: phu luc VI lay DUNG khoi cua main_hujos_vi.tex (5 tac gia +
+  2. Khoi tac gia: phu luc VI lay DUNG khoi cua main.tex (5 tac gia +
      dia chi '34 Le Loi'), phu luc EN chi 2 tac gia -> so chi so mu/at superscript
      ($^{2,*}$...) va dia chi khac nhau. -> Cat bo front matter (\\begingroup..\\endgroup)
      ca 2 ben truoc khi dem.
@@ -32,6 +32,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 H = ROOT / "paper2_hujos"
+S = ROOT / "paper2_vi_submission" / "src"
 
 spec = importlib.util.spec_from_file_location("cvn", ROOT / "experiments" / "check_vi_numbers.py")
 cvn = importlib.util.module_from_spec(spec); spec.loader.exec_module(cvn)
@@ -40,9 +41,9 @@ TABLES = ["tab_threat", "tab_umax", "tab_f2_unreachable", "tab_baseline", "tab_s
 
 def load(vi: bool) -> str:
     if vi:
-        parts = [H / "supp_body_vi.tex",
-                 H / "blocks_vi/08_subsidence.tex", H / "blocks_vi/09_cost.tex"]
-        parts += [H / "tables_vi" / f"{t}.tex" for t in TABLES]
+        parts = [S / "supplementary_body.tex",
+                 S / "sections/08_subsidence.tex", S / "sections/09_cost.tex"]
+        parts += [S / "tables" / f"{t}.tex" for t in TABLES]
     else:
         parts = [H / "supplementary.tex",
                  ROOT / "paper2/blocks/08_subsidence.tex", ROOT / "paper2/blocks/09_cost.tex"]

@@ -1,0 +1,242 @@
+% !TeX program = xelatex
+% =====================================================================
+% BAN TIENG VIET — HUJOS-TT (Tap chi Khoa hoc Dai hoc Hue: Ky thuat & Cong nghe)
+% =====================================================================
+% Cung mot noi dung va CUNG mot so lieu voi ban tieng Anh (main_hujos.tex):
+%   * Bang so: tables/ sinh TU DONG tu tables/ (ban EN, von sinh tu
+%     outputs/*.csv) boi experiments/make_tables_hujos_vi.py — assert tap chu
+%     so cua hai ban trung nhau, nhan dich qua bang tra cuong che.
+%   * Than bai: sections/ dich tu paper2/blocks/ (ban EN 14 trang), giu nguyen
+%     moi con so va moi hedge; thuat ngu theo glossary.tex.
+%   * Phu luc S1-S21: dung chung supplementary.tex (ban EN).
+%
+% Cau truc theo quy dinh HUJOS (muc 3): bai viet bang tieng Viet => tom tat +
+% tu khoa TIENG VIET o DAU bai, ban TIENG ANH o CUOI bai. Day thu Tu theo dung
+% bai tieng Viet da nop truoc do (hujos_submit.md, da qua audit_spec.py):
+%   than bai -> DU LIEU, MA NGUON VA TUYEN BO -> TAI LIEU THAM KHAO ->
+%   THONG TIN TAC GIA (+ chu ky) -> khoi tieng Anh.
+%
+% \HUJOSVI bat cong tac ngon ngu trong preamble.tex (caption "Bang/Hinh",
+% dinh ly "Menh de/Ghi chu/Chung minh", header tieng Viet). Ban EN khong dinh
+% nghia macro nay nen khong doi hanh vi.
+% =====================================================================
+
+\def\HUJOSVI{}
+\input{preamble}
+
+\begin{document}
+
+% ---------------------------------------------------------------- front matter VI
+\begingroup
+  % TIEU DE PHAI NOI DUNG TRONG TAM CONTRIBUTION CHINH (2026-10-09, anh Van yeu cau).
+  % Contribution chinh cua bai KHONG phai 'nhat ky tu khai co gioi han' (do la chu de),
+  % ma la DINH LY BAT KHA: moi bo phat hien la ham cua quy dao phat lai deu mu truoc
+  % tan cong dich thoi diem. Chu dung de dat ten lay tu chinh bai:
+  %   Muc 4     : 'Physics-Based Filters and Their Exact Blind Spots'
+  %   Menh de 1 : 'Exact blindness of aggregate defences'
+  %   Intro     : 'chung toi chung minh dieu nay khong the tranh khoi' -> 'tat yeu'
+  %   Menh de 2 : 'Credit gain and evasion are the same action'
+  % Abstract: 'phan tan cong la dong gop cua bai'. Nua kien tao (neo thiet bi) dung sau.
+  % TIEU DE (doi 2026-10-09 theo anh Van). BA nguyen tac, deu co bang chung:
+  %  1. KHONG dau hai cham. Crossref theo ISSN 2615-9732 (HUJOS Techniques and
+  %     Technology), 55 bai: trong 36 tieu de tieng Viet chi 3 bai dung dau hai
+  %     cham, 33 bai khong. Hai bai cua chinh nhom da nop cung khong. Tieu de VI
+  %     cua tap chi la mot cum danh tu lien mach, noi bang TRONG/THEO/VE/BANG.
+  %  2. KHONG dich tu khuon tieu de tieng Anh. Ban cu ('...: danh gia doi khang
+  %     phuong an...') la khuon 'Topic: subtitle'; ban dau sua lai thanh 'dieu kien
+  %     de X con tin duoc' la dich tung chu cua 'conditions under which X remains
+  %     trustworthy' — sai ngu phap tieng Viet hoc thuat. Dung la 'dieu kien bao dam
+  %     do tin cay cua X'.
+  %  3. KHONG claim gia khi bang chi phi cua bai khong ung ho. Ban cu noi 'chi phi
+  %     gan nhu bang khong', nhung Bang S5 cho tong 8,40 USD/ha/vu (14% doanh thu
+  %     o muc thap) va DAT HON vien tham + kiem tra thuc dia 0,40 USD. Chi co CHI
+  %     PHI BIEN cua lop chung thuc (~0,60 USD/ha) moi gan bang khong. Van xoi da
+  %     duoc sua thanh 'chi phi bien' (xem commit F12).
+  % TIEU DE EN cung bo dau hai cham de hai ban cua CUNG mot bai cung khuon; noi
+  % bang ', and' van la cum danh tu hop le trong tieng Anh.
+  % Thuat ngu 'nhat ky' theo glossary.tex (log : nhat ky), dung nhat voi than
+  % bai (51 lan). Khong dung 'bang chung tuoi tu khai' o tieu de vi no sinh ra
+  % thuat ngu thu hai cho cung mot khai niem.
+  % 'do dac, bao cao, tham dinh' viet day du (khong dung MRV tran) de tieu de khong
+  % chua viet tat — xem experiments/check_acronym_first_use.py.
+\hujostitle{Điểm mù không thể tránh của chứng thực vật lý đối với nhật ký tưới và giải pháp neo theo thiết bị trong đo đạc, báo cáo, thẩm định lúa phát thải thấp}
+
+  \vspace{8pt}
+  \hujosauthors{Mai Xuân Văn$^{1}$, Lê Đức Minh Phương$^{2,*}$, Nguyễn Đăng Trị$^{3}$,
+  Trương Khánh Duy$^{2}$, Nguyễn Tương Tri$^{2,4,*}$}
+
+  \vspace{4pt}
+  \hujosaffil{$^{1}$ Trường Trung học phổ thông (THPT) Thuận Hóa, Trường Đại học Sư phạm, Đại học Huế, Huế, Việt Nam\\
+  $^{2}$ Viện Đào tạo Mở và Công nghệ thông tin, Đại học Huế, Huế, Việt Nam\\
+  $^{3}$ Trường Đại học Gia Định, Thành phố Hồ Chí Minh, Việt Nam\\
+  $^{4}$ Trường Đại học Sư phạm, Đại học Huế, 34 Lê Lợi, Huế, Việt Nam}
+
+  \vspace{4pt}
+  \hujosaffil{$^{*}$ Đồng tác giả liên hệ: Lê Đức Minh Phương. E-mail: Ldmphuong@hueuni.edu.vn;\\
+  Nguyễn Tương Tri. E-mail: ntuongtri@hueuni.edu.vn}
+
+  \vspace{6pt}
+  \begin{hujosabstract}
+  % TRAN 250 TU: ban dau 316 tu (vuot 26%). Da cat nhung cho lap y voi than bai
+  % (danh sach 6 truc vi pham mo hinh, giai thich "do chinh la dong gop"), giu
+  % NGUYEN VEN moi con so va moi hedge. Dem bang script check_abstract_words.
+  \noindent\textbf{Tóm tắt.}
+
+ Đo đạc, báo cáo, thẩm định (MRV) là nút thắt khiến phần giảm phát thải của lúa phát thải
+ thấp chưa thành tín chỉ các-bon, vì giám sát chiếm khoảng ba phần tư chi
+ phí. Trong tưới khô ướt luân phiên (AWD), mỗi hành động đủ điều kiện cấp
+ tín chỉ là một lệnh bật máy bơm, nên nhật ký nông dân tự ghi trông như bằng chứng miễn phí,
+ xếp ở bậc ưu tiên cao nhất theo Quyết định 4801/QĐ-BNNMT. Bài báo dựng lớp
+ kiểm toán đó trên bản sao số (digital twin) FAO-56, phát lại nhật ký với ERA5 công khai rồi cho bên gian lận (adversary) tối ưu hoá tấn công. Kết quả, mọi bộ phát hiện dựa trên quỹ đạo phát lại có điểm mù không thể tránh, kèm cơ chế khắc phục có chi phí biên gần bằng không. Các bộ lọc vật lý phát hiện được nhật ký khai độ sâu tưới lớn hơn lượng nước mà đất
+còn tiếp nhận được, nhưng bỏ lọt bên gian lận chỉ dời thời điểm của các lệnh tưới và giữ
+nguyên tổng lượng nước, nên số pha khô được cấp tín chỉ tăng $33\%$ (ghép cặp). Bộ phát hiện mô hình điểm
+ kết tội oan $26{,}7\%$ nông dân trung thực; bộ bền vững hạ oan còn $5{,}0\%$ nhưng lọt phần
+ lớn tấn công dịch thời điểm. Trên $281$ nhật ký ở ba trạm Đồng bằng sông Cửu Long, phép neo
+ bắt $116/116$ ca giả mạo, không oan ai. Vật lý do đó chỉ ràng buộc nhật ký; dấu thời gian
+ phải do thiết bị cấp.
+
+\noindent\textbf{Từ khóa:} tưới khô ướt luân phiên; đo đạc, báo cáo, thẩm định; tín chỉ
+  các-bon; lúa phát thải thấp; bản sao số.
+
+  \vspace{10pt}
+  \end{hujosabstract}
+\endgroup
+
+% ---------------------------------------------------------------- khoi tieng Anh (ngay sau tom tat tieng Viet, trang 1-2)
+\vspace{10pt}
+\begingroup
+  \hujostitle{An Inherent Blind Spot of Physics-Based Attestation for Irrigation Logs,
+  and Device-Anchored Repair in Monitoring, Reporting and Verification for
+  Low-Emission Rice}
+
+  \vspace{8pt}
+  \hujosauthors{Xuan Van Mai$^{1}$, Le Duc Minh Phuong$^{2,*}$, Dang Tri Nguyen$^{3}$,
+  Khanh Duy Truong$^{2}$, Tuong Tri Nguyen$^{2,4,*}$}
+
+  \vspace{4pt}
+  \hujosaffil{$^{1}$ Thuan Hoa High School, University of Education, Hue University, Hue, Viet Nam\\
+  $^{2}$ Institute of Open Education and Information Technology, Hue University, Hue, Viet Nam\\
+  $^{3}$ Gia Dinh University, Ho Chi Minh City, Viet Nam\\
+  $^{4}$ University of Education, Hue University, 34 Le Loi St., Hue, Viet Nam}
+
+  \vspace{4pt}
+  \hujosaffil{$^{*}$ Co-corresponding authors: Le Duc Minh Phuong. E-mail: Ldmphuong@hueuni.edu.vn;\\
+  Tuong Tri Nguyen. E-mail: ntuongtri@hueuni.edu.vn}
+
+  \vspace{6pt}
+  \begin{hujosabstract}
+  \noindent\textbf{Abstract.} Monitoring, reporting and verification (MRV) is the bottleneck keeping emission
+ reductions in low-emission rice from becoming tradable carbon credits, and
+ monitoring is about three quarters of that cost. Because every credit-eligible
+ action under alternate wetting and drying is already an \emph{actuation command},
+ a farmer-written irrigation log looks like free evidence of the highest rank under
+ Decision 4801/QD-BNNMT. We built that layer on an FAO-56 digital twin, replayed logs under public ERA5 forcing, then attacked it with an optimising adversary. The paper's contribution is an inherent blind-spot proposition for every replay-based detector, plus a repair mechanism with near-zero marginal cost. The physics layer catches claimed depths beyond the soil's water-holding capacity, but an adversary who keeps the
+ total volume and every individual depth and merely \emph{shifts commands in time}
+ inflates creditable dry phases by $33\%$ in paired comparison. No physical tier
+ escapes it usefully: the point model accuses $26.7\%$ of honest farmers, and the
+ robust tier that cuts false accusation to $5.0\%$ in turn misses most
+ time-shifting attacks. Over $281$ audited logs at three Mekong Delta stations
+ and two climate years, matching the log against the gateway's signed,
+ time-stamped command record catches $116/116$ forged logs and accuses none.
+ Physics-based attestation cannot stand alone; the timestamp must come from
+ a device, not the farmer.
+
+ \vspace{4pt}
+
+ \noindent\textbf{Keywords:} alternate wetting and drying; monitoring, reporting
+  and verification; carbon credit; low-emission rice; digital twin.
+
+  \vspace{10pt}
+  \end{hujosabstract}
+\endgroup
+
+
+% ---------------------------------------------------------------- than bai
+\input{sections/01_intro}
+\input{sections/07_system_model}
+\input{sections/02_threat_attack}
+
+\input{sections/03_guarantee}
+
+\input{sections/04_anchor}
+
+\input{sections/05_design_results}
+
+\begin{table}[!t]
+\centering
+\caption{Kết tội oan trên nhật ký trung thực, thuộc tính then chốt mà phương án này
+được quảng bá. Điều kiện giấy tái hiện kết quả $0/60$ của giao thức tự nhất quán;
+điều kiện ruộng phơi bày ngưỡng chênh lệch tuyệt đối.}
+\label{tab:falseacc}
+\footnotesize
+\input{tables/tab_false_accusation}
+\end{table}
+
+\begin{table}[!t]
+\centering
+\caption{Số pha khô được cấp tín chỉ dài ít nhất $72$~giờ, tức mức tối thiểu ba ngày không tưới lại theo Quyết định 4801, và cũng là đại lượng mà VM0051 dùng để tính tín chỉ; so với mốc ruộng trung thực, tính theo ghép cặp. Cột cuối đếm số tấn công thật sự sửa nhật ký. Bảng có hai mốc. Dòng ``trung
+thực'' là trung bình $3{,}23$ pha của toàn bộ $60$ nhật ký trung thực, còn cột
+``trước'' của mỗi dòng gian lận là nhật ký trung thực \emph{ghép cặp} cùng trạm,
+năm, seed và loại đất ($4{,}87$ với các biến thể đối kháng). Hai mốc khác nhau
+có chủ đích, xem Phụ lục~S15.}
+\label{tab:credit}
+\footnotesize
+\input{tables/tab_credit}
+\end{table}
+
+\begin{table}[!t]
+\centering
+\caption{Kết quả chính. Mọi tỷ lệ được tính trên các nhật ký mà tấn công
+\emph{thật sự} sửa; cột thứ hai báo số bị sửa trên số được sinh, vì bên gian lận trả lại nhật ký mà không sửa gì khi không tìm được nước đi cải thiện. Tỷ lệ lọt lưới là
+phần mà không tầng vật lý nào đánh dấu.}
+\label{tab:defence}
+\footnotesize
+\input{tables/tab_defence}
+\end{table}
+
+% Bang benchmark: so sanh voi cac phuong an MRV da cong bo (SOTA).
+% So sinh tu experiments/benchmark_confirmation.py -> _benchmark_summary.json
+% KHONG sua tay; nhan dich boi make_tables_hujos_vi.py tu bang EN.
+\begin{table}[!t]
+\centering
+\caption{Số pha khô đủ điều kiện cấp tín chỉ có thể xác nhận được theo từng
+phương án MRV, trên $150$ pha có thật trong $60$ ruộng mô phỏng; một pha chỉ
+được tính nếu có ít nhất một lần quan sát rơi vào trong nó. Hai dòng cuối có cùng giá trị ở chỉ số này, khác nhau ở chi phí và ở điều chúng chứng
+minh được với một nhật ký đã bị sửa.}
+\label{tab:benchmark}
+\footnotesize
+\input{tables/tab_benchmark}
+\end{table}
+
+\input{sections/06_discussion_conclusion}
+
+% ---------------------------------------------------------------- khai bao
+\section*{Dữ liệu, mã nguồn và tuyên bố}
+
+Mã nguồn, cả hai tập bất định, cả hai cấu hình bên gian lận và toàn bộ $281$ nhật ký
+đã kiểm toán có tại \url{https://github.com/mxuanvan02/TwinGate} theo giấy phép MIT; dữ liệu khí tượng là tái phân tích ERA5 công khai qua kho lưu trữ
+Open-Meteo. Nghiên cứu này được tài trợ bởi Đại học Huế trong đề tài mã số
+DHH2025-19-07. Các tác giả tuyên bố không có xung đột lợi ích. Không áp dụng phê duyệt đạo đức vì nghiên cứu chỉ dùng dữ liệu tái phân tích công khai và thí
+nghiệm mô phỏng, không có người tham gia, động vật hay can thiệp thực địa.
+
+% ---------------------------------------------------------------- tai lieu
+% LOI DA SUA (batch 17): \renewcommand{\thetable}{S\arabic{table}} nam o FRONT MATTER
+% cua supplementary_vi.tex, KHONG nam trong supplementary_body.tex -> khi nhung vao bai chinh,
+% bang phu luc danh so tiep 4 bang cua than bai. Do that: .aux ban gop cho
+% tab:baseline=8, tab:setup=9 va PDF in 'Bảng 8. Chi phí MRV…', 'Bảng 9. Cấu hình thực
+% nghiệm.' trong khi van ben canh van viet 'Bảng~S4 của Phụ lục' -> caption va tham
+% chieu lech nhau. Fix: dat lai counter + nhan S ngay truoc khi nhung, de ban gop in
+% dung 'Bang S1..S5' giong het ban phu luc rieng. Da probe trong /tmp: .aux -> S4/S5,
+% 'Bảng 8/9' = 0 lan, 4 bang than bai van 1..4, 0 loi, so trang khong doi.
+% \clearpage: phu luc la khoi tai lieu rieng, phai bat dau trang moi. Do that: truoc
+% day S1 nam o dong 5/37 cua trang 20, dinh ngay sau cau ve phe duyet dao duc.
+\clearpage
+\appendix
+\setcounter{table}{0}
+\renewcommand{\thetable}{S\arabic{table}}
+\input{supplementary_body}
+
+\bibliographystyle{vancouver}
+\bibliography{refs}
+
+\end{document}
