@@ -86,6 +86,26 @@
             headsep=0.4cm,footskip=0.6cm]{geometry}
 
 % ---- font: Palatino (TeX Gyre Pagella) + math khop ----
+% ---- GUARD ENGINE (batch 19) ----
+% LOI DA SUA: nguoi dung giai nen goi nguon roi chay `latexmk` tran hoac `latexmk -pdf`
+% hoac `pdflatex` thi nhan:
+%   ! Fatal Package fontspec Error: The fontspec package requires either XeTeX or
+%     LuaTeX.
+%   ! Emergency stop.
+% Thong bao do khong noi CACH SUA va 'Emergency stop' khien nguoi dung tuong nguon hu.
+% Guard nay doi no thanh chi dan cu the va dung han, khong de fontspec noi tiep.
+\usepackage{iftex}
+\ifXeTeX\else
+  \PackageError{preamble}{%
+    Ban thao nay BAT BUOC bien dich bang XeLaTeX\MessageBreak
+    (font Unicode tieng Viet TeX Gyre Pagella qua fontspec).\MessageBreak
+    Cach sua: chay `latexmk` tran (goi nguon co .latexmkrc dat pdf_mode=5),\MessageBreak
+    hoac `latexmk -xelatex`, hoac `xelatex main_hujos_vi.tex`.\MessageBreak
+    `pdflatex` va `latexmk -pdf` se LUON that bai voi ban thao nay}%
+    {Xem README_BUILD.md di kem goi nguon.}%
+  \csname @@end\expandafter\endcsname\expandafter\end
+\fi
+
 \usepackage{fontspec}
 \setmainfont{TeX Gyre Pagella}
 \usepackage{unicode-math}
