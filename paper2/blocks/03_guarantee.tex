@@ -20,6 +20,11 @@ where:
 \item[$\varepsilon$] the published tolerance for model error, equal to $5$\,mm as in Sec.~\ref{sec:filters}.
 \end{symbolist}
 
+This bound is written in depletion relative to the root zone rather than against
+an absolute elevation, so unlike the absolute water-table thresholds used in current
+practice it does not drift as the field surface subsides; the proposition and the
+measured shift for the delta are in Supplementary~S4.
+
 Two corrections follow, both verified by scanning the replay operator rather
 than by algebra alone (derivation in Supplementary~S14): \eqref{eq:umax} uses
 $\max$, not a difference --- an initially dry field admits \emph{larger}
@@ -111,8 +116,16 @@ where:
 \item[$\bar u$] a typical event depth, equal to $30$\,mm.
 \end{symbolist}
 
-Here the absolute rule is the degenerate
-case $n\to0$, $\sigma_{\mathrm{event}}\to0$.
+The two rules are not two cases of one formula, and \eqref{eq:tau} should not be
+read as a generalisation of $\tau_0$. As $n\to0$ and
+$\sigma_{\mathrm{event}}\to0$ the expression above tends to
+$\delta_{\mathrm{rel}}M$, that is $2\%$ of the metered volume, not to $5$~mm; the two
+thresholds coincide only if $M$ happens to equal $250$~mm. They differ in kind:
+$\tau_0=5$~mm is an absolute constant that is valid only if the log is assumed to
+be an exact copy of the pumped volume, whereas $\tau(n)$ scales with both $M$ and
+the event count $n$. In the experiments every verdict uses $\tau(n)$, and
+$\tau_0$ is kept only as a reference point that exposes the cost of assuming a
+faithful copy.
 
 \begin{remark}[A filter that cannot fire]
 \label{sec:v2reach}

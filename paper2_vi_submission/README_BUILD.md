@@ -2,7 +2,7 @@
 
 **Một tài liệu duy nhất**: `main.tex` — thân bài và phụ lục S1–S21 nằm chung một file
 (phụ lục được `\input` từ `supplementary_body.tex`), biên dịch ra **`main.pdf`**
-(33 trang).
+(35 trang).
 
 > **Toàn bộ file nằm phẳng ở một cấp, không có thư mục con.** Lý do: một số trình
 > biên dịch trực tuyến (ví dụ Prism – prism.openai.com) làm phẳng gói khi nhập và
@@ -85,5 +85,5 @@ chạy `python3 experiments/make_supp_stubs.py`.
 grep -c '^!' main.log                 # = 0  (không lỗi)
 grep -ci undefined main.log           # = 0  (không tham chiếu treo)
 pdftotext main.pdf - | grep -c '??'   # = 0  (không nhãn chưa giải)
-pdfinfo main.pdf | grep Pages         # = 33
+pdfinfo main.pdf | grep Pages         # = 35
 ```

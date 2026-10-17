@@ -108,9 +108,10 @@ V_1(L)=\{\,i:\ u_i>0\ \wedge\ \hat w_{t_i}^{-}\ \ge\ FC-\varepsilon\,\}.
 \label{eq:v1}
 \end{equation}
 
-where $V_1(L)$ is the set of indices of the claims flagged by the first filter, and
+where $V_1(L)$ is the set of indices of the claims flagged by the first filter,
 $\hat w_{t_i}^{-}$ is the root-zone water content immediately before event $i$ is
-applied, defined in Sec.~\ref{sec:model}.
+applied, defined in Sec.~\ref{sec:model}, and $\varepsilon=5$~mm is the published
+tolerance for model error, shared by $V_1$ and $V_4$.
 
 \emph{$V_4$, storage excess}: a claim larger than the deficit available at
 that hour must have run off or percolated, so it was not ``applied'' in the
@@ -124,6 +125,13 @@ V_4(L)=\{\,i:\ u_i\ >\ \underbrace{(FC-\hat w_{t_i}^{-})}_{\text{deficit}}
 where $V_4(L)$ is the set of indices of the flagged claims, and the underbraced
 expression is the deficit, that is, the water the root zone can still accept at that
 hour before reaching field capacity.
+
+Both $V_1$ and $V_4$ test the \emph{claimed} depth $u_i$, the same quantity the pump
+meter records, rather than $\eta u_i$. This is deliberate: when a log is checked
+against metered pumping both sides must carry the same unit, and folding $\eta$ into
+the claimed side would blur the threshold by the very quantity that is uncertain.
+The efficiency enters only the replay equation \eqref{eq:bucket}, where it shapes
+the trajectory $(\hat w_t,\hat d_t)$ and not the reconciliation of records.
 
 \emph{$V_5$, infiltration bound.} Independent of state, a single event of
 duration $\tau_i$ cannot deliver more than the soil can accept:
@@ -149,8 +157,9 @@ A fourth filter, on depletion below the wilting point, was included in this laye
 
 \begin{proposition}[Exact blindness of aggregate defences]
 \label{prop:blind}
-Let $L$ and $L'$ share the same multiset of depths and the same total, i.e.\
-$\{u_i\}=\{u'_j\}$ as multisets. Then
+Let $L$ and $L'$ share the same multiset of depth-and-duration pairs and the same
+total, i.e.\ $\{(u_i,\tau_i)\}=\{(u'_j,\tau'_j)\}$ as multisets, with each
+duration carried along by its event when that event is moved. Then
 \begin{equation}
 G(L)=G(L')\qquad\text{and}\qquad |V_5(L)|=|V_5(L')|.
 \end{equation}
@@ -161,22 +170,37 @@ Supplementary~S11; both quantities are symmetric functions of the depth
 multiset and never depend on $t_i$.
 \end{proof}
 
-Proposition~\ref{prop:blind} is the whole difficulty in one line: the two
-defences that do not depend on the model being right --- the pump meter and the
-infiltration bound --- are \emph{exactly} invariant under the transformation
-the adversary needs. What remains is $V_1$ and $V_4$, which do depend on order
-through $\hat w_{t_i}^{-}$; they turn out not to help.
+The scope of the result should be stated plainly. Proposition~\ref{prop:blind}
+proves invariance of exactly two quantities, $G$ and $|V_5|$, and therefore establishes
+only that these two aggregate defences are blind to time shifting. It is not an
+impossibility theorem for every detector built on a replayed trajectory: a detector
+designed to compare the timing of each command directly against an independent time
+source lies outside its scope, and the device anchor of Sec.~\ref{sec:anchor} is
+precisely such a detector. For the remaining filters what this paper reports is a
+\emph{measured} trade-off between evasion and false accusation
+(Table~\ref{tab:defence}), not a proof that they can never fire.
+
+The two defences that do not depend on the model being right --- the pump-meter
+reconciliation $G$ of \eqref{eq:gap} and the infiltration bound $V_5$ --- are
+\emph{exactly} invariant under the transformation the adversary needs. What remains is
+$V_1$ and $V_4$, which do depend on order through $\hat w_{t_i}^{-}$; in our
+experiments both fire rarely, but that is a measurement rather than a necessity.
 
 \section{The Time-Shifting Attack}
 \label{sec:timeshift}
 
 \begin{proposition}[Credit gain and evasion are the same action]
 \label{prop:coincide}
-Let a claim at hour $t$ have available deficit $c_t=FC-\hat w_t^{-}$. Between
-consecutive claims the bucket loses
-$\Delta_t=\sum_{s}(\mathit{ETc}_s+\mathit{DP}_s-P_s^{+})\ge 0$, so delaying a
-claim by $\delta$ hours increases its deficit by the drainage accrued in those
-hours:
+Let a claim at hour $t$ have available deficit $c_t=FC-\hat w_t^{-}$, and let the
+waiting interval to the next claim be a \emph{net-loss interval}, that is,
+$\Delta_t=\sum_{s}(\mathit{ETc}_s+\mathit{DP}_s-P_s^{+})\ge 0$ with $P_s^{+}$ the
+rainfall net of runoff. This condition does not always hold, since a sufficiently
+large rain event can offset evapotranspiration and reduce the deficit. It is stated
+as a hypothesis because the proof needs nothing beyond it, and because in practice
+the adversary reads the same public forcing series as the auditor and can select
+exactly those intervals that satisfy it; how often they do is measured in
+Supplement~S11. Delaying a claim by $\delta$ hours then increases its deficit by the
+drainage accrued in those hours:
 \begin{equation}
 c_{t+\delta}\ \ge\ c_t+\min\!\bigl(\delta\cdot\overline{\Delta},\ FC-\hat w_t^{-}\bigr).
 \label{eq:delay}
@@ -186,6 +210,8 @@ where:
 \item[$c_t$] the deficit at hour $t$, in mm, equal to the water the root zone can
   still accept before reaching field capacity;
 \item[$\Delta_t$] the water the bucket loses between two consecutive claims, in mm;
+  the hypothesis of the proposition is that this quantity is nonnegative, and that
+  hypothesis can fail over an interval with effective rainfall;
 \item[$\mathit{ETc}_s$] crop evapotranspiration at hour $s$, that is, $ET_{c,s}$ of
   \eqref{eq:etc};
 \item[$\mathit{DP}_s$] deep percolation below the root zone at hour $s$, the water
@@ -217,9 +243,12 @@ bucket drain for $\delta$ further hours with no inflow, so the available
 deficit can only grow while $u_i$ is unchanged.
 \end{proof}
 
-This is why the attack cannot be closed by better hydrology: any detector whose
-verdict is a function of the replayed trajectory must integrate the same
-drainage that makes the delayed claim look legitimate. The empirical attack is
+This is why the attack cannot be closed by better hydrology: among the filters this paper evaluates, those whose verdict is a function of the
+replayed trajectory must integrate the same drainage that makes the delayed claim
+look legitimate, and the two aggregate defences are invariant outright by
+Proposition~\ref{prop:blind}. A detector that compares the timing of each command
+against an independent time source is not subject to this constraint, and that is
+exactly the device anchor of Sec.~\ref{sec:anchor}. The empirical attack is
 a hill-climb over integer hour offsets in $[-36,36]$ accepting a move only if
 the total is preserved bit-for-bit, every depth stays under \eqref{eq:v5}, and
 $n_{\mathrm{dry}}$ strictly increases. The attack does not steal water ---

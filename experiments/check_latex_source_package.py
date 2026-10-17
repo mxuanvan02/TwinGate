@@ -23,7 +23,7 @@ Gate FAIL (exit 1) khi:
   1. zip co tep rac (artifact build, docx_build, qa_*, probe_*, *.py, hinh *_en)
   2. zip thieu bat cu tep nao trong closure phu thuoc that cua 2 tai lieu goc
   3. `latexmk` tran trong thu muc sach khong exit=0
-  4. khong sinh du output/main.pdf (33 trang)
+  4. khong sinh du output/main.pdf (EXPECT_PAGES trang)
   5. log co loi '!' hoac 'No counter'/'Missing \\begin{document}'/'Emergency stop'
   6. goi nham pdflatex ma KHONG nhan duoc thong bao huong dan (guard iftex)
 """
@@ -47,7 +47,7 @@ PKG = ROOT / "paper2_vi_submission"
 # import va BO QUA thu muc long nhau -> \input{sections/01_intro} khong tim thay file
 # -> 'Emergency stop. (job aborted, no legal \end found)'. Da tai hien bang chung:
 # ban co thu muc con -> exit=1 'File sections/01_intro.tex not found';
-# ban phang -> exit=0, 33 trang.
+# ban phang -> exit=0, dung so trang ky vong.
 H = PKG
 INCLUDE_ROOT = [
     "README_BUILD.md", ".latexmkrc",
@@ -131,6 +131,16 @@ def sh(cmd: list[str], cwd: Path, timeout: int = 600):
     return subprocess.run(cmd, capture_output=True, text=True, cwd=str(cwd), timeout=timeout)
 
 
+# SO TRANG KY VONG cua ban nop. Dat o day mot cho de moi lan sua noi dung
+# (them phuong trinh / doan van) chi can doi mot so, khong phai di tim 4 cho.
+# 2026-10-17: 33 -> 34 -> 35 qua vong revision theo review Prism:
+#   34: them eq:v1 cho ban VI (ban EN da co), doan lam ro eta o V_1/V_4,
+#       doan tau(n) khong suy bien ve tau_0, va pham vi cua prop:blind.
+#   35: them gia thiet net-loss vao prop:coincide (F3) va doan do tan suat thoa
+#       gia thiet o S11 (0/87 tren quy dao phat lai; 65/87 tren ruong mo phong).
+EXPECT_PAGES = 35
+
+
 def pages(pdf: Path) -> int:
     out = sh(["pdfinfo", str(pdf)], pdf.parent, 60).stdout
     m = re.search(r"Pages:\s*(\d+)", out)
@@ -191,7 +201,7 @@ def main() -> int:
             fail(f"log con '{bad}' — latexmk van build nham manh \\input")
 
     print("\n=== 4) PDF SINH RA DU VA DUNG SO TRANG ===")
-    for pdf, exp in [("main.pdf", 33)]:
+    for pdf, exp in [("main.pdf", EXPECT_PAGES)]:
         p = work / pdf
         if not p.exists():
             fail(f"khong sinh ra {pdf}")
@@ -249,10 +259,10 @@ def main() -> int:
     r3 = sh(["xelatex", "-interaction=nonstopmode", f"{base}.tex"], work2, 300)
     if r3.returncode != 0 or not (work2 / f"{base}.pdf").exists():
         fail(f"xelatex thu cong that bai (exit={r3.returncode})")
-    elif pages(work2 / f"{base}.pdf") != 33:
-        fail(f"xelatex thu cong: {pages(work2 / f'{base}.pdf')} trang, mong 33")
+    elif pages(work2 / f"{base}.pdf") != EXPECT_PAGES:
+        fail(f"xelatex thu cong: {pages(work2 / f'{base}.pdf')} trang, mong {EXPECT_PAGES}")
     else:
-        print("  PASS: xelatex thu cong 4 buoc -> 33 trang")
+        print(f"  PASS: xelatex thu cong 4 buoc -> {EXPECT_PAGES} trang")
 
     shutil.rmtree(work, ignore_errors=True)
     shutil.rmtree(work2, ignore_errors=True)

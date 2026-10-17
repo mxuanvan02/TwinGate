@@ -252,14 +252,37 @@ multiset alone.
 \subsection*{Proof of Proposition 2 on credit gain and evasion being the same action}
 
 (i) is definitional: the set $\mathcal{A}$ requires no claim inside the
-interval, so removing one extends or creates a qualifying phase. For (ii),
-delaying a claim to $t+\delta$ means the bucket continues to lose water for
-$\delta$ further hours with no inflow, so $\hat w_{t+\delta}^{-}\le\hat w_t^{-}$
-and $c_{t+\delta}\ge c_t$; the bound on the deficit growth follows because the
-loss per hour is at least the mean $\overline{\Delta}$ until field capacity is
-reached, after which $c$ saturates at $FC-\hat w$. Since the storage-excess
-filter fires only when $u_i>c_{t_i}+\varepsilon$ and $u_i$ is unchanged, a
-larger $c_{t_i}$ can only reduce the violation set.
+interval, so removing one extends or creates a qualifying phase. For (ii), under the
+hypothesis that the waiting interval is a net-loss interval, delaying a claim to
+$t+\delta$ means the bucket continues to lose water for $\delta$ further
+hours, so $\hat w_{t+\delta}^{-}\le\hat w_t^{-}$ and
+$c_{t+\delta}\ge c_t$; the bound on the deficit growth follows because the
+loss per hour is at least the mean $\overline{\Delta}$ until field capacity
+is reached, after which $c$ saturates at $FC-\hat w$. Since the storage-excess
+filter fires only when $u_i>c_{t_i}+\varepsilon$ and $u_i$ is unchanged, a larger
+$c_{t_i}$ can only reduce the violation set.
+
+\paragraph*{How often the net-loss hypothesis holds.}
+The hypothesis $\Delta_t\ge0$ does not hold for every interval, so we measured
+how often it does instead of assuming it. Across three stations and two years, with
+ten seeds per cell, there are 87 intervals between consecutive claims. On the
+\emph{replayed trajectory}, the object the proposition actually speaks about, all
+87 intervals satisfy $\Delta_t\ge0$, so the hypothesis holds throughout
+the dry-season window used for the evaluation. On the \emph{simulated field}, generated
+with in-field rainfall equal to $0.7$--$1.4$ times the grid cell plus noise,
+65 of 87 intervals (74.7\%) violate it, with a mean drop in
+depletion of $0.0555$ and a largest of $0.2955$; the violating
+intervals fall almost entirely in the wetter year, 62 of 84 intervals in
+2024 against 3 of 3 in 2025, and they are slightly shorter, on average
+204.1 hours against 226.9 hours for the net-loss intervals. The two
+results do not contradict each other: the replay uses the observed grid-cell rainfall
+while the simulated field uses perturbed rainfall, and that perturbation is what
+creates intervals with effective rain. The conclusion is that the proposition must be
+read as a \emph{conditional} result: the condition holds in the evaluation window but
+not in a wet year. Since the adversary selects intervals rather than being assigned
+them, its avoidance of wet intervals does not weaken the empirical result of
+Sec.~\ref{sec:results}; it does mean that the $33\%$ increase is measured over
+the intervals the adversary actually chose, not a bound valid for every interval.
 
 % ---------------------------------------------------------------- S12
 \section*{S12. Proof of Proposition 4 on the completeness of the anchor}

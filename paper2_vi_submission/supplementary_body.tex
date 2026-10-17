@@ -187,14 +187,39 @@ $\hat w$, nên số lần vi phạm là một hàm chỉ của đa tập hợp.
 
 \subsection*{Chứng minh Mệnh đề 2 về lợi ích tín chỉ và sự lọt lưới là cùng một hành động}
 
-Phần (i) theo định nghĩa: tập $\mathcal{A}$ không đòi hỏi khai báo nào bên trong khoảng, nên
-bỏ một khai báo sẽ kéo dài hoặc tạo ra một pha đạt điều kiện. Với phần (ii), hoãn khai báo
-đến $t+\delta$ nghĩa là thùng chứa tiếp tục mất nước thêm $\delta$ giờ mà không có nước vào,
-nên $\hat w_{t+\delta}^{-}\le\hat w_t^{-}$ và $c_{t+\delta}\ge c_t$; cận trên của độ tăng phần
-thiếu hụt suy ra vì lượng mất mỗi giờ ít nhất bằng trung bình $\overline{\Delta}$ cho tới khi
-đạt sức chứa ẩm đồng ruộng, sau đó $c$ bão hòa tại $FC-\hat w$. Vì bộ lọc vượt sức chứa chỉ
-kích hoạt khi $u_i>c_{t_i}+\varepsilon$ và $u_i$ không đổi, một $c_{t_i}$ lớn hơn chỉ có thể
-làm giảm tập vi phạm.
+Phần (i) theo định nghĩa: tập $\mathcal{A}$ không đòi hỏi khai báo nào bên trong
+khoảng, nên bỏ một khai báo sẽ kéo dài hoặc tạo ra một pha đạt điều kiện. Với phần
+(ii), dưới giả thiết khoảng chờ là khoảng tổn thất ròng không âm, hoãn khai báo đến
+$t+\delta$ nghĩa là thùng chứa tiếp tục mất nước thêm $\delta$ giờ, nên
+$\hat w_{t+\delta}^{-}\le\hat w_t^{-}$ và
+$c_{t+\delta}\ge c_t$; cận trên của độ tăng phần thiếu hụt suy ra vì lượng
+mất mỗi giờ ít nhất bằng trung bình $\overline{\Delta}$ cho tới khi đạt sức
+chứa ẩm đồng ruộng, sau đó $c$ bão hòa tại $FC-\hat w$. Vì bộ lọc vượt sức chứa
+chỉ kích hoạt khi $u_i>c_{t_i}+\varepsilon$ và $u_i$ không đổi, một $c_{t_i}$ lớn
+hơn chỉ có thể làm giảm tập vi phạm.
+
+\paragraph*{Giả thiết tổn thất ròng được thoả thường xuyên đến đâu.}
+Giả thiết $\Delta_t\ge0$ không đúng với mọi khoảng, nên chúng tôi đo tần suất
+thoả của nó thay vì mặc nhiên chấp nhận. Trên ba trạm và hai năm, với mười hạt giống
+mỗi ô, có 87 khoảng nằm giữa hai lần khai báo liên tiếp. Xét \emph{trên quỹ đạo
+phát lại}, tức đúng đối tượng mà mệnh đề nói tới, cả 87 khoảng đều thoả
+$\Delta_t\ge0$, nên giả thiết được thoả trong toàn bộ cửa sổ mùa khô của
+đánh giá. Xét \emph{trên thửa ruộng mô phỏng}, được sinh ra với lượng mưa tại ruộng
+bằng $0{,}7$--$1{,}4$ lần ô lưới cộng nhiễu, 65 trong 87 khoảng
+(74.7\%) vi phạm giả thiết, với mức giảm trung bình của độ cạn kiệt là
+$0{,}0555$ và lớn nhất là $0{,}2955$;
+các khoảng vi phạm tập trung gần như toàn bộ ở năm nhiều mưa hơn, 62 trong
+84 khoảng của năm 2024 so với 3 trong 3 khoảng của năm 2025, và
+chúng ngắn hơn một chút, trung bình 204{,}1 giờ so với 226{,}9 giờ của các
+khoảng tổn thất ròng. Hai kết quả này không mâu thuẫn nhau: quỹ đạo phát lại dùng
+lượng mưa quan trắc của ô lưới, còn thửa ruộng mô phỏng dùng lượng mưa đã bị làm
+lệch, và chính độ lệch đó tạo ra các khoảng mưa ròng. Kết luận cần rút ra là mệnh đề
+phải được đọc như một kết quả \emph{có điều kiện}, điều kiện đó được thoả trong cửa
+sổ đánh giá nhưng không được thoả trong một năm nhiều mưa. Vì bên gian lận chọn
+khoảng chứ không bị gán khoảng, việc nó tránh các khoảng mưa ròng không làm yếu kết
+quả thực nghiệm ở Mục~\ref{sec:results}; nhưng điều đó cũng có nghĩa mức tăng
+$33\%$ là mức đo được trên các khoảng mà bên gian lận thực sự đã chọn, chứ không
+phải một cận đúng cho mọi khoảng.
 
 % ---------------------------------------------------------------- S12
 \section*{S12. Chứng minh Mệnh đề 4 về tính đầy đủ của neo}

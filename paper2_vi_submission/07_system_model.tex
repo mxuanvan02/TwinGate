@@ -10,7 +10,7 @@ Bài này dùng lại nguyên trạng mô hình cân bằng nước tầng rễ 
 FAO-56 chương 8~\cite{fao56}, để mọi kiểm toán viên có cùng một điểm khởi đầu.
 Lượng nước trong tầng rễ $w_t$ biến đổi theo giờ theo phương trình thùng chứa:
 \begin{equation}
-w_{t+1}=\mathrm{clip}_{\le FC}\!\left(w_t+P_t-RO_t-ET_{c,t}+u_t\right),
+w_{t+1}=\mathrm{clip}_{\le FC}\!\left(w_t+P_t-RO_t-ET_{c,t}+\eta\,u_t\right),
 \label{eq:bucket}
 \end{equation}
 Nghĩa là nước vào trừ nước ra, và phần vượt sức chứa bị cắt bỏ. Trong đó:
@@ -20,8 +20,16 @@ Nghĩa là nước vào trừ nước ra, và phần vượt sức chứa bị c
 \item[$RO_t$] dòng chảy mặt tràn khỏi ruộng trong giờ $t$, tính bằng mm, suy ra từ phương pháp đường cong số của Cơ quan Bảo tồn Đất Hoa Kỳ (SCS-CN) công bố năm 1972, tính theo ngày rồi chia đều
   cho các giờ của một trận mưa;
 \item[$ET_{c,t}$] lượng nước cây trồng bốc thoát trong giờ $t$, tính bằng mm;
-\item[$u_t$] độ sâu nước tưới áp dụng trong giờ $t$, tính bằng mm, là đại lượng
-  duy nhất do nhật ký của nông dân cung cấp;
+\item[$u_t$] độ sâu nước \emph{đã bơm} trong giờ $t$, tính bằng mm, là đại lượng
+  duy nhất do nhật ký của nông dân cung cấp; đây là con số trên đồng hồ bơm,
+  không phải lượng nước thực sự tới tầng rễ;
+\item[$\eta$] hiệu suất tưới, tức tỷ lệ nước bơm tới được tầng rễ,
+  lấy trên lưới $\eta\in\{0{,}60;\,0{,}75;\,1{,}00\}$ của tập bất định
+  $\Theta$ (Phụ lục~S17); còn thửa ruộng mô phỏng được sinh ra với hiệu suất rút
+  ngẫu nhiên từ dải $\eta\in[0{,}60;\,0{,}85]$ rộng hơn (Phụ lục~S20). Hai tập
+  này khác nhau có chủ đích: lưới kiểm toán rời rạc và chứa cả $\eta=1$ để phủ
+  trường hợp không thất thoát, còn dải sinh ruộng là liên tục. Chỉ $\eta u_t$ đi
+  vào cân bằng, vì phần còn lại thất thoát trên đường dẫn và do bốc hơi;
 \item[$FC$] sức chứa ẩm đồng ruộng, tức lượng nước lớn nhất mà đất còn giữ được
   sau khi đã thoát nước tự do, tính bằng mm;
 \item[$\mathrm{clip}_{\le FC}$] toán tử cắt bỏ, giữ nguyên giá trị khi nhỏ hơn
@@ -33,7 +41,12 @@ chiếu, theo đúng cặp phương trình 83 và 84 của FAO-56:
 \begin{equation}
 ET_{c,t}=K_{s,t}\,K_c\,ET_{0,t},
 \qquad
-K_{s,t}=\frac{FC-w_t}{(1-p)\,\mathrm{TAW}},
+K_{s,t}=\begin{cases}
+1, & D_{r,t}\le\mathrm{RAW},\\
+\dfrac{\mathrm{TAW}-D_{r,t}}{(1-p)\,\mathrm{TAW}},
+  & \mathrm{RAW}<D_{r,t}<\mathrm{TAW},\\
+0, & D_{r,t}\ge\mathrm{TAW},
+\end{cases}
 \label{eq:etc}
 \end{equation}
 trong đó:
@@ -43,13 +56,22 @@ trong đó:
   tượng công khai;
 \item[$K_c$] hệ số cây trồng, đặc trưng cho mức dùng nước của lúa so với cỏ tham
   chiếu;
-\item[$K_{s,t}$] hệ số ứng suất nước, giảm dần từ 1 về 0 khi ruộng khô đi, tính
-  theo phương trình 84 của FAO-56;
+\item[$K_{s,t}$] hệ số ứng suất nước, bằng 1 khi ruộng còn đủ ẩm và giảm
+  tuyến tính về 0 khi chạm điểm héo, theo phương trình 84 của FAO-56;
+\item[$D_{r,t}$] lượng nước đã cạn kiệt của tầng rễ tại giờ $t$, tính bằng mm,
+  định nghĩa $D_{r,t}=FC-w_t$;
+\item[$\mathrm{RAW}$] lượng nước sẵn có dễ tiêu, tức phần cạn kiệt mà
+  cây chưa bị stress, tính bằng $p\,\mathrm{TAW}$;
 \item[$p$] phần nước sẵn có mà cây còn dùng được trước khi bắt đầu bị stress,
-  lấy theo FAO-56;
+  lấy $p=0{,}5$ theo FAO-56 và không điều chỉnh khi chuyển sang bước giờ;
 \item[$\mathrm{TAW}$] tổng lượng nước sẵn có trong tầng rễ, tính bằng
   $FC-WP$ theo phương trình 82 của FAO-56.
-\end{symbolist} Phần nước vượt quá $FC$ được coi là chảy tràn hoặc thấm sâu và bị loại khỏi cân
+\end{symbolist} Phương trình 84 của FAO-56 vốn viết cho bước ngày; chúng tôi áp dụng nó ở bước
+giờ mà không đổi dạng hàm, vì $K_{s,t}$ chỉ phụ thuộc lượng cạn kiệt tức thời
+$D_{r,t}$ chứ không phụ thuộc độ dài cửa sổ trung bình, và $p=0{,}5$ được giữ
+nguyên. Hệ quả là stress phản ứng ngay trong giờ ruộng khô đi thay vì trễ một
+ngày, điều này thiên về phía thận trọng khi xét một pha khô dài.
+Phần nước vượt quá $FC$ được coi là chảy tràn hoặc thấm sâu và bị loại khỏi cân
 bằng, nên mô hình bảo toàn khối lượng tuyệt đối; chúng tôi kiểm tra điều đó như
 một bất biến trong mã nguồn.
 

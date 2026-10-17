@@ -7,7 +7,7 @@ This paper reuses, unchanged, the standardised root-zone water balance of FAO-56
 chapter~8~\cite{fao56}, so that every auditor starts from the same point. The root-zone
 water content $w_t$ [mm] evolves hourly under the bucket equation:
 \begin{equation}
-w_{t+1}=\mathrm{clip}_{\le FC}\!\left(w_t+P_t-RO_t-ET_{c,t}+u_t\right),
+w_{t+1}=\mathrm{clip}_{\le FC}\!\left(w_t+P_t-RO_t-ET_{c,t}+\eta\,u_t\right),
 \label{eq:bucket}
 \end{equation}
 That is, water in minus water out, with any excess above field capacity clipped
@@ -19,8 +19,17 @@ away. Here:
   from the curve-number method of the Soil Conservation Service (SCS-CN) published
   in 1972, evaluated daily and shared pro rata over the hours of a rain event;
 \item[$ET_{c,t}$] crop evapotranspiration during hour $t$, in mm;
-\item[$u_t$] irrigation depth applied in hour $t$, in mm, the only term supplied
-  by the farmer's log;
+\item[$u_t$] the \emph{pumped} irrigation depth in hour $t$, in mm, the only term
+  supplied by the farmer's log; this is the metered volume at the pump, not the
+  water that actually reaches the root zone;
+\item[$\eta$] the irrigation efficiency, the fraction of pumped water that
+  reaches the root zone, taken on the grid $\eta\in\{0.60,\,0.75,\,1.00\}$ of the
+  uncertainty set $\Theta$ (Supplement~S17); each simulated field is instead
+  generated with an efficiency drawn from the wider continuous band
+  $\eta\in[0.60,\,0.85]$ (Supplement~S20). The two sets differ on purpose: the
+  audit grid is discrete and includes $\eta=1$, the no-loss case. Only
+  $\eta u_t$ enters the balance; the remainder is lost in conveyance and to
+  evaporation;
 \item[$FC$] field capacity, the largest water content the soil retains after free
   drainage, in mm;
 \item[$\mathrm{clip}_{\le FC}$] the clipping operator, which passes values at or
@@ -32,7 +41,12 @@ evapotranspiration by FAO-56 equations~83 and~84:
 \begin{equation}
 ET_{c,t}=K_{s,t}\,K_c\,ET_{0,t},
 \qquad
-K_{s,t}=\frac{FC-w_t}{(1-p)\,\mathrm{TAW}},
+K_{s,t}=\begin{cases}
+1, & D_{r,t}\le\mathrm{RAW},\\
+\dfrac{\mathrm{TAW}-D_{r,t}}{(1-p)\,\mathrm{TAW}},
+  & \mathrm{RAW}<D_{r,t}<\mathrm{TAW},\\
+0, & D_{r,t}\ge\mathrm{TAW},
+\end{cases}
 \label{eq:etc}
 \end{equation}
 where:
@@ -41,13 +55,24 @@ where:
   of Penman-Monteith, FAO-56 equation~53, from public weather data;
 \item[$K_c$] the crop coefficient, characterising how much water rice uses relative
   to the reference grass;
-\item[$K_{s,t}$] the water-stress coefficient, falling from 1 towards 0 as the
-  field dries, by FAO-56 equation~84;
+\item[$K_{s,t}$] the water-stress coefficient, equal to 1 while the field is
+  sufficiently wet and falling linearly to 0 at the wilting point, by FAO-56
+  equation~84;
+\item[$D_{r,t}$] root-zone depletion at hour $t$, in mm, defined as
+  $D_{r,t}=FC-w_t$;
+\item[$\mathrm{RAW}$] readily available water, the depletion the crop
+  tolerates without stress, equal to $p\,\mathrm{TAW}$;
 \item[$p$] the fraction of available water the crop can still use before stress
-  begins, taken from FAO-56;
+  begins, set to $p=0.5$ following FAO-56 and left unchanged at the hourly step;
 \item[$\mathrm{TAW}$] total available water in the root zone, equal to $FC-WP$ by
   FAO-56 equation~82.
-\end{symbolist} Drainage above field capacity $FC$ is removed by the clipping operator, so mass
+\end{symbolist} FAO-56 equation~84 is written for a daily step; we apply it hourly without
+changing its functional form, because $K_{s,t}$ depends only on the instantaneous
+depletion $D_{r,t}$ and not on the length of the averaging window, and $p=0.5$ is
+kept as given. Stress therefore responds within the hour in which the field dries
+rather than a day later, which is the conservative direction when a long dry phase
+is being assessed.
+Drainage above field capacity $FC$ is removed by the clipping operator, so mass
 conservation holds exactly and is checked as an invariant.
 
 What decides a dry phase is the relative depletion of the root zone, normalised to the
@@ -105,7 +130,7 @@ The hat marks quantities reconstructed from the log rather than measured. This i
 pivot of the whole paper: a replayed trajectory is what the farmer \emph{declared},
 not what the field produced. Replay is
 deterministic and uses only public reanalysis, so two auditors replaying the
-same log obtain the same trajectory and the verdict is reproducible. A
+same log obtain the same trajectory and the verdict is reproducible. Fig.~\ref{fig:method} summarises that path, from the farmer's log through the twin to the verdict of each defence tier. A
 superscript minus denotes the state immediately \emph{before} that hour's
 claim is applied, as in $\hat w_{t}^{-}$: the water available to receive an
 event, which is what a filter must inspect.
@@ -114,3 +139,10 @@ The operator is also what makes the scheme cheap: no sensor is queried, and the
 only inputs are the log, the public weather series and a soil profile. Its
 weakness, developed in Sec.~\ref{sec:timeshift}, is that it can only check
 whether a trajectory is \emph{possible}, never whether it \emph{happened}.
+
+
+\begin{figure}[!t]
+\centering
+\includegraphics[height=6.9cm]{figures_vi/fig1_method_en.png}
+\caption{Data flow of the method. The physical audit layer replays the claimed log through the water-balance twin and then through three filters; the device anchor checks the same log against the signed command record of the gateway. The dashed arrow shows the time-shifting attack passing through the physical layer undetected.}\label{fig:method}
+\end{figure}
