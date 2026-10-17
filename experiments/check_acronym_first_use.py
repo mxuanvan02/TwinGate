@@ -48,7 +48,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 HUJOS = ROOT / "paper2_hujos"
-SUBSRC = ROOT / "paper2_vi_submission" / "src"
+SUBSRC = ROOT / "paper2_vi_submission"   # LAYOUT PHANG: main.tex nam o goc goi
 
 BS = chr(92)
 

@@ -21,7 +21,8 @@ ROOT = Path(__file__).resolve().parents[1]
 # gate KHONG doc, ca 3 case "khong tim thay chuoi de pha -> bo qua", roi ket luan sai
 # rang "gate CO VAN DE — khong duoc tin ket qua PASS". Da chung minh gate van tot bang
 # kiem chung am that trong sandbox /tmp: 3/3 case bi bat (exit=1), sha256 hoan nguyen.
-TARGET = ROOT / "paper2_vi_submission" / "src" / "supplementary_body.tex"
+# LAYOUT PHANG: supplementary_body.tex nam o goc goi nop.
+TARGET = ROOT / "paper2_vi_submission" / "supplementary_body.tex"
 GATE = [sys.executable, str(ROOT / "experiments" / "check_supp_vi_numbers.py")]
 
 # (chuoi that, chuoi pha, mo ta) — 3 phep thu tren 3 loai so khac nhau

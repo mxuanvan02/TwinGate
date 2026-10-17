@@ -42,19 +42,25 @@ ROOT = Path(__file__).resolve().parent.parent
 # Layout goi nop (migration v4, 2026-10-15): src/ chua nguon, output/ chua PDF,
 # README.md o goc. Chi con MOT tai lieu (main.tex); phu luc duoc \input vao main.
 PKG = ROOT / "paper2_vi_submission"
-PKGSRC = PKG / "src"
-H = PKGSRC
+# LAYOUT PHANG (2026-10-15): moi file nam o cap goc, KHONG thu muc con.
+# Ly do: Prism (prism.openai.com — AI LaTeX Editor anh Van dung) LAM PHANG goi khi
+# import va BO QUA thu muc long nhau -> \input{sections/01_intro} khong tim thay file
+# -> 'Emergency stop. (job aborted, no legal \end found)'. Da tai hien bang chung:
+# ban co thu muc con -> exit=1 'File sections/01_intro.tex not found';
+# ban phang -> exit=0, 33 trang.
+H = PKG
 INCLUDE_ROOT = [
     "README_BUILD.md", ".latexmkrc",
     "main.tex", "preamble.tex", "supplementary_body.tex",
     "supplementary_stubs.tex", "glossary.tex", "refs.bib",
-    "vancouver.bst",
+    "vancouver.bst", "main.pdf",
 ]
 ROOTS = ["main.tex"]
 
 JUNK = re.compile(
     r"(\.(aux|bbl|blg|log|out|toc|lof|lot|xdv|synctex\.gz|fdb_latexmk|fls)$"
-    r"|_en\.png$|\.py$|^docx_build/|^qa_png/|^qa_docx/|^_backups/|^probe_)"
+    r"|_en\.png$|\.py$|^docx_build/|^qa_png/|^qa_docx/|^_backups/|^probe_"
+    r"|^src/|^output/|^sections/|^tables/|^figures/)"
 )
 
 fails: list[str] = []
@@ -95,39 +101,28 @@ def closure() -> set[str]:
 
 
 def build_zip(path: Path) -> None:
-    """Goi lai zip theo dung INCLUDE (de gate chay duoc ca khi khong co zip san)."""
+    """Goi lai zip theo dung INCLUDE (de gate chay duoc ca khi khong co zip san).
+
+    LAYOUT PHANG: moi file nam o cap goc cua zip, khong thu muc con. Day la yeu cau
+    bat buoc vi Prism bo qua thu muc long nhau khi import.
+    """
     stage = Path("/tmp/_gate_pkg_stage")
     if stage.exists():
         shutil.rmtree(stage)
     stage.mkdir(parents=True)
-    # Copy files from PKG (root level)
-    for f in ["README_BUILD.md", ".latexmkrc"]:
-        src = PKG / f
-        if src.exists():
-            shutil.copy2(src, stage / f)
-    # Copy files from H (src/)
+    missing = []
     for f in INCLUDE_ROOT:
-        if f in ["README_BUILD.md", ".latexmkrc"]:
-            continue
         src = H / f
         if not src.exists():
-            fail(f"khong the goi: thieu {f} trong paper2_vi_submission/src/")
-            return
-        (stage / "src").mkdir(exist_ok=True)
-        shutil.copy2(src, stage / "src" / f)
-    # Copy subdirectories from H
-    for d in ["sections", "tables", "figures"]:
-        (stage / "src" / d).mkdir(exist_ok=True)
-        for src in sorted((H / d).glob("*")):
-            if src.is_file():
-                shutil.copy2(src, stage / "src" / d / src.name)
-    # Copy output/main.pdf
-    (stage / "output").mkdir(exist_ok=True)
-    pdf = PKG / "output" / "main.pdf"
-    if pdf.exists():
-        shutil.copy2(pdf, stage / "output" / "main.pdf")
+            missing.append(f)
+            continue
+        shutil.copy2(src, stage / f)
+    if missing:
+        fail(f"khong the goi: thieu {missing} trong paper2_vi_submission/")
+        return
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.unlink(missing_ok=True)
+    if path.exists():
+        path.unlink()
     subprocess.run(["zip", "-rqX", str(path), "."], cwd=stage, check=True)
     print(f"  i  da goi lai {path} ({path.stat().st_size / 1024:.0f} KB)")
 
@@ -143,7 +138,10 @@ def pages(pdf: Path) -> int:
 
 
 def main() -> int:
-    zip_path = Path(sys.argv[1]) if len(sys.argv) > 1 else Path("/tmp/source_latex_final.zip")
+    # ZIP MAC DINH = goi nop layout PHANG. Ten cu source_latex_final.zip la goi
+    # layout src/+output/ (da bo): doc no se bao FAIL vi danh muc rac bay gio
+    # TINH CA src/ va output/ (xem JUNK) — khong phai gate hong ma la goi het han.
+    zip_path = Path(sys.argv[1]) if len(sys.argv) > 1 else Path("/tmp/TwinGate_HUJOS_source.zip")
     if not zip_path.exists():
         print(f"  i  {zip_path} khong ton tai — tu goi lai tu paper2_hujos/")
         build_zip(zip_path)
@@ -164,21 +162,14 @@ def main() -> int:
     print("\n=== 2) DU CLOSURE PHU THUOC? ===")
     need = closure()
     have = set(files)
-    # Trong zip, file nằm dưới src/ (ví dụ src/main.tex)
-    # closure() trả về tên không có src/ (ví dụ main.tex)
-    # Thêm tiền tố src/ khi kiểm tra
-    missing = []
-    for f in need:
-        # File trong src/ (tex, bib, bst, png)
-        zip_entry = f"src/{f}" if not f.startswith("src/") else f
-        if zip_entry not in have:
-            missing.append(f)
+    # LAYOUT PHANG: ten file trong zip giong het ten ma closure() tra ve.
+    missing = sorted(f for f in need if f not in have)
     if missing:
         fail(f"thieu {len(missing)} tep can thiet: {missing[:10]}")
     else:
         print(f"  PASS: du {len(need)} tep trong closure (tex/hinh/bib)")
     # Kiểm tra file bắt buộc với đường dẫn đúng
-    for extra in ["README_BUILD.md", ".latexmkrc", "src/vancouver.bst"]:
+    for extra in ["README_BUILD.md", ".latexmkrc", "vancouver.bst"]:
         if extra not in have:
             fail(f"thieu {extra} (bat buoc de nguoi nhan build duoc)")
 
@@ -200,7 +191,7 @@ def main() -> int:
             fail(f"log con '{bad}' — latexmk van build nham manh \\input")
 
     print("\n=== 4) PDF SINH RA DU VA DUNG SO TRANG ===")
-    for pdf, exp in [("output/main.pdf", 33)]:
+    for pdf, exp in [("main.pdf", 33)]:
         p = work / pdf
         if not p.exists():
             fail(f"khong sinh ra {pdf}")
@@ -215,7 +206,7 @@ def main() -> int:
             else:
                 print(f"  PASS: {pdf} {n} trang, khong '??'")
     # log cua tung tai lieu phai sach
-    for lg in ["output/main.log"]:
+    for lg in ["main.log"]:
         lp = work / lg
         if lp.exists():
             body = lp.read_text(encoding="utf-8", errors="ignore")
@@ -228,7 +219,7 @@ def main() -> int:
 
     print("\n=== 5) GUARD ENGINE: goi nham pdflatex phai in HUONG DAN ===")
     # Gọi từ trong src/ để \input{preamble} tìm thấy file, rồi guard mới chạy
-    r2 = sh(["pdflatex", "-interaction=nonstopmode", "main.tex"], work / "src", 300)
+    r2 = sh(["pdflatex", "-interaction=nonstopmode", "main.tex"], work, 300)
     out = r2.stdout + r2.stderr
     if r2.returncode == 0:
         fail("pdflatex exit=0 — khong the (bai dung fontspec); guard khong hoat dong?")
@@ -247,20 +238,19 @@ def main() -> int:
         shutil.rmtree(work2)
     work2.mkdir(parents=True)
     zipfile.ZipFile(zip_path).extractall(work2)
-    # xelatex thủ công: cd vào src/ để tìm preamble.tex
-    src_dir = work2 / "src"
-    for a in ["aux", "bbl", "blg", "log", "out"]:
-        for f in src_dir.glob(f"*.{a}"):
+    # LAYOUT PHANG: xelatex chay ngay tai goc goi, khong can cd vao src/.
+    for a in ["aux", "bbl", "blg", "log", "out", "pdf", "xdv", "fls", "fdb_latexmk"]:
+        for f in work2.glob(f"main.{a}"):
             f.unlink()
     base = "main"
-    sh(["xelatex", "-interaction=nonstopmode", f"{base}.tex"], src_dir, 300)
-    sh(["bibtex", base], src_dir, 120)
-    sh(["xelatex", "-interaction=nonstopmode", f"{base}.tex"], src_dir, 300)
-    r3 = sh(["xelatex", "-interaction=nonstopmode", f"{base}.tex"], src_dir, 300)
-    if r3.returncode != 0 or not (src_dir / f"{base}.pdf").exists():
+    sh(["xelatex", "-interaction=nonstopmode", f"{base}.tex"], work2, 300)
+    sh(["bibtex", base], work2, 120)
+    sh(["xelatex", "-interaction=nonstopmode", f"{base}.tex"], work2, 300)
+    r3 = sh(["xelatex", "-interaction=nonstopmode", f"{base}.tex"], work2, 300)
+    if r3.returncode != 0 or not (work2 / f"{base}.pdf").exists():
         fail(f"xelatex thu cong that bai (exit={r3.returncode})")
-    elif pages(src_dir / f"{base}.pdf") != 33:
-        fail(f"xelatex thu cong: {pages(src_dir / f'{base}.pdf')} trang, mong 33")
+    elif pages(work2 / f"{base}.pdf") != 33:
+        fail(f"xelatex thu cong: {pages(work2 / f'{base}.pdf')} trang, mong 33")
     else:
         print("  PASS: xelatex thu cong 4 buoc -> 33 trang")
 

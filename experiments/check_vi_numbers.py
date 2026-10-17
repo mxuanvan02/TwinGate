@@ -34,7 +34,10 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 EN_DIR = ROOT / "paper2" / "blocks"
-VI_DIR = ROOT / "paper2_vi_submission" / "src" / "sections"
+# LAYOUT PHANG (2026-10-15): 9 chuong than bai nam thang o goc goi nop,
+# khong con thu muc sections/. Ly do phang hoa: Prism (prism.openai.com) lam
+# phang goi khi import va bo qua thu muc long nhau.
+VI_DIR = ROOT / "paper2_vi_submission"
 
 # Cac file than bai (khong tinh 00_title_abstract vi la FILE CHET, khong duoc input)
 FILES = ["01_intro", "07_system_model", "02_threat_attack", "03_guarantee",
@@ -66,7 +69,7 @@ STRUCTURAL = [
 
 
 def strip_noise(text: str) -> str:
-    """Bo comment, command LaTeX, cong thuc, va cac nhan cau truc."""
+    r"""Bo comment, command LaTeX, cong thuc, va cac nhan cau truc."""
     out = []
     for line in text.split("\n"):
         line = re.sub(r"(?<!\\)%.*$", "", line)      # comment (khong phai \%)

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 r"""Sinh supplementary_stubs.tex: dinh nghia \r@<label> cho cac nhan chi ton tai trong
-bai chinh, doc SO THAT tu output/main.aux.
+bai chinh, doc SO THAT tu main.aux (nam canh main.tex — layout phang).
 
 VI SAO CAN: paper2_hujos/supplementary.tex (ban EN) go TAY cac so nay bang
 \@namedef va lay tu main_hujos.aux (ban EN). Ban VI danh so KHAC, nen neu dich
@@ -30,13 +30,13 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-# .aux nam trong output/ khi build bang latexmk ($out_dir), hoac trong src/
-# khi build bang xelatex tho (xem README). Tim ca hai, khong cung dinh mot cho.
+# Layout phang (khong thu muc con): main.aux nam canh main.tex.
+# Ly do phang hoa: Prism (prism.openai.com) lam phang goi khi import va BO QUA
+# thu muc long nhau -> \input{sections/...} khong tim thay file ->
+# 'Emergency stop. (job aborted, no legal \end found)'.
 _SUB = ROOT / "paper2_vi_submission"
-AUX = _SUB / "output" / "main.aux"
-if not AUX.exists():
-    AUX = _SUB / "src" / "main.aux"
-OUT = _SUB / "src" / "supplementary_stubs.tex"
+AUX = _SUB / "main.aux"      # layout phang: .aux nam canh main.tex
+OUT = _SUB / "supplementary_stubs.tex"
 
 # Moi nhan ma phu luc tham chieu cheo toi bai chinh. Them vao day khi phu luc
 # moi trich dan mot nhan khac; KHONG duoc go tay so trong supplementary_body.tex.
@@ -62,7 +62,8 @@ LABELS = [
 
 def main() -> int:
     if not AUX.exists():
-        print(f"  !! KHONG THAY {AUX.name} — phai build src/main.tex TRUOC.")
+        print(f"  !! KHONG THAY {AUX.name} — phai build main.tex TRUOC "
+              f"(cd paper2_vi_submission && latexmk).")
         print("     cd paper2_vi_submission && latexmk")
         return 1
     txt = AUX.read_text(encoding="utf-8")
@@ -80,7 +81,7 @@ def main() -> int:
         "% TU SINH boi experiments/make_supp_stubs.py — KHONG SUA TAY.",
         f"% Nguon so: {AUX.name} (ban TIENG VIET).",
         "% Moi \\r@<label> duoc \\ref doc; {S1} la so trang hien thi khi tro cheo.",
-        "% Neu bai chinh doi danh so: build lai src/main.tex roi chay lai script nay.",
+        "% Neu bai chinh doi danh so: build lai main.tex roi chay lai script nay.",
         r"\makeatletter",
     ]
     for l in LABELS:

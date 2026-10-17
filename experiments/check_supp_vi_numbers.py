@@ -32,7 +32,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 H = ROOT / "paper2_hujos"
-S = ROOT / "paper2_vi_submission" / "src"
+# LAYOUT PHANG: phu luc + bang + 2 chuong phu luc nam thang o goc goi nop.
+S = ROOT / "paper2_vi_submission"
 
 spec = importlib.util.spec_from_file_location("cvn", ROOT / "experiments" / "check_vi_numbers.py")
 cvn = importlib.util.module_from_spec(spec); spec.loader.exec_module(cvn)
@@ -42,8 +43,8 @@ TABLES = ["tab_threat", "tab_umax", "tab_f2_unreachable", "tab_baseline", "tab_s
 def load(vi: bool) -> str:
     if vi:
         parts = [S / "supplementary_body.tex",
-                 S / "sections/08_subsidence.tex", S / "sections/09_cost.tex"]
-        parts += [S / "tables" / f"{t}.tex" for t in TABLES]
+                 S / "08_subsidence.tex", S / "09_cost.tex"]
+        parts += [S / f"{t}.tex" for t in TABLES]
     else:
         parts = [H / "supplementary.tex",
                  ROOT / "paper2/blocks/08_subsidence.tex", ROOT / "paper2/blocks/09_cost.tex"]

@@ -30,7 +30,10 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 H = ROOT / "paper2_hujos"
-S = ROOT / "paper2_vi_submission" / "src"
+# LAYOUT PHANG (2026-10-15): moi .tex nam thang o goc goi nop, khong con
+# thu muc sections/ tables/. Ly do: Prism (prism.openai.com) lam phang goi khi
+# import va bo qua thu muc long nhau.
+S = ROOT / "paper2_vi_submission"
 
 ALLOWED = [
     (0x0000, 0x007F),   # ASCII
@@ -72,15 +75,42 @@ def allowed(cp: int) -> bool:
     return any(a <= cp <= b for a, b in ALLOWED)
 
 
+# LOI DA SUA (2026-10-15): truoc day gate dung glob thu muc + `if not f.exists():
+# continue`, va dem `n = sum(1 for f in files if f.exists())`. Khi layout doi (flatten
+# bo sections/ tables/) glob tra ve RONG, gate bo qua het va VAN IN "GATE PASS: 22 file"
+# — mot con so gia. Day dung la lop loi FAIL-OPEN da ghi trong MEMORY ("helper return 0
+# khi ImportError = FAIL-OPEN: artifact bao DAT ma thieu that").
+# FIX: liet ke TUONG MINH moi file bat buoc; thieu bat cu file nao -> ABORT (exit 1).
+REQUIRED_IN_PKG = [
+    # 9 chuong than bai + phu luc (08/09 thuoc phu luc)
+    "01_intro.tex", "02_threat_attack.tex", "03_guarantee.tex", "04_anchor.tex",
+    "05_design_results.tex", "06_discussion_conclusion.tex", "07_system_model.tex",
+    "08_subsidence.tex", "09_cost.tex",
+    # 9 bang so
+    "tab_baseline.tex", "tab_benchmark.tex", "tab_credit.tex", "tab_defence.tex",
+    "tab_f2_unreachable.tex", "tab_false_accusation.tex", "tab_setup.tex",
+    "tab_threat.tex", "tab_umax.tex",
+    # 5 file goc
+    "main.tex", "preamble.tex", "supplementary_body.tex",
+    "supplementary_stubs.tex", "glossary.tex",
+]
+
+
 def main() -> int:
-    files = sorted((S / "sections").glob("*.tex"))
-    files += [H / "abstract_vi.tex", S / "main.tex", S / "glossary.tex",
-              S / "supplementary_body.tex"]
-    files += sorted((S / "tables").glob("*.tex"))
+    files = [S / f for f in REQUIRED_IN_PKG]
+    files.append(H / "abstract_vi.tex")   # khoi tom tat VI cua ban EN
+
+    missing = [str(f.relative_to(ROOT)) for f in files if not f.exists()]
+    if missing:
+        print(f"!! GATE ABORT: thieu {len(missing)}/{len(files)} file can quet:")
+        for m in missing[:10]:
+            print(f"     {m}")
+        print("   KHONG duoc bo qua roi bao PASS (fail-open). Kiem tra lai layout goi nop.")
+        return 1
+    print(f"  i  quet {len(files)} file tieng Viet (danh sach bat buoc, khong glob)")
+
     bad_total = 0
     for f in files:
-        if not f.exists():
-            continue
         text = f.read_text(encoding="utf-8")
         for lineno, line in enumerate(text.split("\n"), 1):
             for col, ch in enumerate(line):
@@ -95,8 +125,8 @@ def main() -> int:
     if bad_total:
         print(f"\nGATE FAIL: {bad_total} ky tu ngoai lai — sua het truoc khi build.")
         return 1
-    n = sum(1 for f in files if f.exists())
-    print(f"GATE PASS: {n} file tieng Viet, 0 ky tu ngoai lai.")
+    # KHONG dem lai bang f.exists(): danh sach da duoc assert day du o tren.
+    print(f"GATE PASS: {len(files)} file tieng Viet, 0 ky tu ngoai lai.")
     print("  (cho phep: ASCII + Latin mo rong + Latin Extended Additional U+1E00-1EFF")
     print("   + dau cau/toan hoc; cam: CJK/Han, Kana, Hangul, Cyrillic, Hy Lap)")
     return 0
