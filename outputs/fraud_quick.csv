@@ -1,0 +1,13 @@
+station,year,seed,variant,desc,n_irrig_claims,total_mm,truth_total_mm,F1_over_sat,F2_mass_imp,F4_storage,max_depl,awd_ok,awd_broken,awd_shallow,truth_awd_ok
+can_tho,2024,0,honest,"tuan thu AWD, 8 pha kho dat chuan",7,180.0,180.0,0,0,0,0.803,8,0,3,8
+can_tho,2024,0,fraud_wet_day,khai them 8 lan tuoi vao ngay mua,15,540.0,180.0,6,0,8,0.803,8,0,3,8
+can_tho,2024,0,fraud_dry_claim,"khai pha kho 96h tai h=200, xoa 1 lenh",6,160.0,180.0,0,0,0,0.916,7,0,3,8
+can_tho,2024,0,fraud_depth,khai 2 lan tuoi = FC (160mm),7,440.0,180.0,0,0,2,0.803,6,1,1,8
+can_tho,2024,1,honest,"tuan thu AWD, 6 pha kho dat chuan",6,220.0,220.0,0,0,0,0.804,6,0,0,6
+can_tho,2024,1,fraud_wet_day,khai them 8 lan tuoi vao ngay mua,14,520.0,220.0,7,0,8,0.804,6,0,0,6
+can_tho,2024,1,fraud_dry_claim,"khai pha kho 96h tai h=200, xoa 1 lenh",5,180.0,220.0,0,0,0,0.948,5,0,0,6
+can_tho,2024,1,fraud_depth,khai 2 lan tuoi = FC (160mm),6,460.0,220.0,0,0,2,0.804,5,1,0,6
+can_tho,2024,2,honest,"tuan thu AWD, 8 pha kho dat chuan",8,200.0,200.0,0,0,0,0.804,8,0,0,8
+can_tho,2024,2,fraud_wet_day,khai them 8 lan tuoi vao ngay mua,16,560.0,200.0,6,0,8,0.804,8,0,0,8
+can_tho,2024,2,fraud_dry_claim,"khai pha kho 96h tai h=200, xoa 1 lenh",7,180.0,200.0,0,0,0,0.916,7,0,0,8
+can_tho,2024,2,fraud_depth,khai 2 lan tuoi = FC (160mm),8,480.0,200.0,0,0,3,0.803,5,1,0,8

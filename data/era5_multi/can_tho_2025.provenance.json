@@ -1,0 +1,19 @@
+{
+  "station": "can_tho",
+  "latitude": 10.0452,
+  "longitude": 105.7469,
+  "year": 2025,
+  "api": "https://archive-api.open-meteo.com/v1/archive",
+  "hourly_vars": [
+    "temperature_2m",
+    "relative_humidity_2m",
+    "wind_speed_10m",
+    "shortwave_radiation",
+    "precipitation"
+  ],
+  "timezone": "Asia/Ho_Chi_Minh",
+  "elevation_m": 4.0,
+  "rows": 8760,
+  "reanalysis": "ERA5 via Open-Meteo historical weather API (no key)",
+  "coordinate_source": "identical to RABS reproduction fetch_era5_vn.py"
+}

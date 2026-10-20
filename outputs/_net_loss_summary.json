@@ -1,0 +1,36 @@
+{
+  "definition": "interval between consecutive claims of the audited log (CFG_REAL); Delta = depletion(h_end-1) - depletion(h_start)",
+  "stations": [
+    "can_tho",
+    "soc_trang",
+    "ca_mau"
+  ],
+  "years": [
+    2024,
+    2025
+  ],
+  "seeds_per_cell": 10,
+  "n_intervals": 101,
+  "replay": {
+    "n_negative": 0,
+    "pct_negative": 0.0
+  },
+  "truth": {
+    "n_negative": 82,
+    "pct_negative": 81.2,
+    "mean_drop": 0.0536,
+    "max_drop": 0.369,
+    "mean_duration_h_negative": 190.5,
+    "mean_duration_h_net_loss": 276.5
+  },
+  "by_year": {
+    "2024": {
+      "n": 87,
+      "n_negative": 71
+    },
+    "2025": {
+      "n": 14,
+      "n_negative": 11
+    }
+  }
+}

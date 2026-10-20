@@ -1,0 +1,7 @@
+station,year,max_clipped_depl,max_raw_depl,f2_hits_dry_log,n_configs,worst_config
+can_tho,2024,0.9976,0.9976,0,25,sandy_loam/w0=0.9
+can_tho,2025,0.9876,0.9876,0,25,sandy_loam/w0=0.9
+soc_trang,2024,0.9987,0.9987,0,25,sandy_loam/w0=0.9
+soc_trang,2025,0.9921,0.9921,0,25,sandy_loam/w0=0.9
+ca_mau,2024,0.9907,0.9907,0,25,sandy_loam/w0=0.9
+ca_mau,2025,0.9797,0.9797,0,25,sandy_loam/w0=0.9
